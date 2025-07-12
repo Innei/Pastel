@@ -1,0 +1,30 @@
+{
+  "name": "@color-system/tailwindcss",
+  "version": "1.0.0-alpha.1",
+  "description": "",
+  "exports": {},
+  "scripts": {
+    "build": "tsx build.ts",
+    "build:css": "tsx build-css.ts",
+    "build:tailwind": "tsx generate-tailwind-config.ts",
+    "build:v4": "tsx build-tailwind4-css.ts"
+  },
+  "keywords": [
+    "tailwindcss",
+    "uikit",
+    "colors",
+    "apple",
+    "ios",
+    "macos"
+  ],
+  "author": "Innei",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "22.16.3",
+    "prettier": "3.6.2",
+    "tailwindcss": "^4.1.11",
+    "tsdown": "0.12.9",
+    "tsx": "4.20.3"
+  }
+}

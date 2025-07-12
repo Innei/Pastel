@@ -1,0 +1,44 @@
+{
+  "name": "@color-system/colors",
+  "version": "0.0.1",
+  "publishConfig": {
+    "main": "dist/index.cjs",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+      ".": {
+        "require": "./dist/index.cjs",
+        "import": "./dist/index.js"
+      },
+      "./types": {
+        "require": "./dist/types/index.cjs",
+        "import": "./dist/types/index.js"
+      },
+      "./utils": {
+        "require": "./dist/utils.cjs",
+        "import": "./dist/utils.js"
+      },
+      "./palette": {
+        "require": "./dist/palette.cjs",
+        "import": "./dist/palette.js"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "type": "module",
+  "scripts": {
+    "build": "tsdown",
+    "build:tsc": "./build.sh"
+  },
+  "keywords": [
+    "apple",
+    "uikit",
+    "colors"
+  ],
+  "author": "Innei",
+  "license": "MIT",
+  "devDependencies": {
+    "tsdown": "0.12.9",
+    "typescript": "5.8.3"
+  }
+}
