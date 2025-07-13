@@ -43,6 +43,7 @@ export interface GeneratorConfig {
   darkMode?: DarkModeConfig;
   prefix?: string;
   formatOptions?: {
+    colorSpace?: ColorFormat;
     includeP3?: boolean;
     includeFallbacks?: boolean;
     precision?: number;

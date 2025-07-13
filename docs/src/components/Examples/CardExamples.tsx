@@ -1,74 +1,195 @@
-import { colorPalette } from '@pastel-palette/colors'
-
-export default function CardExamples() {
+export function CardExamples() {
   return (
-    <div className="space-y-4">
-      <h4 className="text-xl font-semibold">Cards</h4>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div className="bg-background border border-border rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-text mb-2">Default Card</h3>
-          <p className="text-text-secondary">
-            A simple card using semantic background and border colors
-          </p>
-        </div>
-
-        <div 
-          className="rounded-xl p-6"
-          style={{ 
-            backgroundColor: colorPalette.colors.regular.pink.light.srgb,
-            borderColor: colorPalette.colors.regular.pink.dark.srgb,
-            borderWidth: '1px',
-            borderStyle: 'solid'
-          }}
-        >
-          <h3 className="text-lg font-semibold mb-2">Pink Card</h3>
-          <p className="opacity-80">
-            Custom styled card with direct color imports
-          </p>
-        </div>
-
-        <div className="bg-material-thick backdrop-blur-xl rounded-2xl p-6 shadow-lg border border-white/10">
-          <h3 className="text-lg font-semibold text-primary mb-2">Glass Card</h3>
-          <p className="text-text-tertiary">
-            Material design with beautiful blur effects
-          </p>
-        </div>
-
-        <div className="bg-fill rounded-xl p-6 hover:bg-fill-secondary transition-colors">
-          <h3 className="text-lg font-semibold text-text mb-2">Fill Card</h3>
-          <p className="text-text-secondary">
-            Using fill colors for subtle backgrounds
-          </p>
-        </div>
-
-        <div className="bg-gradient-to-br from-purple to-pink p-6 rounded-xl text-white">
-          <h3 className="text-lg font-semibold mb-2">Gradient Card</h3>
-          <p className="opacity-90">
-            Beautiful gradient using Kawaii colors
-          </p>
-        </div>
-
-        <div className="bg-element hover:bg-element-hover rounded-xl p-6 transition-colors cursor-pointer">
-          <h3 className="text-lg font-semibold text-text mb-2">Interactive Card</h3>
-          <p className="text-text-secondary">
-            Hover me for smooth transitions
-          </p>
-        </div>
+    <div className="card p-8 space-y-8">
+      <div className="text-center">
+        <h4 className="heading-3 text-foreground mb-2">
+          Card Gallery
+        </h4>
+        <p className="text-muted">Clean cards for every need</p>
       </div>
 
-      <div className="mt-8">
-        <h5 className="text-sm font-medium text-text-secondary mb-3">Nested Cards</h5>
-        <div className="bg-background-secondary rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-text mb-4">Parent Container</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-background rounded-lg p-4">
-              <h4 className="font-medium text-text mb-1">Nested Card 1</h4>
-              <p className="text-sm text-text-secondary">Using depth hierarchy</p>
+      <div className="space-y-8">
+        {/* Basic Cards */}
+        <div className="space-y-4">
+          <h5 className="heading-4 text-foreground">
+            Basic Cards
+          </h5>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="card p-6 hover:border-foreground/20 transition-colors">
+              <div className="text-center space-y-3">
+                <h3 className="text-lg font-semibold text-foreground">Default Card</h3>
+                <p className="text-muted">
+                  A simple card using semantic background and border colors
+                </p>
+              </div>
             </div>
-            <div className="bg-background rounded-lg p-4">
-              <h4 className="font-medium text-text mb-1">Nested Card 2</h4>
-              <p className="text-sm text-text-secondary">Clean visual separation</p>
+
+            <div className="bg-pink border border-pink-dark rounded-md p-6 hover:opacity-90 transition-opacity">
+              <div className="text-center space-y-3">
+                <h3 className="text-lg font-semibold text-white">Pink Card</h3>
+                <p className="text-white/80">
+                  Vibrant pastel card with Pastel colors
+                </p>
+              </div>
+            </div>
+
+            <div className="card bg-muted p-6 hover:border-foreground/20 transition-colors">
+              <div className="text-center space-y-3">
+                <h3 className="text-lg font-semibold text-foreground">Background Card</h3>
+                <p className="text-muted">
+                  Card with subtle background color
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Interactive Cards */}
+        <div className="space-y-4">
+          <h5 className="heading-4 text-foreground">
+            Interactive Cards
+          </h5>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="card p-6 cursor-pointer hover:border-foreground transition-colors group">
+              <div className="text-center space-y-3">
+                <h3 className="text-lg font-semibold text-foreground">Hover Card</h3>
+                <p className="text-muted">
+                  Border changes color on hover
+                </p>
+              </div>
+            </div>
+
+            <div className="card p-6 cursor-pointer hover:bg-muted transition-colors">
+              <div className="text-center space-y-3">
+                <h3 className="text-lg font-semibold text-foreground">Background Hover</h3>
+                <p className="text-muted">
+                  Background changes on hover
+                </p>
+              </div>
+            </div>
+
+            <div className="card p-6 cursor-pointer hover:translate-y-[-2px] transition-transform">
+              <div className="text-center space-y-3">
+                <h3 className="text-lg font-semibold text-foreground">Lift Card</h3>
+                <p className="text-muted">
+                  Subtle lift effect on hover
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Cards */}
+        <div className="space-y-4">
+          <h5 className="heading-4 text-foreground">
+            Content Cards
+          </h5>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="card p-6">
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-foreground">Card Title</h3>
+                <p className="text-muted">
+                  Clean card design that works perfectly for showcasing content with a minimal aesthetic.
+                </p>
+                <div className="flex gap-2">
+                  <button className="btn btn-primary">
+                    Learn More
+                  </button>
+                  <button className="btn btn-secondary">
+                    Get Started
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="card p-6">
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-foreground">Another Card</h3>
+                <p className="text-muted">
+                  Consistent styling across all card components for a unified design system.
+                </p>
+                <div className="flex gap-2">
+                  <button className="btn btn-secondary">
+                    Explore
+                  </button>
+                  <button className="btn btn-secondary">
+                    Try Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Nested Cards */}
+        <div className="space-y-4">
+          <h5 className="heading-4 text-foreground">Nested Cards</h5>
+          <div className="card bg-muted p-8">
+            <div className="text-center mb-6">
+              <h3 className="heading-3 text-foreground mb-2">
+                Parent Container
+              </h3>
+              <p className="text-muted">Clean nested card hierarchy</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="card bg-background p-6">
+                <div className="text-center space-y-3">
+                  <h4 className="font-semibold text-foreground">Nested Card 1</h4>
+                  <p className="text-sm text-muted">
+                    Using depth hierarchy for clean visual separation
+                  </p>
+                </div>
+              </div>
+              <div className="card bg-background p-6">
+                <div className="text-center space-y-3">
+                  <h4 className="font-semibold text-foreground">Nested Card 2</h4>
+                  <p className="text-sm text-muted">
+                    Perfect for organizing related content
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Feature Cards */}
+        <div className="space-y-4">
+          <h5 className="heading-4 text-foreground">Feature Cards</h5>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="card p-6 hover:border-foreground/20 transition-colors">
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 mx-auto bg-pink rounded-md flex items-center justify-center text-white text-2xl">
+                  C
+                </div>
+                <h4 className="font-semibold text-foreground">Color System</h4>
+                <p className="text-sm text-muted">
+                  13 beautiful colors with light/dark variants
+                </p>
+              </div>
+            </div>
+
+            <div className="card p-6 hover:border-foreground/20 transition-colors">
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 mx-auto bg-sky rounded-md flex items-center justify-center text-white text-2xl">
+                  T
+                </div>
+                <h4 className="font-semibold text-foreground">TypeScript</h4>
+                <p className="text-sm text-muted">
+                  Full type definitions for all color values
+                </p>
+              </div>
+            </div>
+
+            <div className="card p-6 hover:border-foreground/20 transition-colors">
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 mx-auto bg-green rounded-md flex items-center justify-center text-white text-2xl">
+                  T
+                </div>
+                <h4 className="font-semibold text-foreground">TailwindCSS</h4>
+                <p className="text-sm text-muted">
+                  CSS-based configuration with @theme directives
+                </p>
+              </div>
             </div>
           </div>
         </div>

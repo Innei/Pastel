@@ -202,7 +202,7 @@ docs/
          {/* Color details */}
          <div className="mt-3">
            <h3 className="font-medium capitalize">{name}</h3>
-           <p className="text-sm text-gray-600 dark:text-gray-400 font-mono">
+           <p className="text-sm text-text-secondary dark:text-gray-400 font-mono">
              {variants[selectedVariant].oklch}
            </p>
          </div>

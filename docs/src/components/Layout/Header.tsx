@@ -1,45 +1,94 @@
-import ThemeToggle from '../ThemeToggle'
+import { useState, useEffect } from 'react'
+import { useTheme } from 'next-themes'
+import { Sun, Moon, Menu, Grid2x2 } from 'lucide-react'
+import { Container } from '../ui/Container'
 
-export default function Header() {
+export function Header() {
+  const { theme, setTheme } = useTheme()
+  const [scrolled, setScrolled] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 max-w-7xl items-center mx-auto px-4">
-        <div className="flex flex-1 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="32" height="32" rx="8" fill="currentColor" className="text-pink"/>
-              <circle cx="11" cy="13" r="2" fill="white"/>
-              <circle cx="21" cy="13" r="2" fill="white"/>
-              <path d="M10 20C10 20 13 23 16 23C19 23 22 20 22 20" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-            <h1 className="text-lg font-semibold">Pastel Palette</h1>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all ${
+        scrolled
+          ? 'bg-background/80 backdrop-blur-md border-b border-border'
+          : ''
+      }`}
+    >
+      <Container>
+        <nav className="flex items-center justify-between h-16">
+          <div className="flex items-center gap-8">
+            <a href="/" className="flex items-center gap-2">
+              <Grid2x2 className="w-6 h-6" />
+              <span className="font-semibold text-lg">Pastel</span>
+            </a>
+
+            <div className="hidden md:flex items-center gap-6">
+              <a
+                href="#features"
+                className="text-sm text-text-secondary hover:text-black transition-colors"
+              >
+                Features
+              </a>
+              <a
+                href="#examples"
+                className="text-sm text-text-secondary hover:text-black transition-colors"
+              >
+                Examples
+              </a>
+              <a
+                href="#installation"
+                className="text-sm text-text-secondary hover:text-black transition-colors"
+              >
+                Installation
+              </a>
+              <a
+                href="https://github.com/your-repo/pastel"
+                className="text-sm text-text-secondary hover:text-black transition-colors"
+              >
+                GitHub
+              </a>
+            </div>
           </div>
-          
-          <nav className="flex items-center gap-6">
-            <a 
-              href="#palette" 
-              className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
-            >
-              Palette
-            </a>
-            <a 
-              href="#examples" 
-              className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
-            >
-              Examples
-            </a>
-            <a 
-              href="https://github.com/innei/pastel-palette" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
-            >
-              GitHub
-            </a>
-            <ThemeToggle />
-          </nav>
-        </div>
-      </div>
+
+          <div className="flex items-center gap-4">
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-md hover:bg-gray-100"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </button>
+            )}
+
+            <button className="md:hidden p-2 rounded-md hover:bg-gray-100">
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
+        </nav>
+      </Container>
     </header>
   )
 }

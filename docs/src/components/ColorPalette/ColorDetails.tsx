@@ -1,64 +1,102 @@
-import { useCopyToClipboard } from '../../hooks/useCopyToClipboard'
-import type { ColorVariants } from '@pastel-palette/colors'
+import { colorPalette, type RegularColorName } from '@pastel-palette/colors'
 
-interface Props {
-  name: string
-  colorSet: ColorVariants
-  variant: 'light' | 'dark'
+interface ColorDetailsProps {
+  colorName: string
+  onCopy: (value: string) => void
 }
 
-export default function ColorDetails({ name, colorSet, variant }: Props) {
-  const [copiedOklch, copyOklch] = useCopyToClipboard()
-  const [copiedSrgb, copySrgb] = useCopyToClipboard()
-  const [copiedP3, copyP3] = useCopyToClipboard()
+export function ColorDetails({ colorName, onCopy }: ColorDetailsProps) {
+  const colorVariants =
+    colorPalette.colors.regular[colorName as RegularColorName]
 
-  const color = colorSet[variant]
+  if (!colorVariants) return null
 
   return (
-    <div className="bg-element rounded-lg p-4 space-y-3">
-      <div className="flex items-center justify-between">
-        <h4 className="font-medium capitalize">{name} - {variant}</h4>
-        <div 
-          className="w-12 h-12 rounded-lg shadow-sm"
-          style={{ backgroundColor: color.srgb }}
-        />
-      </div>
-      
-      <div className="space-y-2 text-sm">
-        <div className="flex items-center justify-between group">
-          <span className="text-text-secondary">OKLCH:</span>
-          <button
-            onClick={() => copyOklch(color.oklch)}
-            className="font-mono text-text hover:text-primary transition-colors cursor-pointer"
-          >
-            {color.oklch}
-            {copiedOklch && <span className="ml-2 text-xs text-green">Copied!</span>}
-          </button>
-        </div>
-        
-        <div className="flex items-center justify-between group">
-          <span className="text-text-secondary">sRGB:</span>
-          <button
-            onClick={() => copySrgb(color.srgb)}
-            className="font-mono text-text hover:text-primary transition-colors cursor-pointer"
-          >
-            {color.srgb}
-            {copiedSrgb && <span className="ml-2 text-xs text-green">Copied!</span>}
-          </button>
-        </div>
-        
-        {color.p3 && (
-          <div className="flex items-center justify-between group">
-            <span className="text-text-secondary">P3:</span>
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold capitalize">{colorName}</h3>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <h4 className="text-sm font-medium">Light Variant</h4>
+          <div className="space-y-1">
             <button
-              onClick={() => copyP3(color.p3!)}
-              className="font-mono text-text hover:text-primary transition-colors cursor-pointer"
+              onClick={() => onCopy(colorVariants.light.oklch)}
+              className="w-full text-left p-2 rounded border border-border hover:bg-muted transition-colors"
             >
-              {color.p3}
-              {copiedP3 && <span className="ml-2 text-xs text-green">Copied!</span>}
+              <div className="flex justify-between items-center">
+                <span className="text-xs font-medium">OKLCH</span>
+                <span className="text-xs font-mono">
+                  {colorVariants.light.oklch}
+                </span>
+              </div>
             </button>
+            <button
+              onClick={() => onCopy(colorVariants.light.srgb)}
+              className="w-full text-left p-2 rounded border border-border hover:bg-muted transition-colors"
+            >
+              <div className="flex justify-between items-center">
+                <span className="text-xs font-medium">sRGB</span>
+                <span className="text-xs font-mono">
+                  {colorVariants.light.srgb}
+                </span>
+              </div>
+            </button>
+            {colorVariants.light.p3 && (
+              <button
+                onClick={() => onCopy(colorVariants.light.p3!)}
+                className="w-full text-left p-2 rounded border border-border hover:bg-muted transition-colors"
+              >
+                <div className="flex justify-between items-center">
+                  <span className="text-xs font-medium">P3</span>
+                  <span className="text-xs font-mono">
+                    {colorVariants.light.p3}
+                  </span>
+                </div>
+              </button>
+            )}
           </div>
-        )}
+        </div>
+
+        <div className="space-y-2">
+          <h4 className="text-sm font-medium">Dark Variant</h4>
+          <div className="space-y-1">
+            <button
+              onClick={() => onCopy(colorVariants.dark.oklch)}
+              className="w-full text-left p-2 rounded border border-border hover:bg-muted transition-colors"
+            >
+              <div className="flex justify-between items-center">
+                <span className="text-xs font-medium">OKLCH</span>
+                <span className="text-xs font-mono">
+                  {colorVariants.dark.oklch}
+                </span>
+              </div>
+            </button>
+            <button
+              onClick={() => onCopy(colorVariants.dark.srgb)}
+              className="w-full text-left p-2 rounded border border-border hover:bg-muted transition-colors"
+            >
+              <div className="flex justify-between items-center">
+                <span className="text-xs font-medium">sRGB</span>
+                <span className="text-xs font-mono">
+                  {colorVariants.dark.srgb}
+                </span>
+              </div>
+            </button>
+            {colorVariants.dark.p3 && (
+              <button
+                onClick={() => onCopy(colorVariants.dark.p3!)}
+                className="w-full text-left p-2 rounded border border-border hover:bg-muted transition-colors"
+              >
+                <div className="flex justify-between items-center">
+                  <span className="text-xs font-medium">P3</span>
+                  <span className="text-xs font-mono">
+                    {colorVariants.dark.p3}
+                  </span>
+                </div>
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )
