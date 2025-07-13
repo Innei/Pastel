@@ -9,26 +9,13 @@
       ".": {
         "require": "./dist/index.cjs",
         "import": "./dist/index.js"
-      },
-      "./types": {
-        "require": "./dist/types/index.cjs",
-        "import": "./dist/types/index.js"
-      },
-      "./utils": {
-        "require": "./dist/utils.cjs",
-        "import": "./dist/utils.js"
-      },
-      "./palette": {
-        "require": "./dist/palette.cjs",
-        "import": "./dist/palette.js"
       }
     }
   },
-  "main": "./dist/index.cjs",
+  "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "build": "tsdown",
-    "build:tsc": "./build.sh"
+    "build": "tsup"
   },
   "keywords": [
     "apple",
@@ -38,7 +25,7 @@
   "author": "Innei",
   "license": "MIT",
   "devDependencies": {
-    "tsdown": "0.12.9",
+    "tsup": "8.5.0",
     "typescript": "5.8.3"
   }
 }

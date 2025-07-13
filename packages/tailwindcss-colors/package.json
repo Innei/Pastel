@@ -2,12 +2,14 @@
   "name": "@color-system/tailwindcss",
   "version": "1.0.0-alpha.1",
   "description": "",
-  "exports": {},
+  "exports": {
+    "./dist/theme.css": "./dist/theme.css",
+    "./dist/theme-class.css": "./dist/theme-class.css",
+    "./dist/theme-data-attribute.css": "./dist/theme-data-attribute.css",
+    "./dist/theme-media-query.css": "./dist/theme-media-query.css"
+  },
   "scripts": {
-    "build": "tsx build.ts",
-    "build:css": "tsx build-css.ts",
-    "build:tailwind": "tsx generate-tailwind-config.ts",
-    "build:v4": "tsx build-tailwind4-css.ts"
+    "build:css": "tsx cli/build.ts"
   },
   "keywords": [
     "tailwindcss",
@@ -19,7 +21,9 @@
   ],
   "author": "Innei",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@color-system/colors": "workspace:*"
+  },
   "devDependencies": {
     "@types/node": "22.16.3",
     "prettier": "3.6.2",

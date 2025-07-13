@@ -1,0 +1,18 @@
+@import 'tailwindcss';
+
+/* Import our color system with all @theme definitions */
+@import '@color-system/tailwindcss/dist/theme.css';
+
+/* Geist-inspired base styles */
+:root {
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -13,7 +13,7 @@ npm install @color-system/tailwindcss @color-system/colors
 1. Import the generated theme CSS in your main CSS file:
 
 ```css
-@import "@color-system/tailwindcss/dist/theme.css";
+@import '@color-system/tailwindcss/dist/theme.css';
 
 /* Your other styles */
 ```
@@ -44,9 +44,9 @@ npm install @color-system/tailwindcss @color-system/colors
 Automatically follows the operating system's color scheme preference.
 
 ```css
-@import "@color-system/tailwindcss/dist/theme.css";
+@import '@color-system/tailwindcss/dist/theme.css';
 /* or */
-@import "@color-system/tailwindcss/dist/theme-media-query.css";
+@import '@color-system/tailwindcss/dist/theme-media-query.css';
 ```
 
 No additional HTML or JavaScript needed - it just works!
@@ -56,7 +56,7 @@ No additional HTML or JavaScript needed - it just works!
 Toggle dark mode by adding a `.dark` class to any parent element.
 
 ```css
-@import "@color-system/tailwindcss/dist/theme-class.css";
+@import '@color-system/tailwindcss/dist/theme-class.css';
 ```
 
 ```html
@@ -80,7 +80,7 @@ Toggle dark mode by adding a `.dark` class to any parent element.
 Control dark mode via data attributes for more semantic HTML.
 
 ```css
-@import "@color-system/tailwindcss/dist/theme-data-attribute.css";
+@import '@color-system/tailwindcss/dist/theme-data-attribute.css';
 ```
 
 ```html
@@ -102,6 +102,7 @@ Control dark mode via data attributes for more semantic HTML.
 ## Available CSS Variables
 
 ### Regular Colors
+
 ```css
 --color-blue
 --color-pink
@@ -121,6 +122,7 @@ Control dark mode via data attributes for more semantic HTML.
 ### Semantic Colors
 
 #### Text Colors
+
 ```css
 --color-text                  /* Primary text */
 --color-text-secondary        /* Secondary text */
@@ -131,6 +133,7 @@ Control dark mode via data attributes for more semantic HTML.
 ```
 
 #### UI Element Colors
+
 ```css
 --color-border                /* Primary borders */
 --color-border-secondary      /* Secondary borders */
@@ -140,6 +143,7 @@ Control dark mode via data attributes for more semantic HTML.
 ```
 
 #### Background Colors
+
 ```css
 --color-background            /* Primary background */
 --color-background-secondary  /* Secondary background */
@@ -149,6 +153,7 @@ Control dark mode via data attributes for more semantic HTML.
 ```
 
 #### Fill Colors
+
 ```css
 --color-fill                  /* Primary fill */
 --color-fill-secondary        /* Secondary fill */
@@ -157,6 +162,7 @@ Control dark mode via data attributes for more semantic HTML.
 ```
 
 #### Material Colors (with opacity)
+
 ```css
 --color-material-ultrathick   /* 93% opacity */
 --color-material-thick        /* 85% opacity */
@@ -167,6 +173,7 @@ Control dark mode via data attributes for more semantic HTML.
 ```
 
 #### Application Colors
+
 ```css
 --color-accent                /* Accent color */
 --color-primary               /* Primary brand color */
@@ -190,41 +197,37 @@ Each color also includes format-specific variants:
 
 ## Usage with TailwindCSS v4
 
-In your `tailwind.config.js`:
+TailwindCSS v4 uses CSS-based configuration through the `@theme` directive. The generated theme files already include all color variables in the proper format.
 
-```javascript
-export default {
-  theme: {
-    extend: {
-      colors: {
-        // Map to CSS variables
-        'ui-accent': 'var(--color-accent)',
-        'ui-primary': 'var(--color-primary)',
-        'ui-secondary': 'var(--color-secondary)',
-        
-        // Text colors
-        'ui-text': 'var(--color-text)',
-        'ui-text-secondary': 'var(--color-text-secondary)',
-        
-        // Backgrounds
-        'ui-bg': 'var(--color-background)',
-        'ui-bg-secondary': 'var(--color-background-secondary)',
-      }
-    }
-  }
-}
+Simply import one of the theme files and the colors are automatically available:
+
+```css
+@import '@color-system/tailwindcss/dist/theme.css';
 ```
 
-Then use in your HTML:
+You can then use the colors directly in your CSS:
 
-```html
-<button class="bg-ui-accent text-white border border-ui-border">
-  Click me
-</button>
+```css
+/* Direct usage with CSS variables */
+.button {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
 
-<div class="bg-ui-bg text-ui-text">
-  <p class="text-ui-text-secondary">Secondary text</p>
-</div>
+/* Or extend TailwindCSS with custom utilities */
+@layer utilities {
+  .bg-ui-accent {
+    background-color: var(--color-accent);
+  }
+
+  .text-ui-primary {
+    color: var(--color-text);
+  }
+
+  .border-ui {
+    border-color: var(--color-border);
+  }
+}
 ```
 
 ## Programmatic Usage
@@ -232,19 +235,23 @@ Then use in your HTML:
 Generate custom configurations:
 
 ```typescript
-import { generateCSS, createConfig, classDarkMode } from '@color-system/tailwindcss';
+import {
+  generateCSS,
+  createConfig,
+  classDarkMode,
+} from '@color-system/tailwindcss'
 
 // Create custom configuration
 const config = createConfig({
   darkMode: classDarkMode('.dark-mode'),
-  prefix: 'ui-'
-});
+  prefix: 'ui-',
+})
 
 // Generate CSS string
-const css = generateCSS(config);
+const css = generateCSS(config)
 
 // Write to file or use in build process
-fs.writeFileSync('custom-theme.css', css);
+fs.writeFileSync('custom-theme.css', css)
 ```
 
 ## Examples
