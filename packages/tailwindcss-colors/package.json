@@ -1,5 +1,5 @@
 {
-  "name": "@color-system/tailwindcss",
+  "name": "@pastel-palette/tailwindcss",
   "version": "1.0.0-alpha.1",
   "description": "",
   "exports": {
@@ -13,16 +13,15 @@
   },
   "keywords": [
     "tailwindcss",
-    "uikit",
+    "pastel",
+    "kawaii",
     "colors",
-    "apple",
-    "ios",
-    "macos"
+    "palette"
   ],
   "author": "Innei",
   "license": "MIT",
   "dependencies": {
-    "@color-system/colors": "workspace:*"
+    "@pastel-palette/colors": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "22.16.3",

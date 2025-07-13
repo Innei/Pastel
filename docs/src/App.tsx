@@ -10,14 +10,14 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background text-text">
       <Header />
-      
+
       <main className="container mx-auto px-4 py-8 max-w-7xl">
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-2">Kawaii Color System</h2>
+          <h2 className="text-3xl font-bold mb-2">Pastel Palette</h2>
           <p className="text-text-secondary mb-8">
             A beautiful, pastel-inspired color palette for modern applications
           </p>
-          
+
           <div className="mb-12">
             <h3 className="text-2xl font-semibold mb-6">Color Palette</h3>
             <ColorGrid />
@@ -26,7 +26,7 @@ export default function App() {
 
         <section className="mb-16">
           <h3 className="text-2xl font-semibold mb-6">Examples</h3>
-          
+
           <div className="space-y-12">
             <ButtonExamples />
             <CardExamples />
@@ -35,7 +35,7 @@ export default function App() {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   )

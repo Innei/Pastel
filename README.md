@@ -1,6 +1,6 @@
-# UI Color System
+# Pastel Palette
 
-A comprehensive UIKit-inspired color system with OKLCH color space support, TypeScript definitions, and TailwindCSS v4 integration. Features a cute & kawaii aesthetic with soft, pastel tones.
+A comprehensive kawaii-inspired color system with OKLCH color space support, TypeScript definitions, and TailwindCSS v4 integration. Features a cute & kawaii aesthetic with soft, pastel tones.
 
 ## Features
 
@@ -14,12 +14,12 @@ A comprehensive UIKit-inspired color system with OKLCH color space support, Type
 
 ## Packages
 
-### [@color-system/colors](./packages/colors)
+### [@pastel-palette/colors](./packages/colors)
 
 Core color definitions with TypeScript types and utilities.
 
 ```typescript
-import { colorSystem, validateColor } from '@color-system/colors';
+import { colorSystem, validateColor } from '@pastel-palette/colors';
 
 // Access color values
 const blueLight = colorSystem.regular.blue.light.oklch;
@@ -30,7 +30,7 @@ const result = validateColor('oklch(0.85 0.12 237)');
 // { valid: true, errors: [], warnings: [] }
 ```
 
-### [@color-system/tailwindcss](./packages/tailwindcss-colors)
+### [@pastel-palette/tailwindcss](./packages/tailwindcss-colors)
 
 TailwindCSS v4 integration with automatic CSS generation.
 
@@ -47,10 +47,10 @@ TailwindCSS v4 integration with automatic CSS generation.
 
 ```bash
 # Install both packages
-npm install @color-system/colors @color-system/tailwindcss
+npm install @pastel-palette/colors @pastel-palette/tailwindcss
 
 # Or using pnpm
-pnpm add @color-system/colors @color-system/tailwindcss
+pnpm add @pastel-palette/colors @pastel-palette/tailwindcss
 ```
 
 ## Usage
@@ -63,13 +63,13 @@ pnpm add @color-system/colors @color-system/tailwindcss
 /* Choose your dark mode strategy */
 
 /* Option 1: Media query (follows OS preference) */
-@import "@color-system/tailwindcss/dist/theme.css";
+@import "@pastel-palette/tailwindcss/dist/theme.css";
 
 /* Option 2: Class-based (.dark class) */
-@import "@color-system/tailwindcss/dist/theme-class.css";
+@import "@pastel-palette/tailwindcss/dist/theme-class.css";
 
 /* Option 3: Data attribute (html[data-theme="dark"]) */
-@import "@color-system/tailwindcss/dist/theme-data-attribute.css";
+@import "@pastel-palette/tailwindcss/dist/theme-data-attribute.css";
 ```
 
 2. Use the color variables in your TailwindCSS config or CSS:
@@ -94,7 +94,7 @@ import {
   colorSystem, 
   parseOKLCH, 
   calculateContrastRatio 
-} from '@color-system/colors';
+} from '@pastel-palette/colors';
 
 // Access semantic colors with depth
 const primaryText = colorSystem.element.text.primary;
@@ -179,8 +179,8 @@ Control dark mode via data attributes for more flexibility.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/color-system.git
-cd color-system
+git clone https://github.com/yourusername/pastel-palette.git
+cd pastel-palette
 
 # Install dependencies
 pnpm install
@@ -205,7 +205,7 @@ cd packages/tailwindcss-colors && npm run build
 
 ## Color Philosophy
 
-The kawaii aesthetic emphasizes:
+The pastel palette aesthetic emphasizes:
 - **High lightness values** (0.7-0.95 in OKLCH)
 - **Moderate chroma** (0.08-0.18) for soft appearance
 - **Harmonious pastels** that work well together
@@ -217,4 +217,4 @@ MIT
 
 ## Credits
 
-Inspired by Apple's UIKit color system and modern color spaces like OKLCH.
+Inspired by kawaii aesthetics and modern color spaces like OKLCH.

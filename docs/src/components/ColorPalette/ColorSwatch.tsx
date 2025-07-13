@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useCopyToClipboard } from '../../hooks/useCopyToClipboard'
-import type { ColorVariants } from '@color-system/colors'
+import type { ColorVariants } from '@pastel-palette/colors'
 
 interface Props {
   name: string

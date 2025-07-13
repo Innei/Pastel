@@ -1,4 +1,4 @@
-import { colorPalette } from '@color-system/colors'
+import { colorPalette } from '@pastel-palette/colors'
 
 export default function CardExamples() {
   return (

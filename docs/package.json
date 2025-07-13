@@ -1,5 +1,5 @@
 {
-  "name": "@color-system/docs",
+  "name": "@pastel-palette/docs",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,8 +10,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@color-system/colors": "workspace:*",
-    "@color-system/tailwindcss": "workspace:*",
+    "@pastel-palette/colors": "workspace:*",
+    "@pastel-palette/tailwindcss": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "clsx": "^2.1.1"

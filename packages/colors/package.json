@@ -1,5 +1,5 @@
 {
-  "name": "@color-system/colors",
+  "name": "@pastel-palette/colors",
   "version": "0.0.1",
   "publishConfig": {
     "main": "dist/index.cjs",
@@ -18,9 +18,10 @@
     "build": "tsup"
   },
   "keywords": [
-    "apple",
-    "uikit",
-    "colors"
+    "pastel",
+    "kawaii",
+    "colors",
+    "palette"
   ],
   "author": "Innei",
   "license": "MIT",

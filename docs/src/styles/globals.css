@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /* Import our color system with all @theme definitions */
-@import '@color-system/tailwindcss/dist/theme.css';
+@import '@pastel-palette/tailwindcss/dist/theme.css';
 
 /* Geist-inspired base styles */
 :root {

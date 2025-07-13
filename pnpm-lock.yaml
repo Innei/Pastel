@@ -17,10 +17,10 @@ importers:
 
   docs:
     dependencies:
-      '@color-system/colors':
+      '@pastel-palette/colors':
         specifier: workspace:*
         version: link:../packages/colors
-      '@color-system/tailwindcss':
+      '@pastel-palette/tailwindcss':
         specifier: workspace:*
         version: link:../packages/tailwindcss-colors
       clsx:
@@ -66,7 +66,7 @@ importers:
 
   packages/tailwindcss-colors:
     dependencies:
-      '@color-system/colors':
+      '@pastel-palette/colors':
         specifier: workspace:*
         version: link:../colors
     devDependencies:

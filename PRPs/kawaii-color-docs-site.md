@@ -1,8 +1,8 @@
-# Kawaii Color System Documentation Site PRP
+# Pastel Palette Documentation Site PRP
 
 ## Overview
 
-Create a modern, Vercel-style documentation site showcasing the Kawaii color system with interactive color palettes and real-world usage examples.
+Create a modern, Vercel-style documentation site showcasing the Pastel Palette with interactive color palettes and real-world usage examples.
 
 ## Context & References
 
@@ -354,4 +354,4 @@ The PRP provides comprehensive context with:
 - Updated for TailwindCSS V4 CSS-based configuration
 - Direct integration with the existing color system packages
 
-The approach uses our designed color system values directly through CSS imports and JavaScript imports, ensuring consistency with the Kawaii color system.
+The approach uses our designed color system values directly through CSS imports and JavaScript imports, ensuring consistency with the Pastel Palette.

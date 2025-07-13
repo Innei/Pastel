@@ -12,7 +12,7 @@ export default function Header() {
               <circle cx="21" cy="13" r="2" fill="white"/>
               <path d="M10 20C10 20 13 23 16 23C19 23 22 20 22 20" stroke="white" strokeWidth="2" strokeLinecap="round"/>
             </svg>
-            <h1 className="text-lg font-semibold">Kawaii Colors</h1>
+            <h1 className="text-lg font-semibold">Pastel Palette</h1>
           </div>
           
           <nav className="flex items-center gap-6">
@@ -29,7 +29,7 @@ export default function Header() {
               Examples
             </a>
             <a 
-              href="https://github.com/innei/color-system" 
+              href="https://github.com/innei/pastel-palette" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
