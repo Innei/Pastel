@@ -1,14 +1,18 @@
-import { writeFileSync } from 'fs'
+import { writeFileSync, mkdirSync } from 'fs'
 import { join } from 'path'
-import { colorSystem } from '@color-system/colors'
+import { colorSystem } from '@pastel-palette/colors'
 import { generateCSS } from '../src/generator'
-import type { GeneratorConfig, DarkModeStrategy } from '@color-system/colors'
+import type { GeneratorConfig, DarkModeStrategy } from '@pastel-palette/colors'
 
 const strategies: DarkModeStrategy[] = [
   'media-query',
   'class',
   'data-attribute',
 ]
+
+// Ensure dist directory exists
+const distDir = join(__dirname, '..', 'dist')
+mkdirSync(distDir, { recursive: true })
 
 strategies.forEach((strategy) => {
   const config: GeneratorConfig = {
@@ -26,7 +30,7 @@ strategies.forEach((strategy) => {
 
   const css = generateCSS(config)
   const filename = `theme-${strategy}.css`
-  const filepath = join(__dirname, '..', 'dist', filename)
+  const filepath = join(distDir, filename)
 
   writeFileSync(filepath, css, 'utf-8')
   console.log(`✓ Generated ${filename}`)
@@ -38,7 +42,7 @@ const defaultConfig: GeneratorConfig = {
 }
 
 const defaultCss = generateCSS(defaultConfig)
-const defaultPath = join(__dirname, '..', 'dist', 'theme.css')
+const defaultPath = join(distDir, 'theme.css')
 writeFileSync(defaultPath, defaultCss, 'utf-8')
 console.log('✓ Generated theme.css (default)')
 

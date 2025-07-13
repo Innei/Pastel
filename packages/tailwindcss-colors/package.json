@@ -9,7 +9,10 @@
     "./dist/theme-media-query.css": "./dist/theme-media-query.css"
   },
   "scripts": {
-    "build:css": "tsx cli/build.ts"
+    "build": "pnpm build:css",
+    "build:css": "tsx cli/build.ts",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "tailwindcss",
