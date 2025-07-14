@@ -27,13 +27,13 @@ function App() {
               <div className="flex flex-wrap gap-4">
                 <a
                   href="#installation"
-                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md bg-black text-white hover:opacity-90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md bg-primary text-white hover:opacity-90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   Get Started
                 </a>
                 <a
                   href="https://github.com/your-repo/pastel"
-                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md bg-background text-black border border-border hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md bg-background text-black border border-border hover:bg-background-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   View on GitHub
                 </a>

@@ -1,17 +1,19 @@
 @import 'tailwindcss';
 
 /* Import our color system with all @theme definitions */
-@import '@pastel-palette/tailwindcss/dist/theme-data-attribute.css';
+@import '@pastel-palette/tailwindcss/dist/theme-data-attribute-oklch.css';
 
 /* Import Geist font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap');
 
 /* Font variables */
 :root {
-  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  --font-sans:
+    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Consolas,
+  --font-mono:
+    'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Consolas,
     'Liberation Mono', Menlo, monospace;
 }
 

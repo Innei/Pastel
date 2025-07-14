@@ -3,10 +3,7 @@
   "version": "1.0.0-alpha.1",
   "description": "",
   "exports": {
-    "./dist/theme.css": "./dist/theme.css",
-    "./dist/theme-class.css": "./dist/theme-class.css",
-    "./dist/theme-data-attribute.css": "./dist/theme-data-attribute.css",
-    "./dist/theme-media-query.css": "./dist/theme-media-query.css"
+    "./dist/*": "./dist/*"
   },
   "scripts": {
     "build": "pnpm build:css",

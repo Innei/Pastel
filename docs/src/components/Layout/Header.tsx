@@ -26,10 +26,8 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all ${
-        scrolled
-          ? 'bg-background/80 backdrop-blur-md border-b border-border'
-          : ''
+      className={`fixed top-0 left-0 right-0 z-50 border-b border-transparent transition-all ${
+        scrolled ? 'bg-background/80 backdrop-blur-md !border-border' : ''
       }`}
     >
       <Container>
@@ -72,7 +70,7 @@ export function Header() {
             {mounted && (
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-md hover:bg-gray-100"
+                className="p-2 rounded-md hover:bg-background-secondary"
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? (
@@ -83,7 +81,7 @@ export function Header() {
               </button>
             )}
 
-            <button className="md:hidden p-2 rounded-md hover:bg-gray-100">
+            <button className="md:hidden p-2 rounded-md hover:bg-background-secondary">
               <Menu className="w-5 h-5" />
             </button>
           </div>
