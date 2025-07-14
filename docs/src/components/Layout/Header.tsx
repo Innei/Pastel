@@ -6,11 +6,6 @@ import { Container } from '../ui/Container'
 export function Header() {
   const { theme, setTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,19 +62,17 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-4">
-            {mounted && (
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-md hover:bg-background-secondary"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? (
-                  <Sun className="w-5 h-5" />
-                ) : (
-                  <Moon className="w-5 h-5" />
-                )}
-              </button>
-            )}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-md hover:bg-background-secondary"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
+            </button>
 
             <button className="md:hidden p-2 rounded-md hover:bg-background-secondary">
               <Menu className="w-5 h-5" />

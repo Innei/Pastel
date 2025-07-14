@@ -46,9 +46,9 @@ export function AlertExamples() {
         <div className="space-y-4">
           <h5 className="heading-4 text-foreground">Info Alerts</h5>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="border border-border rounded-md p-6 bg-sky/10">
+            <div className="border border-border rounded-md p-6 bg-blue/10">
               <div className="flex items-center gap-4">
-                <div className="text-2xl text-sky">i</div>
+                <div className="text-2xl text-blue">i</div>
                 <div className="flex-1">
                   <h6 className="font-semibold text-foreground">
                     Did you know?
@@ -60,16 +60,16 @@ export function AlertExamples() {
               </div>
             </div>
 
-            <div className="border border-border rounded-md p-6 bg-sky/10">
+            <div className="border border-border rounded-md p-6 bg-blue/10">
               <div className="flex items-center gap-4">
-                <div className="text-2xl text-sky">i</div>
+                <div className="text-2xl text-blue">i</div>
                 <div className="flex-1">
                   <h6 className="font-semibold text-foreground">Pro Tip</h6>
                   <p className="text-sm text-muted">
                     Use OKLCH for more perceptually uniform colors!
                   </p>
                 </div>
-                <button className="px-3 py-1 bg-sky hover:opacity-90 text-white rounded-md text-sm transition-opacity">
+                <button className="px-3 py-1 bg-blue hover:opacity-90 text-white rounded-md text-sm transition-opacity">
                   Learn
                 </button>
               </div>
@@ -218,7 +218,7 @@ export function AlertExamples() {
 
             <div className="card p-4">
               <div className="flex items-center gap-3">
-                <div className="text-xl text-sky">✓</div>
+                <div className="text-xl text-blue">✓</div>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-foreground">
                     Message sent!
@@ -259,7 +259,7 @@ export function AlertExamples() {
 
             <div className="relative">
               <button className="btn btn-primary">Notifications</button>
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-sky text-white text-xs rounded-full flex items-center justify-center font-medium">
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-blue text-white text-xs rounded-full flex items-center justify-center font-medium">
                 7
               </div>
             </div>

@@ -110,7 +110,7 @@ Control dark mode via data attributes for more semantic HTML.
 --color-green
 --color-orange
 --color-yellow
---color-sky
+--color-blue
 --color-red
 --color-brown
 --color-gray

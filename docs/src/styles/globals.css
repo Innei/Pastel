@@ -26,13 +26,13 @@
     @apply text-text-secondary;
   }
   .bg-muted {
-    @apply bg-fill;
+    @apply bg-neutral/20;
   }
   .border-muted {
     @apply border-border-secondary;
   }
   .hover\:bg-muted:hover {
-    @apply hover:bg-fill-secondary;
+    @apply hover:bg-neutral/10;
   }
   .hover\:border-foreground:hover {
     @apply hover:border-border;
@@ -63,7 +63,7 @@
     @apply px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
   .btn-primary {
-    @apply bg-primary text-white hover:opacity-90 focus:ring-primary;
+    @apply bg-accent text-white hover:opacity-90 focus:ring-accent;
   }
   .btn-secondary {
     @apply bg-background border border-border text-text hover:bg-fill focus:ring-border;

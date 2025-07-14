@@ -32,9 +32,7 @@ export function ButtonExamples() {
         <div className="space-y-4">
           <h5 className="text-lg font-semibold">Secondary Buttons</h5>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <button className="btn btn-secondary">
-              Default
-            </button>
+            <button className="btn btn-secondary">Default</button>
             <button className="btn border border-blue text-blue hover:bg-blue hover:bg-opacity-10">
               Blue
             </button>
@@ -47,25 +45,6 @@ export function ButtonExamples() {
           </div>
         </div>
 
-        {/* Pastel Buttons */}
-        <div className="space-y-4">
-          <h5 className="text-lg font-semibold">Pastel Variants</h5>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <button className="btn bg-sky-light text-sky-dark hover:bg-sky hover:text-white">
-              Sky
-            </button>
-            <button className="btn bg-pink-light text-pink-dark hover:bg-pink hover:text-white">
-              Pink
-            </button>
-            <button className="btn bg-yellow-light text-yellow-dark hover:bg-yellow hover:text-white">
-              Yellow
-            </button>
-            <button className="btn bg-purple-light text-purple-dark hover:bg-purple hover:text-white">
-              Purple
-            </button>
-          </div>
-        </div>
-
         {/* Button Sizes */}
         <div className="space-y-4">
           <h5 className="text-lg font-semibold">Button Sizes</h5>
@@ -73,12 +52,8 @@ export function ButtonExamples() {
             <button className="btn btn-primary text-sm py-1.5 px-3">
               Small
             </button>
-            <button className="btn btn-primary">
-              Medium
-            </button>
-            <button className="btn btn-primary text-lg py-3 px-6">
-              Large
-            </button>
+            <button className="btn btn-primary">Medium</button>
+            <button className="btn btn-primary text-lg py-3 px-6">Large</button>
           </div>
         </div>
 
@@ -86,9 +61,7 @@ export function ButtonExamples() {
         <div className="space-y-4">
           <h5 className="text-lg font-semibold">Button States</h5>
           <div className="flex flex-wrap gap-4">
-            <button className="btn btn-primary">
-              Normal
-            </button>
+            <button className="btn btn-primary">Normal</button>
             <button className="btn btn-secondary" disabled>
               Disabled
             </button>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Palette, Type, Layers, Square, Eye } from 'lucide-react'
-import { ColorDetails } from './ColorDetails'
+import { ColorModal } from './ColorModal'
 import { colorPalette, kawaiiColorSystem } from '@pastel-palette/colors'
 
 type ColorCategory = 'regular' | 'semantic' | 'material' | 'application'
@@ -42,11 +42,11 @@ const colorSections: ColorSection[] = [
 export function ColorGrid() {
   const [selectedCategory, setSelectedCategory] =
     useState<ColorCategory>('regular')
-  const [selectedColor, setSelectedColor] = useState<string | null>(null)
+  const [modalColor, setModalColor] = useState<string | null>(null)
   const [copiedColor, setCopiedColor] = useState<string | null>(null)
 
   const handleColorClick = (colorName: string) => {
-    setSelectedColor(selectedColor === colorName ? null : colorName)
+    setModalColor(colorName)
   }
 
   const handleCopy = async (value: string) => {
@@ -60,20 +60,34 @@ export function ColorGrid() {
   }
 
   const renderRegularColors = () => {
-    const { regular } = colorPalette.colors
+    // Use regular colors - CSS variables will automatically switch to high-contrast when data-contrast-mode="high-contrast"
+    const colors = colorPalette.colors.regular
+
     return (
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {Object.entries(regular).map(([name, variants]) => (
+        {Object.entries(colors).map(([name, variants]) => (
           <div key={name} className="space-y-2">
             <button
               className="w-full text-left group"
               onClick={() => handleColorClick(name)}
             >
               <div className="space-y-1">
-                <div className="aspect-square rounded-md overflow-hidden border border-border transition-all group-hover:scale-105">
+                <div className="aspect-square rounded-md overflow-hidden shadow hover:shadow-xl transition-all group-hover:scale-105 relative">
+                  {/* Dark variant - bottom right */}
                   <div
-                    className="w-full h-full"
-                    style={{ backgroundColor: variants.light.srgb }}
+                    className="absolute inset-0"
+                    style={{
+                      backgroundColor: variants.dark.srgb,
+                      clipPath: 'polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                    }}
+                  />
+                  {/* Light variant - top left */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundColor: variants.light.srgb,
+                      clipPath: 'polygon(0% 0%, 100% 0%, 0% 100%)',
+                    }}
                   />
                 </div>
                 <div className="px-1">
@@ -82,45 +96,6 @@ export function ColorGrid() {
                 </div>
               </div>
             </button>
-
-            {selectedColor === name && (
-              <div className="mt-4 space-y-1">
-                <button
-                  onClick={() => handleCopy(variants.light.srgb)}
-                  className="w-full flex items-center justify-between p-2 rounded border border-border hover:bg-muted transition-colors group"
-                >
-                  <div className="flex items-center gap-2">
-                    <div
-                      className="w-8 h-8 rounded border border-border"
-                      style={{ backgroundColor: variants.light.srgb }}
-                    />
-                    <span className="text-xs font-medium">Light</span>
-                  </div>
-                  <span className="text-xs text-muted font-mono">
-                    {copiedColor === variants.light.srgb
-                      ? 'Copied!'
-                      : variants.light.srgb}
-                  </span>
-                </button>
-                <button
-                  onClick={() => handleCopy(variants.dark.srgb)}
-                  className="w-full flex items-center justify-between p-2 rounded border border-border hover:bg-muted transition-colors group"
-                >
-                  <div className="flex items-center gap-2">
-                    <div
-                      className="w-8 h-8 rounded border border-border"
-                      style={{ backgroundColor: variants.dark.srgb }}
-                    />
-                    <span className="text-xs font-medium">Dark</span>
-                  </div>
-                  <span className="text-xs text-muted font-mono">
-                    {copiedColor === variants.dark.srgb
-                      ? 'Copied!'
-                      : variants.dark.srgb}
-                  </span>
-                </button>
-              </div>
-            )}
           </div>
         ))}
       </div>
@@ -407,11 +382,11 @@ export function ColorGrid() {
               key={section.id}
               onClick={() => {
                 setSelectedCategory(section.id)
-                setSelectedColor(null)
+                setModalColor(null)
               }}
               className={`flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                 selectedCategory === section.id
-                  ? 'border-primary text-primary'
+                  ? 'border-accent text-accent'
                   : 'border-transparent text-text-secondary hover:text-text-tertiary hover:border-border'
               }`}
             >
@@ -435,11 +410,14 @@ export function ColorGrid() {
       {/* Color Content */}
       {renderColorContent()}
 
-      {selectedColor && selectedCategory === 'regular' && (
-        <div className="mt-8 p-6 border border-border rounded-lg">
-          <ColorDetails colorName={selectedColor} onCopy={handleCopy} />
-        </div>
-      )}
+      {/* Color Modal */}
+
+      <ColorModal
+        isOpen={!!modalColor}
+        onClose={() => setModalColor(null)}
+        colorName={modalColor || ''}
+        onCopy={handleCopy}
+      />
     </div>
   )
 }

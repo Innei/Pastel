@@ -3,40 +3,40 @@ import type { ApplicationColorName, ColorVariants } from '../types';
 export const applicationColors: Record<ApplicationColorName, ColorVariants> = {
   accent: {
     light: { 
-      oklch: 'oklch(0.86 0.16 340)', 
-      srgb: 'rgb(255 207 225)',
-      p3: 'color(display-p3 1.0 0.812 0.882)'
+      oklch: 'oklch(0.65 0.18 237)', 
+      srgb: 'rgb(0, 155, 237)',
+      p3: 'color(display-p3 0.082 0.596 0.905)'
     },
     dark: { 
-      oklch: 'oklch(0.76 0.19 340)', 
-      srgb: 'rgb(255 169 204)',
-      p3: 'color(display-p3 1.0 0.663 0.8)'
+      oklch: 'oklch(0.70 0.16 237)', 
+      srgb: 'rgb(0, 170, 244)',
+      p3: 'color(display-p3 0.273 0.658 0.933)'
     }
   },
   
   primary: {
     light: { 
-      oklch: 'oklch(0.85 0.14 250)', 
-      srgb: 'rgb(207 207 255)',
-      p3: 'color(display-p3 0.812 0.812 1.0)'
+      oklch: 'oklch(0.55 0.20 250)', 
+      srgb: 'rgb(0, 113, 223)',
+      p3: 'color(display-p3 0.008 0.435 0.846)'
     },
     dark: { 
       oklch: 'oklch(0.75 0.17 250)', 
-      srgb: 'rgb(179 179 255)',
-      p3: 'color(display-p3 0.702 0.702 1.0)'
+      srgb: 'rgb(75, 179, 255)',
+      p3: 'color(display-p3 0.407 0.692 1.054)'
     }
   },
   
   secondary: {
     light: { 
-      oklch: 'oklch(0.87 0.11 170)', 
-      srgb: 'rgb(196 237 230)',
-      p3: 'color(display-p3 0.769 0.929 0.902)'
+      oklch: 'oklch(0.70 0.18 170)', 
+      srgb: 'rgb(0, 192, 141)',
+      p3: 'color(display-p3 0.130 0.740 0.565)'
     },
     dark: { 
       oklch: 'oklch(0.77 0.14 170)', 
-      srgb: 'rgb(156 219 209)',
-      p3: 'color(display-p3 0.612 0.859 0.82)'
+      srgb: 'rgb(53, 208, 166)',
+      p3: 'color(display-p3 0.412 0.806 0.662)'
     }
   }
 };

@@ -9,6 +9,11 @@ export interface ColorVariants {
   dark: ColorValue;
 }
 
+export interface HighContrastColorVariants {
+  light: ColorValue;
+  dark: ColorValue;
+}
+
 export type DepthLevel = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
 
 export interface SemanticColor {
@@ -45,6 +50,7 @@ export type ApplicationColorName = 'accent' | 'primary' | 'secondary';
 
 export interface ColorSystem {
   regular: Record<RegularColorName, ColorVariants>;
+  regularHighContrast: Record<RegularColorName, HighContrastColorVariants>;
   element: Record<ElementColorName, SemanticColor>;
   background: SemanticColor;
   fill: SemanticColor;

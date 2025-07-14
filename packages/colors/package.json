@@ -30,5 +30,8 @@
   "devDependencies": {
     "tsup": "8.5.0",
     "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "culori": "4.0.2"
   }
 }

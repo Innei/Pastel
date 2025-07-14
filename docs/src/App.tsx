@@ -5,8 +5,13 @@ import { CardExamples } from './components/Examples/CardExamples'
 import { FormExamples } from './components/Examples/FormExamples'
 import { AlertExamples } from './components/Examples/AlertExamples'
 import { Container } from './components/ui/Container'
+// import { colorPalette } from '@pastel-palette/colors'
+import { Toaster } from 'sonner'
 
 function App() {
+  // Use regular colors - CSS variables will automatically switch to high-contrast when data-contrast-mode="high-contrast"
+  // const currentColors = colorPalette.colors.regular
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -27,7 +32,7 @@ function App() {
               <div className="flex flex-wrap gap-4">
                 <a
                   href="#installation"
-                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md bg-primary text-white hover:opacity-90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md bg-accent text-white hover:opacity-90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   Get Started
                 </a>
@@ -41,40 +46,6 @@ function App() {
             </div>
 
             {/* Color Preview Grid */}
-            <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div
-                className="aspect-square rounded-lg animate-in bg-pink"
-                style={{ animationDelay: '0ms' }}
-              />
-              <div
-                className="aspect-square rounded-lg animate-in bg-sky"
-                style={{ animationDelay: '50ms' }}
-              />
-              <div
-                className="aspect-square rounded-lg animate-in bg-blue"
-                style={{ animationDelay: '100ms' }}
-              />
-              <div
-                className="aspect-square rounded-lg animate-in bg-orange"
-                style={{ animationDelay: '150ms' }}
-              />
-              <div
-                className="aspect-square rounded-lg animate-in bg-green"
-                style={{ animationDelay: '200ms' }}
-              />
-              <div
-                className="aspect-square rounded-lg animate-in bg-yellow"
-                style={{ animationDelay: '250ms' }}
-              />
-              <div
-                className="aspect-square rounded-lg animate-in bg-purple"
-                style={{ animationDelay: '300ms' }}
-              />
-              <div
-                className="aspect-square rounded-lg animate-in bg-red"
-                style={{ animationDelay: '350ms' }}
-              />
-            </div>
           </Container>
         </section>
 
@@ -196,6 +167,7 @@ function Button({ variant = 'primary' }) {
           </Container>
         </section>
       </main>
+      <Toaster />
     </div>
   )
 }

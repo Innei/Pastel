@@ -7,7 +7,7 @@ interface ProvidersProps {
 
 export function Providers({ children }: ProvidersProps) {
   return (
-    <ThemeProvider defaultTheme="system" enableSystem>
+    <ThemeProvider defaultTheme="system" disableTransitionOnChange enableSystem>
       {children}
     </ThemeProvider>
   )
