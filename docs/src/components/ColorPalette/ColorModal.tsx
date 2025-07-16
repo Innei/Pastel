@@ -90,13 +90,13 @@ export function ColorModal({
   const renderColorValue = (label: string, value: string) => (
     <div className="space-y-1">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-gray-700">{label}</span>
+        <span className="text-sm font-medium text-text-secondary">{label}</span>
       </div>
       <button
         onClick={() => handleCopy(value)}
-        className="w-full text-left p-3 rounded-md border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-200"
+        className="w-full text-left p-3 rounded-md border border-border hover:border-border-secondary hover:bg-background-secondary transition-all duration-200"
       >
-        <span className="text-sm font-mono text-gray-900">{value}</span>
+        <span className="text-sm font-mono text-text">{value}</span>
       </button>
     </div>
   )
@@ -128,24 +128,24 @@ export function ColorModal({
           {/* Usage and Pairs */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h3 className="text-sm font-medium text-gray-700 mb-2">Usage</h3>
-              <p className="text-sm text-gray-600">{colorInfo.usage}</p>
+              <h3 className="text-sm font-medium text-text-secondary mb-2">Usage</h3>
+              <p className="text-sm text-text-tertiary">{colorInfo.usage}</p>
             </div>
             <div>
-              <h3 className="text-sm font-medium text-gray-700 mb-2">
+              <h3 className="text-sm font-medium text-text-secondary mb-2">
                 Pairs with
               </h3>
-              <p className="text-sm text-gray-600">{colorInfo.pairsWith}</p>
+              <p className="text-sm text-text-tertiary">{colorInfo.pairsWith}</p>
             </div>
           </div>
 
           {/* Color Values */}
           <div className="space-y-6">
-            <h3 className="text-sm font-medium text-gray-700">Color Values</h3>
+            <h3 className="text-sm font-medium text-text-secondary">Color Values</h3>
 
             {/* Light Variant */}
             <div>
-              <h4 className="text-sm font-medium text-gray-600 mb-3">
+              <h4 className="text-sm font-medium text-text-tertiary mb-3">
                 Light Variant
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -175,7 +175,7 @@ export function ColorModal({
 
             {/* Dark Variant */}
             <div>
-              <h4 className="text-sm font-medium text-gray-600 mb-3">
+              <h4 className="text-sm font-medium text-text-tertiary mb-3">
                 Dark Variant
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

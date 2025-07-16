@@ -36,25 +36,25 @@ export function Header() {
             <div className="hidden md:flex items-center gap-6">
               <a
                 href="#features"
-                className="text-sm text-text-secondary hover:text-black transition-colors"
+                className="text-sm text-text-secondary hover:text-text transition-colors"
               >
                 Features
               </a>
               <a
                 href="#examples"
-                className="text-sm text-text-secondary hover:text-black transition-colors"
+                className="text-sm text-text-secondary hover:text-text transition-colors"
               >
                 Examples
               </a>
               <a
                 href="#installation"
-                className="text-sm text-text-secondary hover:text-black transition-colors"
+                className="text-sm text-text-secondary hover:text-text transition-colors"
               >
                 Installation
               </a>
               <a
                 href="https://github.com/your-repo/pastel"
-                className="text-sm text-text-secondary hover:text-black transition-colors"
+                className="text-sm text-text-secondary hover:text-text transition-colors"
               >
                 GitHub
               </a>

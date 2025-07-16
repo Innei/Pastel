@@ -7,10 +7,12 @@ import { AlertExamples } from './components/Examples/AlertExamples'
 import { Container } from './components/ui/Container'
 // import { colorPalette } from '@pastel-palette/colors'
 import { Toaster } from 'sonner'
+import { useTheme } from 'next-themes'
 
 function App() {
   // Use regular colors - CSS variables will automatically switch to high-contrast when data-contrast-mode="high-contrast"
   // const currentColors = colorPalette.colors.regular
+  const { theme } = useTheme()
 
   return (
     <div className="min-h-screen bg-background">
@@ -38,7 +40,7 @@ function App() {
                 </a>
                 <a
                   href="https://github.com/your-repo/pastel"
-                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md bg-background text-black border border-border hover:bg-background-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  className="inline-flex items-center justify-center px-6 text-text py-3 text-base font-medium rounded-md bg-background border border-border hover:bg-background-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   View on GitHub
                 </a>
@@ -127,7 +129,7 @@ function App() {
                   <h3 className="text-xl sm:text-2xl font-semibold mb-4">
                     Package manager
                   </h3>
-                  <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm">
+                  <div className="bg-fill rounded-lg p-4 font-mono text-sm">
                     <code>npm install @pastel/colors</code>
                   </div>
                 </div>
@@ -136,7 +138,7 @@ function App() {
                   <h3 className="text-xl sm:text-2xl font-semibold mb-4">
                     Import styles
                   </h3>
-                  <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm">
+                  <div className="bg-fill rounded-lg p-4 font-mono text-sm">
                     <code>import '@pastel/colors/styles.css'</code>
                   </div>
                 </div>
@@ -145,7 +147,7 @@ function App() {
                   <h3 className="text-xl sm:text-2xl font-semibold mb-4">
                     Use in your components
                   </h3>
-                  <pre className="bg-gray-100 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                  <pre className="bg-fill rounded-lg p-4 font-mono text-sm overflow-x-auto">
                     {`import { colors } from '@pastel/colors'
 
 function Button({ variant = 'primary' }) {
@@ -167,7 +169,16 @@ function Button({ variant = 'primary' }) {
           </Container>
         </section>
       </main>
-      <Toaster />
+      <Toaster 
+        theme={theme as 'light' | 'dark' | 'system'}
+        toastOptions={{
+          style: {
+            background: 'var(--color-background)',
+            border: '1px solid var(--color-border)',
+            color: 'var(--color-text)',
+          },
+        }}
+      />
     </div>
   )
 }

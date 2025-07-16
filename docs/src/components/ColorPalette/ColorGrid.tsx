@@ -113,27 +113,47 @@ export function ColorGrid() {
             <Square className="w-4 h-4" />
             Background Colors
           </h4>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
             {Object.entries(background).map(([level, variants]) => (
               <div key={level} className="space-y-2">
-                <div className="aspect-[4/3] rounded-md overflow-hidden border border-border">
+                <div className="aspect-square rounded-md overflow-hidden shadow hover:shadow-xl transition-all hover:scale-105 relative border border-border">
+                  {/* Dark variant - bottom right */}
                   <div
-                    className="w-full h-full flex items-center justify-center"
-                    style={{ backgroundColor: variants.light.srgb }}
-                  >
-                    <span className="text-xs font-medium text-gray-700 capitalize">
+                    className="absolute inset-0"
+                    style={{
+                      backgroundColor: variants.dark.srgb,
+                      clipPath: 'polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                    }}
+                  />
+                  {/* Light variant - top left */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundColor: variants.light.srgb,
+                      clipPath: 'polygon(0% 0%, 100% 0%, 0% 100%)',
+                    }}
+                  />
+                  {/* Level label */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-xs font-medium capitalize bg-background/80 px-2 py-1 rounded backdrop-blur-sm">
                       {level}
                     </span>
                   </div>
                 </div>
-                <button
-                  onClick={() => handleCopy(variants.light.srgb)}
-                  className="w-full text-xs text-left hover:text-blue-600 transition-colors"
-                >
-                  {copiedColor === variants.light.srgb
-                    ? 'Copied!'
-                    : variants.light.srgb}
-                </button>
+                <div className="space-y-1">
+                  <button
+                    onClick={() => handleCopy(variants.light.srgb)}
+                    className="w-full text-xs text-left hover:text-accent transition-colors"
+                  >
+                    <span className="font-medium">Light:</span> {copiedColor === variants.light.srgb ? 'Copied!' : variants.light.srgb}
+                  </button>
+                  <button
+                    onClick={() => handleCopy(variants.dark.srgb)}
+                    className="w-full text-xs text-left hover:text-accent transition-colors"
+                  >
+                    <span className="font-medium">Dark:</span> {copiedColor === variants.dark.srgb ? 'Copied!' : variants.dark.srgb}
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -145,78 +165,98 @@ export function ColorGrid() {
             <Type className="w-4 h-4" />
             Element Colors
           </h4>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {Object.entries(element).map(([type, variants]) => (
-              <div key={type} className="space-y-2">
+              <div key={type} className="space-y-3">
                 <h5 className="text-sm font-medium capitalize">
                   {type.replace(/([A-Z])/g, ' $1')}
                 </h5>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                   {typeof variants === 'object' && 'light' in variants ? (
-                    <div className="space-y-1">
-                      <div
-                        className="h-12 rounded border border-border flex items-center justify-center"
-                        style={{
-                          backgroundColor: (variants as any).light.srgb,
-                        }}
-                      >
+                    <div className="space-y-2">
+                      <div className="aspect-[4/3] rounded-md overflow-hidden shadow hover:shadow-xl transition-all hover:scale-105 relative border border-border">
+                        {/* Dark variant - bottom right */}
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            backgroundColor: (variants as any).dark.srgb,
+                            clipPath: 'polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                          }}
+                        />
+                        {/* Light variant - top left */}
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            backgroundColor: (variants as any).light.srgb,
+                            clipPath: 'polygon(0% 0%, 100% 0%, 0% 100%)',
+                          }}
+                        />
+                        {/* Sample text for text colors */}
                         {type.includes('text') && (
-                          <span
-                            className="text-sm"
-                            style={{
-                              color:
-                                (variants as any).light.srgb ===
-                                'rgb(255 255 255)'
-                                  ? 'black'
-                                  : 'white',
-                            }}
-                          >
-                            Sample Text
-                          </span>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-xs font-medium bg-background/80 px-2 py-1 rounded backdrop-blur-sm">
+                              Aa
+                            </span>
+                          </div>
                         )}
                       </div>
-                      <button
-                        onClick={() => handleCopy((variants as any).light.srgb)}
-                        className="w-full text-xs text-left hover:text-blue-600 transition-colors"
-                      >
-                        {copiedColor === (variants as any).light.srgb
-                          ? 'Copied!'
-                          : (variants as any).light.srgb}
-                      </button>
+                      <div className="space-y-1">
+                        <button
+                          onClick={() => handleCopy((variants as any).light.srgb)}
+                          className="w-full text-xs text-left hover:text-accent transition-colors"
+                        >
+                          <span className="font-medium">Light:</span> {copiedColor === (variants as any).light.srgb ? 'Copied!' : (variants as any).light.srgb}
+                        </button>
+                        <button
+                          onClick={() => handleCopy((variants as any).dark.srgb)}
+                          className="w-full text-xs text-left hover:text-accent transition-colors"
+                        >
+                          <span className="font-medium">Dark:</span> {copiedColor === (variants as any).dark.srgb ? 'Copied!' : (variants as any).dark.srgb}
+                        </button>
+                      </div>
                     </div>
                   ) : (
                     Object.entries(variants).map(
                       ([level, colorVariants]: [string, any]) => (
-                        <div key={level} className="space-y-1">
-                          <div
-                            className="h-12 rounded border border-border flex items-center justify-center"
-                            style={{
-                              backgroundColor: colorVariants.light.srgb,
-                            }}
-                          >
-                            {type.includes('text') && (
-                              <span
-                                className="text-xs"
-                                style={{
-                                  color:
-                                    colorVariants.light.srgb ===
-                                    'rgb(255 255 255)'
-                                      ? 'black'
-                                      : 'white',
-                                }}
-                              >
-                                {level}
+                        <div key={level} className="space-y-2">
+                          <div className="aspect-[4/3] rounded-md overflow-hidden shadow hover:shadow-xl transition-all hover:scale-105 relative border border-border">
+                            {/* Dark variant - bottom right */}
+                            <div
+                              className="absolute inset-0"
+                              style={{
+                                backgroundColor: colorVariants.dark.srgb,
+                                clipPath: 'polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                              }}
+                            />
+                            {/* Light variant - top left */}
+                            <div
+                              className="absolute inset-0"
+                              style={{
+                                backgroundColor: colorVariants.light.srgb,
+                                clipPath: 'polygon(0% 0%, 100% 0%, 0% 100%)',
+                              }}
+                            />
+                            {/* Level and text sample */}
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <span className="text-xs font-medium capitalize bg-background/80 px-2 py-1 rounded backdrop-blur-sm">
+                                {type.includes('text') ? `${level} Aa` : level}
                               </span>
-                            )}
+                            </div>
                           </div>
-                          <button
-                            onClick={() => handleCopy(colorVariants.light.srgb)}
-                            className="w-full text-xs text-left hover:text-blue-600 transition-colors"
-                          >
-                            {copiedColor === colorVariants.light.srgb
-                              ? 'Copied!'
-                              : colorVariants.light.srgb}
-                          </button>
+                          <div className="space-y-1">
+                            <button
+                              onClick={() => handleCopy(colorVariants.light.srgb)}
+                              className="w-full text-xs text-left hover:text-accent transition-colors"
+                            >
+                              <span className="font-medium">Light:</span> {copiedColor === colorVariants.light.srgb ? 'Copied!' : colorVariants.light.srgb}
+                            </button>
+                            <button
+                              onClick={() => handleCopy(colorVariants.dark.srgb)}
+                              className="w-full text-xs text-left hover:text-accent transition-colors"
+                            >
+                              <span className="font-medium">Dark:</span> {copiedColor === colorVariants.dark.srgb ? 'Copied!' : colorVariants.dark.srgb}
+                            </button>
+                          </div>
                         </div>
                       ),
                     )
@@ -233,27 +273,47 @@ export function ColorGrid() {
             <Eye className="w-4 h-4" />
             Fill Colors
           </h4>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {Object.entries(fill).map(([level, variants]) => (
               <div key={level} className="space-y-2">
-                <div className="aspect-[4/3] rounded-md overflow-hidden border border-border">
+                <div className="aspect-square rounded-md overflow-hidden shadow hover:shadow-xl transition-all hover:scale-105 relative border border-border">
+                  {/* Dark variant - bottom right */}
                   <div
-                    className="w-full h-full flex items-center justify-center"
-                    style={{ backgroundColor: variants.light.srgb }}
-                  >
-                    <span className="text-xs font-medium text-gray-700 capitalize">
+                    className="absolute inset-0"
+                    style={{
+                      backgroundColor: variants.dark.srgb,
+                      clipPath: 'polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                    }}
+                  />
+                  {/* Light variant - top left */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundColor: variants.light.srgb,
+                      clipPath: 'polygon(0% 0%, 100% 0%, 0% 100%)',
+                    }}
+                  />
+                  {/* Level label */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-xs font-medium capitalize bg-background/80 px-2 py-1 rounded backdrop-blur-sm">
                       {level}
                     </span>
                   </div>
                 </div>
-                <button
-                  onClick={() => handleCopy(variants.light.srgb)}
-                  className="w-full text-xs text-left hover:text-blue-600 transition-colors"
-                >
-                  {copiedColor === variants.light.srgb
-                    ? 'Copied!'
-                    : variants.light.srgb}
-                </button>
+                <div className="space-y-1">
+                  <button
+                    onClick={() => handleCopy(variants.light.srgb)}
+                    className="w-full text-xs text-left hover:text-accent transition-colors"
+                  >
+                    <span className="font-medium">Light:</span> {copiedColor === variants.light.srgb ? 'Copied!' : variants.light.srgb}
+                  </button>
+                  <button
+                    onClick={() => handleCopy(variants.dark.srgb)}
+                    className="w-full text-xs text-left hover:text-accent transition-colors"
+                  >
+                    <span className="font-medium">Dark:</span> {copiedColor === variants.dark.srgb ? 'Copied!' : variants.dark.srgb}
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -268,33 +328,53 @@ export function ColorGrid() {
     return (
       <div className="space-y-4">
         <div className="text-sm text-muted mb-4">
-          Material colors provide different levels of transparency for
-          glass-morphism effects
+          Material colors provide different levels of transparency for glass-morphism effects
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
           {Object.entries(material).map(([level, variants]) => (
             <div key={level} className="space-y-2">
-              <div className="aspect-square rounded-lg overflow-hidden border border-border relative">
+              <div className="aspect-square rounded-lg overflow-hidden border border-border shadow hover:shadow-xl transition-all hover:scale-105 relative">
                 {/* Background pattern to show transparency */}
                 <div className="absolute inset-0 bg-gradient-to-br from-pink-200 to-blue-200"></div>
+                
+                {/* Dark variant - bottom right */}
                 <div
                   className="absolute inset-0 backdrop-blur-sm"
-                  style={{ backgroundColor: variants.light.srgb }}
+                  style={{
+                    backgroundColor: variants.dark.srgb,
+                    clipPath: 'polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                  }}
                 />
+                {/* Light variant - top left */}
+                <div
+                  className="absolute inset-0 backdrop-blur-sm"
+                  style={{
+                    backgroundColor: variants.light.srgb,
+                    clipPath: 'polygon(0% 0%, 100% 0%, 0% 100%)',
+                  }}
+                />
+                
+                {/* Level label */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xs font-medium text-gray-700 capitalize text-center">
+                  <span className="text-xs font-medium capitalize text-center bg-background/90 px-2 py-1 rounded backdrop-blur-sm">
                     {level.replace(/([A-Z])/g, ' $1')}
                   </span>
                 </div>
               </div>
-              <button
-                onClick={() => handleCopy(variants.light.srgb)}
-                className="w-full text-xs text-left hover:text-blue-600 transition-colors"
-              >
-                {copiedColor === variants.light.srgb
-                  ? 'Copied!'
-                  : variants.light.srgb}
-              </button>
+              <div className="space-y-1">
+                <button
+                  onClick={() => handleCopy(variants.light.srgb)}
+                  className="w-full text-xs text-left hover:text-accent transition-colors"
+                >
+                  <span className="font-medium">Light:</span> {copiedColor === variants.light.srgb ? 'Copied!' : variants.light.srgb}
+                </button>
+                <button
+                  onClick={() => handleCopy(variants.dark.srgb)}
+                  className="w-full text-xs text-left hover:text-accent transition-colors"
+                >
+                  <span className="font-medium">Dark:</span> {copiedColor === variants.dark.srgb ? 'Copied!' : variants.dark.srgb}
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -313,41 +393,43 @@ export function ColorGrid() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {Object.entries(application).map(([name, variants]) => (
             <div key={name} className="space-y-3">
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold capitalize">{name}</h4>
-                <div className="aspect-[3/2] rounded-lg overflow-hidden border border-border">
-                  <div
-                    className="w-full h-full flex items-center justify-center"
-                    style={{ backgroundColor: variants.light.srgb }}
-                  >
-                    <span className="text-white font-medium">
-                      Sample Button
-                    </span>
-                  </div>
+              <h4 className="text-sm font-semibold capitalize">{name}</h4>
+              <div className="aspect-[3/2] rounded-lg overflow-hidden shadow hover:shadow-xl transition-all hover:scale-105 relative border border-border">
+                {/* Dark variant - bottom right */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundColor: variants.dark.srgb,
+                    clipPath: 'polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                  }}
+                />
+                {/* Light variant - top left */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundColor: variants.light.srgb,
+                    clipPath: 'polygon(0% 0%, 100% 0%, 0% 100%)',
+                  }}
+                />
+                {/* Sample button overlay */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-white font-medium bg-black/20 px-3 py-1 rounded backdrop-blur-sm">
+                    Sample Button
+                  </span>
                 </div>
               </div>
               <div className="space-y-1">
                 <button
                   onClick={() => handleCopy(variants.light.srgb)}
-                  className="w-full flex items-center justify-between p-2 rounded border border-border hover:bg-muted transition-colors"
+                  className="w-full text-xs text-left hover:text-accent transition-colors"
                 >
-                  <span className="text-xs font-medium">Light</span>
-                  <span className="text-xs text-muted font-mono">
-                    {copiedColor === variants.light.srgb
-                      ? 'Copied!'
-                      : variants.light.srgb}
-                  </span>
+                  <span className="font-medium">Light:</span> {copiedColor === variants.light.srgb ? 'Copied!' : variants.light.srgb}
                 </button>
                 <button
                   onClick={() => handleCopy(variants.dark.srgb)}
-                  className="w-full flex items-center justify-between p-2 rounded border border-border hover:bg-muted transition-colors"
+                  className="w-full text-xs text-left hover:text-accent transition-colors"
                 >
-                  <span className="text-xs font-medium">Dark</span>
-                  <span className="text-xs text-muted font-mono">
-                    {copiedColor === variants.dark.srgb
-                      ? 'Copied!'
-                      : variants.dark.srgb}
-                  </span>
+                  <span className="font-medium">Dark:</span> {copiedColor === variants.dark.srgb ? 'Copied!' : variants.dark.srgb}
                 </button>
               </div>
             </div>
