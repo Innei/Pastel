@@ -1,11 +1,20 @@
 {
   "name": "pastel-palette",
+  "type": "module",
   "version": "0.6.2",
   "private": true,
-  "license": "MIT",
   "packageManager": "pnpm@10.13.1",
-  "repo": {
-    "url": "https://github.com/Innei/Pastel"
+  "license": "MIT",
+  "scripts": {
+    "build": "turbo build",
+    "build:css": "turbo build:css",
+    "bump": "nbump",
+    "clean": "turbo clean",
+    "dev": "turbo dev",
+    "typecheck": "turbo typecheck"
+  },
+  "dependencies": {
+    "@innei/prettier": "1.0.0"
   },
   "devDependencies": {
     "eslint": "9.31.0",
@@ -14,15 +23,7 @@
     "turbo": "2.5.4",
     "typescript": "5.8.3"
   },
-  "scripts": {
-    "build": "turbo build",
-    "build:css": "turbo build:css",
-    "typecheck": "turbo typecheck",
-    "dev": "turbo dev",
-    "clean": "turbo clean",
-    "bump": "nbump"
-  },
-  "dependencies": {
-    "@innei/prettier": "1.0.0"
+  "repo": {
+    "url": "https://github.com/Innei/Pastel"
   }
 }

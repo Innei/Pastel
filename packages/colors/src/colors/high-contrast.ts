@@ -1,4 +1,4 @@
-import type { RegularColorName, HighContrastColorVariants } from '../types';
+import type { HighContrastColorVariants,RegularColorName } from '../types';
 
 export const highContrastColors: Record<RegularColorName, HighContrastColorVariants> = {
   blue: {

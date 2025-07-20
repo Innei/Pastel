@@ -1,4 +1,5 @@
-import { colorPalette, type RegularColorName } from '@pastel-palette/colors'
+import type {RegularColorName} from '@pastel-palette/colors';
+import { colorPalette  } from '@pastel-palette/colors'
 
 interface ColorDetailsProps {
   colorName: string

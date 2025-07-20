@@ -1,15 +1,16 @@
-import { Header } from './components/Layout/Header'
-import { Footer } from './components/Layout/Footer'
-import { Hero } from './components/Hero'
+import { useTheme } from 'next-themes'
+// import { colorPalette } from '@pastel-palette/colors'
+import { Toaster } from 'sonner'
+
 import { ColorGrid } from './components/ColorPalette/ColorGrid'
+import { AlertExamples } from './components/Examples/AlertExamples'
 import { ButtonExamples } from './components/Examples/ButtonExamples'
 import { CardExamples } from './components/Examples/CardExamples'
 import { FormExamples } from './components/Examples/FormExamples'
-import { AlertExamples } from './components/Examples/AlertExamples'
+import { Hero } from './components/Hero'
+import { Footer } from './components/Layout/Footer'
+import { Header } from './components/Layout/Header'
 import { Container } from './components/ui/Container'
-// import { colorPalette } from '@pastel-palette/colors'
-import { Toaster } from 'sonner'
-import { useTheme } from 'next-themes'
 
 function App() {
   // Use regular colors - CSS variables will automatically switch to high-contrast when data-contrast-mode="high-contrast"

@@ -1,4 +1,4 @@
-export { regularColors } from './regular';
+export { applicationColors } from './application';
 export { highContrastColors } from './high-contrast';
 export { kawaiiColors } from './kawaii';
-export { applicationColors } from './application';
+export { regularColors } from './regular';

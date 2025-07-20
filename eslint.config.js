@@ -15,6 +15,7 @@ export default defineConfig(
       '@eslint-react/no-clone-element': 0,
       '@eslint-react/hooks-extra/no-direct-set-state-in-use-effect': 0,
       'no-restricted-syntax': 0,
+      'unicorn/prefer-single-call': 0,
     },
   },
   {

@@ -1,11 +1,11 @@
 import type {
+  ColorFormat,
   ColorSystem,
+  ColorVariants,
   DarkModeConfig,
   GeneratorConfig,
-  ColorVariants,
-  SemanticColor,
   MaterialColor,
-  ColorFormat,
+  SemanticColor,
 } from '@pastel-palette/colors'
 
 export function generateColorVariable(name: string, value: string): string {
@@ -14,7 +14,7 @@ export function generateColorVariable(name: string, value: string): string {
 
 export function generateThemeVariable(
   name: string,
-  hasAlpha: boolean = false,
+  hasAlpha = false,
   colorSpace: ColorFormat = 'srgb',
 ): string {
   if (colorSpace === 'oklch') {
@@ -39,6 +39,7 @@ function extractColorValues(
     }
   } else if (colorSpace === 'p3') {
     // Extract P3 values from "color(display-p3 0.678 0.812 1.0)" format to "0.678 0.812 1.0"
+    // eslint-disable-next-line regexp/no-super-linear-backtracking
     const match = colorString.match(/color\(display-p3\s+([^)]+)\)/)
     if (match) {
       return match[1]
@@ -103,9 +104,7 @@ export function generateColorVariables(
 
   // Kawaii regular colors
   if (colors.regularKawaii) {
-    for (const [colorName, variants] of Object.entries(
-      colors.regularKawaii,
-    )) {
+    for (const [colorName, variants] of Object.entries(colors.regularKawaii)) {
       const colorValue = (variants as ColorVariants)[mode]
       const colorString = getColorString(colorValue)
       lines.push(
@@ -208,11 +207,15 @@ export function generateThemeVariables(
   // Kawaii regular colors
   if (colors.regularKawaii) {
     for (const colorName of Object.keys(colors.regularKawaii)) {
-      lines.push(generateThemeVariable(`${colorName}-kawaii`, false, colorSpace))
+      lines.push(
+        generateThemeVariable(`${colorName}-kawaii`, false, colorSpace),
+      )
       lines.push(
         generateThemeVariable(`${colorName}-kawaii-light`, false, colorSpace),
       )
-      lines.push(generateThemeVariable(`${colorName}-kawaii-dark`, false, colorSpace))
+      lines.push(
+        generateThemeVariable(`${colorName}-kawaii-dark`, false, colorSpace),
+      )
     }
   }
 
@@ -297,9 +300,7 @@ export function generateTailwindTheme(
   }`
 
   if (darkModeConfig.strategy === 'media-query') {
-    return (
-      baseStructure +
-      `
+    return `${baseStructure}
 
   /* Light mode overrides using media query */
   @media (prefers-color-scheme: light) {
@@ -315,12 +316,9 @@ export function generateTailwindTheme(
     }
   }
 }`
-    )
   } else if (darkModeConfig.strategy === 'class') {
     const selector = darkModeConfig.selector || '.dark'
-    return (
-      baseStructure +
-      `
+    return `${baseStructure}
 
   /* Light mode overrides using class selector */
   :root {
@@ -332,15 +330,12 @@ export function generateTailwindTheme(
     ${generateActiveColorReferences(colors, 'dark')};
   }
 }`
-    )
   } else {
     const lightSelector =
       darkModeConfig.selector?.replace('dark', 'light') ||
       '[data-theme="light"]'
     const darkSelector = darkModeConfig.selector || '[data-theme="dark"]'
-    return (
-      baseStructure +
-      `
+    return `${baseStructure}
 
   /* Light mode overrides using data attribute */
   ${lightSelector} {
@@ -352,7 +347,6 @@ export function generateTailwindTheme(
     ${generateActiveColorReferences(colors, 'dark')};
   }
 }`
-    )
   }
 }
 
@@ -375,7 +369,9 @@ export function generateActiveColorReferences(
   // Kawaii regular colors
   if (colors.regularKawaii) {
     for (const colorName of Object.keys(colors.regularKawaii)) {
-      lines.push(`--color-${colorName}-kawaii: var(--color-${colorName}-kawaii-${mode})`)
+      lines.push(
+        `--color-${colorName}-kawaii: var(--color-${colorName}-kawaii-${mode})`,
+      )
     }
   }
 

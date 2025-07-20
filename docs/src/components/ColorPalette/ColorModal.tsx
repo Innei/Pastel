@@ -1,10 +1,11 @@
+import type {RegularColorName} from '@pastel-palette/colors';
 import {
   colorPalette,
-  kawaiiColorSystem,
-  type RegularColorName,
+  kawaiiColorSystem
 } from '@pastel-palette/colors'
-import { Modal } from '../ui/Modal'
 import { toast } from 'sonner'
+
+import { Modal } from '../ui/Modal'
 
 type ColorVariant = 'regular' | 'high-contrast' | 'kawaii'
 
@@ -96,16 +97,20 @@ export function ColorModal({
     // For regular colors, use the original logic
     if (colorType === 'regular') {
       switch (colorVariant) {
-        case 'regular':
+        case 'regular': {
           return colorPalette.colors.regular[colorName as RegularColorName]
-        case 'high-contrast':
+        }
+        case 'high-contrast': {
           return colorPalette.colors.regularHighContrast[
             colorName as RegularColorName
           ]
-        case 'kawaii':
+        }
+        case 'kawaii': {
           return kawaiiColorSystem.regularKawaii[colorName as RegularColorName]
-        default:
+        }
+        default: {
           return colorPalette.colors.regular[colorName as RegularColorName]
+        }
       }
     }
     

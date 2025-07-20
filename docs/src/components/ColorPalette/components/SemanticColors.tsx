@@ -1,9 +1,9 @@
-import React from 'react'
-import { Square, Type, Eye } from 'lucide-react'
 import { kawaiiColorSystem } from '@pastel-palette/colors'
-import { getColorValue } from '../utils/colorUtils'
-import { ColorCard } from './ColorCard'
+import { Eye,Square, Type } from 'lucide-react'
+import * as React from 'react'
+
 import type { ColorChannel } from '../types'
+import { ColorCard } from './ColorCard'
 
 interface SemanticColorsProps {
   selectedChannel: ColorChannel
@@ -66,7 +66,7 @@ export const SemanticColors: React.FC<SemanticColorsProps> = ({
           {Object.entries(element).map(([type, variants]) => (
             <div key={type} className="space-y-3">
               <h5 className="text-sm font-medium capitalize">
-                {type.replace(/([A-Z])/g, ' $1')}
+                {type.replaceAll(/([A-Z])/g, ' $1')}
               </h5>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {typeof variants === 'object' && 'light' in variants ? (

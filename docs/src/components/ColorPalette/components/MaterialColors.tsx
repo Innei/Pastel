@@ -1,7 +1,8 @@
-import React from 'react'
 import { kawaiiColorSystem } from '@pastel-palette/colors'
-import { ColorCard } from './ColorCard'
+import * as React from 'react'
+
 import type { ColorChannel } from '../types'
+import { ColorCard } from './ColorCard'
 
 interface MaterialColorsProps {
   selectedChannel: ColorChannel
@@ -20,7 +21,7 @@ export const MaterialColors: React.FC<MaterialColorsProps> = ({
 
   const renderLevelLabel = (level: string) => (
     <span className="text-xs font-medium capitalize text-center bg-background/90 px-2 py-1 rounded backdrop-blur-sm">
-      {level.replace(/([A-Z])/g, ' $1')}
+      {level.replaceAll(/([A-Z])/g, ' $1')}
     </span>
   )
 

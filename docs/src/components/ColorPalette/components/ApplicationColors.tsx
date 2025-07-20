@@ -1,7 +1,8 @@
-import React from 'react'
 import { colorPalette } from '@pastel-palette/colors'
-import { ColorCard } from './ColorCard'
+import * as React from 'react'
+
 import type { ColorChannel } from '../types'
+import { ColorCard } from './ColorCard'
 
 interface ApplicationColorsProps {
   selectedChannel: ColorChannel

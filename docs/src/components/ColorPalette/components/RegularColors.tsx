@@ -1,8 +1,9 @@
-import React from 'react'
 import { colorPalette, kawaiiColorSystem } from '@pastel-palette/colors'
+import * as React from 'react'
+
+import type { ColorChannel, ColorVariant, SortOrder } from '../types'
 import { parseOKLCH } from '../utils/colorUtils'
 import { ColorCard } from './ColorCard'
-import type { ColorVariant, SortOrder, ColorChannel } from '../types'
 
 interface RegularColorsProps {
   selectedVariant: ColorVariant
@@ -23,14 +24,18 @@ export const RegularColors: React.FC<RegularColorsProps> = ({
 }) => {
   const getColorsByVariant = () => {
     switch (selectedVariant) {
-      case 'regular':
+      case 'regular': {
         return colorPalette.colors.regular
-      case 'high-contrast':
+      }
+      case 'high-contrast': {
         return colorPalette.colors.regularHighContrast
-      case 'kawaii':
+      }
+      case 'kawaii': {
         return kawaiiColorSystem.regularKawaii
-      default:
+      }
+      default: {
         return colorPalette.colors.regular
+      }
     }
   }
 
@@ -39,11 +44,13 @@ export const RegularColors: React.FC<RegularColorsProps> = ({
     const colorEntries = Object.entries(colors)
 
     switch (sortOrder) {
-      case 'alphabetical':
+      case 'alphabetical': {
         return colorEntries.sort(([a], [b]) => a.localeCompare(b))
+      }
 
-      case 'alphabetical-desc':
+      case 'alphabetical-desc': {
         return colorEntries.sort(([a], [b]) => b.localeCompare(a))
+      }
 
       case 'hue': {
         return colorEntries.sort(([, a], [, b]) => {
@@ -69,9 +76,9 @@ export const RegularColors: React.FC<RegularColorsProps> = ({
         })
       }
 
-      case 'default':
-      default:
+      default: {
         return colorEntries
+      }
     }
   }
 

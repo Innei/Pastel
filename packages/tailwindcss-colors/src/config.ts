@@ -16,12 +16,12 @@ export function mediaDarkMode(): DarkModeConfig {
   return { strategy: 'media-query' }
 }
 
-export function classDarkMode(selector: string = '.dark'): DarkModeConfig {
+export function classDarkMode(selector = '.dark'): DarkModeConfig {
   return { strategy: 'class', selector }
 }
 
 export function dataAttributeDarkMode(
-  selector: string = 'html[data-theme="dark"]',
+  selector = 'html[data-theme="dark"]',
 ): DarkModeConfig {
   return { strategy: 'data-attribute', selector }
 }

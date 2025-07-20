@@ -1,7 +1,8 @@
-import { ReactNode } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence,motion } from 'framer-motion'
 import { X } from 'lucide-react'
+import type { ReactNode } from 'react'
+
 import { cn } from '../../utils/cn'
 
 interface ModalProps {

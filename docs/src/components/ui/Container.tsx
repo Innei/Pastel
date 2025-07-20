@@ -1,4 +1,5 @@
-import { HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
+
 import { cn } from '../../utils/cn'
 
 interface ContainerProps extends HTMLAttributes<HTMLDivElement> {}

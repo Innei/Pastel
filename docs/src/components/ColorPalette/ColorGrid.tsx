@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { ColorModal } from './ColorModal'
+
 import { Dropdown } from '../ui/Dropdown'
+import { ColorModal } from './ColorModal'
+import { ApplicationColors } from './components/ApplicationColors'
+import { MaterialColors } from './components/MaterialColors'
 import { RegularColors } from './components/RegularColors'
 import { SemanticColors } from './components/SemanticColors'
-import { MaterialColors } from './components/MaterialColors'
-import { ApplicationColors } from './components/ApplicationColors'
-import { colorSections, colorVariantOptions, sortOptions, colorChannelOptions } from './utils/constants'
-import type { ColorCategory, ColorVariant, SortOrder, ColorChannel } from './types'
+import type { ColorCategory, ColorChannel,ColorVariant, SortOrder } from './types'
+import { colorChannelOptions,colorSections, colorVariantOptions, sortOptions } from './utils/constants'
 
 type ColorModalState = {
   name: string
@@ -38,7 +39,7 @@ export function ColorGrid() {
 
   const renderColorContent = () => {
     switch (selectedCategory) {
-      case 'regular':
+      case 'regular': {
         return (
           <RegularColors
             selectedVariant={selectedVariant}
@@ -49,7 +50,8 @@ export function ColorGrid() {
             copiedColor={copiedColor}
           />
         )
-      case 'semantic':
+      }
+      case 'semantic': {
         return (
           <SemanticColors
             selectedChannel={selectedChannel}
@@ -58,7 +60,8 @@ export function ColorGrid() {
             copiedColor={copiedColor}
           />
         )
-      case 'material':
+      }
+      case 'material': {
         return (
           <MaterialColors
             selectedChannel={selectedChannel}
@@ -67,7 +70,8 @@ export function ColorGrid() {
             copiedColor={copiedColor}
           />
         )
-      case 'application':
+      }
+      case 'application': {
         return (
           <ApplicationColors
             selectedChannel={selectedChannel}
@@ -76,7 +80,8 @@ export function ColorGrid() {
             copiedColor={copiedColor}
           />
         )
-      default:
+      }
+      default: {
         return (
           <RegularColors
             selectedVariant={selectedVariant}
@@ -87,6 +92,7 @@ export function ColorGrid() {
             copiedColor={copiedColor}
           />
         )
+      }
     }
   }
 

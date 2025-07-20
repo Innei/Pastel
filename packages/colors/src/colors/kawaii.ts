@@ -1,4 +1,4 @@
-import type { RegularColorName, KawaiiColorVariants } from '../types';
+import type { KawaiiColorVariants,RegularColorName } from '../types';
 
 export const kawaiiColors: Record<RegularColorName, KawaiiColorVariants> = {
   blue: {

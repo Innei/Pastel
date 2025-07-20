@@ -1,7 +1,17 @@
 {
   "name": "@pastel-palette/tailwindcss",
+  "type": "module",
   "version": "1.0.0-alpha.1",
   "description": "",
+  "author": "Innei",
+  "license": "MIT",
+  "keywords": [
+    "tailwindcss",
+    "pastel",
+    "kawaii",
+    "colors",
+    "palette"
+  ],
   "exports": {
     "./dist/*": "./dist/*"
   },
@@ -11,15 +21,6 @@
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit"
   },
-  "keywords": [
-    "tailwindcss",
-    "pastel",
-    "kawaii",
-    "colors",
-    "palette"
-  ],
-  "author": "Innei",
-  "license": "MIT",
   "dependencies": {
     "@pastel-palette/colors": "workspace:*"
   },

@@ -1,12 +1,14 @@
-import { writeFileSync, mkdirSync } from 'fs'
-import { join } from 'path'
-import { colorSystem } from '@pastel-palette/colors'
-import { generateCSS } from '../src/generator'
+import { mkdirSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
+
 import type {
-  GeneratorConfig,
-  DarkModeStrategy,
   ColorFormat,
+  DarkModeStrategy,
+  GeneratorConfig,
 } from '@pastel-palette/colors'
+import { colorSystem } from '@pastel-palette/colors'
+
+import { generateCSS } from '../src/generator'
 
 const strategies: DarkModeStrategy[] = [
   'media-query',
@@ -51,7 +53,7 @@ strategies.forEach((strategy) => {
       const filepath = join(distDir, filename)
 
       writeFileSync(filepath, css, 'utf-8')
-      console.log(`✓ Generated ${filename}`)
+      console.info(`✓ Generated ${filename}`)
     })
   })
 })
@@ -75,16 +77,16 @@ commonConfigs.forEach(({ suffix, colorSpace }) => {
 
     const css = generateCSS(config)
     const filename =
-      contrast === 'regular' 
-        ? `theme${suffix}.css` 
+      contrast === 'regular'
+        ? `theme${suffix}.css`
         : contrast === 'high-contrast'
           ? `theme${suffix}-hc.css`
           : `theme${suffix}-kawaii.css`
     const filepath = join(distDir, filename)
 
     writeFileSync(filepath, css, 'utf-8')
-    console.log(`✓ Generated ${filename}`)
+    console.info(`✓ Generated ${filename}`)
   })
 })
 
-console.log('\n✨ All TailwindCSS v4 theme files generated successfully!')
+console.info('\n✨ All TailwindCSS v4 theme files generated successfully!')

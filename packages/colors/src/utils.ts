@@ -1,9 +1,9 @@
-import type { OKLCH, RGB, ColorValidationResult, ContrastRatio } from './types/utilities';
+import type { ColorValidationResult, ContrastRatio,OKLCH, RGB } from './types/utilities';
 
 export function mapHexToRGBString(hex: string): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
+  const r = Number.parseInt(hex.slice(1, 3), 16);
+  const g = Number.parseInt(hex.slice(3, 5), 16);
+  const b = Number.parseInt(hex.slice(5, 7), 16);
   return `rgb(${r} ${g} ${b})`;
 }
 
@@ -16,10 +16,10 @@ export function parseOKLCH(oklchString: string): OKLCH | null {
   const match = oklchString.match(/oklch\(([\d.]+)%?\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)/);
   if (!match) return null;
   
-  const l = parseFloat(match[1]) / (match[1].includes('%') ? 100 : 1);
-  const c = parseFloat(match[2]);
-  const h = parseFloat(match[3]);
-  const a = match[4] ? parseFloat(match[4]) : 1;
+  const l = Number.parseFloat(match[1]) / (match[1].includes('%') ? 100 : 1);
+  const c = Number.parseFloat(match[2]);
+  const h = Number.parseFloat(match[3]);
+  const a = match[4] ? Number.parseFloat(match[4]) : 1;
   
   return { l, c, h, a };
 }
@@ -36,10 +36,10 @@ export function parseRGB(rgbString: string): RGB | null {
   const match = rgbString.match(/rgba?\(([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)/);
   if (!match) return null;
   
-  const r = parseInt(match[1]);
-  const g = parseInt(match[2]);
-  const b = parseInt(match[3]);
-  const a = match[4] ? parseFloat(match[4]) : 1;
+  const r = Number.parseInt(match[1]);
+  const g = Number.parseInt(match[2]);
+  const b = Number.parseInt(match[3]);
+  const a = match[4] ? Number.parseFloat(match[4]) : 1;
   
   return { r, g, b, a };
 }
@@ -129,6 +129,6 @@ export function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
 }
 
-export function toFixed(value: number, precision: number = 3): number {
+export function toFixed(value: number, precision = 3): number {
   return Math.round(value * Math.pow(10, precision)) / Math.pow(10, precision);
 }

@@ -1,6 +1,8 @@
-import { Container } from './ui/Container'
-import { ArrowRight, Star, Palette, Zap } from 'lucide-react'
+import { ArrowRight, Palette, Star, Zap } from 'lucide-react'
+
 import pkg from '../../../package.json'
+import { Container } from './ui/Container'
+
 export function Hero() {
   return (
     <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden">

@@ -1,7 +1,6 @@
-import { CloudUpload, Check, AlertCircle, X } from 'lucide-react'
-import { Slider } from '../ui/Slider'
+import { AlertCircle, Check, CloudUpload, X } from 'lucide-react'
+
 import { Input } from '../ui/Input'
-import { Textarea } from '../ui/Textarea'
 import { Label } from '../ui/Label'
 import {
   Select,
@@ -10,6 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/Select'
+import { Slider } from '../ui/Slider'
+import { Textarea } from '../ui/Textarea'
 
 export function FormExamples() {
   return (

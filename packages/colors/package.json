@@ -1,6 +1,28 @@
 {
   "name": "@pastel-palette/colors",
+  "type": "module",
   "version": "0.0.1",
+  "author": "Innei",
+  "license": "MIT",
+  "keywords": [
+    "pastel",
+    "kawaii",
+    "colors",
+    "palette"
+  ],
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "culori": "4.0.2"
+  },
+  "devDependencies": {
+    "tsup": "8.5.0",
+    "typescript": "5.8.3"
+  },
   "publishConfig": {
     "main": "dist/index.cjs",
     "module": "dist/index.js",
@@ -11,27 +33,5 @@
         "import": "./dist/index.js"
       }
     }
-  },
-  "main": "src/index.ts",
-  "type": "module",
-  "scripts": {
-    "build": "tsup",
-    "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit"
-  },
-  "keywords": [
-    "pastel",
-    "kawaii",
-    "colors",
-    "palette"
-  ],
-  "author": "Innei",
-  "license": "MIT",
-  "devDependencies": {
-    "tsup": "8.5.0",
-    "typescript": "5.8.3"
-  },
-  "dependencies": {
-    "culori": "4.0.2"
   }
 }

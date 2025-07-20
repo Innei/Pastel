@@ -1,4 +1,4 @@
-import type { RegularColorName, ColorVariants } from '../types'
+import type { ColorVariants,RegularColorName } from '../types'
 
 export const regularColors: Record<RegularColorName, ColorVariants> = {
   blue: {

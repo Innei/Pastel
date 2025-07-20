@@ -1,6 +1,7 @@
-import { useTheme } from 'next-themes'
-import { Sun, Moon, Monitor } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { Monitor,Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
+
 import { Container } from '../ui/Container'
 
 export function Footer() {

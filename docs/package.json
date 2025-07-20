@@ -1,14 +1,14 @@
 {
   "name": "@pastel-palette/docs",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "tsc && vite build",
+    "clean": "rm -rf dist build",
+    "dev": "vite",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist build"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@pastel-palette/colors": "workspace:*",

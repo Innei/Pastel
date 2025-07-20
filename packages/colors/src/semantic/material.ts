@@ -1,4 +1,4 @@
-import type { MaterialOpacity, MaterialColor } from '../types';
+import type { MaterialColor,MaterialOpacity } from '../types';
 
 export const materialColors: Record<MaterialOpacity, MaterialColor> = {
   ultraThick: {

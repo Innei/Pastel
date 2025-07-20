@@ -1,4 +1,4 @@
-import { ColorSystem, DarkModeConfig } from './index';
+import type { ColorSystem, DarkModeConfig } from './index';
 
 export interface OKLCH {
   l: number;

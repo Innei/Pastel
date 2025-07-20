@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 interface ColorCardProps {
   colorName: string
@@ -28,14 +28,18 @@ export const ColorCard: React.FC<ColorCardProps> = ({
     if (!colorData) return ''
 
     switch (selectedChannel) {
-      case 'oklch':
+      case 'oklch': {
         return colorData.oklch || ''
-      case 'srgb':
+      }
+      case 'srgb': {
         return colorData.srgb || ''
-      case 'p3':
+      }
+      case 'p3': {
         return colorData.p3 || colorData.srgb || ''
-      default:
+      }
+      default: {
         return colorData.oklch || ''
+      }
     }
   }
 
