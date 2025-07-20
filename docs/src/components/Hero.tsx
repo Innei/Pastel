@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden">
       {/* Background gradient using semantic colors */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background-secondary via-background-tertiary to-fill dark:from-background-secondary/80 dark:via-background-tertiary/60 dark:to-fill/80" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background-secondary to-material-medium" />
 
       {/* Animated gradient orbs using project colors */}
       <div className="absolute inset-0 overflow-hidden">

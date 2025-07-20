@@ -24,7 +24,10 @@ function App() {
         <Hero />
 
         {/* Color Palette Section */}
-        <section className="py-16 sm:py-24 lg:py-32 border-t border-border">
+        <section
+          id="palette"
+          className="py-16 sm:py-24 lg:py-32 border-t border-border"
+        >
           <Container>
             <div className="max-w-2xl mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
@@ -86,7 +89,7 @@ function App() {
         </section>
 
         {/* Installation Section */}
-        <section
+        {/* <section
           id="installation"
           className="py-16 sm:py-24 lg:py-32 border-t border-border"
         >
@@ -139,11 +142,11 @@ function Button({ variant = 'primary' }) {
               </div>
             </div>
           </Container>
-        </section>
+        </section> */}
       </main>
-      
+
       <Footer />
-      
+
       <Toaster
         theme={theme as 'light' | 'dark' | 'system'}
         toastOptions={{

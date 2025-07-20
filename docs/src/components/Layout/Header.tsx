@@ -29,10 +29,10 @@ export function Header() {
 
             <div className="hidden md:flex items-center gap-6">
               <a
-                href="#features"
+                href="#palette"
                 className="text-sm text-text-secondary hover:text-text transition-colors"
               >
-                Features
+                Palette
               </a>
               <a
                 href="#examples"
@@ -40,12 +40,12 @@ export function Header() {
               >
                 Examples
               </a>
-              <a
+              {/* <a
                 href="#installation"
                 className="text-sm text-text-secondary hover:text-text transition-colors"
               >
                 Installation
-              </a>
+              </a> */}
             </div>
           </div>
 
