@@ -18,7 +18,8 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "module": "ESNext"
   },
   "include": [
     "**/*.ts",

@@ -1,5 +1,6 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import type {
   ColorFormat,
@@ -18,6 +19,8 @@ const strategies: DarkModeStrategy[] = [
 
 const colorSpaces: ColorFormat[] = ['srgb', 'oklch', 'p3']
 const contrastVariants = ['regular', 'high-contrast', 'kawaii']
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 // Ensure dist directory exists
 const distDir = join(__dirname, '..', 'dist')
