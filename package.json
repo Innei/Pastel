@@ -4,6 +4,9 @@
   "private": true,
   "license": "MIT",
   "packageManager": "pnpm@10.13.1",
+  "repo": {
+    "url": "https://github.com/Innei/Pastel"
+  },
   "devDependencies": {
     "nbump": "2.1.3",
     "turbo": "2.5.4",

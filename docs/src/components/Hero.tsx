@@ -1,6 +1,6 @@
 import { Container } from './ui/Container'
 import { ArrowRight, Star, Palette, Zap } from 'lucide-react'
-
+import pkg from '../../../package.json'
 export function Hero() {
   return (
     <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden">
@@ -26,7 +26,7 @@ export function Hero() {
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
                 A thoughtfully crafted
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink to-blue">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue">
                   {' '}
                   color system
                 </span>{' '}
@@ -55,7 +55,7 @@ export function Hero() {
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-green-500/10 text-green-600 dark:text-green-400">
+                <div className="p-2 rounded-lg bg-blue/10 text-blue">
                   <Zap className="w-5 h-5" />
                 </div>
                 <div>
@@ -65,7 +65,7 @@ export function Hero() {
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                <div className="p-2 rounded-lg bg-purple/10 text-purple">
                   <Star className="w-5 h-5" />
                 </div>
                 <div>
@@ -88,7 +88,7 @@ export function Hero() {
               </a>
 
               <a
-                href="https://github.com/your-repo/pastel"
+                href={pkg.repo.url}
                 className="inline-flex items-center gap-2 px-6 py-3 text-base font-medium rounded-full bg-background-secondary text-text border border-border hover:bg-background-tertiary transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-border"
               >
                 <svg
@@ -106,26 +106,26 @@ export function Hero() {
           {/* Right content - Color showcase */}
           <div className="relative">
             <div className="relative grid grid-cols-2 gap-4 sm:gap-6">
-              {/* Color cards */}
+              {/* Color cards using project colors */}
               <div className="space-y-4">
-                <div className="aspect-square rounded-2xl bg-gradient-to-br from-pink-400 to-pink-600 shadow-lg shadow-pink-500/25 transform rotate-[-6deg]" />
-                <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg shadow-blue-500/25 transform rotate-[3deg]" />
+                <div className="aspect-square rounded-2xl bg-gradient-to-br from-pink to-pink-dark shadow-lg shadow-pink/25 transform rotate-[-6deg]" />
+                <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue to-blue-dark shadow-lg shadow-blue/25 transform rotate-[3deg]" />
               </div>
 
               <div className="space-y-4 mt-8">
-                <div className="aspect-square rounded-2xl bg-gradient-to-br from-purple-400 to-purple-600 shadow-lg shadow-purple-500/25 transform rotate-[6deg]" />
-                <div className="aspect-square rounded-2xl bg-gradient-to-br from-green-400 to-green-600 shadow-lg shadow-green-500/25 transform rotate-[-3deg]" />
+                <div className="aspect-square rounded-2xl bg-gradient-to-br from-purple to-purple-dark shadow-lg shadow-purple/25 transform rotate-[6deg]" />
+                <div className="aspect-square rounded-2xl bg-gradient-to-br from-green to-green-dark shadow-lg shadow-green/25 transform rotate-[-3deg]" />
               </div>
 
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400/20 dark:bg-yellow-400/10 rounded-full blur-2xl animate-bounce" />
-              <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-pink-400/20 dark:bg-pink-400/10 rounded-full blur-2xl animate-bounce animation-delay-1000" />
+              {/* Floating elements using project colors */}
+              <div className="absolute -top-4 -right-4 w-16 h-16 bg-yellow/20 dark:bg-yellow/10 rounded-full blur-2xl animate-bounce" />
+              <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-pink/20 dark:bg-pink/10 rounded-full blur-2xl animate-bounce animation-delay-1000" />
             </div>
 
             {/* Stats */}
             <div className="mt-8 grid grid-cols-3 gap-4 text-center">
               <div>
-                <p className="text-2xl font-bold text-text">50+</p>
+                <p className="text-2xl font-bold text-text">20+</p>
                 <p className="text-sm text-text-secondary">Colors</p>
               </div>
               <div>
