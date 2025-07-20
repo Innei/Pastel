@@ -8,12 +8,10 @@
 
 /* Font variables */
 :root {
-  --font-sans:
-    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  --font-mono:
-    'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Consolas,
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Consolas,
     'Liberation Mono', Menlo, monospace;
 }
 
@@ -51,7 +49,7 @@
     @apply text-base font-semibold;
   }
   .label {
-    @apply text-sm font-medium text-text;
+    @apply text-sm font-medium text-text mb-2 block;
   }
   .input {
     @apply w-full px-3 py-2 border border-border rounded-md bg-background text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent;
@@ -66,7 +64,7 @@
     @apply bg-accent text-white hover:opacity-90 focus:ring-accent;
   }
   .btn-secondary {
-    @apply bg-background border border-border text-text hover:bg-fill focus:ring-border;
+    @apply bg-background border border-border text-text hover:bg-material-medium focus:ring-border;
   }
 }
 
@@ -78,6 +76,7 @@ body {
 
   @apply bg-background text-text;
 }
+
 
 /* Animation utilities */
 @layer utilities {

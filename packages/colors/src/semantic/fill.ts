@@ -3,50 +3,66 @@ import type { SemanticColor } from '../types';
 export const fillColors: SemanticColor = {
   primary: {
     light: { 
-      oklch: 'oklch(0.88 0.00 0)', 
-      srgb: 'rgb(224 224 224)',
-      p3: 'color(display-p3 0.878 0.878 0.878)'
+      oklch: 'oklch(0.88 0 0)',
+ 
+      srgb: 'rgb(215, 215, 215)',
+ 
+      p3: 'color(display-p3 0.844 0.844 0.844)',
     },
     dark: { 
-      oklch: 'oklch(0.25 0.00 0)', 
-      srgb: 'rgb(64 64 64)',
-      p3: 'color(display-p3 0.251 0.251 0.251)'
+      oklch: 'oklch(0.25 0 0)',
+ 
+      srgb: 'rgb(34, 34, 34)',
+ 
+      p3: 'color(display-p3 0.131 0.131 0.131)',
     }
   },
   secondary: {
     light: { 
-      oklch: 'oklch(0.84 0.00 0)', 
-      srgb: 'rgb(214 214 214)',
-      p3: 'color(display-p3 0.839 0.839 0.839)'
+      oklch: 'oklch(0.84 0 0)',
+ 
+      srgb: 'rgb(202, 202, 202)',
+ 
+      p3: 'color(display-p3 0.793 0.793 0.793)',
     },
     dark: { 
-      oklch: 'oklch(0.30 0.00 0)', 
-      srgb: 'rgb(77 77 77)',
-      p3: 'color(display-p3 0.302 0.302 0.302)'
+      oklch: 'oklch(0.3 0 0)',
+ 
+      srgb: 'rgb(46, 46, 46)',
+ 
+      p3: 'color(display-p3 0.179 0.179 0.179)',
     }
   },
   tertiary: {
     light: { 
-      oklch: 'oklch(0.80 0.00 0)', 
-      srgb: 'rgb(204 204 204)',
-      p3: 'color(display-p3 0.8 0.8 0.8)'
+      oklch: 'oklch(0.8 0 0)',
+ 
+      srgb: 'rgb(190, 190, 190)',
+ 
+      p3: 'color(display-p3 0.743 0.743 0.743)',
     },
     dark: { 
-      oklch: 'oklch(0.35 0.00 0)', 
-      srgb: 'rgb(89 89 89)',
-      p3: 'color(display-p3 0.349 0.349 0.349)'
+      oklch: 'oklch(0.35 0 0)',
+ 
+      srgb: 'rgb(58, 58, 58)',
+ 
+      p3: 'color(display-p3 0.229 0.229 0.229)',
     }
   },
   quaternary: {
     light: { 
-      oklch: 'oklch(0.76 0.00 0)', 
-      srgb: 'rgb(194 194 194)',
-      p3: 'color(display-p3 0.761 0.761 0.761)'
+      oklch: 'oklch(0.76 0 0)',
+ 
+      srgb: 'rgb(177, 177, 177)',
+ 
+      p3: 'color(display-p3 0.694 0.694 0.694)',
     },
     dark: { 
-      oklch: 'oklch(0.40 0.00 0)', 
-      srgb: 'rgb(102 102 102)',
-      p3: 'color(display-p3 0.4 0.4 0.4)'
+      oklch: 'oklch(0.4 0 0)',
+ 
+      srgb: 'rgb(72, 72, 72)',
+ 
+      p3: 'color(display-p3 0.281 0.281 0.281)',
     }
   }
 };

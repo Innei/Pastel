@@ -1,10 +1,11 @@
 import type { ColorSystem, ColorPalette } from './types';
-import { regularColors, highContrastColors, applicationColors } from './colors';
+import { regularColors, highContrastColors, kawaiiColors, applicationColors } from './colors';
 import { elementColors, backgroundColors, fillColors, materialColors } from './semantic';
 
 export const kawaiiColorSystem: ColorSystem = {
   regular: regularColors,
   regularHighContrast: highContrastColors,
+  regularKawaii: kawaiiColors,
   element: elementColors,
   background: backgroundColors,
   fill: fillColors,

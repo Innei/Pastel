@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useTheme } from 'next-themes'
-import { Sun, Moon, Menu, Grid2x2 } from 'lucide-react'
+import { Menu, Grid2x2, Github } from 'lucide-react'
 import { Container } from '../ui/Container'
 
 export function Header() {
-  const { theme, setTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -14,10 +12,6 @@ export function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
 
   return (
     <header
@@ -52,28 +46,18 @@ export function Header() {
               >
                 Installation
               </a>
-              <a
-                href="https://github.com/your-repo/pastel"
-                className="text-sm text-text-secondary hover:text-text transition-colors"
-              >
-                GitHub
-              </a>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-md hover:bg-background-secondary"
-              aria-label="Toggle theme"
+            <a
+              href="https://github.com/your-repo/pastel"
+              className="p-2 rounded-md hover:bg-background-secondary transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              {theme === 'dark' ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
-            </button>
-
+              <Github className="w-5 h-5" />
+            </a>
             <button className="md:hidden p-2 rounded-md hover:bg-background-secondary">
               <Menu className="w-5 h-5" />
             </button>

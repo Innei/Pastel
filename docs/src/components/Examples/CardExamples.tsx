@@ -116,7 +116,7 @@ export function CardExamples() {
         {/* Nested Cards */}
         <div className="space-y-4">
           <h5 className="heading-4 text-foreground">Nested Cards</h5>
-          <div className="card bg-muted p-8">
+          <div className="card bg-material-medium p-8">
             <div className="text-center mb-6">
               <h3 className="heading-3 text-foreground mb-2">
                 Parent Container

@@ -32,14 +32,16 @@ export function ButtonExamples() {
         <div className="space-y-4">
           <h5 className="text-lg font-semibold">Secondary Buttons</h5>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <button className="btn btn-secondary">Default</button>
-            <button className="btn border border-blue text-blue hover:bg-blue hover:bg-opacity-10">
+            <button className="btn btn-secondary hover:bg-material-medium">
+              Default
+            </button>
+            <button className="btn border border-blue text-blue hover:bg-blue hover:text-white hover:bg-opacity-10">
               Blue
             </button>
-            <button className="btn border border-green text-green hover:bg-green hover:bg-opacity-10">
+            <button className="btn border border-green text-green hover:bg-green hover:text-white hover:bg-opacity-10">
               Green
             </button>
-            <button className="btn border border-red text-red hover:bg-red hover:bg-opacity-10">
+            <button className="btn border border-red text-red hover:bg-red hover:text-white hover:bg-opacity-10">
               Red
             </button>
           </div>
@@ -148,7 +150,7 @@ export function ButtonExamples() {
         {/* Usage Example */}
         <div className="space-y-4">
           <h5 className="text-lg font-semibold">Usage Example</h5>
-          <div className="bg-muted p-6 rounded-md overflow-x-auto">
+          <div className="bg-material-medium p-6 rounded-md overflow-x-auto">
             <pre className="text-sm">
               <code>{`<button className="btn btn-primary">
   Primary Button

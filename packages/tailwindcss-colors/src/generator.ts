@@ -101,6 +101,22 @@ export function generateColorVariables(
     )
   }
 
+  // Kawaii regular colors
+  if (colors.regularKawaii) {
+    for (const [colorName, variants] of Object.entries(
+      colors.regularKawaii,
+    )) {
+      const colorValue = (variants as ColorVariants)[mode]
+      const colorString = getColorString(colorValue)
+      lines.push(
+        generateColorVariable(
+          `${colorName}-kawaii${suffix}`,
+          extractColorValues(colorString, colorSpace),
+        ),
+      )
+    }
+  }
+
   for (const [colorName, depthColors] of Object.entries(colors.element)) {
     for (const [depth, variants] of Object.entries(
       depthColors as SemanticColor,
@@ -187,6 +203,17 @@ export function generateThemeVariables(
       generateThemeVariable(`${colorName}-hc-light`, false, colorSpace),
     )
     lines.push(generateThemeVariable(`${colorName}-hc-dark`, false, colorSpace))
+  }
+
+  // Kawaii regular colors
+  if (colors.regularKawaii) {
+    for (const colorName of Object.keys(colors.regularKawaii)) {
+      lines.push(generateThemeVariable(`${colorName}-kawaii`, false, colorSpace))
+      lines.push(
+        generateThemeVariable(`${colorName}-kawaii-light`, false, colorSpace),
+      )
+      lines.push(generateThemeVariable(`${colorName}-kawaii-dark`, false, colorSpace))
+    }
   }
 
   // Element colors
@@ -343,6 +370,13 @@ export function generateActiveColorReferences(
   // High contrast regular colors
   for (const colorName of Object.keys(colors.regularHighContrast)) {
     lines.push(`--color-${colorName}-hc: var(--color-${colorName}-hc-${mode})`)
+  }
+
+  // Kawaii regular colors
+  if (colors.regularKawaii) {
+    for (const colorName of Object.keys(colors.regularKawaii)) {
+      lines.push(`--color-${colorName}-kawaii: var(--color-${colorName}-kawaii-${mode})`)
+    }
   }
 
   // Element colors

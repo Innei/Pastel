@@ -15,7 +15,7 @@ const strategies: DarkModeStrategy[] = [
 ]
 
 const colorSpaces: ColorFormat[] = ['srgb', 'oklch', 'p3']
-const contrastVariants = ['regular', 'high-contrast']
+const contrastVariants = ['regular', 'high-contrast', 'kawaii']
 
 // Ensure dist directory exists
 const distDir = join(__dirname, '..', 'dist')
@@ -45,7 +45,9 @@ strategies.forEach((strategy) => {
       const filename =
         contrast === 'regular'
           ? `theme-${strategy}-${colorSpace}.css`
-          : `theme-${strategy}-${colorSpace}-hc.css`
+          : contrast === 'high-contrast'
+            ? `theme-${strategy}-${colorSpace}-hc.css`
+            : `theme-${strategy}-${colorSpace}-kawaii.css`
       const filepath = join(distDir, filename)
 
       writeFileSync(filepath, css, 'utf-8')
@@ -73,7 +75,11 @@ commonConfigs.forEach(({ suffix, colorSpace }) => {
 
     const css = generateCSS(config)
     const filename =
-      contrast === 'regular' ? `theme${suffix}.css` : `theme${suffix}-hc.css`
+      contrast === 'regular' 
+        ? `theme${suffix}.css` 
+        : contrast === 'high-contrast'
+          ? `theme${suffix}-hc.css`
+          : `theme${suffix}-kawaii.css`
     const filepath = join(distDir, filename)
 
     writeFileSync(filepath, css, 'utf-8')

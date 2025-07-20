@@ -88,6 +88,38 @@ Core utilities in `/packages/colors/src/utils.ts`:
 - Include OKLCH format (primary) and sRGB fallback (required)
 - Use semantic depth levels for UI elements (primary, secondary, tertiary, etc.)
 
+### Color Generation Rules
+**CRITICAL**: Always use OKLCH as the primary color space and convert to sRGB/P3 using culori library:
+
+1. **Primary Color Space**: OKLCH is the authoritative format
+2. **Color Conversion Process**:
+   ```javascript
+   import { rgb, oklch, formatRgb, p3 } from 'culori';
+   
+   // Convert target RGB to OKLCH (normalize RGB to 0-1 range)
+   const targetColor = rgb({ r: 31/255, g: 31/255, b: 35/255 });
+   const oklchColor = oklch(targetColor);
+   
+   // Generate color scales maintaining hue and chroma, adjusting lightness
+   const colorScale = {
+     primary: { l: oklchColor.l, c: oklchColor.c, h: oklchColor.h },
+     secondary: { l: oklchColor.l + 0.03, c: oklchColor.c, h: oklchColor.h }
+   };
+   
+   // Convert back to sRGB and P3
+   const srgbColor = formatRgb(oklch(colorScale.primary));
+   const p3Color = p3(oklch(colorScale.primary));
+   ```
+3. **Background Color Standards**: 
+   - Primary dark background: `rgb(31, 31, 35)` (#1f1f23) - similar to GitHub's dark theme
+   - Generate color scales by incrementing lightness (L) by 0.03 steps
+   - Maintain consistent hue (H) and chroma (C) across the scale
+4. **Never manually calculate color values** - always use culori for accuracy
+5. **Color Format Requirements**:
+   - OKLCH: `oklch(0.241 0.008 286)` format
+   - sRGB: `rgb(31 31 35)` format (space-separated, no commas)
+   - P3: `color(display-p3 0.122 0.122 0.136)` format
+
 ### CSS Theme Generation
 - Run `pnpm build:css` after color changes to regenerate theme files
 - The CLI tool at `/packages/tailwindcss-colors/cli/build.ts` generates all three dark mode strategies

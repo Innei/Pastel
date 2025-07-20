@@ -1,64 +1,64 @@
-import type { SemanticColor } from '../types';
+import type { SemanticColor } from '../types'
 
 export const backgroundColors: SemanticColor = {
   primary: {
-    light: { 
-      oklch: 'oklch(0.98 0.005 220)', 
-      srgb: 'rgb(249 249 250)',
-      p3: 'color(display-p3 0.976 0.976 0.98)'
+    light: {
+      oklch: 'oklch(0.98 0.005 220)',
+      srgb: 'rgb(245, 249, 251)',
+      p3: 'color(display-p3 0.964 0.977 0.982)',
     },
-    dark: { 
-      oklch: 'oklch(0.12 0.01 220)', 
-      srgb: 'rgb(30 30 32)',
-      p3: 'color(display-p3 0.118 0.118 0.125)'
-    }
+    dark: {
+      oklch: 'oklch(0.241 0.008 286)',
+      srgb: 'rgb(31 31 35)',
+      p3: 'color(display-p3 0.122 0.122 0.136)',
+    },
   },
   secondary: {
-    light: { 
-      oklch: 'oklch(0.96 0.005 220)', 
-      srgb: 'rgb(244 244 245)',
-      p3: 'color(display-p3 0.957 0.957 0.961)'
+    light: {
+      oklch: 'oklch(0.96 0.005 220)',
+      srgb: 'rgb(238, 243, 244)',
+      p3: 'color(display-p3 0.937 0.951 0.956)',
     },
-    dark: { 
-      oklch: 'oklch(0.15 0.01 220)', 
-      srgb: 'rgb(37 37 40)',
-      p3: 'color(display-p3 0.145 0.145 0.157)'
-    }
+    dark: {
+      oklch: 'oklch(0.271 0.008 286)',
+      srgb: 'rgb(38 38 42)',
+      p3: 'color(display-p3 0.150 0.150 0.164)',
+    },
   },
   tertiary: {
-    light: { 
-      oklch: 'oklch(0.94 0.005 220)', 
-      srgb: 'rgb(239 239 240)',
-      p3: 'color(display-p3 0.937 0.937 0.941)'
+    light: {
+      oklch: 'oklch(0.94 0.005 220)',
+      srgb: 'rgb(232, 236, 237)',
+      p3: 'color(display-p3 0.911 0.925 0.930)',
     },
-    dark: { 
-      oklch: 'oklch(0.18 0.01 220)', 
-      srgb: 'rgb(45 45 48)',
-      p3: 'color(display-p3 0.176 0.176 0.188)'
-    }
+    dark: {
+      oklch: 'oklch(0.301 0.008 286)',
+      srgb: 'rgb(46 46 50)',
+      p3: 'color(display-p3 0.179 0.179 0.194)',
+    },
   },
   quaternary: {
-    light: { 
-      oklch: 'oklch(0.92 0.005 220)', 
-      srgb: 'rgb(234 234 235)',
-      p3: 'color(display-p3 0.918 0.918 0.922)'
+    light: {
+      oklch: 'oklch(0.92 0.005 220)',
+      srgb: 'rgb(225, 229, 231)',
+      p3: 'color(display-p3 0.886 0.899 0.904)',
     },
-    dark: { 
-      oklch: 'oklch(0.20 0.01 220)', 
-      srgb: 'rgb(50 50 53)',
-      p3: 'color(display-p3 0.196 0.196 0.208)'
-    }
+    dark: {
+      oklch: 'oklch(0.331 0.008 286)',
+      srgb: 'rgb(53 53 57)',
+      p3: 'color(display-p3 0.208 0.208 0.224)',
+    },
   },
   quinary: {
-    light: { 
-      oklch: 'oklch(0.90 0.005 220)', 
-      srgb: 'rgb(229 229 230)',
-      p3: 'color(display-p3 0.898 0.898 0.902)'
+    light: {
+      oklch: 'oklch(0.90 0.005 220)',
+      srgb: 'rgb(219, 223, 224)',
+      p3: 'color(display-p3 0.860 0.873 0.878)',
     },
-    dark: { 
-      oklch: 'oklch(0.22 0.01 220)', 
-      srgb: 'rgb(55 55 58)',
-      p3: 'color(display-p3 0.216 0.216 0.228)'
-    }
-  }
-};
+    dark: {
+      oklch: 'oklch(0.361 0.008 286)',
+      srgb: 'rgb(61 61 65)',
+      p3: 'color(display-p3 0.238 0.239 0.254)',
+    },
+  },
+}

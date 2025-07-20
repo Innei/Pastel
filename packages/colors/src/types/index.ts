@@ -14,6 +14,11 @@ export interface HighContrastColorVariants {
   dark: ColorValue;
 }
 
+export interface KawaiiColorVariants {
+  light: ColorValue;
+  dark: ColorValue;
+}
+
 export type DepthLevel = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
 
 export interface SemanticColor {
@@ -40,7 +45,9 @@ export interface DarkModeConfig {
 
 export type RegularColorName = 
   | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'orange' 
-  | 'pink' | 'brown' | 'gray' | 'black' | 'white' | 'sky' | 'neutral';
+  | 'pink' | 'brown' | 'gray' | 'black' | 'white' | 'sky' | 'neutral'
+  | 'teal' | 'cyan' | 'indigo' | 'violet' | 'lime' | 'emerald' 
+  | 'amber' | 'rose' | 'slate' | 'zinc';
 
 export type ElementColorName = 
   | 'border' | 'separator' | 'link' | 'text' 
@@ -51,6 +58,7 @@ export type ApplicationColorName = 'accent' | 'primary' | 'secondary';
 export interface ColorSystem {
   regular: Record<RegularColorName, ColorVariants>;
   regularHighContrast: Record<RegularColorName, HighContrastColorVariants>;
+  regularKawaii: Record<RegularColorName, KawaiiColorVariants>;
   element: Record<ElementColorName, SemanticColor>;
   background: SemanticColor;
   fill: SemanticColor;

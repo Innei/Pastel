@@ -63,7 +63,7 @@ export function Modal({
               >
                 {/* Header */}
                 {title && (
-                  <div className="flex items-center justify-between p-6 border-b border-border flex-shrink-0">
+                  <div className="flex items-center justify-between px-6 py-3 border-b border-border flex-shrink-0">
                     <Dialog.Title className="text-lg font-semibold text-text">
                       {title}
                     </Dialog.Title>
@@ -85,11 +85,7 @@ export function Modal({
                 )}
 
                 {/* Content - with scroll */}
-                <div
-                  className={cn('overflow-y-auto flex-1 p-6', title && 'pt-0')}
-                >
-                  {children}
-                </div>
+                <div className={'overflow-y-auto flex-1 p-6'}>{children}</div>
               </motion.div>
             </Dialog.Content>
           </Dialog.Portal>

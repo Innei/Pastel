@@ -1,11 +1,20 @@
-import { colorPalette, type RegularColorName } from '@pastel-palette/colors'
+import {
+  colorPalette,
+  kawaiiColorSystem,
+  type RegularColorName,
+} from '@pastel-palette/colors'
 import { Modal } from '../ui/Modal'
 import { toast } from 'sonner'
+
+type ColorVariant = 'regular' | 'high-contrast' | 'kawaii'
 
 interface ColorModalProps {
   isOpen: boolean
   onClose: () => void
   colorName: string
+  colorType: 'regular' | 'semantic' | 'material' | 'application'
+  colorVariant: ColorVariant
+  colorData?: any
   onCopy: (value: string) => void
 }
 
@@ -73,10 +82,38 @@ export function ColorModal({
   isOpen,
   onClose,
   colorName,
+  colorType,
+  colorVariant,
+  colorData,
   onCopy,
 }: ColorModalProps) {
-  const colorVariants =
-    colorPalette.colors.regular[colorName as RegularColorName]
+  const getColorVariants = () => {
+    // If colorData is provided (for non-regular colors), use it directly
+    if (colorData) {
+      return colorData
+    }
+    
+    // For regular colors, use the original logic
+    if (colorType === 'regular') {
+      switch (colorVariant) {
+        case 'regular':
+          return colorPalette.colors.regular[colorName as RegularColorName]
+        case 'high-contrast':
+          return colorPalette.colors.regularHighContrast[
+            colorName as RegularColorName
+          ]
+        case 'kawaii':
+          return kawaiiColorSystem.regularKawaii[colorName as RegularColorName]
+        default:
+          return colorPalette.colors.regular[colorName as RegularColorName]
+      }
+    }
+    
+    // For other color types, return null if no colorData provided
+    return null
+  }
+
+  const colorVariants = getColorVariants()
   const colorInfo = colorInfoMap[colorName] || {
     usage: 'Various UI elements and design applications',
     pairsWith: 'Complementary colors and neutral backgrounds',
@@ -94,16 +131,18 @@ export function ColorModal({
       </div>
       <button
         onClick={() => handleCopy(value)}
-        className="w-full text-left p-3 rounded-md border border-border hover:border-border-secondary hover:bg-background-secondary transition-all duration-200"
+        className="w-full select-all text-left p-3 overflow-x-auto rounded-md border border-border hover:border-border-secondary hover:bg-background-secondary transition-all duration-200"
       >
-        <span className="text-sm font-mono text-text">{value}</span>
+        <pre className="text-sm font-mono text-text">
+          <code className="mr-3">{value}</code>
+        </pre>
       </button>
     </div>
   )
 
   return (
     <Modal
-      title={colorName.toLocaleUpperCase()}
+      title={`${colorName.toLocaleUpperCase()} - ${colorType === 'regular' ? colorVariant.replace('-', ' ').toUpperCase() : colorType.toUpperCase()}`}
       isOpen={isOpen}
       onClose={onClose}
       size="lg"
@@ -128,20 +167,26 @@ export function ColorModal({
           {/* Usage and Pairs */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h3 className="text-sm font-medium text-text-secondary mb-2">Usage</h3>
+              <h3 className="text-sm font-medium text-text-secondary mb-2">
+                Usage
+              </h3>
               <p className="text-sm text-text-tertiary">{colorInfo.usage}</p>
             </div>
             <div>
               <h3 className="text-sm font-medium text-text-secondary mb-2">
                 Pairs with
               </h3>
-              <p className="text-sm text-text-tertiary">{colorInfo.pairsWith}</p>
+              <p className="text-sm text-text-tertiary">
+                {colorInfo.pairsWith}
+              </p>
             </div>
           </div>
 
           {/* Color Values */}
           <div className="space-y-6">
-            <h3 className="text-sm font-medium text-text-secondary">Color Values</h3>
+            <h3 className="text-sm font-medium text-text-secondary">
+              Color Values
+            </h3>
 
             {/* Light Variant */}
             <div>
