@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
-import { Menu, Grid2x2, Github } from 'lucide-react'
-import { Container } from '../ui/Container'
+import { Grid2x2,Menu } from 'lucide-react'
+import { useEffect,useState } from 'react'
+
 import pkg from '../../../../package.json'
+import { Container } from '../ui/Container'
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
 

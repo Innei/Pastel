@@ -12,16 +12,25 @@ export function Footer() {
     { value: 'dark', icon: Moon, label: 'Dark' },
   ]
 
-  const activeIndex = themeOptions.findIndex(option => option.value === theme)
+  const activeIndex = themeOptions.findIndex((option) => option.value === theme)
 
   return (
     <footer className="border-t border-border bg-background">
       <Container>
         <div className="flex items-center justify-between py-8">
           <div className="text-sm text-text-secondary">
-            © 2024 Pastel. Built with love for better design systems.
+            © 2025 Pastel. Built with love by{' '}
+            <a
+              className="hover:underline decoration-accent"
+              href="https://innei.in"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Innei
+            </a>
+            . To build better design.
           </div>
-          
+
           <div className="relative flex items-center gap-1 p-1 rounded-full bg-background-secondary border border-border">
             <motion.div
               className="absolute rounded-full bg-background shadow-sm border border-border/50"
@@ -32,7 +41,7 @@ export function Footer() {
                 height: 32,
               }}
               transition={{
-                type: "spring",
+                type: 'spring',
                 stiffness: 300,
                 damping: 30,
               }}
@@ -42,8 +51,8 @@ export function Footer() {
                 key={option.value}
                 onClick={() => setTheme(option.value)}
                 className={`relative z-10 p-2 rounded-full transition-colors ${
-                  theme === option.value 
-                    ? 'text-text' 
+                  theme === option.value
+                    ? 'text-text'
                     : 'text-text-secondary hover:text-text'
                 }`}
                 aria-label={`Switch to ${option.label} theme`}
