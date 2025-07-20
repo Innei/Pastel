@@ -116,7 +116,7 @@ export function ColorGrid() {
     <div className="space-y-8">
       {/* Category Tabs */}
       <div className="border-b border-border">
-        <nav className="flex space-x-8">
+        <nav className="flex space-x-8 overflow-auto">
           {colorSections.map((section) => (
             <button
               type="button"
@@ -125,7 +125,7 @@ export function ColorGrid() {
                 setSelectedCategory(section.id)
                 setModalColor(null)
               }}
-              className={`flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+              className={`flex items-center gap-2 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                 selectedCategory === section.id
                   ? 'border-accent text-accent'
                   : 'border-transparent text-text-secondary hover:text-text-tertiary hover:border-border'

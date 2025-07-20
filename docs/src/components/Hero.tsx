@@ -19,7 +19,7 @@ export function Hero() {
       <Container className="relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left content */}
-          <div className="space-y-8">
+          <div className="space-y-8 text-center lg:text-left">
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium">
                 <Star className="w-4 h-4" />
@@ -35,7 +35,7 @@ export function Hero() {
                 for modern interfaces
               </h1>
 
-              <p className="text-lg sm:text-xl text-text-secondary max-w-lg">
+              <p className="text-lg sm:text-xl text-text-secondary max-w-lg mx-auto lg:mx-0">
                 Pastel provides a comprehensive color palette designed for
                 accessibility, consistency, and visual harmony across your
                 applications.
@@ -43,12 +43,12 @@ export function Hero() {
             </div>
 
             {/* Feature highlights */}
-            <div className="grid sm:grid-cols-3 gap-4">
-              <div className="flex items-start gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-md mx-auto lg:max-w-none lg:mx-0">
+              <div className="flex items-start gap-3 justify-center sm:justify-start">
                 <div className="p-2 rounded-lg bg-accent/10 text-accent">
                   <Palette className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="text-center sm:text-left">
                   <p className="text-sm font-medium text-text">Beautiful</p>
                   <p className="text-xs text-text-secondary">
                     Carefully crafted
@@ -56,21 +56,21 @@ export function Hero() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 justify-center sm:justify-start">
                 <div className="p-2 rounded-lg bg-blue/10 text-blue">
                   <Zap className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="text-center sm:text-left">
                   <p className="text-sm font-medium text-text">Accessible</p>
                   <p className="text-xs text-text-secondary">WCAG compliant</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 justify-center sm:justify-start">
                 <div className="p-2 rounded-lg bg-purple/10 text-purple">
                   <Star className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="text-center sm:text-left">
                   <p className="text-sm font-medium text-text">Consistent</p>
                   <p className="text-xs text-text-secondary">
                     Across platforms
@@ -80,10 +80,10 @@ export function Hero() {
             </div>
 
             {/* CTA buttons */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a
                 href="#installation"
-                className="group inline-flex items-center gap-2 px-6 py-3 text-base font-medium rounded-full bg-accent text-white hover:bg-accent/90 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent shadow-lg shadow-accent/25"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium rounded-full bg-accent text-white hover:bg-accent/90 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent shadow-lg shadow-accent/25"
               >
                 Get Started
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -91,7 +91,7 @@ export function Hero() {
 
               <a
                 href={pkg.repo.url}
-                className="inline-flex items-center gap-2 px-6 py-3 text-base font-medium rounded-full bg-background-secondary text-text border border-border hover:bg-background-tertiary transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-border"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium rounded-full bg-background-secondary text-text border border-border hover:bg-background-tertiary transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-border"
               >
                 <svg
                   className="w-4 h-4"
@@ -106,8 +106,8 @@ export function Hero() {
           </div>
 
           {/* Right content - Color showcase */}
-          <div className="relative">
-            <div className="relative grid grid-cols-2 gap-4 sm:gap-6">
+          <div className="relative order-first lg:order-last">
+            <div className="relative grid grid-cols-2 gap-4 sm:gap-6 max-w-sm mx-auto lg:max-w-none">
               {/* Color cards using project colors */}
               <div className="space-y-4">
                 <div className="aspect-square rounded-2xl bg-gradient-to-br from-pink to-pink-dark shadow-lg shadow-pink/25 transform rotate-[-6deg]" />
@@ -125,7 +125,7 @@ export function Hero() {
             </div>
 
             {/* Stats */}
-            <div className="mt-8 grid grid-cols-3 gap-4 text-center">
+            <div className="mt-8 grid grid-cols-3 gap-4 text-center max-w-xs mx-auto lg:max-w-none">
               <div>
                 <p className="text-2xl font-bold text-text">20+</p>
                 <p className="text-sm text-text-secondary">Colors</p>
