@@ -1,12 +1,12 @@
 import { colorPalette } from '@pastel-palette/colors'
 import * as React from 'react'
 
-import type { ColorChannel } from '../types'
+import type { ColorCategory, ColorChannel } from '../types'
 import { ColorCard } from './ColorCard'
 
 interface ApplicationColorsProps {
   selectedChannel: ColorChannel
-  onColorClick: (colorName: string, type: string, data?: any) => void
+  onColorClick: (colorName: string, type: ColorCategory, data?: any) => void
   onCopy: (value: string) => void
   copiedColor: string | null
 }
@@ -30,7 +30,7 @@ export const ApplicationColors: React.FC<ApplicationColorsProps> = ({
       <div className="text-sm text-muted mb-4">
         Brand and accent colors for primary interactions and key UI elements
       </div>
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {Object.entries(application).map(([name, variants]) => (
           <div key={name} className="space-y-3">
@@ -40,11 +40,7 @@ export const ApplicationColors: React.FC<ApplicationColorsProps> = ({
               variants={variants}
               selectedChannel={selectedChannel}
               onClick={() =>
-                onColorClick(
-                  `application-${name}`,
-                  'application',
-                  variants,
-                )
+                onColorClick(`application-${name}`, 'application', variants)
               }
               onCopy={onCopy}
               copiedColor={copiedColor}

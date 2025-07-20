@@ -1,7 +1,12 @@
 import { colorPalette, kawaiiColorSystem } from '@pastel-palette/colors'
 import * as React from 'react'
 
-import type { ColorChannel, ColorVariant, SortOrder } from '../types'
+import type {
+  ColorCategory,
+  ColorChannel,
+  ColorVariant,
+  SortOrder,
+} from '../types'
 import { parseOKLCH } from '../utils/colorUtils'
 import { ColorCard } from './ColorCard'
 
@@ -9,7 +14,7 @@ interface RegularColorsProps {
   selectedVariant: ColorVariant
   sortOrder: SortOrder
   selectedChannel: ColorChannel
-  onColorClick: (colorName: string, type: string, data?: any) => void
+  onColorClick: (colorName: string, type: ColorCategory, data?: any) => void
   onCopy: (value: string) => void
   copiedColor: string | null
 }

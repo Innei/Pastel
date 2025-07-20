@@ -6,8 +6,18 @@ import { ApplicationColors } from './components/ApplicationColors'
 import { MaterialColors } from './components/MaterialColors'
 import { RegularColors } from './components/RegularColors'
 import { SemanticColors } from './components/SemanticColors'
-import type { ColorCategory, ColorChannel,ColorVariant, SortOrder } from './types'
-import { colorChannelOptions,colorSections, colorVariantOptions, sortOptions } from './utils/constants'
+import type {
+  ColorCategory,
+  ColorChannel,
+  ColorVariant,
+  SortOrder,
+} from './types'
+import {
+  colorChannelOptions,
+  colorSections,
+  colorVariantOptions,
+  sortOptions,
+} from './utils/constants'
 
 type ColorModalState = {
   name: string
@@ -16,14 +26,20 @@ type ColorModalState = {
 } | null
 
 export function ColorGrid() {
-  const [selectedCategory, setSelectedCategory] = useState<ColorCategory>('regular')
-  const [selectedVariant, setSelectedVariant] = useState<ColorVariant>('regular')
+  const [selectedCategory, setSelectedCategory] =
+    useState<ColorCategory>('regular')
+  const [selectedVariant, setSelectedVariant] =
+    useState<ColorVariant>('regular')
   const [sortOrder, setSortOrder] = useState<SortOrder>('default')
   const [selectedChannel, setSelectedChannel] = useState<ColorChannel>('oklch')
   const [modalColor, setModalColor] = useState<ColorModalState>(null)
   const [copiedColor, setCopiedColor] = useState<string | null>(null)
 
-  const handleColorClick = (colorName: string, type: ColorCategory = 'regular', data?: any) => {
+  const handleColorClick = (
+    colorName: string,
+    type: ColorCategory = 'regular',
+    data?: any,
+  ) => {
     setModalColor({ name: colorName, type, data })
   }
 
@@ -103,6 +119,7 @@ export function ColorGrid() {
         <nav className="flex space-x-8">
           {colorSections.map((section) => (
             <button
+              type="button"
               key={section.id}
               onClick={() => {
                 setSelectedCategory(section.id)
@@ -129,7 +146,10 @@ export function ColorGrid() {
               {colorSections.find((s) => s.id === selectedCategory)?.title}
             </h3>
             <p className="text-text-secondary">
-              {colorSections.find((s) => s.id === selectedCategory)?.description}
+              {
+                colorSections.find((s) => s.id === selectedCategory)
+                  ?.description
+              }
             </p>
           </div>
 
@@ -145,7 +165,9 @@ export function ColorGrid() {
                   <Dropdown
                     options={colorVariantOptions}
                     value={selectedVariant}
-                    onChange={(value) => setSelectedVariant(value as ColorVariant)}
+                    onChange={(value) =>
+                      setSelectedVariant(value as ColorVariant)
+                    }
                     placeholder="Select color variant"
                   />
                 </div>

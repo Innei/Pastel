@@ -1,13 +1,13 @@
 import { kawaiiColorSystem } from '@pastel-palette/colors'
-import { Eye,Square, Type } from 'lucide-react'
+import { Eye, Square, Type } from 'lucide-react'
 import * as React from 'react'
 
-import type { ColorChannel } from '../types'
+import type { ColorCategory, ColorChannel } from '../types'
 import { ColorCard } from './ColorCard'
 
 interface SemanticColorsProps {
   selectedChannel: ColorChannel
-  onColorClick: (colorName: string, type: string, data?: any) => void
+  onColorClick: (colorName: string, type: ColorCategory, data?: any) => void
   onCopy: (value: string) => void
   copiedColor: string | null
 }
@@ -47,7 +47,9 @@ export const SemanticColors: React.FC<SemanticColorsProps> = ({
               colorName={`background-${level}`}
               variants={variants}
               selectedChannel={selectedChannel}
-              onClick={() => onColorClick(`background-${level}`, 'semantic', variants)}
+              onClick={() =>
+                onColorClick(`background-${level}`, 'semantic', variants)
+              }
               onCopy={onCopy}
               copiedColor={copiedColor}
               labelContent={renderColorLabel(level)}
@@ -78,7 +80,9 @@ export const SemanticColors: React.FC<SemanticColorsProps> = ({
                     onCopy={onCopy}
                     copiedColor={copiedColor}
                     aspectRatio="aspect-[4/3]"
-                    labelContent={type.includes('text') ? renderTextLabel() : null}
+                    labelContent={
+                      type.includes('text') ? renderTextLabel() : null
+                    }
                   />
                 ) : (
                   Object.entries(variants).map(([level, colorVariants]) => (
@@ -87,7 +91,13 @@ export const SemanticColors: React.FC<SemanticColorsProps> = ({
                       colorName={`${type}-${level}`}
                       variants={colorVariants}
                       selectedChannel={selectedChannel}
-                      onClick={() => onColorClick(`${type}-${level}`, 'semantic', colorVariants)}
+                      onClick={() =>
+                        onColorClick(
+                          `${type}-${level}`,
+                          'semantic',
+                          colorVariants,
+                        )
+                      }
                       onCopy={onCopy}
                       copiedColor={copiedColor}
                       aspectRatio="aspect-[4/3]"
@@ -114,7 +124,9 @@ export const SemanticColors: React.FC<SemanticColorsProps> = ({
               colorName={`fill-${level}`}
               variants={variants}
               selectedChannel={selectedChannel}
-              onClick={() => onColorClick(`fill-${level}`, 'semantic', variants)}
+              onClick={() =>
+                onColorClick(`fill-${level}`, 'semantic', variants)
+              }
               onCopy={onCopy}
               copiedColor={copiedColor}
               labelContent={renderColorLabel(level)}

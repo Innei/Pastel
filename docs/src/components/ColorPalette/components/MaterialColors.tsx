@@ -1,12 +1,12 @@
 import { kawaiiColorSystem } from '@pastel-palette/colors'
 import * as React from 'react'
 
-import type { ColorChannel } from '../types'
+import type { ColorCategory, ColorChannel } from '../types'
 import { ColorCard } from './ColorCard'
 
 interface MaterialColorsProps {
   selectedChannel: ColorChannel
-  onColorClick: (colorName: string, type: string, data?: any) => void
+  onColorClick: (colorName: string, type: ColorCategory, data?: any) => void
   onCopy: (value: string) => void
   copiedColor: string | null
 }
@@ -28,9 +28,10 @@ export const MaterialColors: React.FC<MaterialColorsProps> = ({
   return (
     <div className="space-y-4">
       <div className="text-sm text-muted mb-4">
-        Material colors provide different levels of transparency for glass-morphism effects
+        Material colors provide different levels of transparency for
+        glass-morphism effects
       </div>
-      
+
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
         {Object.entries(material).map(([level, variants]) => (
           <ColorCard
@@ -38,18 +39,22 @@ export const MaterialColors: React.FC<MaterialColorsProps> = ({
             colorName={`material-${level}`}
             variants={variants}
             selectedChannel={selectedChannel}
-            onClick={() => onColorClick(`material-${level}`, 'material', variants)}
+            onClick={() =>
+              onColorClick(`material-${level}`, 'material', variants)
+            }
             onCopy={onCopy}
             copiedColor={copiedColor}
             labelContent={
               <div className="relative w-full h-full">
                 {/* Background pattern to show transparency */}
                 <div className="absolute inset-0 bg-gradient-to-br from-pink-200 to-blue-200" />
-                
+
                 {/* The actual material color overlay */}
-                <div className="absolute inset-0 backdrop-blur-sm" 
-                     style={{ backgroundColor: variants.light.srgb }} />
-                
+                <div
+                  className="absolute inset-0 backdrop-blur-sm"
+                  style={{ backgroundColor: variants.light.srgb }}
+                />
+
                 {/* Label */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   {renderLevelLabel(level)}
