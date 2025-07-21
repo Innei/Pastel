@@ -1,11 +1,11 @@
-# @color-system/colors
+# @pastel-palette/colors
 
 Core color definitions package for the UI Color System, featuring OKLCH color space support, TypeScript types, and a kawaii aesthetic.
 
 ## Installation
 
 ```bash
-npm install @color-system/colors
+npm install @pastel-palette/colors
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ npm install @color-system/colors
 ### Basic Usage
 
 ```typescript
-import { colorSystem } from '@color-system/colors';
+import { colorSystem } from '@pastel-palette/colors';
 
 // Access regular colors
 const blueLight = colorSystem.regular.blue.light;
@@ -34,7 +34,7 @@ import type {
   ColorVariants, 
   SemanticColor,
   DepthLevel 
-} from '@color-system/colors';
+} from '@pastel-palette/colors';
 
 // Color value with multiple formats
 interface ColorValue {
@@ -61,7 +61,7 @@ import {
   formatOKLCH,
   validateColor,
   calculateContrastRatio 
-} from '@color-system/colors';
+} from '@pastel-palette/colors';
 
 // Parse OKLCH color strings
 const oklch = parseOKLCH('oklch(0.85 0.12 237)');
@@ -150,7 +150,7 @@ Brand colors for your application:
 ### Custom Color Validation
 
 ```typescript
-import { validateColor } from '@color-system/colors';
+import { validateColor } from '@pastel-palette/colors';
 
 function validateThemeColors(colors: string[]) {
   return colors.map(color => {
@@ -169,7 +169,7 @@ function validateThemeColors(colors: string[]) {
 ### Accessibility Checking
 
 ```typescript
-import { calculateContrastRatio, parseRGB } from '@color-system/colors';
+import { calculateContrastRatio, parseRGB } from '@pastel-palette/colors';
 
 function checkTextContrast(textColor: string, bgColor: string) {
   const text = parseRGB(textColor);
@@ -198,16 +198,16 @@ The package provides multiple export paths:
 
 ```typescript
 // Main exports
-import { colorSystem, colorPalette } from '@color-system/colors';
+import { colorSystem, colorPalette } from '@pastel-palette/colors';
 
 // Type definitions
-import type { ColorValue, ColorVariants } from '@color-system/colors/types';
+import type { ColorValue, ColorVariants } from '@pastel-palette/colors/types';
 
 // Utilities only
-import { parseOKLCH, validateColor } from '@color-system/colors/utils';
+import { parseOKLCH, validateColor } from '@pastel-palette/colors/utils';
 
 // Color palette info
-import { colorPalette } from '@color-system/colors/palette';
+import { colorPalette } from '@pastel-palette/colors/palette';
 ```
 
 ## Development

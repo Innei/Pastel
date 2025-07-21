@@ -154,7 +154,7 @@ Opacity-based materials:
 Follows the operating system's color scheme preference.
 
 ```css
-@import "@color-system/tailwindcss/dist/theme.css";
+@import "@pastel-palette/tailwindcss/dist/theme.css";
 ```
 
 ### 2. Class-based

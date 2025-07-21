@@ -73,7 +73,7 @@ docs/
 
    ```json
    {
-     "name": "@color-system/docs",
+     "name": "@pastel-palette/docs",
      "version": "0.1.0",
      "private": true,
      "type": "module",
@@ -84,8 +84,8 @@ docs/
        "typecheck": "tsc --noEmit"
      },
      "dependencies": {
-       "@color-system/colors": "workspace:*",
-       "@color-system/tailwindcss-colors": "workspace:*",
+       "@pastel-palette/colors": "workspace:*",
+       "@pastel-palette/tailwindcss-colors": "workspace:*",
        "react": "^18.3.1",
        "react-dom": "^18.3.1",
        "clsx": "^2.1.1"
@@ -117,13 +117,13 @@ docs/
 4. **Global Styles** (`src/styles/globals.css`)
    
    Note: TailwindCSS v4 不再使用 JavaScript 配置文件，配置通过 CSS 直接处理。
-   我们的 `@color-system/tailwindcss-colors/dist/theme.css` 已经包含了所有 @theme 定义。
+   我们的 `@pastel-palette/tailwindcss-colors/dist/theme.css` 已经包含了所有 @theme 定义。
 
    ```css
    @import 'tailwindcss';
    
    /* Import our color system with all @theme definitions */
-   @import '@color-system/tailwindcss-colors/dist/theme.css';
+   @import '@pastel-palette/tailwindcss-colors/dist/theme.css';
 
    /* Geist-inspired base styles */
    :root {
@@ -143,7 +143,7 @@ docs/
 5. **Color Grid Component** (`src/components/ColorPalette/ColorGrid.tsx`)
 
    ```tsx
-   import { colorPalette } from '@color-system/colors'
+   import { colorPalette } from '@pastel-palette/colors'
    import ColorSwatch from './ColorSwatch'
 
    export default function ColorGrid() {
@@ -164,7 +164,7 @@ docs/
    ```typescript
    import { useState } from 'react'
    import { useCopyToClipboard } from '../../hooks/useCopyToClipboard'
-   import type { ColorVariants } from '@color-system/colors'
+   import type { ColorVariants } from '@pastel-palette/colors'
 
    interface Props {
      name: string
@@ -239,7 +239,7 @@ docs/
 
 ### Design System Integration
 
-- Use CSS custom properties from `@color-system/tailwindcss-colors`
+- Use CSS custom properties from `@pastel-palette/tailwindcss-colors`
 - Implement Vercel-style components with:
   - Subtle shadows and borders
   - Smooth transitions
@@ -278,7 +278,7 @@ docs/
 </button>
 
 // Using color directly from imports for custom styling
-import { colorPalette } from '@color-system/colors'
+import { colorPalette } from '@pastel-palette/colors'
 
 <div 
   className="rounded-xl p-6"
