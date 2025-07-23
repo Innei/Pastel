@@ -9,7 +9,10 @@
       "Bash(ls:*)",
       "Bash(npm run build:*)",
       "Bash(node:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(grep:*)",
+      "Bash(npx turbo:*)",
+      "Bash(npx tsx:*)"
     ],
     "deny": []
   }

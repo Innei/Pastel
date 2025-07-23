@@ -247,7 +247,7 @@ export function AlertExamples() {
         </div>
 
         {/* Notification Badges */}
-        <div className="space-y-4">
+        <div className="space-y-4" data-contrast="high">
           <h5 className="heading-4 text-foreground">Notification Badges</h5>
           <div className="flex flex-wrap gap-4 justify-center">
             <div className="relative">

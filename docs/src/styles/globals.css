@@ -1,10 +1,11 @@
 @import 'tailwindcss';
 
 /* Import our color system with all @theme definitions */
-@import '@pastel-palette/tailwindcss/dist/theme-data-attribute-oklch.css';
+@import '@pastel-palette/tailwindcss/dist/theme-oklch.css';
 
 /* Import Geist font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap');
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 /* Font variables */
 :root {
@@ -76,7 +77,6 @@ body {
 
   @apply bg-background text-text;
 }
-
 
 /* Animation utilities */
 @layer utilities {

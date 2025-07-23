@@ -1,4 +1,4 @@
-import { colorPalette, kawaiiColorSystem } from '@pastel-palette/colors'
+import { colorSystem } from '@pastel-palette/colors'
 import * as React from 'react'
 
 import type {
@@ -30,16 +30,16 @@ export const RegularColors: React.FC<RegularColorsProps> = ({
   const getColorsByVariant = () => {
     switch (selectedVariant) {
       case 'regular': {
-        return colorPalette.colors.regular
+        return colorSystem.regular.colors
       }
       case 'high-contrast': {
-        return colorPalette.colors.regularHighContrast
+        return colorSystem['high-contrast'].colors
       }
       case 'kawaii': {
-        return kawaiiColorSystem.regularKawaii
+        return colorSystem.kawaii.colors
       }
       default: {
-        return colorPalette.colors.regular
+        return colorSystem.regular.colors
       }
     }
   }

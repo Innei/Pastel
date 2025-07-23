@@ -1,8 +1,5 @@
-import type {RegularColorName} from '@pastel-palette/colors';
-import {
-  colorPalette,
-  kawaiiColorSystem
-} from '@pastel-palette/colors'
+import type { RegularColorName } from '@pastel-palette/colors'
+import { colorSystem } from '@pastel-palette/colors'
 import { toast } from 'sonner'
 
 import { Modal } from '../ui/Modal'
@@ -93,27 +90,27 @@ export function ColorModal({
     if (colorData) {
       return colorData
     }
-    
+
     // For regular colors, use the original logic
     if (colorType === 'regular') {
       switch (colorVariant) {
         case 'regular': {
-          return colorPalette.colors.regular[colorName as RegularColorName]
+          return colorSystem.regular.colors[colorName as RegularColorName]
         }
         case 'high-contrast': {
-          return colorPalette.colors.regularHighContrast[
+          return colorSystem['high-contrast'].colors[
             colorName as RegularColorName
           ]
         }
         case 'kawaii': {
-          return kawaiiColorSystem.regularKawaii[colorName as RegularColorName]
+          return colorSystem.kawaii.colors[colorName as RegularColorName]
         }
         default: {
-          return colorPalette.colors.regular[colorName as RegularColorName]
+          return colorSystem.regular.colors[colorName as RegularColorName]
         }
       }
     }
-    
+
     // For other color types, return null if no colorData provided
     return null
   }
@@ -135,6 +132,7 @@ export function ColorModal({
         <span className="text-sm font-medium text-text-secondary">{label}</span>
       </div>
       <button
+        type="button"
         onClick={() => handleCopy(value)}
         className="w-full select-all text-left p-3 overflow-x-auto rounded-md border border-border hover:border-border-secondary hover:bg-background-secondary transition-all duration-200"
       >
@@ -147,7 +145,11 @@ export function ColorModal({
 
   return (
     <Modal
-      title={`${colorName.toLocaleUpperCase()} - ${colorType === 'regular' ? colorVariant.replace('-', ' ').toUpperCase() : colorType.toUpperCase()}`}
+      title={`${colorName.toLocaleUpperCase()} - ${
+        colorType === 'regular'
+          ? colorVariant.replace('-', ' ').toUpperCase()
+          : colorType.toUpperCase()
+      }`}
       isOpen={isOpen}
       onClose={onClose}
       size="lg"
@@ -189,67 +191,25 @@ export function ColorModal({
 
           {/* Color Values */}
           <div className="space-y-6">
-            <h3 className="text-sm font-medium text-text-secondary">
-              Color Values
-            </h3>
-
-            {/* Light Variant */}
-            <div>
-              <h4 className="text-sm font-medium text-text-tertiary mb-3">
-                Light Variant
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-3">
-                  {renderColorValue('Solid color', colorVariants.light.srgb)}
-                  {renderColorValue(
-                    'Alpha color',
-                    colorVariants.light.srgb
-                      .replace('rgb(', 'rgba(')
-                      .replace(')', ', 1)'),
-                  )}
-                </div>
-                <div className="space-y-3">
-                  {colorVariants.light.p3 &&
-                    renderColorValue('P3 color', colorVariants.light.p3)}
-                  {colorVariants.light.p3 &&
-                    renderColorValue(
-                      'P3 alpha',
-                      colorVariants.light.p3.replace(/\)$/, ' / 1)'),
-                    )}
-                </div>
-              </div>
-              <div className="pt-2">
+            {/* Light variant */}
+            <div className="space-y-3">
+              <h3 className="text-lg font-semibold">Light Variant</h3>
+              <div className="space-y-2">
                 {renderColorValue('OKLCH', colorVariants.light.oklch)}
+                {renderColorValue('sRGB', colorVariants.light.srgb)}
+                {colorVariants.light.p3 &&
+                  renderColorValue('Display P3', colorVariants.light.p3)}
               </div>
             </div>
 
-            {/* Dark Variant */}
-            <div>
-              <h4 className="text-sm font-medium text-text-tertiary mb-3">
-                Dark Variant
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-3">
-                  {renderColorValue('Solid color', colorVariants.dark.srgb)}
-                  {renderColorValue(
-                    'Alpha color',
-                    colorVariants.dark.srgb
-                      .replace('rgb(', 'rgba(')
-                      .replace(')', ', 1)'),
-                  )}
-                </div>
-                <div className="space-y-3">
-                  {colorVariants.dark.p3 &&
-                    renderColorValue('P3 color', colorVariants.dark.p3)}
-                  {colorVariants.dark.p3 &&
-                    renderColorValue(
-                      'P3 alpha',
-                      colorVariants.dark.p3.replace(/\)$/, ' / 1)'),
-                    )}
-                </div>
-              </div>
-              <div className="pt-2">
+            {/* Dark variant */}
+            <div className="space-y-3">
+              <h3 className="text-lg font-semibold">Dark Variant</h3>
+              <div className="space-y-2">
                 {renderColorValue('OKLCH', colorVariants.dark.oklch)}
+                {renderColorValue('sRGB', colorVariants.dark.srgb)}
+                {colorVariants.dark.p3 &&
+                  renderColorValue('Display P3', colorVariants.dark.p3)}
               </div>
             </div>
           </div>

@@ -1,10 +1,12 @@
-import { kawaiiColorSystem } from '@pastel-palette/colors'
+import { colorSystem } from '@pastel-palette/colors'
+import { useTheme } from 'next-themes'
 import * as React from 'react'
 
-import type { ColorCategory, ColorChannel } from '../types'
+import type { ColorCategory, ColorChannel, ColorVariant } from '../types'
 import { ColorCard } from './ColorCard'
 
 interface MaterialColorsProps {
+  selectedVariant: ColorVariant
   selectedChannel: ColorChannel
   onColorClick: (colorName: string, type: ColorCategory, data?: any) => void
   onCopy: (value: string) => void
@@ -12,12 +14,32 @@ interface MaterialColorsProps {
 }
 
 export const MaterialColors: React.FC<MaterialColorsProps> = ({
+  selectedVariant,
   selectedChannel,
   onColorClick,
   onCopy,
   copiedColor,
 }) => {
-  const { material } = kawaiiColorSystem
+  const getMaterialColors = () => {
+    switch (selectedVariant) {
+      case 'regular': {
+        return colorSystem.regular.material
+      }
+      case 'high-contrast': {
+        return colorSystem['high-contrast'].material
+      }
+      case 'kawaii': {
+        return colorSystem.kawaii.material
+      }
+      default: {
+        return colorSystem.regular.material
+      }
+    }
+  }
+
+  const material = getMaterialColors()
+
+  const isDark = useTheme().theme === 'dark'
 
   const renderLevelLabel = (level: string) => (
     <span className="text-xs font-medium capitalize text-center bg-background/90 px-2 py-1 rounded backdrop-blur-sm">
@@ -47,12 +69,15 @@ export const MaterialColors: React.FC<MaterialColorsProps> = ({
             labelContent={
               <div className="relative w-full h-full">
                 {/* Background pattern to show transparency */}
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-200 to-blue-200" />
+                <div className="absolute inset-0 bg-gradient-to-br from-pink to-blue" />
 
                 {/* The actual material color overlay */}
                 <div
                   className="absolute inset-0 backdrop-blur-sm"
-                  style={{ backgroundColor: variants.light.srgb }}
+                  style={{
+                    backgroundColor:
+                      variants[isDark ? 'dark' : 'light'][selectedChannel],
+                  }}
                 />
 
                 {/* Label */}

@@ -1,4 +1,6 @@
 import type { ColorValidationResult, ContrastRatio,OKLCH, RGB } from './types/utilities';
+import { rgb, oklch, p3 } from 'culori';
+import type { ColorValue } from './types';
 
 export function mapHexToRGBString(hex: string): string {
   const r = Number.parseInt(hex.slice(1, 3), 16);
@@ -131,4 +133,91 @@ export function clamp(value: number, min: number, max: number): number {
 
 export function toFixed(value: number, precision = 3): number {
   return Math.round(value * Math.pow(10, precision)) / Math.pow(10, precision);
+}
+
+/**
+ * Generate color formats from OKLCH string
+ */
+export function createColorFromOKLCH(oklchString: string): ColorValue {
+  // Parse OKLCH string manually to get the raw values
+  const match = oklchString.match(/oklch\(([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)/);
+  if (!match) {
+    throw new Error(`Invalid OKLCH format: ${oklchString}`);
+  }
+
+  const l = Number.parseFloat(match[1]);
+  const c = Number.parseFloat(match[2]);
+  const h = Number.parseFloat(match[3]);
+  const alpha = match[4] ? Number.parseFloat(match[4]) : 1;
+
+  // Create culori OKLCH object with proper mode
+  const oklchColor = { mode: 'oklch' as const, l, c, h, alpha };
+  
+  // Convert to sRGB
+  const srgbColor = rgb(oklchColor);
+  const srgbString = srgbColor ? 
+    `rgb(${Math.max(0, Math.min(255, Math.round(srgbColor.r * 255)))} ${Math.max(0, Math.min(255, Math.round(srgbColor.g * 255)))} ${Math.max(0, Math.min(255, Math.round(srgbColor.b * 255)))})` :
+    'rgb(0 0 0)';
+  
+  // Convert to P3
+  const p3Color = p3(oklchColor);
+  const p3String = p3Color ? 
+    `color(display-p3 ${toFixed(p3Color.r, 3)} ${toFixed(p3Color.g, 3)} ${toFixed(p3Color.b, 3)})` :
+    undefined;
+
+  return {
+    oklch: oklchString,
+    srgb: srgbString,
+    p3: p3String
+  };
+}
+
+/**
+ * Generate color formats from sRGB string
+ */
+export function createColorFromSRGB(srgbString: string): ColorValue {
+  // Parse sRGB string
+  const match = srgbString.match(/rgba?\((\d+)\s+(\d+)\s+(\d+)(?:\s*\/\s*([\d.]+))?\)/);
+  if (!match) {
+    throw new Error(`Invalid sRGB format: ${srgbString}`);
+  }
+
+  const r = Number.parseInt(match[1]) / 255;
+  const g = Number.parseInt(match[2]) / 255;
+  const b = Number.parseInt(match[3]) / 255;
+  const alpha = match[4] ? Number.parseFloat(match[4]) : 1;
+
+  // Create culori RGB object with proper mode
+  const rgbColor = { mode: 'rgb' as const, r, g, b, alpha };
+  
+  // Convert to OKLCH
+  const oklchColor = oklch(rgbColor);
+  const oklchString = oklchColor ? 
+    `oklch(${toFixed(oklchColor.l, 3)} ${toFixed(oklchColor.c, 3)} ${toFixed(oklchColor.h || 0, 0)})` :
+    'oklch(0 0 0)';
+  
+  // Convert to P3
+  const p3Color = p3(rgbColor);
+  const p3String = p3Color ? 
+    `color(display-p3 ${toFixed(p3Color.r, 3)} ${toFixed(p3Color.g, 3)} ${toFixed(p3Color.b, 3)})` :
+    undefined;
+
+  return {
+    oklch: oklchString,
+    srgb: srgbString,
+    p3: p3String
+  };
+}
+
+/**
+ * Create color from either OKLCH or sRGB input
+ */
+export function createColor(input: string): ColorValue {
+  if (input.startsWith('oklch(')) {
+    return createColorFromOKLCH(input);
+  } else if (input.startsWith('rgb')) {
+    return createColorFromSRGB(input);
+  } else {
+    throw new Error(`Unsupported color format: ${input}. Use oklch() or rgb() format.`);
+  }
 }

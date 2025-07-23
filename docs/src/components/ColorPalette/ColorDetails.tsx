@@ -1,5 +1,5 @@
-import type {RegularColorName} from '@pastel-palette/colors';
-import { colorPalette  } from '@pastel-palette/colors'
+import type { RegularColorName } from '@pastel-palette/colors'
+import { colorSystem } from '@pastel-palette/colors'
 
 interface ColorDetailsProps {
   colorName: string
@@ -8,7 +8,7 @@ interface ColorDetailsProps {
 
 export function ColorDetails({ colorName, onCopy }: ColorDetailsProps) {
   const colorVariants =
-    colorPalette.colors.regular[colorName as RegularColorName]
+    colorSystem.regular.colors[colorName as RegularColorName]
 
   if (!colorVariants) return null
 

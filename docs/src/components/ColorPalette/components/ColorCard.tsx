@@ -45,7 +45,11 @@ export const ColorCard: React.FC<ColorCardProps> = ({
 
   return (
     <div className="space-y-2">
-      <button className="w-full text-left group" onClick={onClick}>
+      <button
+        type="button"
+        className="w-full text-left group"
+        onClick={onClick}
+      >
         <div
           className={`${aspectRatio} rounded-md overflow-hidden shadow hover:shadow-xl transition-all group-hover:scale-105 relative border border-border`}
         >
@@ -65,7 +69,7 @@ export const ColorCard: React.FC<ColorCardProps> = ({
               clipPath: 'polygon(0% 0%, 100% 0%, 0% 100%)',
             }}
           />
-          
+
           {/* Custom label content */}
           {labelContent && (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -83,8 +87,9 @@ export const ColorCard: React.FC<ColorCardProps> = ({
               {getColorValue(variants, 'light')}
             </p>
           </div>
-          
+
           <button
+            type="button"
             onClick={() => onCopy(getColorValue(variants, 'light'))}
             className="w-full text-xs text-left hover:text-accent transition-colors"
           >
@@ -94,6 +99,7 @@ export const ColorCard: React.FC<ColorCardProps> = ({
               : getColorValue(variants, 'light')}
           </button>
           <button
+            type="button"
             onClick={() => onCopy(getColorValue(variants, 'dark'))}
             className="w-full text-xs text-left hover:text-accent transition-colors"
           >

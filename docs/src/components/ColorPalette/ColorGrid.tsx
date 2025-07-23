@@ -70,6 +70,7 @@ export function ColorGrid() {
       case 'semantic': {
         return (
           <SemanticColors
+            selectedVariant={selectedVariant}
             selectedChannel={selectedChannel}
             onColorClick={handleColorClick}
             onCopy={handleCopy}
@@ -80,6 +81,7 @@ export function ColorGrid() {
       case 'material': {
         return (
           <MaterialColors
+            selectedVariant={selectedVariant}
             selectedChannel={selectedChannel}
             onColorClick={handleColorClick}
             onCopy={handleCopy}
@@ -90,6 +92,7 @@ export function ColorGrid() {
       case 'application': {
         return (
           <ApplicationColors
+            selectedVariant={selectedVariant}
             selectedChannel={selectedChannel}
             onColorClick={handleColorClick}
             onCopy={handleCopy}
@@ -155,22 +158,29 @@ export function ColorGrid() {
 
           {/* Controls Section */}
           <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-2 min-w-[200px]">
+              <label className="text-sm font-medium text-text-secondary">
+                Color Variant
+              </label>
+              <Dropdown
+                options={colorVariantOptions}
+                value={selectedVariant}
+                onChange={(value) => {
+                  setSelectedVariant(value as ColorVariant)
+
+                  document.documentElement.dataset.contrast =
+                    value === 'high-contrast'
+                      ? 'high'
+                      : value === 'kawaii'
+                      ? 'low'
+                      : ''
+                }}
+                placeholder="Select color variant"
+              />
+            </div>
             {/* Color Variant Selector and Sort Options - Only show for regular colors */}
             {selectedCategory === 'regular' && (
               <>
-                <div className="flex flex-col gap-2 min-w-[200px]">
-                  <label className="text-sm font-medium text-text-secondary">
-                    Color Variant
-                  </label>
-                  <Dropdown
-                    options={colorVariantOptions}
-                    value={selectedVariant}
-                    onChange={(value) =>
-                      setSelectedVariant(value as ColorVariant)
-                    }
-                    placeholder="Select color variant"
-                  />
-                </div>
                 <div className="flex flex-col gap-2 min-w-[200px]">
                   <label className="text-sm font-medium text-text-secondary">
                     Sort Order
@@ -205,17 +215,16 @@ export function ColorGrid() {
       {renderColorContent()}
 
       {/* Color Modal */}
-      {modalColor && (
-        <ColorModal
-          isOpen={!!modalColor}
-          onClose={() => setModalColor(null)}
-          colorName={modalColor.name}
-          colorType={modalColor.type}
-          colorVariant={selectedVariant}
-          colorData={modalColor.data}
-          onCopy={handleCopy}
-        />
-      )}
+
+      <ColorModal
+        isOpen={!!modalColor}
+        onClose={() => setModalColor(null)}
+        colorName={modalColor?.name ?? ''}
+        colorType={modalColor?.type ?? 'regular'}
+        colorVariant={selectedVariant}
+        colorData={modalColor?.data}
+        onCopy={handleCopy}
+      />
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { AnimatePresence,motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import type { ReactNode } from 'react'
 
@@ -40,7 +40,7 @@ export function Modal({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.15, ease: 'easeOut' }}
-                className="fixed inset-0 z-50 bg-material-thick backdrop-blur-sm"
+                className="fixed inset-0 z-50 bg-background-quaternary/20 backdrop-blur-[70px]"
               />
             </Dialog.Overlay>
 
@@ -69,7 +69,10 @@ export function Modal({
                       {title}
                     </Dialog.Title>
                     <Dialog.Close asChild>
-                      <button className="text-text-secondary hover:text-text transition-colors">
+                      <button
+                        type="button"
+                        className="text-text-secondary hover:text-text transition-colors"
+                      >
                         <X className="w-5 h-5" />
                       </button>
                     </Dialog.Close>
@@ -79,7 +82,10 @@ export function Modal({
                 {/* Close button when no title */}
                 {!title && (
                   <Dialog.Close asChild>
-                    <button className="absolute right-4 top-4 z-10 text-text-secondary hover:text-text transition-colors p-1">
+                    <button
+                      type="button"
+                      className="absolute right-4 top-4 z-10 text-text-secondary hover:text-text transition-colors p-1"
+                    >
                       <X className="w-5 h-5" />
                     </button>
                   </Dialog.Close>

@@ -1,10 +1,11 @@
-import { colorPalette } from '@pastel-palette/colors'
+import { colorSystem } from '@pastel-palette/colors'
 import * as React from 'react'
 
-import type { ColorCategory, ColorChannel } from '../types'
+import type { ColorCategory, ColorChannel, ColorVariant } from '../types'
 import { ColorCard } from './ColorCard'
 
 interface ApplicationColorsProps {
+  selectedVariant: ColorVariant
   selectedChannel: ColorChannel
   onColorClick: (colorName: string, type: ColorCategory, data?: any) => void
   onCopy: (value: string) => void
@@ -12,12 +13,30 @@ interface ApplicationColorsProps {
 }
 
 export const ApplicationColors: React.FC<ApplicationColorsProps> = ({
+  selectedVariant,
   selectedChannel,
   onColorClick,
   onCopy,
   copiedColor,
 }) => {
-  const { application } = colorPalette.colors
+  const getApplicationColors = () => {
+    switch (selectedVariant) {
+      case 'regular': {
+        return colorSystem.regular.application
+      }
+      case 'high-contrast': {
+        return colorSystem['high-contrast'].application
+      }
+      case 'kawaii': {
+        return colorSystem.kawaii.application
+      }
+      default: {
+        return colorSystem.regular.application
+      }
+    }
+  }
+
+  const application = getApplicationColors()
 
   const renderSampleButton = () => (
     <span className="text-white font-medium bg-black/20 px-3 py-1 rounded backdrop-blur-sm">

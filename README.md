@@ -12,27 +12,9 @@ A comprehensive kawaii-inspired color system with OKLCH color space support, Typ
 - 💨 **TailwindCSS v4**: CSS-based configuration with @theme directives
 - 📦 **Monorepo Structure**: Modular packages for colors and TailwindCSS integration
 
-## Packages
+## Usage
 
-### [@pastel-palette/colors](./packages/colors)
-
-Core color definitions with TypeScript types and utilities.
-
-```typescript
-import { colorSystem, validateColor } from '@pastel-palette/colors';
-
-// Access color values
-const blueLight = colorSystem.regular.blue.light.oklch;
-// "oklch(0.85 0.12 237)"
-
-// Validate colors
-const result = validateColor('oklch(0.85 0.12 237)');
-// { valid: true, errors: [], warnings: [] }
-```
-
-### [@pastel-palette/tailwindcss](./packages/tailwindcss-colors)
-
-TailwindCSS v4 integration with automatic CSS generation.
+TailwindCSS v4 integration with automatic CSS generation and color variants support.
 
 ```css
 /* Use generated CSS variables in your styles */
@@ -46,11 +28,11 @@ TailwindCSS v4 integration with automatic CSS generation.
 ## Installation
 
 ```bash
-# Install both packages
-npm install @pastel-palette/colors @pastel-palette/tailwindcss
+# Install TailwindCSS integration
+npm install @pastel-palette/tailwindcss
 
 # Or using pnpm
-pnpm add @pastel-palette/colors @pastel-palette/tailwindcss
+pnpm add @pastel-palette/tailwindcss
 ```
 
 ## Usage
@@ -60,16 +42,16 @@ pnpm add @pastel-palette/colors @pastel-palette/tailwindcss
 1. Import the generated theme CSS in your main CSS file:
 
 ```css
-/* Choose your dark mode strategy */
+/* Choose your color space - all include unified kawaii and high-contrast support */
 
-/* Option 1: Media query (follows OS preference) */
-@import "@pastel-palette/tailwindcss/dist/theme.css";
+/* OKLCH color space (recommended) */
+@import '@pastel-palette/tailwindcss/dist/theme-oklch.css';
 
-/* Option 2: Class-based (.dark class) */
-@import "@pastel-palette/tailwindcss/dist/theme-class.css";
+/* sRGB color space (fallback) */
+@import '@pastel-palette/tailwindcss/dist/theme-srgb.css';
 
-/* Option 3: Data attribute (html[data-theme="dark"]) */
-@import "@pastel-palette/tailwindcss/dist/theme-data-attribute.css";
+/* P3 Display color space (wide gamut) */
+@import '@pastel-palette/tailwindcss/dist/theme-p3.css';
 ```
 
 2. Use the color variables in your TailwindCSS config or CSS:
@@ -87,39 +69,62 @@ pnpm add @pastel-palette/colors @pastel-palette/tailwindcss
 }
 ```
 
-### TypeScript API
+### Color Variants Usage
 
-```typescript
-import { 
-  colorSystem, 
-  parseOKLCH, 
-  calculateContrastRatio 
-} from '@pastel-palette/colors';
+The color system now supports three variants: **regular**, **kawaii**, and **high-contrast**. You can use them in two ways:
 
-// Access semantic colors with depth
-const primaryText = colorSystem.element.text.primary;
-const secondaryBackground = colorSystem.background.secondary;
+#### Method 1: Data Attributes (Responsive Override)
 
-// Parse OKLCH strings
-const oklch = parseOKLCH('oklch(0.85 0.12 237)');
-// { l: 0.85, c: 0.12, h: 237, a: 1 }
+Use data attributes to apply color variants that automatically switch between light and dark modes:
 
-// Check contrast ratios
-const textRgb = parseRGB(colorSystem.element.text.primary.light.srgb);
-const bgRgb = parseRGB(colorSystem.background.primary.light.srgb);
-const contrast = calculateContrastRatio(textRgb!, bgRgb!);
-// { ratio: 12.5, passes: { aa: true, aaa: true, ... } }
+```html
+<!-- Kawaii mode -->
+<html data-contrast="low">
+  <div class="bg-background text-text">Kawaii colors with auto dark mode</div>
+</html>
+
+<!-- High contrast mode -->
+<html data-contrast="high">
+  <div class="bg-background text-text">
+    High contrast colors with auto dark mode
+  </div>
+</html>
 ```
+
+#### Method 2: Fixed Color Classes (Static Colors)
+
+Use suffixed classes for colors that don't respond to dark mode changes:
+
+```html
+<!-- Always use kawaii colors (fixed) -->
+<div class="bg-background-kawaii text-text-kawaii">
+  Always kawaii, regardless of dark mode
+</div>
+
+<!-- Always use high contrast colors (fixed) -->
+<div class="bg-background-hc text-text-hc">
+  Always high contrast, regardless of dark mode
+</div>
+
+<!-- Specific light/dark variants -->
+<div class="bg-background-light text-text-dark">
+  Mixed light background with dark text
+</div>
+```
+
 
 ## Color Categories
 
 ### Regular Colors
+
 - `blue`, `pink`, `purple`, `green`, `orange`, `yellow`
 - `sky`, `red`, `brown`, `gray`, `neutral`, `black`, `white`
+- Available in three variants: **regular** (default), **kawaii** (softer), **high-contrast** (more accessible)
 
 ### Semantic Colors
 
 #### Element Colors
+
 - `text` - Primary text colors with depth levels
 - `placeholderText` - Form placeholder text
 - `border` - Border colors with primary/secondary variants
@@ -129,13 +134,17 @@ const contrast = calculateContrastRatio(textRgb!, bgRgb!);
 - `disabledText` - Disabled text elements
 
 #### Background Colors
+
 Depth levels: `primary`, `secondary`, `tertiary`, `quaternary`, `quinary`
 
 #### Fill Colors
+
 System fills with depth levels for UI components
 
 #### Material Colors
+
 Opacity-based materials:
+
 - `ultraThick` (93% opacity)
 - `thick` (85% opacity)
 - `medium` (72% opacity)
@@ -144,77 +153,102 @@ Opacity-based materials:
 - `opaque` (100% opacity)
 
 #### Application Colors
+
 - `accent` - Main accent color
 - `primary` - Primary brand color
 - `secondary` - Secondary brand color
 
-## Dark Mode Strategies
+## Dark Mode & Color Variants
 
-### 1. Media Query (Default)
-Follows the operating system's color scheme preference.
+The unified theme system automatically handles dark mode via TailwindCSS v4's built-in dark mode support. All color variants (regular, kawaii, high-contrast) work seamlessly with dark mode.
 
-```css
-@import "@pastel-palette/tailwindcss/dist/theme.css";
-```
+### Dark Mode Activation
 
-### 2. Class-based
-Toggle dark mode using a `.dark` class on any parent element.
+Dark mode is activated using TailwindCSS v4's standard approach:
 
 ```html
+<!-- Automatic (follows OS preference) -->
+<html>
+  <body class="dark:bg-background-dark">
+    Content
+  </body>
+</html>
+
+<!-- Manual toggle with class -->
 <html class="dark">
-  <!-- Dark mode active -->
+  <body class="bg-background">
+    Content automatically uses dark colors
+  </body>
 </html>
 ```
 
-### 3. Data Attribute
-Control dark mode via data attributes for more flexibility.
+### Color Variant Control
+
+Control color variants independently of dark mode:
 
 ```html
-<html data-theme="dark">
-  <!-- Dark mode active -->
+<!-- Kawaii colors with automatic dark mode -->
+<html data-contrast="low">
+  <body class="bg-background text-text">
+    Kawaii colors, dark mode follows OS
+  </body>
 </html>
-```
 
-## Building from Source
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/pastel-palette.git
-cd pastel-palette
-
-# Install dependencies
-pnpm install
-
-# Build all packages
-pnpm -r build
-
-# Or build individually
-cd packages/colors && npm run build:tsc
-cd packages/tailwindcss-colors && npm run build
+<!-- High contrast colors with manual dark mode -->
+<html data-contrast="high" class="dark">
+  <body class="bg-background text-text">
+    High contrast + dark mode
+  </body>
+</html>
 ```
 
 ## Development
 
 ```bash
-# Run TypeScript checks
-cd packages/colors && npx tsc --noEmit
+# Clone the repository
+git clone https://github.com/Innei/pastel.git
+cd pastel
+
+# Install dependencies
+pnpm install
 
 # Regenerate TailwindCSS themes
-cd packages/tailwindcss-colors && npm run build
+cd packages/tailwindcss-colors && pnpm build
 ```
 
 ## Color Philosophy
 
 The pastel palette aesthetic emphasizes:
+
 - **High lightness values** (0.7-0.95 in OKLCH)
 - **Moderate chroma** (0.08-0.18) for soft appearance
 - **Harmonious pastels** that work well together
 - **Gentle contrasts** while maintaining accessibility
 
+### Color Variant Characteristics
+
+#### Regular Colors (Default)
+
+- Balanced lightness and chroma for general use
+- WCAG AA compliant contrast ratios
+- Suitable for most UI applications
+
+#### Kawaii Colors (`-kawaii`)
+
+- **Higher lightness values** (0.82-0.9 in OKLCH)
+- **Lower chroma** (0.08-0.14) for extra softness
+- Ultra-cute aesthetic with pastel softness
+- Perfect for kawaii/cute themed applications
+
+#### High Contrast Colors (`-hc`)
+
+- **Lower lightness values** (0.4-0.6 in OKLCH)
+- **Higher chroma** (0.2-0.3) for vivid appearance
+- WCAG AAA compliant contrast ratios
+- Enhanced accessibility for visually impaired users
+
 ## License
 
-MIT
+2025 © Innei, Released under the MIT License.
 
-## Credits
-
-Inspired by kawaii aesthetics and modern color spaces like OKLCH.
+> [Personal Website](https://innei.in/) · GitHub [@Innei](https://github.com/innei/)

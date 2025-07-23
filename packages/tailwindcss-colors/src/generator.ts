@@ -2,29 +2,18 @@ import type {
   ColorFormat,
   ColorSystem,
   ColorVariants,
-  DarkModeConfig,
   GeneratorConfig,
   MaterialColor,
   SemanticColor,
+  ThemeColorSystem,
 } from '@pastel-palette/colors'
 
 export function generateColorVariable(name: string, value: string): string {
   return `--color-${name}: ${value}`
 }
 
-export function generateThemeVariable(
-  name: string,
-  hasAlpha = false,
-  colorSpace: ColorFormat = 'srgb',
-): string {
-  if (colorSpace === 'oklch') {
-    return `--color-${name}: oklch(var(--color-${name}))`
-  } else if (colorSpace === 'p3') {
-    return `--color-${name}: color(display-p3 var(--color-${name}))`
-  } else {
-    const func = hasAlpha ? 'rgba' : 'rgb'
-    return `--color-${name}: ${func}(var(--color-${name}))`
-  }
+export function generateThemeVariable(name: string, value: string): string {
+  return `--color-${name}: ${value}`
 }
 
 function extractColorValues(
@@ -59,6 +48,7 @@ function extractColorValues(
   return colorString
 }
 
+// Deprecated: keeping for compatibility
 export function generateColorVariables(
   colors: ColorSystem,
   mode: 'light' | 'dark',
@@ -77,7 +67,8 @@ export function generateColorVariables(
     }
   }
 
-  for (const [colorName, variants] of Object.entries(colors.regular)) {
+  // Regular colors
+  for (const [colorName, variants] of Object.entries(colors.regular.colors)) {
     const colorValue = (variants as ColorVariants)[mode]
     const colorString = getColorString(colorValue)
     lines.push(
@@ -90,7 +81,7 @@ export function generateColorVariables(
 
   // High contrast regular colors
   for (const [colorName, variants] of Object.entries(
-    colors.regularHighContrast,
+    colors['high-contrast'].colors,
   )) {
     const colorValue = (variants as ColorVariants)[mode]
     const colorString = getColorString(colorValue)
@@ -103,8 +94,8 @@ export function generateColorVariables(
   }
 
   // Kawaii regular colors
-  if (colors.regularKawaii) {
-    for (const [colorName, variants] of Object.entries(colors.regularKawaii)) {
+  if (colors.kawaii) {
+    for (const [colorName, variants] of Object.entries(colors.kawaii.colors)) {
       const colorValue = (variants as ColorVariants)[mode]
       const colorString = getColorString(colorValue)
       lines.push(
@@ -116,7 +107,10 @@ export function generateColorVariables(
     }
   }
 
-  for (const [colorName, depthColors] of Object.entries(colors.element)) {
+  // Use regular theme for semantic colors (element, background, fill, material, application)
+  const regularTheme = colors.regular
+
+  for (const [colorName, depthColors] of Object.entries(regularTheme.element)) {
     for (const [depth, variants] of Object.entries(
       depthColors as SemanticColor,
     )) {
@@ -132,7 +126,7 @@ export function generateColorVariables(
     }
   }
 
-  for (const [depth, variants] of Object.entries(colors.background)) {
+  for (const [depth, variants] of Object.entries(regularTheme.background)) {
     const colorValue = (variants as ColorVariants)[mode]
     const varName = depth === 'primary' ? 'background' : `background-${depth}`
     const colorString = getColorString(colorValue)
@@ -144,7 +138,7 @@ export function generateColorVariables(
     )
   }
 
-  for (const [depth, variants] of Object.entries(colors.fill)) {
+  for (const [depth, variants] of Object.entries(regularTheme.fill)) {
     const colorValue = (variants as ColorVariants)[mode]
     const varName = depth === 'primary' ? 'fill' : `fill-${depth}`
     const colorString = getColorString(colorValue)
@@ -156,7 +150,9 @@ export function generateColorVariables(
     )
   }
 
-  for (const [opacity, materialColor] of Object.entries(colors.material)) {
+  for (const [opacity, materialColor] of Object.entries(
+    regularTheme.material,
+  )) {
     const colorValue = (materialColor as MaterialColor)[mode]
     const varName = `material-${opacity.toLowerCase()}`
     const colorString = getColorString(colorValue)
@@ -168,7 +164,9 @@ export function generateColorVariables(
     )
   }
 
-  for (const [colorName, variants] of Object.entries(colors.application)) {
+  for (const [colorName, variants] of Object.entries(
+    regularTheme.application,
+  )) {
     const colorValue = (variants as ColorVariants)[mode]
     const colorString = getColorString(colorValue)
     lines.push(
@@ -182,174 +180,317 @@ export function generateColorVariables(
   return lines.join(';\n    ')
 }
 
-export function generateThemeVariables(
+export function generateUnifiedThemeColorVariables(
   colors: ColorSystem,
   colorSpace: ColorFormat = 'srgb',
-): string {
-  const lines: string[] = []
+): {
+  lightModeDefaults: string
+  allVariants: string
+  darkOverrides: string
+  kawaiiOverrides: string
+  kawaiiDarkOverrides: string
+  hcOverrides: string
+  hcDarkOverrides: string
+} {
+  const lightModeLines: string[] = []
+  const allVariantLines: string[] = []
+  const darkOverrideLines: string[] = []
+  const kawaiiOverrideLines: string[] = []
+  const kawaiiDarkOverrideLines: string[] = []
+  const hcOverrideLines: string[] = []
+  const hcDarkOverrideLines: string[] = []
 
-  // Regular colors
-  for (const colorName of Object.keys(colors.regular)) {
-    lines.push(generateThemeVariable(colorName, false, colorSpace))
-    lines.push(generateThemeVariable(`${colorName}-light`, false, colorSpace))
-    lines.push(generateThemeVariable(`${colorName}-dark`, false, colorSpace))
+  function getColorString(colorValue: any): string {
+    if (colorSpace === 'oklch') {
+      return colorValue.oklch || colorValue.srgb || ''
+    } else if (colorSpace === 'p3') {
+      return colorValue.p3 || colorValue.srgb || ''
+    } else {
+      return colorValue.srgb || ''
+    }
   }
 
-  // High contrast regular colors
-  for (const colorName of Object.keys(colors.regularHighContrast)) {
-    lines.push(generateThemeVariable(`${colorName}-hc`, false, colorSpace))
-    lines.push(
-      generateThemeVariable(`${colorName}-hc-light`, false, colorSpace),
+  function processColorGroup(
+    regularGroup: any,
+    hcGroup: any,
+    kawaiiGroup: any,
+    baseName: string,
+  ) {
+    const regularVariants = regularGroup[baseName] as ColorVariants
+    const hcVariants = hcGroup[baseName] as ColorVariants
+    const kawaiiVariants = kawaiiGroup
+      ? (kawaiiGroup[baseName] as ColorVariants)
+      : null
+
+    if (!regularVariants) return
+
+    const regularLight = getColorString(regularVariants.light)
+    const regularDark = getColorString(regularVariants.dark)
+    const hcLight = getColorString(hcVariants.light)
+    const hcDark = getColorString(hcVariants.dark)
+    const kawaiiLight = kawaiiVariants
+      ? getColorString(kawaiiVariants.light)
+      : null
+    const kawaiiDark = kawaiiVariants
+      ? getColorString(kawaiiVariants.dark)
+      : null
+
+    // Light mode default (regular light)
+    lightModeLines.push(generateThemeVariable(baseName, regularLight))
+
+    // All variants with suffixes
+    allVariantLines.push(
+      generateThemeVariable(`${baseName}-light`, regularLight),
     )
-    lines.push(generateThemeVariable(`${colorName}-hc-dark`, false, colorSpace))
+    allVariantLines.push(generateThemeVariable(`${baseName}-dark`, regularDark))
+    allVariantLines.push(generateThemeVariable(`${baseName}-hc`, hcLight))
+    if (kawaiiLight) {
+      allVariantLines.push(
+        generateThemeVariable(`${baseName}-kawaii`, kawaiiLight),
+      )
+    }
+
+    // Dark mode overrides
+    darkOverrideLines.push(generateThemeVariable(baseName, regularDark))
+
+    // Kawaii overrides
+    if (kawaiiLight && kawaiiDark) {
+      kawaiiOverrideLines.push(generateThemeVariable(baseName, kawaiiLight))
+      kawaiiDarkOverrideLines.push(generateThemeVariable(baseName, kawaiiDark))
+    }
+
+    // High contrast overrides
+    hcOverrideLines.push(generateThemeVariable(baseName, hcLight))
+    hcDarkOverrideLines.push(generateThemeVariable(baseName, hcDark))
   }
 
-  // Kawaii regular colors
-  if (colors.regularKawaii) {
-    for (const colorName of Object.keys(colors.regularKawaii)) {
-      lines.push(
-        generateThemeVariable(`${colorName}-kawaii`, false, colorSpace),
-      )
-      lines.push(
-        generateThemeVariable(`${colorName}-kawaii-light`, false, colorSpace),
-      )
-      lines.push(
-        generateThemeVariable(`${colorName}-kawaii-dark`, false, colorSpace),
-      )
+  // Process regular colors
+  for (const colorName of Object.keys(colors.regular.colors)) {
+    processColorGroup(
+      colors.regular.colors,
+      colors['high-contrast'].colors,
+      colors.kawaii.colors,
+      colorName,
+    )
+  }
+
+  // Process semantic colors (element, background, fill, material, application)
+  function processSemanticColors(
+    regularSemantic: any,
+    kawaiisemantic: any,
+    hcSemantic: any,
+    groupName: string,
+  ) {
+    for (const [key, variants] of Object.entries(regularSemantic)) {
+      let varName: string
+      switch (groupName) {
+        case 'element': {
+          varName = key === 'primary' ? key : `${key}`
+          break
+        }
+        case 'background': {
+          varName = key === 'primary' ? 'background' : `background-${key}`
+          break
+        }
+        case 'fill': {
+          varName = key === 'primary' ? 'fill' : `fill-${key}`
+          break
+        }
+        case 'material': {
+          varName = `material-${key.toLowerCase()}`
+          break
+        }
+        default: {
+          varName = key
+        }
+      }
+
+      if (groupName === 'element') {
+        // Element colors have depth structure
+        for (const [depth, depthVariants] of Object.entries(
+          variants as SemanticColor,
+        )) {
+          const depthVarName =
+            depth === 'primary' ? varName : `${varName}-${depth}`
+
+          const regularLight = getColorString(
+            (depthVariants as ColorVariants).light,
+          )
+          const regularDark = getColorString(
+            (depthVariants as ColorVariants).dark,
+          )
+
+          // For semantic colors, we use the same values across themes for now
+          // but you could extend this to use theme-specific semantic colors
+          const kawaiiLight = kawaiisemantic?.[key]?.[depth]
+            ? getColorString(kawaiisemantic[key][depth].light)
+            : regularLight
+          const kawaiiDark = kawaiisemantic?.[key]?.[depth]
+            ? getColorString(kawaiisemantic[key][depth].dark)
+            : regularDark
+          const hcLight = hcSemantic?.[key]?.[depth]
+            ? getColorString(hcSemantic[key][depth].light)
+            : regularLight
+          const hcDark = hcSemantic?.[key]?.[depth]
+            ? getColorString(hcSemantic[key][depth].dark)
+            : regularDark
+
+          lightModeLines.push(generateThemeVariable(depthVarName, regularLight))
+          allVariantLines.push(
+            generateThemeVariable(`${depthVarName}-light`, regularLight),
+          )
+          allVariantLines.push(
+            generateThemeVariable(`${depthVarName}-dark`, regularDark),
+          )
+          darkOverrideLines.push(
+            generateThemeVariable(depthVarName, regularDark),
+          )
+
+          kawaiiOverrideLines.push(
+            generateThemeVariable(depthVarName, kawaiiLight),
+          )
+          kawaiiDarkOverrideLines.push(
+            generateThemeVariable(depthVarName, kawaiiDark),
+          )
+          hcOverrideLines.push(generateThemeVariable(depthVarName, hcLight))
+          hcDarkOverrideLines.push(generateThemeVariable(depthVarName, hcDark))
+        }
+      } else {
+        // Other semantic colors have direct variants
+        const regularLight = getColorString((variants as ColorVariants).light)
+        const regularDark = getColorString((variants as ColorVariants).dark)
+
+        const kawaiiLight = kawaiisemantic?.[key]
+          ? getColorString(kawaiisemantic[key].light)
+          : regularLight
+        const kawaiiDark = kawaiisemantic?.[key]
+          ? getColorString(kawaiisemantic[key].dark)
+          : regularDark
+        const hcLight = hcSemantic?.[key]
+          ? getColorString(hcSemantic[key].light)
+          : regularLight
+        const hcDark = hcSemantic?.[key]
+          ? getColorString(hcSemantic[key].dark)
+          : regularDark
+
+        lightModeLines.push(generateThemeVariable(varName, regularLight))
+        allVariantLines.push(
+          generateThemeVariable(`${varName}-light`, regularLight),
+        )
+        allVariantLines.push(
+          generateThemeVariable(`${varName}-dark`, regularDark),
+        )
+        darkOverrideLines.push(generateThemeVariable(varName, regularDark))
+
+        kawaiiOverrideLines.push(generateThemeVariable(varName, kawaiiLight))
+        kawaiiDarkOverrideLines.push(generateThemeVariable(varName, kawaiiDark))
+        hcOverrideLines.push(generateThemeVariable(varName, hcLight))
+        hcDarkOverrideLines.push(generateThemeVariable(varName, hcDark))
+      }
     }
   }
 
-  // Element colors
-  for (const [colorName, depthColors] of Object.entries(colors.element)) {
-    for (const depth of Object.keys(depthColors as SemanticColor)) {
-      const varName = depth === 'primary' ? colorName : `${colorName}-${depth}`
-      const hasAlpha = colorSpace === 'srgb' // Only use rgba for srgb
-      lines.push(generateThemeVariable(varName, hasAlpha, colorSpace))
-      lines.push(
-        generateThemeVariable(`${varName}-light`, hasAlpha, colorSpace),
-      )
-      lines.push(generateThemeVariable(`${varName}-dark`, hasAlpha, colorSpace))
-    }
-  }
+  processSemanticColors(
+    colors.regular.element,
+    colors.kawaii.element,
+    colors['high-contrast'].element,
+    'element',
+  )
+  processSemanticColors(
+    colors.regular.background,
+    colors.kawaii.background,
+    colors['high-contrast'].background,
+    'background',
+  )
+  processSemanticColors(
+    colors.regular.fill,
+    colors.kawaii.fill,
+    colors['high-contrast'].fill,
+    'fill',
+  )
+  processSemanticColors(
+    colors.regular.material,
+    colors.kawaii.material,
+    colors['high-contrast'].material,
+    'material',
+  )
+  processSemanticColors(
+    colors.regular.application,
+    colors.kawaii.application,
+    colors['high-contrast'].application,
+    'application',
+  )
 
-  // Background colors
-  for (const depth of Object.keys(colors.background)) {
-    const varName = depth === 'primary' ? 'background' : `background-${depth}`
-    const hasAlpha = colorSpace === 'srgb'
-    lines.push(generateThemeVariable(varName, hasAlpha, colorSpace))
-    lines.push(generateThemeVariable(`${varName}-light`, hasAlpha, colorSpace))
-    lines.push(generateThemeVariable(`${varName}-dark`, hasAlpha, colorSpace))
+  return {
+    lightModeDefaults: lightModeLines.join(';\n  '),
+    allVariants: allVariantLines.join(';\n  '),
+    darkOverrides: darkOverrideLines.join(';\n    '),
+    kawaiiOverrides: kawaiiOverrideLines.join(';\n      '),
+    kawaiiDarkOverrides: kawaiiDarkOverrideLines.join(';\n        '),
+    hcOverrides: hcOverrideLines.join(';\n      '),
+    hcDarkOverrides: hcDarkOverrideLines.join(';\n        '),
   }
+}
 
-  // Fill colors
-  for (const depth of Object.keys(colors.fill)) {
-    const varName = depth === 'primary' ? 'fill' : `fill-${depth}`
-    const hasAlpha = colorSpace === 'srgb'
-    lines.push(generateThemeVariable(varName, hasAlpha, colorSpace))
-    lines.push(generateThemeVariable(`${varName}-light`, hasAlpha, colorSpace))
-    lines.push(generateThemeVariable(`${varName}-dark`, hasAlpha, colorSpace))
-  }
-
-  // Material colors
-  for (const opacity of Object.keys(colors.material)) {
-    const varName = `material-${opacity.toLowerCase()}`
-    const hasAlpha = colorSpace === 'srgb'
-    lines.push(generateThemeVariable(varName, hasAlpha, colorSpace))
-    lines.push(generateThemeVariable(`${varName}-light`, hasAlpha, colorSpace))
-    lines.push(generateThemeVariable(`${varName}-dark`, hasAlpha, colorSpace))
-  }
-
-  // Application colors
-  for (const colorName of Object.keys(colors.application)) {
-    lines.push(generateThemeVariable(colorName, false, colorSpace))
-    lines.push(generateThemeVariable(`${colorName}-light`, false, colorSpace))
-    lines.push(generateThemeVariable(`${colorName}-dark`, false, colorSpace))
-  }
-
-  return lines.join(';\n  ')
+// Deprecated: keeping for compatibility
+export function generateThemeVariables(): string {
+  return 'deprecated function - use generateUnifiedThemeColorVariables instead'
 }
 
 export function generateTailwindTheme(
   colors: ColorSystem,
-  darkMode?: DarkModeConfig,
   colorSpace: ColorFormat = 'srgb',
 ): string {
-  const darkModeConfig = darkMode || { strategy: 'media-query' }
-  const themeVariables = generateThemeVariables(colors, colorSpace)
-  const lightColorVariables = generateColorVariables(
-    colors,
-    'light',
-    colorSpace,
-  )
-  const darkColorVariables = generateColorVariables(colors, 'dark', colorSpace)
+  const colorVars = generateUnifiedThemeColorVariables(colors, colorSpace)
 
-  const baseStructure = `/* This file is auto-generated by Pastel Palette for Tailwind v4 */
+  return `/* This file is auto-generated by Pastel Palette for Tailwind v4 */
 @import "tailwindcss";
 
-@theme inline {
-  /* UIKit Colors - Auto-generated */
-  ${themeVariables};
+/* Light mode colors (default) */
+@theme {
+  ${colorVars.lightModeDefaults};
 }
 
-/* Define color values */
-@layer base {
-  :root {
-    /* Light mode colors (default) */
-    ${lightColorVariables};
-    ${darkColorVariables};
-  }`
+/* All color variants with suffixes */
+@theme {
+  ${colorVars.allVariants};
+}
 
-  if (darkModeConfig.strategy === 'media-query') {
-    return `${baseStructure}
-
-  /* Light mode overrides using media query */
-  @media (prefers-color-scheme: light) {
-    :root {
-      ${generateActiveColorReferences(colors, 'light')};
+@layer theme {
+  * {
+    /* Dark mode overrides */
+    @variant dark {
+      ${colorVars.darkOverrides};
     }
-  }
-
-  /* Dark mode overrides using media query */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      ${generateActiveColorReferences(colors, 'dark')};
-    }
-  }
-}`
-  } else if (darkModeConfig.strategy === 'class') {
-    const selector = darkModeConfig.selector || '.dark'
-    return `${baseStructure}
-
-  /* Light mode overrides using class selector */
-  :root {
-    ${generateActiveColorReferences(colors, 'light')};
-  }
-
-  /* Dark mode overrides using class selector */
-  ${selector} {
-    ${generateActiveColorReferences(colors, 'dark')};
-  }
-}`
-  } else {
-    const lightSelector =
-      darkModeConfig.selector?.replace('dark', 'light') ||
-      '[data-theme="light"]'
-    const darkSelector = darkModeConfig.selector || '[data-theme="dark"]'
-    return `${baseStructure}
-
-  /* Light mode overrides using data attribute */
-  ${lightSelector} {
-    ${generateActiveColorReferences(colors, 'light')};
-  }
-
-  /* Dark mode overrides using data attribute */
-  ${darkSelector} {
-    ${generateActiveColorReferences(colors, 'dark')};
-  }
-}`
   }
 }
 
+@layer theme {
+   [data-contrast=low], [data-contrast=low] * {
+      /* Kawaii color overrides */
+      ${colorVars.kawaiiOverrides};
+
+      /* Kawaii dark mode overrides */
+      @variant dark {
+        ${colorVars.kawaiiDarkOverrides};
+      }
+    }
+}
+
+@layer theme {
+  [data-contrast=high], [data-contrast=high] * {
+      /* High contrast color overrides */
+      ${colorVars.hcOverrides};
+
+      /* High contrast dark mode overrides */
+      @variant dark {
+        ${colorVars.hcDarkOverrides};
+      }
+    }
+}`
+}
+
+// Deprecated: keeping for compatibility
 export function generateActiveColorReferences(
   colors: ColorSystem,
   mode: 'light' | 'dark',
@@ -357,52 +498,54 @@ export function generateActiveColorReferences(
   const lines: string[] = []
 
   // Regular colors
-  for (const colorName of Object.keys(colors.regular)) {
+  for (const colorName of Object.keys(colors.regular.colors)) {
     lines.push(`--color-${colorName}: var(--color-${colorName}-${mode})`)
   }
 
   // High contrast regular colors
-  for (const colorName of Object.keys(colors.regularHighContrast)) {
+  for (const colorName of Object.keys(colors['high-contrast'].colors)) {
     lines.push(`--color-${colorName}-hc: var(--color-${colorName}-hc-${mode})`)
   }
 
   // Kawaii regular colors
-  if (colors.regularKawaii) {
-    for (const colorName of Object.keys(colors.regularKawaii)) {
+  if (colors.kawaii) {
+    for (const colorName of Object.keys(colors.kawaii.colors)) {
       lines.push(
         `--color-${colorName}-kawaii: var(--color-${colorName}-kawaii-${mode})`,
       )
     }
   }
 
-  // Element colors
-  for (const [colorName, depthColors] of Object.entries(colors.element)) {
+  // Element colors (using regular theme)
+  for (const [colorName, depthColors] of Object.entries(
+    colors.regular.element,
+  )) {
     for (const depth of Object.keys(depthColors as SemanticColor)) {
       const varName = depth === 'primary' ? colorName : `${colorName}-${depth}`
       lines.push(`--color-${varName}: var(--color-${varName}-${mode})`)
     }
   }
 
-  // Background colors
-  for (const depth of Object.keys(colors.background)) {
+  // Background colors (using regular theme)
+  for (const depth of Object.keys(colors.regular.background)) {
     const varName = depth === 'primary' ? 'background' : `background-${depth}`
     lines.push(`--color-${varName}: var(--color-${varName}-${mode})`)
   }
 
-  // Fill colors
-  for (const depth of Object.keys(colors.fill)) {
+  // Fill colors (using regular theme)
+  for (const depth of Object.keys(colors.regular.fill)) {
     const varName = depth === 'primary' ? 'fill' : `fill-${depth}`
     lines.push(`--color-${varName}: var(--color-${varName}-${mode})`)
   }
 
-  // Material colors
-  for (const opacity of Object.keys(colors.material)) {
+  // Material colors (using regular theme)
+  for (const opacity of Object.keys(colors.regular.material)) {
     const varName = `material-${opacity.toLowerCase()}`
     lines.push(`--color-${varName}: var(--color-${varName}-${mode})`)
   }
 
-  // Application colors
-  for (const colorName of Object.keys(colors.application)) {
+  // Application colors (using regular theme)
+  for (const colorName of Object.keys(colors.regular.application)) {
     lines.push(`--color-${colorName}: var(--color-${colorName}-${mode})`)
   }
 
@@ -411,5 +554,5 @@ export function generateActiveColorReferences(
 
 export function generateCSS(config: GeneratorConfig): string {
   const colorSpace = config.formatOptions?.colorSpace || 'srgb'
-  return generateTailwindTheme(config.colors, config.darkMode, colorSpace)
+  return generateTailwindTheme(config.colors, colorSpace)
 }
