@@ -93,7 +93,26 @@ const ColorSidebarProvider = ({
         ? 'high-contrast'
         : 'kawaii'
     const themeData = colorSystem[variant] || colorSystem.regular
-    return Object.entries(themeData.element || {})
+    const elementData = themeData.element || {}
+
+    // Flatten the nested structure for ColorItem compatibility
+    const flattened: [string, any][] = []
+    Object.entries(elementData).forEach(([elementName, semanticColor]) => {
+      if (typeof semanticColor === 'object' && semanticColor !== null) {
+        Object.entries(semanticColor).forEach(([level, colorVariants]) => {
+          // Each colorVariants should have light and dark properties
+          if (
+            colorVariants &&
+            typeof colorVariants === 'object' &&
+            'light' in colorVariants
+          ) {
+            flattened.push([`${elementName}-${level}`, colorVariants])
+          }
+        })
+      }
+    })
+
+    return flattened
   }, [selectedVariant])
 
   const getBackgroundColors = useCallback(() => {
@@ -104,7 +123,24 @@ const ColorSidebarProvider = ({
         ? 'high-contrast'
         : 'kawaii'
     const themeData = colorSystem[variant] || colorSystem.regular
-    return Object.entries(themeData.background || {})
+    const backgroundData = themeData.background || {}
+
+    // Flatten the nested structure for ColorItem compatibility
+    const flattened: [string, any][] = []
+    if (typeof backgroundData === 'object' && backgroundData !== null) {
+      Object.entries(backgroundData).forEach(([level, colorVariants]) => {
+        // Each colorVariants should have light and dark properties
+        if (
+          colorVariants &&
+          typeof colorVariants === 'object' &&
+          'light' in colorVariants
+        ) {
+          flattened.push([`background-${level}`, colorVariants])
+        }
+      })
+    }
+
+    return flattened
   }, [selectedVariant])
 
   const getFillColors = useCallback(() => {
@@ -115,7 +151,24 @@ const ColorSidebarProvider = ({
         ? 'high-contrast'
         : 'kawaii'
     const themeData = colorSystem[variant] || colorSystem.regular
-    return Object.entries(themeData.fill || {})
+    const fillData = themeData.fill || {}
+
+    // Flatten the nested structure for ColorItem compatibility
+    const flattened: [string, any][] = []
+    if (typeof fillData === 'object' && fillData !== null) {
+      Object.entries(fillData).forEach(([level, colorVariants]) => {
+        // Each colorVariants should have light and dark properties
+        if (
+          colorVariants &&
+          typeof colorVariants === 'object' &&
+          'light' in colorVariants
+        ) {
+          flattened.push([`fill-${level}`, colorVariants])
+        }
+      })
+    }
+
+    return flattened
   }, [selectedVariant])
 
   const getMaterialColors = useCallback(() => {
