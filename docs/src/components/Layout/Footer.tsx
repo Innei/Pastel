@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import { Monitor,Moon, Sun } from 'lucide-react'
+import { Monitor, Moon, Sun } from 'lucide-react'
+import { m as motion } from 'motion/react'
 import { useTheme } from 'next-themes'
 
 import { Container } from '../ui/Container'
@@ -49,6 +49,7 @@ export function Footer() {
             />
             {themeOptions.map((option) => (
               <button
+                type="button"
                 key={option.value}
                 onClick={() => setTheme(option.value)}
                 className={`relative z-10 p-2 rounded-full transition-colors ${

@@ -1,8 +1,8 @@
 import { colorSystem } from '@pastel-palette/colors'
-import { Square, Type } from 'lucide-react'
 import * as React from 'react'
 
 import type { ColorCategory, ColorChannel, ColorVariant } from '../types'
+import { ColorSwatch } from './ColorSwatch'
 
 interface GridSemanticColorsProps {
   selectedVariant: ColorVariant
@@ -10,59 +10,6 @@ interface GridSemanticColorsProps {
   selectedCategory: ColorCategory
   onColorClick: (colorName: string, type: ColorCategory, data?: any) => void
   onCopy: (value: string) => void
-}
-
-interface SemanticSwatchProps {
-  name: string
-  variants: any
-
-  onClick: () => void
-
-  showTextIcon?: boolean
-}
-
-const SemanticSwatch: React.FC<SemanticSwatchProps> = ({
-  name,
-  variants,
-
-  onClick,
-
-  showTextIcon = false,
-}) => {
-  return (
-    <div className="group">
-      <button type="button" className="w-full text-left" onClick={onClick}>
-        <div className="aspect-square rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all group-hover:scale-[1.02] border border-border relative">
-          {/* Dark variant - bottom half */}
-          <div
-            className="h-1/2 w-full"
-            style={{ backgroundColor: variants.dark.srgb }}
-          />
-          {/* Light variant - top half */}
-          <div
-            className="h-1/2 w-full"
-            style={{ backgroundColor: variants.light.srgb }}
-          />
-
-          {/* Icon overlay */}
-          {showTextIcon && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Type className="w-6 h-6 text-white drop-shadow-lg" />
-            </div>
-          )}
-          {!showTextIcon && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Square className="w-4 h-4 text-white/80 drop-shadow-lg" />
-            </div>
-          )}
-        </div>
-      </button>
-
-      <p className="text-sm font-medium capitalize text-center">
-        {name.replace('-', ' ')}
-      </p>
-    </div>
-  )
 }
 
 export const GridSemanticColors: React.FC<GridSemanticColorsProps> = ({
@@ -153,11 +100,12 @@ export const GridSemanticColors: React.FC<GridSemanticColorsProps> = ({
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
         {flattenedColors.map(({ name, variants, showTextIcon }) => (
-          <SemanticSwatch
+          <ColorSwatch
             key={name}
             name={name}
             variants={variants}
             onClick={() => onColorClick(name, selectedCategory, variants)}
+            showIcon={true}
             showTextIcon={showTextIcon}
           />
         ))}

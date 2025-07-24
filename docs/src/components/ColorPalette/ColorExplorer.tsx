@@ -1,6 +1,13 @@
 import { Command, Search } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/Select'
 import { ColorCanvas } from './components/ColorCanvas'
 import { ColorSidebar } from './components/ColorSidebar'
 import { ColorTimeline } from './components/ColorTimeline'
@@ -32,19 +39,6 @@ export function ColorExplorer() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [recentColors, setRecentColors] = useState<string[]>([])
-
-  const [isMobile, setIsMobile] = useState(false)
-
-  // Responsive detection
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -87,79 +81,6 @@ export function ColorExplorer() {
     }
   }
 
-  // Mobile Timeline Layout
-  if (isMobile) {
-    return (
-      <div className="min-h-screen bg-background">
-        {/* Mobile Header */}
-        <div className="sticky top-0 z-40 bg-background border-b border-border px-4 py-3">
-          <div className="flex items-center justify-between">
-            <h1 className="text-lg font-semibold">Color Explorer</h1>
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setIsCommandPaletteOpen(true)}
-                className="p-2 rounded-md hover:bg-background-secondary"
-                title="Search colors (⌘K)"
-              >
-                <Search className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Controls */}
-          <div className="mt-3 flex gap-2 overflow-x-auto">
-            <select
-              value={selectedVariant}
-              onChange={(e) =>
-                setSelectedVariant(e.target.value as ColorVariant)
-              }
-              className="px-3 py-1 text-sm bg-background-secondary border border-border rounded-md"
-            >
-              <option value="regular">Regular</option>
-              <option value="high-contrast">High Contrast</option>
-              <option value="kawaii">Kawaii</option>
-            </select>
-            <select
-              value={selectedChannel}
-              onChange={(e) =>
-                setSelectedChannel(e.target.value as ColorChannel)
-              }
-              className="px-3 py-1 text-sm bg-background-secondary border border-border rounded-md"
-            >
-              <option value="oklch">OKLCH</option>
-              <option value="srgb">sRGB</option>
-              <option value="p3">P3</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Timeline Component */}
-        <ColorTimeline
-          selectedCategory={selectedCategory}
-          selectedVariant={selectedVariant}
-          selectedChannel={selectedChannel}
-          onColorSelect={handleColorSelect}
-          onCopy={handleCopy}
-          onCategoryChange={setSelectedCategory}
-        />
-
-        {/* Command Palette */}
-        <CommandPalette
-          isOpen={isCommandPaletteOpen}
-          onClose={() => setIsCommandPaletteOpen(false)}
-          onColorSelect={handleColorSelect}
-          searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
-          recentColors={recentColors}
-          selectedChannel={selectedChannel}
-          selectedVariant={selectedVariant}
-          onCopy={handleCopy}
-        />
-      </div>
-    )
-  }
-
   // Desktop Sidebar + Canvas Layout
   return (
     <div className="min-h-screen bg-background flex">
@@ -185,58 +106,70 @@ export function ColorExplorer() {
               <h1 className="text-xl font-semibold">Color Explorer</h1>
               <div className="flex items-center gap-2 text-sm text-text-secondary">
                 <kbd className="px-2 py-1 bg-background-secondary border border-border rounded text-xs">
-                  ⌘K
+                  ⌘ K
                 </kbd>
-                <span>to search</span>
+                <span>to Search</span>
               </div>
             </div>
 
             <div className="flex items-center gap-2">
               {/* Controls */}
-              <select
+              <Select
                 value={selectedVariant}
-                onChange={(e) =>
-                  setSelectedVariant(e.target.value as ColorVariant)
+                onValueChange={(value) =>
+                  setSelectedVariant(value as ColorVariant)
                 }
-                className="px-3 py-2 bg-background-secondary border border-border rounded-md text-sm"
               >
-                <option value="regular">Regular</option>
-                <option value="high-contrast">High Contrast</option>
-                <option value="kawaii">Kawaii</option>
-              </select>
+                <SelectTrigger className="w-[120px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="regular">Regular</SelectItem>
+                  <SelectItem value="high-contrast">High Contrast</SelectItem>
+                  <SelectItem value="kawaii">Kawaii</SelectItem>
+                </SelectContent>
+              </Select>
 
-              <select
+              <Select
                 value={selectedChannel}
-                onChange={(e) =>
-                  setSelectedChannel(e.target.value as ColorChannel)
+                onValueChange={(value) =>
+                  setSelectedChannel(value as ColorChannel)
                 }
-                className="px-3 py-2 bg-background-secondary border border-border rounded-md text-sm"
               >
-                <option value="oklch">OKLCH</option>
-                <option value="srgb">sRGB</option>
-                <option value="p3">P3</option>
-              </select>
+                <SelectTrigger className="w-[100px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="oklch">OKLCH</SelectItem>
+                  <SelectItem value="srgb">sRGB</SelectItem>
+                  <SelectItem value="p3">P3</SelectItem>
+                </SelectContent>
+              </Select>
 
               {selectedCategory === 'regular' && (
-                <select
+                <Select
                   value={sortOrder}
-                  onChange={(e) => setSortOrder(e.target.value as SortOrder)}
-                  className="px-3 py-2 bg-background-secondary border border-border rounded-md text-sm"
+                  onValueChange={(value) => setSortOrder(value as SortOrder)}
                 >
-                  <option value="default">Default</option>
-                  <option value="alphabetical">A-Z</option>
-                  <option value="alphabetical-desc">Z-A</option>
-                  <option value="hue">By Hue</option>
-                  <option value="lightness">By Lightness</option>
-                  <option value="saturation">By Saturation</option>
-                </select>
+                  <SelectTrigger className="w-[130px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="default">Default</SelectItem>
+                    <SelectItem value="alphabetical">A-Z</SelectItem>
+                    <SelectItem value="alphabetical-desc">Z-A</SelectItem>
+                    <SelectItem value="hue">By Hue</SelectItem>
+                    <SelectItem value="lightness">By Lightness</SelectItem>
+                    <SelectItem value="saturation">By Saturation</SelectItem>
+                  </SelectContent>
+                </Select>
               )}
 
               <button
                 type="button"
                 onClick={() => setIsCommandPaletteOpen(true)}
                 className="p-2 rounded-md hover:bg-background-secondary border border-border"
-                title="Command Palette (⌘K)"
+                title="Command Palette (⌘ + K)"
               >
                 <Command className="w-4 h-4" />
               </button>

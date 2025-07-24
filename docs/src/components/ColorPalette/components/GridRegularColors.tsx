@@ -3,45 +3,13 @@ import * as React from 'react'
 
 import type { ColorCategory, ColorVariant, SortOrder } from '../types'
 import { parseOKLCH } from '../utils/colorUtils'
+import { ColorSwatch } from './ColorSwatch'
 
 interface GridRegularColorsProps {
   selectedVariant: ColorVariant
   sortOrder: SortOrder
 
   onColorClick: (colorName: string, type: ColorCategory, data?: any) => void
-}
-
-interface ColorSwatchProps {
-  name: string
-  variants: any
-
-  onClick: () => void
-}
-
-const ColorSwatch: React.FC<ColorSwatchProps> = ({
-  variants,
-  name,
-  onClick,
-}) => {
-  return (
-    <div className="group">
-      <button type="button" className="w-full text-left" onClick={onClick}>
-        <div className="aspect-square rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all group-hover:scale-[1.02] border border-border">
-          {/* Dark variant - bottom half */}
-          <div
-            className="h-1/2 w-full"
-            style={{ backgroundColor: variants.dark.srgb }}
-          />
-          {/* Light variant - top half */}
-          <div
-            className="h-1/2 w-full"
-            style={{ backgroundColor: variants.light.srgb }}
-          />
-        </div>
-      </button>
-      <p className="text-sm font-medium capitalize text-center">{name}</p>
-    </div>
-  )
 }
 
 export const GridRegularColors: React.FC<GridRegularColorsProps> = ({
