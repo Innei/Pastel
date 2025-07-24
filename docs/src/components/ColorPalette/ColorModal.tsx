@@ -3,14 +3,13 @@ import { colorSystem } from '@pastel-palette/colors'
 import { toast } from 'sonner'
 
 import { Modal } from '../ui/Modal'
-
-type ColorVariant = 'regular' | 'high-contrast' | 'kawaii'
+import type { ColorCategory, ColorVariant } from './types'
 
 interface ColorModalProps {
   isOpen: boolean
   onClose: () => void
   colorName: string
-  colorType: 'regular' | 'semantic' | 'material' | 'application'
+  colorType: ColorCategory
   colorVariant: ColorVariant
   colorData?: any
   onCopy: (value: string) => void

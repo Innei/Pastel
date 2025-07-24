@@ -2,10 +2,10 @@ import { useState } from 'react'
 
 import { Dropdown } from '../ui/Dropdown'
 import { ColorModal } from './ColorModal'
-import { ApplicationColors } from './components/ApplicationColors'
-import { MaterialColors } from './components/MaterialColors'
-import { RegularColors } from './components/RegularColors'
-import { SemanticColors } from './components/SemanticColors'
+import { GridApplicationColors } from './components/GridApplicationColors'
+import { GridMaterialColors } from './components/GridMaterialColors'
+import { GridRegularColors } from './components/GridRegularColors'
+import { GridSemanticColors } from './components/GridSemanticColors'
 import type {
   ColorCategory,
   ColorChannel,
@@ -33,7 +33,6 @@ export function ColorGrid() {
   const [sortOrder, setSortOrder] = useState<SortOrder>('default')
   const [selectedChannel, setSelectedChannel] = useState<ColorChannel>('oklch')
   const [modalColor, setModalColor] = useState<ColorModalState>(null)
-  const [copiedColor, setCopiedColor] = useState<string | null>(null)
 
   const handleColorClick = (
     colorName: string,
@@ -46,8 +45,6 @@ export function ColorGrid() {
   const handleCopy = async (value: string) => {
     try {
       await navigator.clipboard.writeText(value)
-      setCopiedColor(value)
-      setTimeout(() => setCopiedColor(null), 2000)
     } catch (err) {
       console.error('Failed to copy:', err)
     }
@@ -57,58 +54,51 @@ export function ColorGrid() {
     switch (selectedCategory) {
       case 'regular': {
         return (
-          <RegularColors
+          <GridRegularColors
             selectedVariant={selectedVariant}
             sortOrder={sortOrder}
-            selectedChannel={selectedChannel}
             onColorClick={handleColorClick}
-            onCopy={handleCopy}
-            copiedColor={copiedColor}
           />
         )
       }
-      case 'semantic': {
-        return (
-          <SemanticColors
-            selectedVariant={selectedVariant}
-            selectedChannel={selectedChannel}
-            onColorClick={handleColorClick}
-            onCopy={handleCopy}
-            copiedColor={copiedColor}
-          />
-        )
-      }
+
       case 'material': {
         return (
-          <MaterialColors
+          <GridMaterialColors
             selectedVariant={selectedVariant}
             selectedChannel={selectedChannel}
             onColorClick={handleColorClick}
-            onCopy={handleCopy}
-            copiedColor={copiedColor}
           />
         )
       }
       case 'application': {
         return (
-          <ApplicationColors
+          <GridApplicationColors
             selectedVariant={selectedVariant}
             selectedChannel={selectedChannel}
             onColorClick={handleColorClick}
+          />
+        )
+      }
+      case 'element':
+      case 'background':
+      case 'fill': {
+        return (
+          <GridSemanticColors
+            selectedVariant={selectedVariant}
+            selectedChannel={selectedChannel}
+            selectedCategory={selectedCategory}
+            onColorClick={handleColorClick}
             onCopy={handleCopy}
-            copiedColor={copiedColor}
           />
         )
       }
       default: {
         return (
-          <RegularColors
+          <GridRegularColors
             selectedVariant={selectedVariant}
             sortOrder={sortOrder}
-            selectedChannel={selectedChannel}
             onColorClick={handleColorClick}
-            onCopy={handleCopy}
-            copiedColor={copiedColor}
           />
         )
       }
@@ -215,7 +205,6 @@ export function ColorGrid() {
       {renderColorContent()}
 
       {/* Color Modal */}
-
       <ColorModal
         isOpen={!!modalColor}
         onClose={() => setModalColor(null)}

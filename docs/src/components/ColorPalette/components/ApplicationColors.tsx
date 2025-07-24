@@ -9,7 +9,7 @@ interface ApplicationColorsProps {
   selectedChannel: ColorChannel
   onColorClick: (colorName: string, type: ColorCategory, data?: any) => void
   onCopy: (value: string) => void
-  copiedColor: string | null
+  
 }
 
 export const ApplicationColors: React.FC<ApplicationColorsProps> = ({
@@ -17,7 +17,7 @@ export const ApplicationColors: React.FC<ApplicationColorsProps> = ({
   selectedChannel,
   onColorClick,
   onCopy,
-  copiedColor,
+  
 }) => {
   const getApplicationColors = () => {
     switch (selectedVariant) {
@@ -62,7 +62,7 @@ export const ApplicationColors: React.FC<ApplicationColorsProps> = ({
                 onColorClick(`application-${name}`, 'application', variants)
               }
               onCopy={onCopy}
-              copiedColor={copiedColor}
+              
               aspectRatio="aspect-[3/2]"
               labelContent={renderSampleButton()}
             />

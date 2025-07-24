@@ -22,6 +22,7 @@ export default defineConfig(
     files: ['**/*.tsx'],
     rules: {
       '@stylistic/jsx-self-closing-comp': 'error',
+      '@eslint-react/no-context-provider': 0,
     },
   },
 )

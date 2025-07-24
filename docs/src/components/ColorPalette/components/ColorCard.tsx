@@ -1,15 +1,15 @@
 import * as React from 'react'
+import { CopyButton } from '../../ui/CopyButton'
 
 interface ColorCardProps {
   colorName: string
   variants: any
   onClick: () => void
-  onCopy: (value: string) => void
+  onCopy?: (value: string) => void
   selectedChannel: 'oklch' | 'srgb' | 'p3'
   showLabels?: boolean
   aspectRatio?: string
   labelContent?: React.ReactNode
-  copiedColor?: string | null
 }
 
 export const ColorCard: React.FC<ColorCardProps> = ({
@@ -21,7 +21,6 @@ export const ColorCard: React.FC<ColorCardProps> = ({
   showLabels = true,
   aspectRatio = 'aspect-square',
   labelContent,
-  copiedColor,
 }) => {
   const getColorValue = (colorVariant: any, mode: 'light' | 'dark') => {
     const colorData = colorVariant[mode]
@@ -88,26 +87,30 @@ export const ColorCard: React.FC<ColorCardProps> = ({
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={() => onCopy(getColorValue(variants, 'light'))}
-            className="w-full text-xs text-left hover:text-accent transition-colors"
-          >
-            <span className="font-medium">Light:</span>{' '}
-            {copiedColor === getColorValue(variants, 'light')
-              ? 'Copied!'
-              : getColorValue(variants, 'light')}
-          </button>
-          <button
-            type="button"
-            onClick={() => onCopy(getColorValue(variants, 'dark'))}
-            className="w-full text-xs text-left hover:text-accent transition-colors"
-          >
-            <span className="font-medium">Dark:</span>{' '}
-            {copiedColor === getColorValue(variants, 'dark')
-              ? 'Copied!'
-              : getColorValue(variants, 'dark')}
-          </button>
+          <div className="space-y-1">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-medium">Light:</span>
+              <CopyButton
+                value={getColorValue(variants, 'light')}
+                label="Copy"
+                onCopy={onCopy}
+              />
+            </div>
+            <div className="text-xs text-text-secondary font-mono truncate">
+              {getColorValue(variants, 'light')}
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-medium">Dark:</span>
+              <CopyButton
+                value={getColorValue(variants, 'dark')}
+                label="Copy"
+                onCopy={onCopy}
+              />
+            </div>
+            <div className="text-xs text-text-secondary font-mono truncate">
+              {getColorValue(variants, 'dark')}
+            </div>
+          </div>
         </div>
       )}
     </div>

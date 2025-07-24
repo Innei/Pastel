@@ -2,6 +2,7 @@ import { useTheme } from 'next-themes'
 // import { colorPalette } from '@pastel-palette/colors'
 import { Toaster } from 'sonner'
 
+import { ColorExplorer } from './components/ColorPalette/ColorExplorer'
 import { ColorGrid } from './components/ColorPalette/ColorGrid'
 import { AlertExamples } from './components/Examples/AlertExamples'
 import { ButtonExamples } from './components/Examples/ButtonExamples'
@@ -40,6 +41,16 @@ function App() {
             </div>
             <ColorGrid />
           </Container>
+
+          <div className="hidden xl:block px-8 my-32">
+            <h2 className="text-3xl text-center sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+              Color explorer
+            </h2>
+            <p className="text-lg text-text-secondary text-center">
+              Explore the color palette in detail.
+            </p>
+            <ColorExplorer />
+          </div>
         </section>
 
         {/* Examples Section */}
@@ -88,62 +99,6 @@ function App() {
             </div>
           </Container>
         </section>
-
-        {/* Installation Section */}
-        {/* <section
-          id="installation"
-          className="py-16 sm:py-24 lg:py-32 border-t border-border"
-        >
-          <Container>
-            <div className="max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-8">
-                Installation
-              </h2>
-
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-semibold mb-4">
-                    Package manager
-                  </h3>
-                  <div className="bg-material-medium rounded-lg p-4 font-mono text-sm">
-                    <code>npm install @pastel/colors</code>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-semibold mb-4">
-                    Import styles
-                  </h3>
-                  <div className="bg-material-medium rounded-lg p-4 font-mono text-sm">
-                    <code>import '@pastel/colors/styles.css'</code>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-semibold mb-4">
-                    Use in your components
-                  </h3>
-                  <pre className="bg-material-medium rounded-lg p-4 font-mono text-sm overflow-x-auto">
-                    {`import { colors } from '@pastel/colors'
-
-function Button({ variant = 'primary' }) {
-  return (
-    <button 
-      style={{ 
-        backgroundColor: colors[variant].base,
-        color: colors[variant].contrast 
-      }}
-    >
-      Click me
-    </button>
-  )
-}`}
-                  </pre>
-                </div>
-              </div>
-            </div>
-          </Container>
-        </section> */}
       </main>
 
       <Footer />

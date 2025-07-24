@@ -1,4 +1,4 @@
-import { Layers, Palette, Square, Type } from 'lucide-react'
+import { Layers, Palette, Square, Type, RectangleHorizontal, Brush } from 'lucide-react'
 
 import type { ColorSection } from '../types'
 
@@ -10,10 +10,22 @@ export const colorSections: ColorSection[] = [
     icon: <Palette className="w-5 h-5" />,
   },
   {
-    id: 'semantic',
-    title: 'Semantic Colors',
-    description: 'UI element colors for text, borders, backgrounds',
+    id: 'element',
+    title: 'Element Colors',
+    description: 'UI element colors for text, borders, and links',
     icon: <Type className="w-5 h-5" />,
+  },
+  {
+    id: 'background',
+    title: 'Background Colors',
+    description: 'Background colors with different depth levels',
+    icon: <RectangleHorizontal className="w-5 h-5" />,
+  },
+  {
+    id: 'fill',
+    title: 'Fill Colors',
+    description: 'Fill colors for components and surfaces',
+    icon: <Brush className="w-5 h-5" />,
   },
   {
     id: 'material',

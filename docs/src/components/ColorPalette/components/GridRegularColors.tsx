@@ -1,31 +1,54 @@
 import { colorSystem } from '@pastel-palette/colors'
 import * as React from 'react'
 
-import type {
-  ColorCategory,
-  ColorChannel,
-  ColorVariant,
-  SortOrder,
-} from '../types'
+import type { ColorCategory, ColorVariant, SortOrder } from '../types'
 import { parseOKLCH } from '../utils/colorUtils'
-import { ColorCard } from './ColorCard'
 
-interface RegularColorsProps {
+interface GridRegularColorsProps {
   selectedVariant: ColorVariant
   sortOrder: SortOrder
-  selectedChannel: ColorChannel
+
   onColorClick: (colorName: string, type: ColorCategory, data?: any) => void
-  onCopy: (value: string) => void
-  
 }
 
-export const RegularColors: React.FC<RegularColorsProps> = ({
+interface ColorSwatchProps {
+  name: string
+  variants: any
+
+  onClick: () => void
+}
+
+const ColorSwatch: React.FC<ColorSwatchProps> = ({
+  variants,
+  name,
+  onClick,
+}) => {
+  return (
+    <div className="group">
+      <button type="button" className="w-full text-left" onClick={onClick}>
+        <div className="aspect-square rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all group-hover:scale-[1.02] border border-border">
+          {/* Dark variant - bottom half */}
+          <div
+            className="h-1/2 w-full"
+            style={{ backgroundColor: variants.dark.srgb }}
+          />
+          {/* Light variant - top half */}
+          <div
+            className="h-1/2 w-full"
+            style={{ backgroundColor: variants.light.srgb }}
+          />
+        </div>
+      </button>
+      <p className="text-sm font-medium capitalize text-center">{name}</p>
+    </div>
+  )
+}
+
+export const GridRegularColors: React.FC<GridRegularColorsProps> = ({
   selectedVariant,
   sortOrder,
-  selectedChannel,
+
   onColorClick,
-  onCopy,
-  
 }) => {
   const getColorsByVariant = () => {
     switch (selectedVariant) {
@@ -52,11 +75,9 @@ export const RegularColors: React.FC<RegularColorsProps> = ({
       case 'alphabetical': {
         return colorEntries.sort(([a], [b]) => a.localeCompare(b))
       }
-
       case 'alphabetical-desc': {
         return colorEntries.sort(([a], [b]) => b.localeCompare(a))
       }
-
       case 'hue': {
         return colorEntries.sort(([, a], [, b]) => {
           const aHue = parseOKLCH(a.light.oklch).hue
@@ -64,7 +85,6 @@ export const RegularColors: React.FC<RegularColorsProps> = ({
           return aHue - bHue
         })
       }
-
       case 'lightness': {
         return colorEntries.sort(([, a], [, b]) => {
           const aLightness = parseOKLCH(a.light.oklch).lightness
@@ -72,7 +92,6 @@ export const RegularColors: React.FC<RegularColorsProps> = ({
           return bLightness - aLightness // Light to dark
         })
       }
-
       case 'saturation': {
         return colorEntries.sort(([, a], [, b]) => {
           const aChroma = parseOKLCH(a.light.oklch).chroma
@@ -80,7 +99,6 @@ export const RegularColors: React.FC<RegularColorsProps> = ({
           return bChroma - aChroma // Vibrant to muted
         })
       }
-
       default: {
         return colorEntries
       }
@@ -90,16 +108,13 @@ export const RegularColors: React.FC<RegularColorsProps> = ({
   const sortedColors = getSortedColors()
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
       {sortedColors.map(([name, variants]) => (
-        <ColorCard
+        <ColorSwatch
           key={name}
-          colorName={name}
+          name={name}
           variants={variants}
-          selectedChannel={selectedChannel}
-          onClick={() => onColorClick(name, 'regular')}
-          onCopy={onCopy}
-          
+          onClick={() => onColorClick(name, 'regular', variants)}
         />
       ))}
     </div>

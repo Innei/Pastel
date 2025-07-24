@@ -10,7 +10,7 @@ interface MaterialColorsProps {
   selectedChannel: ColorChannel
   onColorClick: (colorName: string, type: ColorCategory, data?: any) => void
   onCopy: (value: string) => void
-  copiedColor: string | null
+  
 }
 
 export const MaterialColors: React.FC<MaterialColorsProps> = ({
@@ -18,7 +18,7 @@ export const MaterialColors: React.FC<MaterialColorsProps> = ({
   selectedChannel,
   onColorClick,
   onCopy,
-  copiedColor,
+  
 }) => {
   const getMaterialColors = () => {
     switch (selectedVariant) {
@@ -65,7 +65,7 @@ export const MaterialColors: React.FC<MaterialColorsProps> = ({
               onColorClick(`material-${level}`, 'material', variants)
             }
             onCopy={onCopy}
-            copiedColor={copiedColor}
+            
             labelContent={
               <div className="relative w-full h-full">
                 {/* Background pattern to show transparency */}
