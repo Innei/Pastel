@@ -5,7 +5,6 @@ import type {
   GeneratorConfig,
   MaterialColor,
   SemanticColor,
-  ThemeColorSystem,
 } from '@pastel-palette/colors'
 
 export function generateColorVariable(name: string, value: string): string {

@@ -1,5 +1,4 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import { forwardRef } from 'react'
 
 import { cn } from '../../utils/cn'
 
@@ -10,17 +9,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      variant = 'primary',
-      size = 'md',
-      asChild,
-      children,
-      ...props
-    },
-    ref,
+export const Button = (
+    { ref, className, variant = 'primary', size = 'md', asChild, children, ...props }: ButtonProps & { ref?: React.RefObject<HTMLButtonElement | null> },
   ) => {
     const variants = {
       primary: 'bg-text text-background hover:opacity-90',
@@ -62,7 +52,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {children}
       </button>
     )
-  },
-)
+  }
 
 Button.displayName = 'Button'

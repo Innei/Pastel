@@ -9,10 +9,7 @@ interface SliderProps
   valueFormatter?: (value: number) => string
 }
 
-const Slider = React.forwardRef<
-  React.ElementRef<typeof SliderPrimitive.Root>,
-  SliderProps
->(({ className, showValue = false, valueFormatter, ...props }, ref) => (
+const Slider = ({ ref, className, showValue = false, valueFormatter, ...props }: SliderProps & { ref?: React.RefObject<React.ElementRef<typeof SliderPrimitive.Root> | null> }) => (
   <div className="relative flex flex-col space-y-2">
     <SliderPrimitive.Root
       ref={ref}
@@ -37,7 +34,7 @@ const Slider = React.forwardRef<
       </div>
     )}
   </div>
-))
+)
 
 Slider.displayName = SliderPrimitive.Root.displayName
 

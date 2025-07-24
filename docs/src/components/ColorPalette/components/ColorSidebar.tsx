@@ -1,7 +1,5 @@
 import { colorSystem } from '@pastel-palette/colors'
-import {
-  Search,
-} from 'lucide-react'
+import { Search } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { useCallback, useMemo } from 'react'
 import { createContext, useContextSelector } from 'use-context-selector'
@@ -73,7 +71,6 @@ const ColorSidebarProvider = ({
   selectedChannel,
   sortOrder,
 }: ColorSidebarProviderProps) => {
-
   // Get colors for regular category
   const getRegularColors = useCallback(() => {
     const variant =
@@ -296,10 +293,7 @@ interface CategoryHeaderProps {
   colorCount: number
 }
 
-const CategoryHeader = ({
-  section,
-  colorCount,
-}: CategoryHeaderProps) => {
+const CategoryHeader = ({ section, colorCount }: CategoryHeaderProps) => {
   const selectedCategory = useContextSelector(
     ColorSidebarContext,
     (ctx) => ctx.selectedCategory,
@@ -354,7 +348,6 @@ const SearchBar = () => {
   )
 }
 
-
 // ColorCategories Component
 const ColorCategories = () => {
   const selectedCategory = useContextSelector(
@@ -401,34 +394,37 @@ const ColorCategories = () => {
         let colorCount = 0
 
         switch (section.id) {
-          case 'regular':
+          case 'regular': {
             colors = getRegularColors()
             break
-          case 'element':
+          }
+          case 'element': {
             colors = getElementColors()
             break
-          case 'background':
+          }
+          case 'background': {
             colors = getBackgroundColors()
             break
-          case 'fill':
+          }
+          case 'fill': {
             colors = getFillColors()
             break
-          case 'material':
+          }
+          case 'material': {
             colors = getMaterialColors()
             break
-          case 'application':
+          }
+          case 'application': {
             colors = getApplicationColors()
             break
+          }
         }
-        
+
         colorCount = colors.length
 
         return (
           <div key={section.id} className="space-y-1">
-            <CategoryHeader
-              section={section}
-              colorCount={colorCount}
-            />
+            <CategoryHeader section={section} colorCount={colorCount} />
 
             {selectedCategory === section.id && (
               <div className="ml-3 space-y-1">

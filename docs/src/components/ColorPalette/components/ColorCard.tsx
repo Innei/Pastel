@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import { CopyButton } from '../../ui/CopyButton'
 
 interface ColorCardProps {

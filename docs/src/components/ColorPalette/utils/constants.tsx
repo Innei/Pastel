@@ -1,4 +1,4 @@
-import { Layers, Palette, Square, Type, RectangleHorizontal, Brush } from 'lucide-react'
+import { Brush,Layers, Palette, RectangleHorizontal, Square, Type } from 'lucide-react'
 
 import type { ColorSection } from '../types'
 

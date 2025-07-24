@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect } from 'react'
-import { ChevronLeft, ChevronRight, Copy, Eye } from 'lucide-react'
-import { CopyButton } from '../../ui/CopyButton'
-
 import { colorSystem } from '@pastel-palette/colors'
-import { colorSections } from '../utils/constants'
+import { ChevronLeft, ChevronRight, Copy, Eye } from 'lucide-react'
+import { useEffect,useRef, useState } from 'react'
+
+import { CopyButton } from '../../ui/CopyButton'
 import type { ColorCategory, ColorChannel, ColorVariant } from '../types'
+import { colorSections } from '../utils/constants'
 
 interface ColorTimelineProps {
   selectedCategory: ColorCategory
@@ -47,21 +47,26 @@ export function ColorTimeline({
       
       let categoryData = {}
       switch (selectedCategory) {
-        case 'element':
+        case 'element': {
           categoryData = themeData.element || {}
           break
-        case 'background':
+        }
+        case 'background': {
           categoryData = themeData.background || {}
           break
-        case 'fill':
+        }
+        case 'fill': {
           categoryData = themeData.fill || {}
           break
-        case 'material':
+        }
+        case 'material': {
           categoryData = themeData.material || {}
           break
-        case 'application':
+        }
+        case 'application': {
           categoryData = themeData.application || {}
           break
+        }
       }
       
       return Object.entries(categoryData).map(([name, data]) => ({ name, data, category: selectedCategory }))

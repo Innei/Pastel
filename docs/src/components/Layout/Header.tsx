@@ -1,5 +1,5 @@
 import { Grid2x2,Menu,X } from 'lucide-react'
-import { motion, AnimatePresence } from 'motion/react'
+import { AnimatePresence,motion } from 'motion/react'
 import { useEffect,useState } from 'react'
 
 import pkg from '../../../../package.json'

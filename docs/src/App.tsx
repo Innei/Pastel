@@ -1,4 +1,6 @@
+import { Check,Copy } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { useState } from 'react'
 // import { colorPalette } from '@pastel-palette/colors'
 import { Toaster } from 'sonner'
 
@@ -12,8 +14,6 @@ import { Hero } from './components/Hero'
 import { Footer } from './components/Layout/Footer'
 import { Header } from './components/Layout/Header'
 import { Container } from './components/ui/Container'
-import { Copy, Check } from 'lucide-react'
-import { useState } from 'react'
 
 function CopyCodeButton({ text }: { text: string }) {
   const [isCopied, setIsCopied] = useState(false)
@@ -163,9 +163,9 @@ function App() {
                       <div className="bg-fill rounded-xl border border-border overflow-hidden">
                         <div className="flex items-center justify-between px-4 py-3 bg-background-secondary border-b border-border">
                           <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 bg-red rounded-full"></div>
-                            <div className="w-3 h-3 bg-yellow rounded-full"></div>
-                            <div className="w-3 h-3 bg-green rounded-full"></div>
+                            <div className="w-3 h-3 bg-red rounded-full" />
+                            <div className="w-3 h-3 bg-yellow rounded-full" />
+                            <div className="w-3 h-3 bg-green rounded-full" />
                             <span className="ml-2 text-sm text-text-secondary font-mono">styles.css</span>
                           </div>
                           <CopyCodeButton text={`.button {
@@ -208,9 +208,9 @@ function App() {
                       <div className="bg-fill rounded-xl border border-border overflow-hidden">
                         <div className="flex items-center justify-between px-4 py-3 bg-background-secondary border-b border-border">
                           <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 bg-red rounded-full"></div>
-                            <div className="w-3 h-3 bg-yellow rounded-full"></div>
-                            <div className="w-3 h-3 bg-green rounded-full"></div>
+                            <div className="w-3 h-3 bg-red rounded-full" />
+                            <div className="w-3 h-3 bg-yellow rounded-full" />
+                            <div className="w-3 h-3 bg-green rounded-full" />
                             <span className="ml-2 text-sm text-text-secondary font-mono">Button.tsx</span>
                           </div>
                           <CopyCodeButton text={`// Using semantic colors
@@ -251,9 +251,9 @@ function App() {
                       <div className="bg-fill rounded-xl border border-border overflow-hidden">
                         <div className="flex items-center justify-between px-4 py-3 bg-background-secondary border-b border-border">
                           <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 bg-red rounded-full"></div>
-                            <div className="w-3 h-3 bg-yellow rounded-full"></div>
-                            <div className="w-3 h-3 bg-green rounded-full"></div>
+                            <div className="w-3 h-3 bg-red rounded-full" />
+                            <div className="w-3 h-3 bg-yellow rounded-full" />
+                            <div className="w-3 h-3 bg-green rounded-full" />
                             <span className="ml-2 text-sm text-text-secondary font-mono">components.css</span>
                           </div>
                           <CopyCodeButton text={`.btn-primary {
