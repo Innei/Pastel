@@ -1,4 +1,3 @@
-import { Square, Type } from 'lucide-react'
 import { m } from 'motion/react'
 import * as React from 'react'
 
@@ -10,7 +9,7 @@ interface ColorSwatchProps {
   }
   onClick: () => void
   showIcon?: boolean
-  showTextIcon?: boolean
+  icon?: React.ReactNode
 }
 
 export const ColorSwatch: React.FC<ColorSwatchProps> = ({
@@ -18,7 +17,7 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
   variants,
   onClick,
   showIcon = false,
-  showTextIcon = false,
+  icon,
 }) => {
   const displayName = name.replace('-', ' ')
 
@@ -38,13 +37,9 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
           />
 
           {/* Icon overlay for semantic colors */}
-          {showIcon && (
+          {showIcon && icon && (
             <div className="absolute inset-0 flex items-center justify-center">
-              {showTextIcon ? (
-                <Type className="w-6 h-6 text-white drop-shadow-lg" />
-              ) : (
-                <Square className="w-4 h-4 text-white/80 drop-shadow-lg" />
-              )}
+              {icon}
             </div>
           )}
         </div>

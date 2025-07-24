@@ -1,4 +1,4 @@
-import { Command, Search } from 'lucide-react'
+import { Command } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 
 import {
@@ -10,7 +10,6 @@ import {
 } from '../ui/Select'
 import { ColorCanvas } from './components/ColorCanvas'
 import { ColorSidebar } from './components/ColorSidebar'
-import { ColorTimeline } from './components/ColorTimeline'
 import { CommandPalette } from './components/CommandPalette'
 import type {
   ColorCategory,

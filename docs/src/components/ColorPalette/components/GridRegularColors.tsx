@@ -83,6 +83,7 @@ export const GridRegularColors: React.FC<GridRegularColorsProps> = ({
           name={name}
           variants={variants}
           onClick={() => onColorClick(name, 'regular', variants)}
+          showIcon={false}
         />
       ))}
     </div>
