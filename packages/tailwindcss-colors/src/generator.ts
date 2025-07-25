@@ -78,6 +78,20 @@ export function generateColorVariables(
     )
   }
 
+  // Regular grayScale colors
+  for (const [grayScaleName, variants] of Object.entries(
+    colors.regular.grayScale,
+  )) {
+    const colorValue = (variants as ColorVariants)[mode]
+    const colorString = getColorString(colorValue)
+    lines.push(
+      generateColorVariable(
+        `${grayScaleName}${suffix}`,
+        extractColorValues(colorString, colorSpace),
+      ),
+    )
+  }
+
   // High contrast regular colors
   for (const [colorName, variants] of Object.entries(
     colors['high-contrast'].colors,
@@ -92,6 +106,20 @@ export function generateColorVariables(
     )
   }
 
+  // High contrast grayScale colors
+  for (const [grayScaleName, variants] of Object.entries(
+    colors['high-contrast'].grayScale,
+  )) {
+    const colorValue = (variants as ColorVariants)[mode]
+    const colorString = getColorString(colorValue)
+    lines.push(
+      generateColorVariable(
+        `${grayScaleName}-hc${suffix}`,
+        extractColorValues(colorString, colorSpace),
+      ),
+    )
+  }
+
   // Kawaii regular colors
   if (colors.kawaii) {
     for (const [colorName, variants] of Object.entries(colors.kawaii.colors)) {
@@ -100,6 +128,20 @@ export function generateColorVariables(
       lines.push(
         generateColorVariable(
           `${colorName}-kawaii${suffix}`,
+          extractColorValues(colorString, colorSpace),
+        ),
+      )
+    }
+
+    // Kawaii grayScale colors
+    for (const [grayScaleName, variants] of Object.entries(
+      colors.kawaii.grayScale,
+    )) {
+      const colorValue = (variants as ColorVariants)[mode]
+      const colorString = getColorString(colorValue)
+      lines.push(
+        generateColorVariable(
+          `${grayScaleName}-kawaii${suffix}`,
           extractColorValues(colorString, colorSpace),
         ),
       )
@@ -270,6 +312,16 @@ export function generateUnifiedThemeColorVariables(
       colors['high-contrast'].colors,
       colors.kawaii.colors,
       colorName,
+    )
+  }
+
+  // Process grayScale colors
+  for (const grayScaleName of Object.keys(colors.regular.grayScale)) {
+    processColorGroup(
+      colors.regular.grayScale,
+      colors['high-contrast'].grayScale,
+      colors.kawaii.grayScale,
+      grayScaleName,
     )
   }
 
@@ -501,9 +553,23 @@ export function generateActiveColorReferences(
     lines.push(`--color-${colorName}: var(--color-${colorName}-${mode})`)
   }
 
+  // Regular grayScale colors
+  for (const grayScaleName of Object.keys(colors.regular.grayScale)) {
+    lines.push(
+      `--color-${grayScaleName}: var(--color-${grayScaleName}-${mode})`,
+    )
+  }
+
   // High contrast regular colors
   for (const colorName of Object.keys(colors['high-contrast'].colors)) {
     lines.push(`--color-${colorName}-hc: var(--color-${colorName}-hc-${mode})`)
+  }
+
+  // High contrast grayScale colors
+  for (const grayScaleName of Object.keys(colors['high-contrast'].grayScale)) {
+    lines.push(
+      `--color-${grayScaleName}-hc: var(--color-${grayScaleName}-hc-${mode})`,
+    )
   }
 
   // Kawaii regular colors
@@ -511,6 +577,13 @@ export function generateActiveColorReferences(
     for (const colorName of Object.keys(colors.kawaii.colors)) {
       lines.push(
         `--color-${colorName}-kawaii: var(--color-${colorName}-kawaii-${mode})`,
+      )
+    }
+
+    // Kawaii grayScale colors
+    for (const grayScaleName of Object.keys(colors.kawaii.grayScale)) {
+      lines.push(
+        `--color-${grayScaleName}-kawaii: var(--color-${grayScaleName}-kawaii-${mode})`,
       )
     }
   }
