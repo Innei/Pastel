@@ -52,6 +52,7 @@ export const highContrastColors: Record<RegularColorName, ColorVariants> = {
     dark: createColor('oklch(0.85 0 0)'),
   },
 
+
   neutral: {
     light: createColor('oklch(0.25 0 0)'),
     dark: createColor('oklch(0.9 0 0)'),

@@ -4,6 +4,7 @@ import {
   highContrastColors,
   highContrastElementColors,
   highContrastFillColors,
+  highContrastGrayScale,
   highContrastMaterialColors,
 } from './themes/high-contrast'
 import {
@@ -12,6 +13,7 @@ import {
   kawaiiColors,
   kawaiiElementColors,
   kawaiiFillColors,
+  kawaiiGrayScale,
   kawaiiMaterialColors,
 } from './themes/kawaii'
 import {
@@ -20,12 +22,14 @@ import {
   regularColors,
   regularElementColors,
   regularFillColors,
+  regularGrayScale,
   regularMaterialColors,
 } from './themes/regular'
 import type { ColorPalette, ColorSystem, ThemeColorSystem } from './types'
 
 export const regularColorSystem: ThemeColorSystem = {
   colors: regularColors,
+  grayScale: regularGrayScale,
   element: regularElementColors,
   background: regularBackgroundColors,
   fill: regularFillColors,
@@ -35,6 +39,7 @@ export const regularColorSystem: ThemeColorSystem = {
 
 export const kawaiiColorSystem: ThemeColorSystem = {
   colors: kawaiiColors,
+  grayScale: kawaiiGrayScale,
   element: kawaiiElementColors,
   background: kawaiiBackgroundColors,
   fill: kawaiiFillColors,
@@ -44,6 +49,7 @@ export const kawaiiColorSystem: ThemeColorSystem = {
 
 export const highContrastColorSystem: ThemeColorSystem = {
   colors: highContrastColors,
+  grayScale: highContrastGrayScale,
   element: highContrastElementColors,
   background: highContrastBackgroundColors,
   fill: highContrastFillColors,

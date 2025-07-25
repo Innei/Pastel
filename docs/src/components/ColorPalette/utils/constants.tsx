@@ -1,4 +1,4 @@
-import { Brush,Layers, Palette, RectangleHorizontal, Square, Type } from 'lucide-react'
+import { Brush, Layers, Palette, RectangleHorizontal, Square, Type, Zap } from 'lucide-react'
 
 import type { ColorSection } from '../types'
 
@@ -8,6 +8,12 @@ export const colorSections: ColorSection[] = [
     title: 'Regular Colors',
     description: 'Base color palette with light and dark variants',
     icon: <Palette className="w-5 h-5" />,
+  },
+  {
+    id: 'grayScale',
+    title: 'Gray Scale',
+    description: '10-level grayscale colors from dark to light',
+    icon: <Zap className="w-5 h-5" />,
   },
   {
     id: 'element',

@@ -1,4 +1,4 @@
-export type ColorCategory = 'regular' | 'element' | 'background' | 'fill' | 'material' | 'application'
+export type ColorCategory = 'regular' | 'grayScale' | 'element' | 'background' | 'fill' | 'material' | 'application'
 export type ColorVariant = 'regular' | 'high-contrast' | 'kawaii'
 export type SortOrder =
   | 'default'

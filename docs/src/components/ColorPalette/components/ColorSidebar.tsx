@@ -106,6 +106,7 @@ interface ColorSidebarContextType {
 
   // Methods
   getRegularColors: () => [string, ColorData][]
+  getGrayScaleColors: () => [string, ColorData][]
   getElementColors: () => [string, ColorData][]
   getBackgroundColors: () => [string, ColorData][]
   getFillColors: () => [string, ColorData][]
@@ -165,6 +166,24 @@ const ColorSidebarProvider = ({
       ) as [string, ColorData][]
     } catch (error) {
       console.warn('Error getting regular colors:', error)
+      return []
+    }
+  }, [selectedVariant])
+
+  // Get colors for grayScale category
+  const getGrayScaleColors = useCallback((): [string, ColorData][] => {
+    try {
+      const themeData = getVariantData(selectedVariant)
+      const grayScaleData = themeData?.grayScale || {}
+      return Object.entries(grayScaleData).filter(
+        ([, value]) =>
+          value &&
+          typeof value === 'object' &&
+          'light' in value &&
+          'dark' in value,
+      ) as [string, ColorData][]
+    } catch (error) {
+      console.warn('Error getting gray scale colors:', error)
       return []
     }
   }, [selectedVariant])
@@ -283,6 +302,7 @@ const ColorSidebarProvider = ({
       onColorSelect,
       onSearchChange,
       getRegularColors,
+      getGrayScaleColors,
       getElementColors,
       getBackgroundColors,
       getFillColors,
@@ -302,6 +322,7 @@ const ColorSidebarProvider = ({
       onColorSelect,
       onSearchChange,
       getRegularColors,
+      getGrayScaleColors,
       getElementColors,
       getBackgroundColors,
       getFillColors,
@@ -464,6 +485,7 @@ const ColorCategories = () => {
   )
   const contextValue = useContextSelector(ColorSidebarContext, (ctx) => ({
     getRegularColors: ctx.getRegularColors,
+    getGrayScaleColors: ctx.getGrayScaleColors,
     getElementColors: ctx.getElementColors,
     getBackgroundColors: ctx.getBackgroundColors,
     getFillColors: ctx.getFillColors,
@@ -478,6 +500,9 @@ const ColorCategories = () => {
       switch (sectionId) {
         case 'regular': {
           return contextValue.getRegularColors()
+        }
+        case 'grayScale': {
+          return contextValue.getGrayScaleColors()
         }
         case 'element': {
           return contextValue.getElementColors()

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Dropdown } from '../ui/Dropdown'
 import { ColorModal } from './ColorModal'
 import { GridApplicationColors } from './components/GridApplicationColors'
+import { GridGrayScaleColors } from './components/GridGrayScaleColors'
 import { GridMaterialColors } from './components/GridMaterialColors'
 import { GridRegularColors } from './components/GridRegularColors'
 import { GridSemanticColors } from './components/GridSemanticColors'
@@ -57,6 +58,16 @@ export function ColorGrid() {
           <GridRegularColors
             selectedVariant={selectedVariant}
             sortOrder={sortOrder}
+            onColorClick={handleColorClick}
+          />
+        )
+      }
+
+      case 'grayScale': {
+        return (
+          <GridGrayScaleColors
+            selectedVariant={selectedVariant}
+            selectedChannel={selectedChannel}
             onColorClick={handleColorClick}
           />
         )

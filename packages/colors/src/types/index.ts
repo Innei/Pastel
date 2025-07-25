@@ -74,6 +74,18 @@ export type RegularColorName =
   | 'slate'
   | 'zinc'
 
+export type GrayScaleColorName =
+  | 'gray1'
+  | 'gray2'
+  | 'gray3'
+  | 'gray4'
+  | 'gray5'
+  | 'gray6'
+  | 'gray7'
+  | 'gray8'
+  | 'gray9'
+  | 'gray10'
+
 export type ElementColorName =
   | 'border'
   | 'separator'
@@ -89,6 +101,7 @@ export type ThemeName = 'regular' | 'kawaii' | 'high-contrast'
 
 export interface ThemeColorSystem {
   colors: Record<RegularColorName, ColorVariants>
+  grayScale: Record<GrayScaleColorName, ColorVariants>
   element: Record<ElementColorName, SemanticColor>
   background: SemanticColor
   fill: SemanticColor
