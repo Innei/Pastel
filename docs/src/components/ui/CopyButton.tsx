@@ -1,10 +1,10 @@
 import { Check, Copy } from 'lucide-react'
-import { useCallback,useState } from 'react'
+import { useCallback, useState } from 'react'
 
 interface CopyButtonProps {
   value: string
   label: string
-  variant?: 'default' | 'primary'
+  variant?: 'default' | 'primary' | 'icon'
   onCopy?: (value: string) => void
 }
 
@@ -26,6 +26,24 @@ export function CopyButton({
       console.error('Failed to copy to clipboard:', error)
     }
   }, [value, onCopy])
+
+  if (variant === 'icon') {
+    return (
+      <button
+        type="button"
+        onClick={handleCopy}
+        title={`Copy ${label}: ${value}`}
+        className="group flex items-center justify-center p-2 rounded-md border border-border hover:bg-background-tertiary transition-all"
+      >
+        {isCopied ? (
+          <Check className="w-4 h-4 text-green" />
+        ) : (
+          <Copy className="w-4 h-4" />
+        )}
+      </button>
+    )
+  }
+
   return (
     <button
       type="button"
@@ -37,7 +55,7 @@ export function CopyButton({
       }`}
     >
       <span className="text-sm font-medium">{label}</span>
-      <span className="text-xs text-text/95">{value}</span>
+      <span className="text-xs opacity-95">{value}</span>
       {isCopied ? (
         <Check className="w-4 h-4 text-green" />
       ) : (

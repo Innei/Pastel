@@ -12,11 +12,83 @@ import type {
 } from '../types'
 import { colorSections } from '../utils/constants'
 
+// Types
+interface ColorData {
+  light: {
+    oklch: string
+    srgb: string
+    p3?: string
+  }
+  dark: {
+    oklch: string
+    srgb: string
+    p3?: string
+  }
+}
+
+// Custom hooks
+const useColorDisplay = (data: ColorData, selectedChannel: ColorChannel) => {
+  return useMemo(() => {
+    const lightColor = data.light
+    const darkColor = data.dark
+    const displayColor = lightColor[selectedChannel] || lightColor.oklch
+
+    return {
+      lightColor,
+      darkColor,
+      displayColor,
+      lightBackground: lightColor.srgb || lightColor.oklch,
+      darkBackground: darkColor.srgb || darkColor.oklch,
+    }
+  }, [data, selectedChannel])
+}
+
+// Utilities
+const getVariantData = (selectedVariant: ColorVariant) => {
+  const variant =
+    selectedVariant === 'regular'
+      ? 'regular'
+      : selectedVariant === 'high-contrast'
+      ? 'high-contrast'
+      : 'kawaii'
+  return colorSystem[variant] || colorSystem.regular
+}
+
+const flattenNestedColors = (
+  data: Record<string, any>,
+  prefix: string,
+): [string, ColorData][] => {
+  const flattened: [string, ColorData][] = []
+
+  try {
+    Object.entries(data || {}).forEach(([key, value]) => {
+      if (
+        value &&
+        typeof value === 'object' &&
+        'light' in value &&
+        'dark' in value
+      ) {
+        flattened.push([`${prefix}${key}`, value as ColorData])
+      }
+    })
+  } catch (error) {
+    console.warn('Error flattening nested colors:', error)
+  }
+
+  return flattened
+}
+
 // ColorSidebar Context
+interface SelectedColor {
+  name: string
+  category: ColorCategory
+  data?: ColorData
+}
+
 interface ColorSidebarContextType {
   // Props from parent
   selectedCategory: ColorCategory
-  selectedColor: { name: string; category: ColorCategory; data?: any } | null
+  selectedColor: SelectedColor | null
   searchQuery: string
 
   selectedVariant: ColorVariant
@@ -25,18 +97,22 @@ interface ColorSidebarContextType {
 
   // Event handlers
   onCategoryChange: (category: ColorCategory) => void
-  onColorSelect: (name: string, category: ColorCategory, data?: any) => void
+  onColorSelect: (
+    name: string,
+    category: ColorCategory,
+    data?: ColorData,
+  ) => void
   onSearchChange: (query: string) => void
 
   // Methods
-  getRegularColors: () => [string, any][]
-  getElementColors: () => [string, any][]
-  getBackgroundColors: () => [string, any][]
-  getFillColors: () => [string, any][]
-  getMaterialColors: () => [string, any][]
-  getApplicationColors: () => [string, any][]
-  filterColors: (colors: [string, any][]) => [string, any][]
-  sortColors: (colors: [string, any][]) => [string, any][]
+  getRegularColors: () => [string, ColorData][]
+  getElementColors: () => [string, ColorData][]
+  getBackgroundColors: () => [string, ColorData][]
+  getFillColors: () => [string, ColorData][]
+  getMaterialColors: () => [string, ColorData][]
+  getApplicationColors: () => [string, ColorData][]
+  filterColors: (colors: [string, ColorData][]) => [string, ColorData][]
+  sortColors: (colors: [string, ColorData][]) => [string, ColorData][]
 }
 
 const ColorSidebarContext = createContext<ColorSidebarContextType>(
@@ -47,11 +123,15 @@ const ColorSidebarContext = createContext<ColorSidebarContextType>(
 interface ColorSidebarProviderProps {
   children: ReactNode
   selectedCategory: ColorCategory
-  selectedColor: { name: string; category: ColorCategory; data?: any } | null
+  selectedColor: SelectedColor | null
   searchQuery: string
 
   onCategoryChange: (category: ColorCategory) => void
-  onColorSelect: (name: string, category: ColorCategory, data?: any) => void
+  onColorSelect: (
+    name: string,
+    category: ColorCategory,
+    data?: ColorData,
+  ) => void
   onSearchChange: (query: string) => void
   selectedVariant: ColorVariant
   selectedChannel: ColorChannel
@@ -72,130 +152,94 @@ const ColorSidebarProvider = ({
   sortOrder,
 }: ColorSidebarProviderProps) => {
   // Get colors for regular category
-  const getRegularColors = useCallback(() => {
-    const variant =
-      selectedVariant === 'regular'
-        ? 'regular'
-        : selectedVariant === 'high-contrast'
-        ? 'high-contrast'
-        : 'kawaii'
-
-    const colorData = colorSystem[variant]?.colors || colorSystem.regular.colors
-    return Object.entries(colorData)
+  const getRegularColors = useCallback((): [string, ColorData][] => {
+    try {
+      const themeData = getVariantData(selectedVariant)
+      const colorData = themeData?.colors || {}
+      return Object.entries(colorData).filter(
+        ([, value]) =>
+          value &&
+          typeof value === 'object' &&
+          'light' in value &&
+          'dark' in value,
+      ) as [string, ColorData][]
+    } catch (error) {
+      console.warn('Error getting regular colors:', error)
+      return []
+    }
   }, [selectedVariant])
 
   // Get individual color categories
-  const getElementColors = useCallback(() => {
-    const variant =
-      selectedVariant === 'regular'
-        ? 'regular'
-        : selectedVariant === 'high-contrast'
-        ? 'high-contrast'
-        : 'kawaii'
-    const themeData = colorSystem[variant] || colorSystem.regular
-    const elementData = themeData.element || {}
-
-    // Flatten the nested structure for ColorItem compatibility
-    const flattened: [string, any][] = []
-    Object.entries(elementData).forEach(([elementName, semanticColor]) => {
-      if (typeof semanticColor === 'object' && semanticColor !== null) {
-        Object.entries(semanticColor).forEach(([level, colorVariants]) => {
-          // Each colorVariants should have light and dark properties
-          if (
-            colorVariants &&
-            typeof colorVariants === 'object' &&
-            'light' in colorVariants
-          ) {
-            flattened.push([`${elementName}-${level}`, colorVariants])
-          }
-        })
-      }
-    })
-
-    return flattened
-  }, [selectedVariant])
-
-  const getBackgroundColors = useCallback(() => {
-    const variant =
-      selectedVariant === 'regular'
-        ? 'regular'
-        : selectedVariant === 'high-contrast'
-        ? 'high-contrast'
-        : 'kawaii'
-    const themeData = colorSystem[variant] || colorSystem.regular
-    const backgroundData = themeData.background || {}
-
-    // Flatten the nested structure for ColorItem compatibility
-    const flattened: [string, any][] = []
-    if (typeof backgroundData === 'object' && backgroundData !== null) {
-      Object.entries(backgroundData).forEach(([level, colorVariants]) => {
-        // Each colorVariants should have light and dark properties
-        if (
-          colorVariants &&
-          typeof colorVariants === 'object' &&
-          'light' in colorVariants
-        ) {
-          flattened.push([`background-${level}`, colorVariants])
-        }
-      })
+  const getElementColors = useCallback((): [string, ColorData][] => {
+    try {
+      const themeData = getVariantData(selectedVariant)
+      const elementData = themeData?.element || {}
+      return flattenNestedColors(elementData, '')
+    } catch (error) {
+      console.warn('Error getting element colors:', error)
+      return []
     }
-
-    return flattened
   }, [selectedVariant])
 
-  const getFillColors = useCallback(() => {
-    const variant =
-      selectedVariant === 'regular'
-        ? 'regular'
-        : selectedVariant === 'high-contrast'
-        ? 'high-contrast'
-        : 'kawaii'
-    const themeData = colorSystem[variant] || colorSystem.regular
-    const fillData = themeData.fill || {}
-
-    // Flatten the nested structure for ColorItem compatibility
-    const flattened: [string, any][] = []
-    if (typeof fillData === 'object' && fillData !== null) {
-      Object.entries(fillData).forEach(([level, colorVariants]) => {
-        // Each colorVariants should have light and dark properties
-        if (
-          colorVariants &&
-          typeof colorVariants === 'object' &&
-          'light' in colorVariants
-        ) {
-          flattened.push([`fill-${level}`, colorVariants])
-        }
-      })
+  const getBackgroundColors = useCallback((): [string, ColorData][] => {
+    try {
+      const themeData = getVariantData(selectedVariant)
+      const backgroundData = themeData?.background || {}
+      return flattenNestedColors(backgroundData, 'background-')
+    } catch (error) {
+      console.warn('Error getting background colors:', error)
+      return []
     }
-
-    return flattened
   }, [selectedVariant])
 
-  const getMaterialColors = useCallback(() => {
-    const variant =
-      selectedVariant === 'regular'
-        ? 'regular'
-        : selectedVariant === 'high-contrast'
-        ? 'high-contrast'
-        : 'kawaii'
-    const themeData = colorSystem[variant] || colorSystem.regular
-    return Object.entries(themeData.material || {})
+  const getFillColors = useCallback((): [string, ColorData][] => {
+    try {
+      const themeData = getVariantData(selectedVariant)
+      const fillData = themeData?.fill || {}
+      return flattenNestedColors(fillData, 'fill-')
+    } catch (error) {
+      console.warn('Error getting fill colors:', error)
+      return []
+    }
   }, [selectedVariant])
 
-  const getApplicationColors = useCallback(() => {
-    const variant =
-      selectedVariant === 'regular'
-        ? 'regular'
-        : selectedVariant === 'high-contrast'
-        ? 'high-contrast'
-        : 'kawaii'
-    const themeData = colorSystem[variant] || colorSystem.regular
-    return Object.entries(themeData.application || {})
+  const getMaterialColors = useCallback((): [string, ColorData][] => {
+    try {
+      const themeData = getVariantData(selectedVariant)
+      const materialData = themeData?.material || {}
+      return Object.entries(materialData).filter(
+        ([, value]) =>
+          value &&
+          typeof value === 'object' &&
+          'light' in value &&
+          'dark' in value,
+      ) as [string, ColorData][]
+    } catch (error) {
+      console.warn('Error getting material colors:', error)
+      return []
+    }
+  }, [selectedVariant])
+
+  const getApplicationColors = useCallback((): [string, ColorData][] => {
+    try {
+      const themeData = getVariantData(selectedVariant)
+      const applicationData = themeData?.application || {}
+      return Object.entries(applicationData).filter(
+        ([, value]) =>
+          value &&
+          typeof value === 'object' &&
+          'light' in value &&
+          'dark' in value,
+      ) as [string, ColorData][]
+    } catch (error) {
+      console.warn('Error getting application colors:', error)
+      return []
+    }
   }, [selectedVariant])
 
   // Filter colors based on search query
   const filterColors = useCallback(
-    (colors: [string, any][]) => {
+    (colors: [string, ColorData][]): [string, ColorData][] => {
       if (!searchQuery) return colors
 
       return colors.filter(([name]) =>
@@ -207,7 +251,7 @@ const ColorSidebarProvider = ({
 
   // Sort colors based on sort order
   const sortColors = useCallback(
-    (colors: [string, any][]) => {
+    (colors: [string, ColorData][]): [string, ColorData][] => {
       if (sortOrder === 'default') return colors
 
       return [...colors].sort(([nameA], [nameB]) => {
@@ -278,7 +322,7 @@ const ColorSidebarProvider = ({
 // ColorItem Component
 interface ColorItemProps {
   name: string
-  data: any
+  data: ColorData
   category: ColorCategory
 }
 
@@ -296,42 +340,43 @@ const ColorItem = ({ name, data, category }: ColorItemProps) => {
     (ctx) => ctx.onColorSelect,
   )
 
-  const isSelected =
-    selectedColor?.name === name && selectedColor?.category === category
-  const lightColor = data?.light || data
-  const darkColor = data?.dark || data
-  const displayColor = lightColor?.[selectedChannel] || lightColor?.oklch || ''
+  const { lightBackground, darkBackground } = useColorDisplay(
+    data,
+    selectedChannel,
+  )
+
+  const isSelected = useMemo(
+    () => selectedColor?.name === name && selectedColor?.category === category,
+    [selectedColor?.name, selectedColor?.category, name, category],
+  )
+
+  const handleClick = useCallback(() => {
+    onColorSelect(name, category, data)
+  }, [name, category, data, onColorSelect])
 
   return (
     <div
       className={`group flex items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-colors ${
         isSelected ? 'bg-accent text-white' : 'hover:bg-background-secondary'
       }`}
-      onClick={() => onColorSelect(name, category, data)}
+      onClick={handleClick}
     >
       {/* Color Preview */}
       <div className="relative w-4 h-4 rounded-sm overflow-hidden border border-border flex-shrink-0">
-        {darkColor && (
-          <>
-            <div
-              className="absolute inset-0"
-              style={{
-                background: lightColor?.srgb || lightColor?.oklch || '',
-                clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-              }}
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background: darkColor?.srgb || darkColor?.oklch || '',
-                clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
-              }}
-            />
-          </>
-        )}
-        {!darkColor && (
-          <div className="w-full h-full" style={{ background: displayColor }} />
-        )}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: lightBackground,
+            clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: darkBackground,
+            clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
+          }}
+        />
       </div>
 
       {/* Color Name */}
@@ -341,8 +386,14 @@ const ColorItem = ({ name, data, category }: ColorItemProps) => {
 }
 
 // CategoryHeader Component
+interface CategorySection {
+  id: ColorCategory
+  title: string
+  icon: ReactNode
+}
+
 interface CategoryHeaderProps {
-  section: any
+  section: CategorySection
   colorCount: number
 }
 
@@ -356,6 +407,10 @@ const CategoryHeader = ({ section, colorCount }: CategoryHeaderProps) => {
     (ctx) => ctx.onCategoryChange,
   )
 
+  const handleClick = useCallback(() => {
+    onCategoryChange(section.id)
+  }, [section.id, onCategoryChange])
+
   return (
     <div
       className={`flex items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-colors ${
@@ -363,7 +418,7 @@ const CategoryHeader = ({ section, colorCount }: CategoryHeaderProps) => {
           ? 'bg-accent/10 text-accent'
           : 'hover:bg-background-secondary'
       }`}
-      onClick={() => onCategoryChange(section.id)}
+      onClick={handleClick}
     >
       {section.icon}
       <span className="text-sm font-medium flex-1">{section.title}</span>
@@ -407,88 +462,71 @@ const ColorCategories = () => {
     ColorSidebarContext,
     (ctx) => ctx.selectedCategory,
   )
-  const getRegularColors = useContextSelector(
-    ColorSidebarContext,
-    (ctx) => ctx.getRegularColors,
-  )
-  const getElementColors = useContextSelector(
-    ColorSidebarContext,
-    (ctx) => ctx.getElementColors,
-  )
-  const getBackgroundColors = useContextSelector(
-    ColorSidebarContext,
-    (ctx) => ctx.getBackgroundColors,
-  )
-  const getFillColors = useContextSelector(
-    ColorSidebarContext,
-    (ctx) => ctx.getFillColors,
-  )
-  const getMaterialColors = useContextSelector(
-    ColorSidebarContext,
-    (ctx) => ctx.getMaterialColors,
-  )
-  const getApplicationColors = useContextSelector(
-    ColorSidebarContext,
-    (ctx) => ctx.getApplicationColors,
-  )
-  const filterColors = useContextSelector(
-    ColorSidebarContext,
-    (ctx) => ctx.filterColors,
-  )
-  const sortColors = useContextSelector(
-    ColorSidebarContext,
-    (ctx) => ctx.sortColors,
+  const contextValue = useContextSelector(ColorSidebarContext, (ctx) => ({
+    getRegularColors: ctx.getRegularColors,
+    getElementColors: ctx.getElementColors,
+    getBackgroundColors: ctx.getBackgroundColors,
+    getFillColors: ctx.getFillColors,
+    getMaterialColors: ctx.getMaterialColors,
+    getApplicationColors: ctx.getApplicationColors,
+    filterColors: ctx.filterColors,
+    sortColors: ctx.sortColors,
+  }))
+
+  const getColorsForSection = useCallback(
+    (sectionId: ColorCategory): [string, ColorData][] => {
+      switch (sectionId) {
+        case 'regular': {
+          return contextValue.getRegularColors()
+        }
+        case 'element': {
+          return contextValue.getElementColors()
+        }
+        case 'background': {
+          return contextValue.getBackgroundColors()
+        }
+        case 'fill': {
+          return contextValue.getFillColors()
+        }
+        case 'material': {
+          return contextValue.getMaterialColors()
+        }
+        case 'application': {
+          return contextValue.getApplicationColors()
+        }
+        default: {
+          return []
+        }
+      }
+    },
+    [contextValue],
   )
 
   return (
     <div className="space-y-2">
       {colorSections.map((section) => {
-        let colors: [string, any][] = []
-        let colorCount = 0
-
-        switch (section.id) {
-          case 'regular': {
-            colors = getRegularColors()
-            break
-          }
-          case 'element': {
-            colors = getElementColors()
-            break
-          }
-          case 'background': {
-            colors = getBackgroundColors()
-            break
-          }
-          case 'fill': {
-            colors = getFillColors()
-            break
-          }
-          case 'material': {
-            colors = getMaterialColors()
-            break
-          }
-          case 'application': {
-            colors = getApplicationColors()
-            break
-          }
-        }
-
-        colorCount = colors.length
+        const colors = getColorsForSection(section.id as ColorCategory)
+        const colorCount = colors.length
 
         return (
           <div key={section.id} className="space-y-1">
-            <CategoryHeader section={section} colorCount={colorCount} />
+            <CategoryHeader
+              section={section as CategorySection}
+              colorCount={colorCount}
+            />
 
             {selectedCategory === section.id && (
               <div className="ml-3 space-y-1">
-                {sortColors(filterColors(colors)).map(([name, data]) => (
-                  <ColorItem
-                    key={name}
-                    name={name}
-                    data={data}
-                    category={section.id as ColorCategory}
-                  />
-                ))}
+                {contextValue
+                  .sortColors(contextValue.filterColors(colors))
+                  .map(([name, data]) => (
+                    <ColorItem
+                      key={name}
+                      name={name}
+                      data={data}
+                      category={section.id as ColorCategory}
+                    />
+                  ))}
               </div>
             )}
           </div>
@@ -501,11 +539,15 @@ const ColorCategories = () => {
 // Main ColorSidebar Component
 interface ColorSidebarProps {
   selectedCategory: ColorCategory
-  selectedColor: { name: string; category: ColorCategory; data?: any } | null
+  selectedColor: SelectedColor | null
   searchQuery: string
 
   onCategoryChange: (category: ColorCategory) => void
-  onColorSelect: (name: string, category: ColorCategory, data?: any) => void
+  onColorSelect: (
+    name: string,
+    category: ColorCategory,
+    data?: ColorData,
+  ) => void
   onSearchChange: (query: string) => void
   selectedVariant: ColorVariant
   selectedChannel: ColorChannel
