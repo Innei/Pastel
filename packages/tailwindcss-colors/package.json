@@ -19,6 +19,7 @@
     "build": "pnpm build:css",
     "build:css": "tsx cli/build.ts",
     "clean": "rm -rf dist",
+    "dev": "tsx watch cli/build.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

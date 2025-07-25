@@ -6,17 +6,17 @@ export const kawaiiApplicationColors: Record<
   ColorVariants
 > = {
   accent: {
-    light: createColor('oklch(0.85 0.12 237)'),
-    dark: createColor('oklch(0.65 0.14 237)'),
+    light: createColor('oklch(0.71 0.14 237)'),
+    dark: createColor('oklch(0.67 0.14 237)'),
   },
 
   primary: {
-    light: createColor('oklch(0.87 0.16 350)'),
-    dark: createColor('oklch(0.7 0.18 350)'),
+    light: createColor('oklch(0.68 0.14 237)'),
+    dark: createColor('oklch(0.7 0.14 237)'),
   },
 
   secondary: {
-    light: createColor('oklch(0.84 0.14 280)'),
-    dark: createColor('oklch(0.67 0.16 280)'),
+    light: createColor('oklch(0.7486 0.1168 187.91)'),
+    dark: createColor('oklch(0.77 0.1168 187.91)'),
   },
 }

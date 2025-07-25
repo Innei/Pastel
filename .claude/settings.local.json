@@ -12,7 +12,9 @@
       "Bash(mv:*)",
       "Bash(grep:*)",
       "Bash(npx turbo:*)",
-      "Bash(npx tsx:*)"
+      "Bash(npx tsx:*)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs"
     ],
     "deny": []
   }
