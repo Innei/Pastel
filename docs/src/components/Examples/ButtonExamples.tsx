@@ -1,171 +1,474 @@
-export function ButtonExamples() {
+'use client'
+
+import {
+  AlertTriangle,
+  CheckCircle,
+  Download,
+  Heart,
+  Loader2,
+  Plus,
+  Settings,
+  Share2,
+  Trash2,
+  X,
+} from 'lucide-react'
+import { m as motion } from 'motion/react'
+import { useState } from 'react'
+
+import { microReboundPreset, softSpringPreset } from '../../constants/spring'
+
+interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive'
+  size?: 'sm' | 'md' | 'lg'
+  disabled?: boolean
+  loading?: boolean
+  children: React.ReactNode
+  icon?: 'left' | 'right'
+  iconElement?: React.ReactNode
+  className?: string
+  [key: string]: any
+}
+
+function Button({
+  variant = 'primary',
+  size = 'md',
+  disabled = false,
+  loading = false,
+  children,
+  icon,
+  iconElement,
+  className = '',
+  ...props
+}: ButtonProps) {
+  const baseClasses =
+    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
+
+  const variants = {
+    primary: 'bg-accent text-white hover:opacity-90 focus:ring-accent',
+    secondary:
+      'bg-background-secondary text-text border border-border hover:bg-fill focus:ring-accent',
+    outline: 'border border-border text-text hover:bg-fill focus:ring-accent',
+    ghost: 'text-text hover:bg-fill focus:ring-accent',
+    destructive: 'bg-red text-white hover:opacity-90 focus:ring-red',
+  }
+
+  const sizes = {
+    sm: 'text-sm px-3 py-1.5 gap-1.5',
+    md: 'text-sm px-4 py-2 gap-2',
+    lg: 'text-base px-6 py-3 gap-2.5',
+  }
+
+  const iconSizes = {
+    sm: 'w-3.5 h-3.5',
+    md: 'w-4 h-4',
+    lg: 'w-5 h-5',
+  }
+
   return (
-    <div className="card p-8 space-y-8">
-      <div className="text-center">
-        <h4 className="heading-4 mb-2">Button Examples</h4>
-        <p className="text-muted">
-          Explore different button styles using our color system
+    <motion.button
+      className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`}
+      disabled={disabled || loading}
+      whileHover={!disabled && !loading ? { y: -1, scale: 1.02 } : {}}
+      whileTap={!disabled && !loading ? { scale: 0.98 } : {}}
+      transition={microReboundPreset}
+      {...props}
+    >
+      {loading && <Loader2 className={`${iconSizes[size]} animate-spin`} />}
+      {!loading && iconElement && icon === 'left' && (
+        <span className={iconSizes[size]}>{iconElement}</span>
+      )}
+      <span>{children}</span>
+      {!loading && iconElement && icon === 'right' && (
+        <span className={iconSizes[size]}>{iconElement}</span>
+      )}
+    </motion.button>
+  )
+}
+
+export function ButtonExamples() {
+  const [isLoading, setIsLoading] = useState(false)
+  const [likedButtons, setLikedButtons] = useState<Set<string>>(new Set())
+
+  const handleLoadingDemo = () => {
+    setIsLoading(true)
+    setTimeout(() => setIsLoading(false), 2000)
+  }
+
+  const handleLike = (buttonId: string) => {
+    setLikedButtons((prev) => {
+      const newSet = new Set(prev)
+      if (newSet.has(buttonId)) {
+        newSet.delete(buttonId)
+      } else {
+        newSet.add(buttonId)
+      }
+      return newSet
+    })
+  }
+
+  return (
+    <div className="card p-8 space-y-12">
+      <motion.div
+        className="text-center max-w-3xl mx-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={softSpringPreset}
+      >
+        <h4 className="heading-3 text-text mb-4">Button System</h4>
+        <p className="text-text-secondary text-lg leading-relaxed mb-6">
+          A comprehensive button system showcasing our OKLCH color palette with
+          semantic variants, sizes, and interactive states designed for optimal
+          user experience.
         </p>
-      </div>
+        <div className="h-1 w-24 bg-gradient-to-r from-accent to-accent/50 rounded-full mx-auto" />
+      </motion.div>
 
-      <div className="space-y-8">
-        {/* Primary Buttons */}
-        <div className="space-y-4">
-          <h5 className="text-lg font-semibold">Primary Buttons</h5>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <button className="btn bg-primary text-white hover:opacity-90">
-              Primary
-            </button>
-            <button className="btn bg-pink text-white hover:opacity-90">
+      <div className="space-y-12">
+        {/* Button Variants */}
+        <motion.section
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.1 }}
+        >
+          <div className="flex items-center gap-4">
+            <h5 className="heading-4 text-text">Semantic Variants</h5>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <p className="text-text-secondary">
+            Five semantic button variants covering all common use cases in
+            modern applications.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            <Button variant="primary">Primary</Button>
+            <Button variant="secondary">Secondary</Button>
+            <Button variant="outline">Outline</Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button variant="destructive">Destructive</Button>
+          </div>
+        </motion.section>
+
+        {/* Color Palette Integration */}
+        <motion.section
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.2 }}
+        >
+          <div className="flex items-center gap-4">
+            <h5 className="heading-4 text-text">OKLCH Color Integration</h5>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <p className="text-text-secondary">
+            Demonstrating our color system with direct color access for specific
+            design needs.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
+            <Button className="bg-pink text-white hover:opacity-90">
               Pink
-            </button>
-            <button className="btn bg-purple text-white hover:opacity-90">
+            </Button>
+            <Button className="bg-purple text-white hover:opacity-90">
               Purple
-            </button>
-            <button className="btn bg-green text-white hover:opacity-90">
-              Green
-            </button>
-          </div>
-        </div>
-
-        {/* Secondary Buttons */}
-        <div className="space-y-4">
-          <h5 className="text-lg font-semibold">Secondary Buttons</h5>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <button className="btn btn-secondary hover:bg-material-medium">
-              Default
-            </button>
-            <button className="btn border border-blue text-blue hover:bg-blue hover:text-white hover:bg-opacity-10">
+            </Button>
+            <Button className="bg-blue text-white hover:opacity-90">
               Blue
-            </button>
-            <button className="btn border border-green text-green hover:bg-green hover:text-white hover:bg-opacity-10">
+            </Button>
+            <Button className="bg-green text-white hover:opacity-90">
               Green
-            </button>
-            <button className="btn border border-red text-red hover:bg-red hover:text-white hover:bg-opacity-10">
-              Red
-            </button>
+            </Button>
+            <Button className="bg-yellow text-black hover:opacity-90">
+              Yellow
+            </Button>
+            <Button className="bg-orange text-white hover:opacity-90">
+              Orange
+            </Button>
           </div>
-        </div>
+        </motion.section>
 
         {/* Button Sizes */}
-        <div className="space-y-4">
-          <h5 className="text-lg font-semibold">Button Sizes</h5>
-          <div className="flex flex-wrap items-center gap-4">
-            <button className="btn btn-primary text-sm py-1.5 px-3">
-              Small
-            </button>
-            <button className="btn btn-primary">Medium</button>
-            <button className="btn btn-primary text-lg py-3 px-6">Large</button>
+        <motion.section
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.3 }}
+        >
+          <div className="flex items-center gap-4">
+            <h5 className="heading-4 text-text">Size Variations</h5>
+            <div className="flex-1 h-px bg-border" />
           </div>
-        </div>
-
-        {/* Button States */}
-        <div className="space-y-4">
-          <h5 className="text-lg font-semibold">Button States</h5>
-          <div className="flex flex-wrap gap-4">
-            <button className="btn btn-primary">Normal</button>
-            <button className="btn btn-secondary" disabled>
-              Disabled
-            </button>
-            <button className="btn btn-primary flex items-center gap-2">
-              <svg
-                className="w-4 h-4 animate-spin"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                 />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                 />
-              </svg>
-              Loading
-            </button>
+          <p className="text-text-secondary">
+            Three carefully proportioned sizes with consistent spacing and
+            typography scales.
+          </p>
+          <div className="flex flex-wrap items-center gap-6">
+            <Button variant="primary" size="sm">
+              Small Button
+            </Button>
+            <Button variant="primary" size="md">
+              Medium Button
+            </Button>
+            <Button variant="primary" size="lg">
+              Large Button
+            </Button>
           </div>
-        </div>
+        </motion.section>
 
-        {/* Icon Buttons */}
-        <div className="space-y-4">
-          <h5 className="text-lg font-semibold">Icon Buttons</h5>
-          <div className="flex flex-wrap gap-4">
-            <button className="btn btn-primary flex items-center gap-2">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-              Add Item
-            </button>
-            <button className="btn btn-secondary flex items-center gap-2">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-              Like
-            </button>
-            <button className="btn btn-secondary flex items-center gap-2">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
-                />
-              </svg>
-              Share
-            </button>
+        {/* Interactive States */}
+        <motion.section
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.4 }}
+        >
+          <div className="flex items-center gap-4">
+            <h5 className="heading-4 text-text">Interactive States</h5>
+            <div className="flex-1 h-px bg-border" />
           </div>
-        </div>
+          <p className="text-text-secondary">
+            Comprehensive state management including hover, focus, disabled, and
+            loading states.
+          </p>
+          <div className="bg-background-secondary p-6 rounded-xl border border-border">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="space-y-3">
+                <h6 className="text-sm font-semibold text-text">Normal</h6>
+                <Button variant="primary">Active Button</Button>
+              </div>
+              <div className="space-y-3">
+                <h6 className="text-sm font-semibold text-text">Disabled</h6>
+                <Button variant="primary" disabled>
+                  Disabled Button
+                </Button>
+              </div>
+              <div className="space-y-3">
+                <h6 className="text-sm font-semibold text-text">Loading</h6>
+                <Button
+                  variant="primary"
+                  loading={isLoading}
+                  onClick={handleLoadingDemo}
+                >
+                  {isLoading ? 'Processing...' : 'Start Loading'}
+                </Button>
+              </div>
+              <div className="space-y-3">
+                <h6 className="text-sm font-semibold text-text">Focus</h6>
+                <Button variant="primary" className="focus:ring-4">
+                  Focus Me
+                </Button>
+              </div>
+            </div>
+          </div>
+        </motion.section>
 
-        {/* Usage Example */}
-        <div className="space-y-4">
-          <h5 className="text-lg font-semibold">Usage Example</h5>
-          <div className="bg-material-medium p-6 rounded-md overflow-x-auto">
-            <pre className="text-sm">
-              <code>{`<button className="btn btn-primary">
-  Primary Button
-</button>
+        {/* Icon Integration */}
+        <motion.section
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.5 }}
+        >
+          <div className="flex items-center gap-4">
+            <h5 className="heading-4 text-text">Icon Integration</h5>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <p className="text-text-secondary">
+            Flexible icon positioning with automatic sizing and proper spacing
+            relationships.
+          </p>
+          <div className="space-y-6">
+            <div>
+              <h6 className="text-sm font-medium text-text mb-3">
+                Icons with Actions
+              </h6>
+              <div className="flex flex-wrap gap-4">
+                <Button variant="primary" icon="left" iconElement={<Plus />}>
+                  Add Item
+                </Button>
+                <Button
+                  variant="secondary"
+                  icon="left"
+                  iconElement={<Download />}
+                >
+                  Download
+                </Button>
+                <Button
+                  variant="outline"
+                  icon="left"
+                  iconElement={<Settings />}
+                >
+                  Settings
+                </Button>
+                <Button
+                  variant="destructive"
+                  icon="left"
+                  iconElement={<Trash2 />}
+                >
+                  Delete
+                </Button>
+              </div>
+            </div>
 
-<button className="btn bg-pink text-white hover:opacity-90">
+            <div>
+              <h6 className="text-sm font-medium text-text mb-3">
+                Interactive Icons
+              </h6>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  variant={likedButtons.has('like1') ? 'primary' : 'outline'}
+                  icon="left"
+                  iconElement={
+                    <Heart
+                      className={
+                        likedButtons.has('like1') ? 'fill-current' : ''
+                      }
+                    />
+                  }
+                  onClick={() => handleLike('like1')}
+                >
+                  {likedButtons.has('like1') ? 'Liked' : 'Like'}
+                </Button>
+                <Button variant="ghost" icon="left" iconElement={<Share2 />}>
+                  Share
+                </Button>
+                <Button
+                  variant="secondary"
+                  icon="right"
+                  iconElement={<CheckCircle />}
+                >
+                  Complete
+                </Button>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Real-world Examples */}
+        <motion.section
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.6 }}
+        >
+          <div className="flex items-center gap-4">
+            <h5 className="heading-4 text-text">Real-world Examples</h5>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <p className="text-text-secondary">
+            Common UI patterns and use cases demonstrating practical button
+            implementations.
+          </p>
+          <div className="space-y-8">
+            {/* Form Actions */}
+            <div className="bg-gradient-to-br from-background to-background-secondary p-6 rounded-xl border border-border">
+              <h6 className="text-sm font-medium text-text mb-4">
+                Form Actions
+              </h6>
+              <div className="flex flex-wrap gap-3 justify-end">
+                <Button variant="ghost">Cancel</Button>
+                <Button variant="secondary">Save Draft</Button>
+                <Button variant="primary">Submit Form</Button>
+              </div>
+            </div>
+
+            {/* Card Actions */}
+            <div className="bg-gradient-to-br from-background to-background-secondary p-6 rounded-xl border border-border">
+              <h6 className="text-sm font-medium text-text mb-4">
+                Card Actions
+              </h6>
+              <div className="flex flex-wrap gap-3">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  icon="left"
+                  iconElement={<Heart />}
+                >
+                  Like
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  icon="left"
+                  iconElement={<Share2 />}
+                >
+                  Share
+                </Button>
+                <Button variant="primary" size="sm">
+                  View Details
+                </Button>
+              </div>
+            </div>
+
+            {/* Alert Actions */}
+            <div className="bg-gradient-to-br from-background to-background-secondary p-6 rounded-xl border border-border">
+              <h6 className="text-sm font-medium text-text mb-4">
+                Alert Actions
+              </h6>
+              <div className="flex items-center gap-3 p-4 bg-yellow/10 border border-yellow/20 rounded-lg">
+                <AlertTriangle className="w-5 h-5 text-yellow flex-shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm text-text">
+                    This action cannot be undone
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    icon="left"
+                    iconElement={<X />}
+                  >
+                    Cancel
+                  </Button>
+                  <Button variant="destructive" size="sm">
+                    Confirm
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Implementation Guide */}
+        <motion.section
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.7 }}
+        >
+          <div className="flex items-center gap-4">
+            <h5 className="heading-4 text-text">Implementation Guide</h5>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <div className="bg-material-medium rounded-xl p-6 overflow-x-auto">
+            <pre className="text-sm text-text">
+              <code>{`// Semantic variants
+<Button variant="primary">Primary Action</Button>
+<Button variant="secondary">Secondary Action</Button>
+<Button variant="outline">Outlined Button</Button>
+<Button variant="ghost">Ghost Button</Button>
+<Button variant="destructive">Delete Action</Button>
+
+// With icons
+<Button 
+  variant="primary" 
+  icon="left" 
+  iconElement={<Plus />}
+>
+  Add Item
+</Button>
+
+// With states
+<Button loading={isLoading} disabled={isDisabled}>
+  Submit
+</Button>
+
+// Direct color access
+<Button className="bg-pink text-white hover:opacity-90">
   Pink Button
-</button>
-
-<button className="btn btn-secondary">
-  Secondary Button
-</button>`}</code>
+</Button>`}</code>
             </pre>
           </div>
-        </div>
+        </motion.section>
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import { Monitor, Moon, Sun } from 'lucide-react'
-import { m as motion } from 'motion/react'
+import { m } from 'motion/react'
 import { useTheme } from 'next-themes'
 
 import { Container } from '../ui/Container'
@@ -33,7 +33,7 @@ export function Footer() {
           </div>
 
           <div className="relative flex items-center gap-1 p-1 rounded-full bg-background-secondary border border-border">
-            <motion.div
+            <m.div
               className="absolute rounded-full bg-background shadow-sm border border-border/50"
               initial={false}
               animate={{

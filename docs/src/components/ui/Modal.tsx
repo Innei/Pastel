@@ -3,6 +3,7 @@ import { X } from 'lucide-react'
 import { AnimatePresence, m as motion } from 'motion/react'
 import type { ReactNode } from 'react'
 
+import { Spring } from '../../constants/spring'
 import { cn } from '../../utils/cn'
 
 interface ModalProps {
@@ -39,7 +40,7 @@ export function Modal({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.15, ease: 'easeOut' }}
+                transition={Spring.presets.smooth}
                 className="fixed inset-0 z-50 bg-background-quaternary/20 backdrop-blur-[70px]"
               />
             </Dialog.Overlay>
@@ -50,10 +51,7 @@ export function Modal({
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{
-                  duration: 0.15,
-                  ease: [0.16, 1, 0.3, 1], // Custom easing for smoother animation
-                }}
+                transition={Spring.presets.smooth}
                 className={cn(
                   'fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2',
                   'bg-background rounded-lg shadow-xl w-full max-h-[90vh] flex flex-col',

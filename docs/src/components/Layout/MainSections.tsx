@@ -1,3 +1,6 @@
+import { m } from 'motion/react'
+
+import { Spring } from '../../constants/spring'
 import { ColorExplorer } from '../ColorPalette/ColorExplorer'
 import { ColorGrid } from '../ColorPalette/ColorGrid'
 import { AlertExamples } from '../Examples/AlertExamples'
@@ -10,23 +13,46 @@ export function MainSections() {
   return (
     <>
       {/* Color Palette Section */}
-      <section
+      <m.section
         id="palette"
         className="py-16 sm:py-24 lg:py-32 border-t border-border"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={Spring.smooth(0.8)}
+        viewport={{ once: true, margin: '-100px' }}
       >
         <Container>
-          <div className="max-w-2xl mb-16">
+          <m.div
+            className="max-w-2xl mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={Spring.smooth(0.6, 0.2)}
+            viewport={{ once: true }}
+          >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
               Color palette
             </h2>
             <p className="text-lg text-text-secondary">
               A complete set of colors for building beautiful interfaces.
             </p>
-          </div>
-          <ColorGrid />
+          </m.div>
+          <m.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={Spring.smooth(0.8, 0.4)}
+            viewport={{ once: true }}
+          >
+            <ColorGrid />
+          </m.div>
         </Container>
 
-        <div className="hidden xl:block px-8 max-w-[1440px] mx-auto my-32">
+        <m.div
+          className="hidden xl:block px-8 max-w-[1440px] mx-auto my-32"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={Spring.smooth(0.8, 0.6)}
+          viewport={{ once: true, margin: '-100px' }}
+        >
           <h2 className="text-3xl text-center sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
             Color explorer
           </h2>
@@ -34,55 +60,57 @@ export function MainSections() {
             Explore the color palette in detail.
           </p>
           <ColorExplorer />
-        </div>
-      </section>
+        </m.div>
+      </m.section>
 
       {/* Examples Section */}
-      <section
+      <m.section
         id="examples"
         className="py-16 sm:py-24 lg:py-32 border-t border-border"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={Spring.smooth(0.8)}
+        viewport={{ once: true, margin: '-100px' }}
       >
         <Container>
-          <div className="max-w-2xl mb-16">
+          <m.div
+            className="max-w-2xl mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={Spring.smooth(0.6, 0.2)}
+            viewport={{ once: true }}
+          >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
               Component examples
             </h2>
             <p className="text-lg text-text-secondary">
               See how Pastel colors work across different UI components.
             </p>
-          </div>
+          </m.div>
 
           <div className="space-y-24">
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-                Buttons
-              </h3>
-              <ButtonExamples />
-            </div>
-
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-                Cards
-              </h3>
-              <CardExamples />
-            </div>
-
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-                Forms
-              </h3>
-              <FormExamples />
-            </div>
-
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-                Alerts
-              </h3>
-              <AlertExamples />
-            </div>
+            {[
+              { title: 'Buttons', component: <ButtonExamples />, delay: 0.3 },
+              { title: 'Cards', component: <CardExamples />, delay: 0.4 },
+              { title: 'Forms', component: <FormExamples />, delay: 0.5 },
+              { title: 'Alerts', component: <AlertExamples />, delay: 0.6 },
+            ].map((section) => (
+              <m.div
+                key={section.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={Spring.smooth(0.8, section.delay)}
+                viewport={{ once: true, margin: '-50px' }}
+              >
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
+                  {section.title}
+                </h3>
+                {section.component}
+              </m.div>
+            ))}
           </div>
         </Container>
-      </section>
+      </m.section>
     </>
   )
 }

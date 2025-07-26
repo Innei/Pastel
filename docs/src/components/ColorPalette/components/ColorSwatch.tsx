@@ -1,6 +1,8 @@
 import { m } from 'motion/react'
 import * as React from 'react'
 
+import { microReboundPreset } from '../../../constants/spring'
+
 interface ColorSwatchProps {
   name: string
   variants: {
@@ -24,7 +26,15 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
   return (
     <m.div className="group" layout layoutId={name}>
       <button type="button" className="w-full text-left" onClick={onClick}>
-        <div className="aspect-square rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all group-hover:scale-[1.02] border border-border relative">
+        <m.div 
+          className="aspect-square rounded-lg overflow-hidden shadow-sm border border-border relative"
+          whileHover={{ 
+            scale: 1.05,
+            boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+          }}
+          whileTap={{ scale: 0.98 }}
+          transition={microReboundPreset}
+        >
           {/* Dark variant - bottom half */}
           <div
             className="h-1/2 w-full"
@@ -38,16 +48,25 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
 
           {/* Icon overlay for semantic colors */}
           {showIcon && icon && (
-            <div className="absolute inset-0 flex items-center justify-center">
+            <m.div 
+              className="absolute inset-0 flex items-center justify-center"
+              whileHover={{ scale: 1.1 }}
+              transition={microReboundPreset}
+            >
               {icon}
-            </div>
+            </m.div>
           )}
-        </div>
+        </m.div>
       </button>
 
-      <p className="text-sm font-medium capitalize text-center">
+      <m.p 
+        className="text-sm font-medium capitalize text-center"
+        initial={{ opacity: 0.8 }}
+        whileHover={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+      >
         {displayName}
-      </p>
+      </m.p>
     </m.div>
   )
 }

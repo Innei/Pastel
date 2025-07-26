@@ -1,6 +1,6 @@
-import { Grid2x2,Menu,X } from 'lucide-react'
-import { AnimatePresence,motion } from 'motion/react'
-import { useEffect,useState } from 'react'
+import { Grid2x2, Menu, X } from 'lucide-react'
+import { AnimatePresence, m } from 'motion/react'
+import { useEffect, useState } from 'react'
 
 import pkg from '../../../../package.json'
 import { Container } from '../ui/Container'
@@ -20,10 +20,10 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 border-b border-transparent transition-all ${
-        mobileMenuOpen 
-          ? 'bg-background !border-border' 
-          : scrolled 
-          ? 'bg-background/80 backdrop-blur-md !border-border' 
+        mobileMenuOpen
+          ? 'bg-background !border-border'
+          : scrolled
+          ? 'bg-background/80 backdrop-blur-md !border-border'
           : ''
       }`}
     >
@@ -77,13 +77,14 @@ export function Header() {
                 />
               </svg>
             </a>
-            <button 
+            <button
+              type="button"
               className="md:hidden p-2 rounded-full hover:bg-material-medium transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <AnimatePresence mode="wait">
                 {mobileMenuOpen ? (
-                  <motion.div
+                  <m.div
                     key="close"
                     initial={{ opacity: 0, rotate: -90 }}
                     animate={{ opacity: 1, rotate: 0 }}
@@ -91,9 +92,9 @@ export function Header() {
                     transition={{ duration: 0.2, ease: 'easeInOut' }}
                   >
                     <X className="w-5 h-5" />
-                  </motion.div>
+                  </m.div>
                 ) : (
-                  <motion.div
+                  <m.div
                     key="menu"
                     initial={{ opacity: 0, rotate: 90 }}
                     animate={{ opacity: 1, rotate: 0 }}
@@ -101,7 +102,7 @@ export function Header() {
                     transition={{ duration: 0.2, ease: 'easeInOut' }}
                   >
                     <Menu className="w-5 h-5" />
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </button>
@@ -112,26 +113,26 @@ export function Header() {
       {/* Mobile Navigation Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
+          <m.div
             className="md:hidden bg-background/95 backdrop-blur-md border-b border-border overflow-hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ 
-              duration: 0.3, 
+            transition={{
+              duration: 0.3,
               ease: 'easeInOut',
-              opacity: { duration: 0.2 }
+              opacity: { duration: 0.2 },
             }}
           >
             <Container>
-              <motion.div
+              <m.div
                 className="py-4 space-y-2"
                 initial={{ y: -10 }}
                 animate={{ y: 0 }}
                 exit={{ y: -10 }}
                 transition={{ duration: 0.2, delay: 0.1 }}
               >
-                <motion.a
+                <m.a
                   href="#installation"
                   className="block py-2 text-sm text-text-secondary hover:text-text transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
@@ -140,8 +141,8 @@ export function Header() {
                   transition={{ duration: 0.3, delay: 0.1 }}
                 >
                   Installation
-                </motion.a>
-                <motion.a
+                </m.a>
+                <m.a
                   href="#palette"
                   className="block py-2 text-sm text-text-secondary hover:text-text transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
@@ -150,8 +151,8 @@ export function Header() {
                   transition={{ duration: 0.3, delay: 0.15 }}
                 >
                   Palette
-                </motion.a>
-                <motion.a
+                </m.a>
+                <m.a
                   href="#examples"
                   className="block py-2 text-sm text-text-secondary hover:text-text transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
@@ -160,10 +161,10 @@ export function Header() {
                   transition={{ duration: 0.3, delay: 0.2 }}
                 >
                   Examples
-                </motion.a>
-              </motion.div>
+                </m.a>
+              </m.div>
             </Container>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

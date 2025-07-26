@@ -1,5 +1,8 @@
-import { AlertCircle, Check, CloudUpload, X } from 'lucide-react'
+import { AlertCircle, Check, CloudUpload, Info, Star, X } from 'lucide-react'
+import { m } from 'motion/react'
+import { useState } from 'react'
 
+import { microReboundPreset, softSpringPreset } from '../../constants/spring'
 import { Input } from '../ui/Input'
 import { Label } from '../ui/Label'
 import {
@@ -13,243 +16,542 @@ import { Slider } from '../ui/Slider'
 import { Textarea } from '../ui/Textarea'
 
 export function FormExamples() {
+  const [selectedPlan, setSelectedPlan] = useState<string>('')
+  const [checkboxStates, setCheckboxStates] = useState({
+    notifications: false,
+    darkMode: false,
+    weeklyUpdates: false,
+  })
+  const [isDragOver, setIsDragOver] = useState(false)
+
+  const plans = [
+    { id: 'free', name: 'Free', price: '$0/month', popular: false },
+    { id: 'pro', name: 'Pro', price: '$10/month', popular: true },
+    { id: 'team', name: 'Team', price: '$25/month', popular: false },
+    { id: 'enterprise', name: 'Enterprise', price: 'Custom', popular: false },
+  ]
+
+  const handleCheckboxChange = (key: keyof typeof checkboxStates) => {
+    setCheckboxStates((prev) => ({ ...prev, [key]: !prev[key] }))
+  }
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(true)
+  }
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(false)
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(false)
+    // Handle file drop logic here
+  }
+
   return (
-    <div className="card p-8 space-y-8">
-      <div className="text-center">
-        <h4 className="heading-3 text-foreground mb-2">Form Elements</h4>
-        <p className="text-muted">Clean forms that users will enjoy</p>
+    <div className="card p-8 space-y-12">
+      {/* Header Section - Improved hierarchy */}
+      <div className="text-center space-y-3">
+        <h4 className="heading-3 text-foreground">Form Elements</h4>
+        <p className="text-text-secondary text-base leading-relaxed max-w-2xl mx-auto">
+          Clean, accessible forms designed for great user experiences
+        </p>
+        <div className="w-16 h-0.5 bg-gradient-to-r from-accent/50 to-accent mx-auto rounded-full" />
       </div>
 
-      <div className="space-y-8">
-        {/* Basic Form Elements */}
-        <div className="space-y-4">
-          <h5 className="heading-4 text-foreground">Basic Elements</h5>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="space-y-12">
+        {/* Basic Form Elements - Enhanced layout and spacing */}
+        <m.div
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={softSpringPreset}
+        >
+          <div className="flex items-center gap-3">
+            <h5 className="heading-4 text-foreground">Basic Elements</h5>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left Column */}
             <div className="space-y-6">
-              <div className="flex gap-3 flex-col">
-                <Label htmlFor="name">Your Name</Label>
-                <Input id="name" type="text" placeholder="Enter your name..." />
+              <div className="space-y-2">
+                <Label htmlFor="name" className="flex items-center gap-2">
+                  Your Name
+                  <span className="text-red text-xs">*</span>
+                </Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your name..."
+                  className="transition-all duration-200 focus:scale-[1.01]"
+                />
+                <p className="text-xs text-text-tertiary">
+                  This will be displayed on your profile
+                </p>
               </div>
 
-              <div className="flex gap-3 flex-col">
-                <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" placeholder="your@email.com" />
+              <div className="space-y-2">
+                <Label htmlFor="email" className="flex items-center gap-2">
+                  Email Address
+                  <span className="text-red text-xs">*</span>
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="your@email.com"
+                  className="transition-all duration-200 focus:scale-[1.01]"
+                />
+                <p className="text-xs text-text-tertiary">
+                  We'll never share your email
+                </p>
               </div>
 
-              <div className="flex gap-3 flex-col">
+              <div className="space-y-2">
                 <Label htmlFor="color">Favorite Color</Label>
                 <Select>
-                  <SelectTrigger id="color">
+                  <SelectTrigger
+                    id="color"
+                    className="transition-all duration-200 hover:border-border-secondary"
+                  >
                     <SelectValue placeholder="Choose your favorite..." />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="pink">Pink</SelectItem>
-                    <SelectItem value="blue">Blue</SelectItem>
-                    <SelectItem value="purple">Purple</SelectItem>
-                    <SelectItem value="green">Green</SelectItem>
-                    <SelectItem value="orange">Orange</SelectItem>
+                    <SelectItem value="pink">🌸 Pink</SelectItem>
+                    <SelectItem value="blue">💙 Blue</SelectItem>
+                    <SelectItem value="purple">💜 Purple</SelectItem>
+                    <SelectItem value="green">💚 Green</SelectItem>
+                    <SelectItem value="orange">🧡 Orange</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
 
+            {/* Right Column */}
             <div className="space-y-6">
-              <div className="flex gap-3 flex-col">
+              <div className="space-y-2">
                 <Label htmlFor="message">Message</Label>
                 <Textarea
                   id="message"
                   placeholder="Tell us something..."
                   rows={4}
+                  className="transition-all duration-200 focus:scale-[1.01] resize-none"
                 />
+                <div className="flex justify-between text-xs text-text-tertiary">
+                  <span>Share your thoughts with us</span>
+                  <span>0/500</span>
+                </div>
               </div>
 
-              <div className="flex gap-3 flex-col">
+              <div className="space-y-3">
                 <Label>Preferences</Label>
-                <div className="flex gap-1 flex-col">
-                  <label className="flex items-center gap-3 cursor-pointer p-2 rounded-md hover:bg-muted">
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 rounded focus:ring-0 accent-accent"
-                    />
-                    <span className="text-sm text-foreground">
-                      Enable notifications
-                    </span>
-                  </label>
-                  <label className="flex items-center gap-3 cursor-pointer p-2 rounded-md hover:bg-muted">
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 rounded focus:ring-0 accent-accent"
-                    />
-                    <span className="text-sm text-foreground">Dark mode</span>
-                  </label>
-                  <label className="flex items-center gap-3 cursor-pointer p-2 rounded-md hover:bg-muted">
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 rounded focus:ring-0 accent-accent"
-                    />
-                    <span className="text-sm text-foreground">
-                      Weekly updates
-                    </span>
-                  </label>
+                <div className="space-y-1">
+                  {[
+                    {
+                      key: 'notifications' as const,
+                      label: 'Enable notifications',
+                      desc: 'Get notified about updates',
+                    },
+                    {
+                      key: 'darkMode' as const,
+                      label: 'Dark mode',
+                      desc: 'Switch to dark theme',
+                    },
+                    {
+                      key: 'weeklyUpdates' as const,
+                      label: 'Weekly updates',
+                      desc: 'Receive weekly newsletters',
+                    },
+                  ].map(({ key, label, desc }) => (
+                    <m.label
+                      key={key}
+                      className="group flex items-start gap-3 cursor-pointer p-3 rounded-lg hover:bg-background-secondary transition-all duration-200"
+                      whileHover={{ x: 2 }}
+                      transition={microReboundPreset}
+                    >
+                      <div className="relative">
+                        <input
+                          type="checkbox"
+                          checked={checkboxStates[key]}
+                          onChange={() => handleCheckboxChange(key)}
+                          className="w-4 h-4 rounded border-border text-accent focus:ring-accent focus:ring-offset-0 transition-colors"
+                        />
+                        {checkboxStates[key] && (
+                          <m.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={microReboundPreset}
+                            className="absolute inset-0 pointer-events-none"
+                          >
+                            <Check className="w-4 h-4 text-white" />
+                          </m.div>
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <span className="text-sm font-medium text-text group-hover:text-foreground transition-colors">
+                          {label}
+                        </span>
+                        <p className="text-xs text-text-tertiary mt-0.5">
+                          {desc}
+                        </p>
+                      </div>
+                    </m.label>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </m.div>
 
-        {/* Radio Buttons */}
-        <div className="space-y-4">
-          <h5 className="heading-4 text-foreground">Radio Buttons</h5>
-          <div className="card p-6">
-            <div className="flex gap-3 flex-col">
-              <Label>Choose your plan</Label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-                <label className="card p-4 cursor-pointer hover:border-foreground transition-colors text-center">
-                  <input type="radio" name="plan" className="sr-only" />
-                  <div className="text-sm font-medium">Free</div>
-                  <div className="text-xs text-muted">$0/month</div>
-                </label>
-                <label className="card p-4 cursor-pointer hover:border-foreground transition-colors text-center">
-                  <input type="radio" name="plan" className="sr-only" />
-                  <div className="text-sm font-medium">Pro</div>
-                  <div className="text-xs text-muted">$10/month</div>
-                </label>
-                <label className="card p-4 cursor-pointer hover:border-foreground transition-colors text-center">
-                  <input type="radio" name="plan" className="sr-only" />
-                  <div className="text-sm font-medium">Team</div>
-                  <div className="text-xs text-muted">$25/month</div>
-                </label>
-                <label className="card p-4 cursor-pointer hover:border-foreground transition-colors text-center">
-                  <input type="radio" name="plan" className="sr-only" />
-                  <div className="text-sm font-medium">Enterprise</div>
-                  <div className="text-xs text-muted">Custom</div>
-                </label>
-              </div>
-            </div>
+        {/* Radio Buttons - Enhanced with better visual feedback */}
+        <m.div
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.1 }}
+        >
+          <div className="flex items-center gap-3">
+            <h5 className="heading-4 text-foreground">Plan Selection</h5>
+            <div className="flex-1 h-px bg-border" />
           </div>
-        </div>
 
-        {/* Range Sliders */}
-        <div className="space-y-4">
-          <h5 className="heading-4 text-foreground">Range Sliders</h5>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="card p-6">
-              <div className="flex gap-6 flex-col">
-                <Label htmlFor="volume">Volume</Label>
-                <Slider
-                  defaultValue={[75]}
-                  max={100}
-                  step={1}
-                  className="w-full"
-                  showValue
-                  valueFormatter={(value) => `${value}%`}
-                  id="volume"
-                />
-              </div>
-            </div>
-
-            <div className="card p-6">
-              <div className="flex gap-6 flex-col">
-                <Label htmlFor="brightness">Brightness</Label>
-                <Slider
-                  defaultValue={[50]}
-                  max={100}
-                  step={1}
-                  className="w-full"
-                  showValue
-                  valueFormatter={(value) => `${value}%`}
-                  id="brightness"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* File Upload */}
-        <div className="space-y-4">
-          <h5 className="heading-4 text-foreground">File Upload</h5>
-          <div className="border-2 border-dashed border-border rounded-md p-8 hover:border-border/50 transition-colors cursor-pointer text-center">
+          <div className="card p-6 bg-gradient-to-br from-background to-background-secondary">
             <div className="space-y-4">
-              <div className="text-muted">
-                <CloudUpload className="w-12 h-12 mx-auto" />
+              <div className="flex items-center gap-2 mb-6">
+                <Label className="text-base font-semibold">
+                  Choose your plan
+                </Label>
+                <Info className="w-4 h-4 text-text-tertiary" />
               </div>
-              <div>
-                <h6 className="text-lg font-semibold text-foreground">
-                  Upload your files
-                </h6>
-                <p className="text-muted">Drag and drop or click to select</p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {plans.map((plan) => (
+                  <m.label
+                    key={plan.id}
+                    className={`relative card p-5 cursor-pointer text-center transition-all duration-200 ${
+                      selectedPlan === plan.id
+                        ? 'border-accent bg-accent/5 shadow-lg shadow-accent/10'
+                        : 'hover:border-border-secondary hover:shadow-md'
+                    }`}
+                    whileHover={{ y: -2, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={microReboundPreset}
+                  >
+                    <input
+                      type="radio"
+                      name="plan"
+                      value={plan.id}
+                      checked={selectedPlan === plan.id}
+                      onChange={(e) => setSelectedPlan(e.target.value)}
+                      className="sr-only"
+                    />
+
+                    {plan.popular && (
+                      <div className="absolute -top-2 -right-2">
+                        <div className="bg-accent text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+                          <Star className="w-3 h-3 fill-current" />
+                          Popular
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="space-y-2">
+                      <div className="text-sm font-semibold text-foreground">
+                        {plan.name}
+                      </div>
+                      <div className="text-xs text-text-secondary">
+                        {plan.price}
+                      </div>
+                    </div>
+
+                    {selectedPlan === plan.id && (
+                      <m.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={microReboundPreset}
+                        className="absolute bottom-2 right-2"
+                      >
+                        <Check className="w-4 h-4 text-accent" />
+                      </m.div>
+                    )}
+                  </m.label>
+                ))}
               </div>
-              <button className="btn btn-primary">Choose Files</button>
             </div>
           </div>
-        </div>
+        </m.div>
 
-        {/* Form Actions */}
-        <div className="space-y-4">
-          <h5 className="heading-4 text-foreground">Form Actions</h5>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <button className="btn btn-primary px-8 py-2 font-medium">
-              Submit
-            </button>
-            <button className="btn btn-secondary px-6 py-2 font-medium">
-              Reset Form
-            </button>
-            <button className="btn btn-secondary px-6 py-2 font-medium">
-              Save Draft
-            </button>
+        {/* Range Sliders - Enhanced with better labels and feedback */}
+        <m.div
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.2 }}
+        >
+          <div className="flex items-center gap-3">
+            <h5 className="heading-4 text-foreground">Range Controls</h5>
+            <div className="flex-1 h-px bg-border" />
           </div>
-        </div>
 
-        {/* Validation States */}
-        <div className="space-y-4">
-          <h5 className="heading-4 text-foreground">Validation States</h5>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <Label htmlFor="valid-input">Valid Input</Label>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="card p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="volume" className="text-sm font-medium">
+                  Volume
+                </Label>
+                <span className="text-xs text-text-tertiary">Audio level</span>
+              </div>
+              <Slider
+                defaultValue={[75]}
+                max={100}
+                step={1}
+                className="w-full"
+                showValue
+                valueFormatter={(value) => `${value}%`}
+                id="volume"
+              />
+              <div className="flex justify-between text-xs text-text-tertiary">
+                <span>Quiet</span>
+                <span>Loud</span>
+              </div>
+            </div>
+
+            <div className="card p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="brightness" className="text-sm font-medium">
+                  Brightness
+                </Label>
+                <span className="text-xs text-text-tertiary">
+                  Display level
+                </span>
+              </div>
+              <Slider
+                defaultValue={[50]}
+                max={100}
+                step={1}
+                className="w-full"
+                showValue
+                valueFormatter={(value) => `${value}%`}
+                id="brightness"
+              />
+              <div className="flex justify-between text-xs text-text-tertiary">
+                <span>Dark</span>
+                <span>Bright</span>
+              </div>
+            </div>
+          </div>
+        </m.div>
+
+        {/* File Upload - Enhanced with drag and drop feedback */}
+        <m.div
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.3 }}
+        >
+          <div className="flex items-center gap-3">
+            <h5 className="heading-4 text-foreground">File Upload</h5>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          <m.div
+            className={`border-2 border-dashed rounded-lg p-8 cursor-pointer text-center transition-all duration-200 ${
+              isDragOver
+                ? 'border-accent bg-accent/5 scale-[1.02]'
+                : 'border-border hover:border-border-secondary hover:bg-background-secondary'
+            }`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            whileHover={{ y: -2 }}
+            transition={microReboundPreset}
+          >
+            <div className="space-y-4">
+              <m.div
+                className={`transition-colors duration-200 ${
+                  isDragOver ? 'text-accent' : 'text-text-secondary'
+                }`}
+                animate={isDragOver ? { scale: [1, 1.1, 1] } : {}}
+                transition={{ duration: 0.3 }}
+              >
+                <CloudUpload className="w-12 h-12 mx-auto" />
+              </m.div>
+              <div className="space-y-2">
+                <h6 className="text-lg font-semibold text-foreground">
+                  {isDragOver ? 'Drop your files here' : 'Upload your files'}
+                </h6>
+                <p className="text-text-secondary">
+                  {isDragOver
+                    ? 'Release to upload'
+                    : 'Drag and drop or click to select files'}
+                </p>
+                <p className="text-xs text-text-tertiary">
+                  Supports: JPG, PNG, PDF, DOC (Max: 10MB)
+                </p>
+              </div>
+              {!isDragOver && (
+                <m.button
+                  className="btn btn-primary"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={microReboundPreset}
+                >
+                  Choose Files
+                </m.button>
+              )}
+            </div>
+          </m.div>
+        </m.div>
+
+        {/* Form Actions - Enhanced with better hierarchy */}
+        <m.div
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.4 }}
+        >
+          <div className="flex items-center gap-3">
+            <h5 className="heading-4 text-foreground">Form Actions</h5>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <m.button
+              className="btn btn-primary px-8 py-3 font-medium text-base min-w-[120px]"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={microReboundPreset}
+            >
+              Submit Form
+            </m.button>
+            <div className="flex gap-3">
+              <m.button
+                className="btn btn-secondary px-6 py-2 font-medium"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={microReboundPreset}
+              >
+                Save Draft
+              </m.button>
+              <m.button
+                className="btn btn-secondary px-6 py-2 font-medium text-text-secondary"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={microReboundPreset}
+              >
+                Reset Form
+              </m.button>
+            </div>
+          </div>
+        </m.div>
+
+        {/* Validation States - Enhanced with better visual feedback */}
+        <m.div
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...softSpringPreset, delay: 0.5 }}
+        >
+          <div className="flex items-center gap-3">
+            <h5 className="heading-4 text-foreground">Validation States</h5>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          <m.div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <m.div
+              className="space-y-2"
+              whileHover={{ y: -2 }}
+              transition={microReboundPreset}
+            >
+              <Label
+                htmlFor="valid-input"
+                className="flex items-center gap-2 text-green"
+              >
+                <Check className="w-4 h-4" />
+                Valid Input
+              </Label>
               <Input
                 id="valid-input"
                 type="text"
-                value="Valid input"
-                className="border-green focus:border-green focus:ring-green"
+                value="john.doe@example.com"
+                className="border-green focus:border-green focus:ring-green bg-green/5"
                 readOnly
               />
-              <p className="text-xs text-green flex items-center gap-1 mt-2">
+              <m.p
+                className="text-xs text-green flex items-center gap-2 mt-2"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={microReboundPreset}
+              >
                 <Check className="w-3 h-3" />
-                Looks great!
-              </p>
-            </div>
+                Perfect! This looks great.
+              </m.p>
+            </m.div>
 
-            <div>
-              <Label htmlFor="warning-input">Warning Input</Label>
+            <m.div
+              className="space-y-2"
+              whileHover={{ y: -2 }}
+              transition={microReboundPreset}
+            >
+              <Label
+                htmlFor="warning-input"
+                className="flex items-center gap-2 text-yellow"
+              >
+                <AlertCircle className="w-4 h-4" />
+                Warning Input
+              </Label>
               <Input
                 id="warning-input"
                 type="text"
-                value="Warning"
-                className="border-yellow focus:border-yellow focus:ring-yellow"
+                value="example@gmail"
+                className="border-yellow focus:border-yellow focus:ring-yellow bg-yellow/5"
                 readOnly
               />
-              <p className="text-xs text-yellow flex items-center gap-1 mt-2">
+              <m.p
+                className="text-xs text-yellow flex items-center gap-2 mt-2"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ ...microReboundPreset, delay: 0.1 }}
+              >
                 <AlertCircle className="w-3 h-3" />
-                This might need attention
-              </p>
-            </div>
+                This might need attention.
+              </m.p>
+            </m.div>
 
-            <div>
-              <Label htmlFor="error-input">Error Input</Label>
+            <m.div
+              className="space-y-2"
+              whileHover={{ y: -2 }}
+              transition={microReboundPreset}
+            >
+              <Label
+                htmlFor="error-input"
+                className="flex items-center gap-2 text-red"
+              >
+                <X className="w-4 h-4" />
+                Error Input
+              </Label>
               <Input
                 id="error-input"
                 type="text"
-                value="Error"
-                className="border-red focus:border-red focus:ring-red"
+                value="invalid-email"
+                className="border-red focus:border-red focus:ring-red bg-red/5"
                 readOnly
               />
-              <p className="text-xs text-red flex items-center gap-1 mt-2">
+              <m.p
+                className="text-xs text-red flex items-center gap-2 mt-2"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ ...microReboundPreset, delay: 0.2 }}
+              >
                 <X className="w-3 h-3" />
-                Please fix this field
-              </p>
-            </div>
-          </div>
-        </div>
+                Please enter a valid email address.
+              </m.p>
+            </m.div>
+          </m.div>
+        </m.div>
       </div>
     </div>
   )
