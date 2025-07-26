@@ -11,6 +11,9 @@
     "bump": "nbump",
     "clean": "turbo clean",
     "dev": "turbo dev",
+    "format": "prettier --write .",
+    "lint": "eslint . --fix",
+    "postinstall": "simple-git-hooks",
     "typecheck": "turbo typecheck"
   },
   "dependencies": {
@@ -19,9 +22,27 @@
   "devDependencies": {
     "eslint": "9.31.0",
     "eslint-config-hyoban": "4.0.8",
+    "lint-staged": "16.1.2",
     "nbump": "2.1.3",
+    "prettier": "3.6.2",
+    "simple-git-hooks": "2.13.0",
     "turbo": "2.5.4",
     "typescript": "5.8.3"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ],
+    "*.{css,scss}": [
+      "prettier --write"
+    ]
   },
   "repo": {
     "url": "https://github.com/Innei/Pastel"
