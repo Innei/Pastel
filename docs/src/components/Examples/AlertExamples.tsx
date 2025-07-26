@@ -14,7 +14,7 @@ import {
   XCircle,
   Zap,
 } from 'lucide-react'
-import { AnimatePresence, m } from 'motion/react'
+import { m } from 'motion/react'
 import { useState } from 'react'
 
 import { microReboundPreset, softSpringPreset } from '../../constants/spring'
