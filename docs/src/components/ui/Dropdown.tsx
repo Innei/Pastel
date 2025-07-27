@@ -1,3 +1,4 @@
+import * as Portal from '@radix-ui/react-portal'
 import { ChevronDown } from 'lucide-react'
 import { useEffect,useRef, useState } from 'react'
 
@@ -18,6 +19,8 @@ interface DropdownProps {
 export function Dropdown({ options, value, onChange, placeholder, className = '' }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  const [buttonPosition, setButtonPosition] = useState({ top: 0, left: 0, width: 0 })
 
   const selectedOption = options.find(option => option.value === value)
 
@@ -34,14 +37,27 @@ export function Dropdown({ options, value, onChange, placeholder, className = ''
     }
   }, [])
 
+  // Update button position when dropdown opens
+  useEffect(() => {
+    if (isOpen && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setButtonPosition({
+        top: rect.bottom + window.scrollY,
+        left: rect.left + window.scrollX,
+        width: rect.width
+      });
+    }
+  }, [isOpen]);
+
   const handleSelect = (optionValue: string) => {
     onChange(optionValue)
     setIsOpen(false)
   }
 
   return (
-    <div ref={dropdownRef} className={`relative ${className}`}>
+    <div className={`relative ${className}`}>
       <button
+        ref={buttonRef}
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="relative w-full cursor-pointer rounded-md bg-background border border-border py-2 pl-3 pr-10 text-left shadow-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent hover:border-border-secondary transition-colors"
@@ -50,15 +66,22 @@ export function Dropdown({ options, value, onChange, placeholder, className = ''
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-          <ChevronDown 
-            className={`h-4 w-4 text-text-secondary transition-transform ${isOpen ? 'rotate-180' : ''}`} 
-            aria-hidden="true" 
+          <ChevronDown
+            className={`h-4 w-4 text-text-secondary transition-transform ${isOpen ? 'rotate-180' : ''}`}
+            aria-hidden="true"
           />
         </span>
       </button>
 
       {isOpen && (
-        <div className="absolute z-50 mt-1 w-full rounded-md bg-background border border-border shadow-xl">
+        <Portal.Root ref={dropdownRef}
+          style={{
+            position: 'absolute',
+            top: `${buttonPosition.top}px`,
+            left: `${buttonPosition.left}px`,
+            width: `${buttonPosition.width}px`,
+          }}
+          className="mt-1 rounded-md bg-background border border-border shadow-xl">
           <div className="max-h-60 overflow-auto py-1">
             {options.map((option) => (
               <button
@@ -93,7 +116,7 @@ export function Dropdown({ options, value, onChange, placeholder, className = ''
               </button>
             ))}
           </div>
-        </div>
+        </Portal.Root>
       )}
     </div>
   )
