@@ -16,6 +16,7 @@ import { m as motion } from 'motion/react'
 import { useState } from 'react'
 
 import { microReboundPreset, softSpringPreset } from '../../constants/spring'
+import { cn } from '../../utils/cn'
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive'
@@ -281,27 +282,31 @@ export function ButtonExamples() {
                 Icons with Actions
               </h6>
               <div className="flex flex-wrap gap-4">
-                <Button variant="primary" icon="left" iconElement={<Plus />}>
+                <Button
+                  variant="primary"
+                  icon="left"
+                  iconElement={<Plus className="w-4 h-4" />}
+                >
                   Add Item
                 </Button>
                 <Button
                   variant="secondary"
                   icon="left"
-                  iconElement={<Download />}
+                  iconElement={<Download className="w-4 h-4" />}
                 >
                   Download
                 </Button>
                 <Button
                   variant="outline"
                   icon="left"
-                  iconElement={<Settings />}
+                  iconElement={<Settings className="w-4 h-4" />}
                 >
                   Settings
                 </Button>
                 <Button
                   variant="destructive"
                   icon="left"
-                  iconElement={<Trash2 />}
+                  iconElement={<Trash2 className="w-4 h-4" />}
                 >
                   Delete
                 </Button>
@@ -318,22 +323,27 @@ export function ButtonExamples() {
                   icon="left"
                   iconElement={
                     <Heart
-                      className={
-                        likedButtons.has('like1') ? 'fill-current' : ''
-                      }
+                      className={cn(
+                        'w-4 h-4',
+                        likedButtons.has('like1') ? 'fill-current' : '',
+                      )}
                     />
                   }
                   onClick={() => handleLike('like1')}
                 >
                   {likedButtons.has('like1') ? 'Liked' : 'Like'}
                 </Button>
-                <Button variant="ghost" icon="left" iconElement={<Share2 />}>
+                <Button
+                  variant="ghost"
+                  icon="left"
+                  iconElement={<Share2 className="w-4 h-4" />}
+                >
                   Share
                 </Button>
                 <Button
                   variant="secondary"
                   icon="right"
-                  iconElement={<CheckCircle />}
+                  iconElement={<CheckCircle className="w-4 h-4" />}
                 >
                   Complete
                 </Button>
@@ -380,7 +390,7 @@ export function ButtonExamples() {
                   variant="outline"
                   size="sm"
                   icon="left"
-                  iconElement={<Heart />}
+                  iconElement={<Heart className="w-4 h-4" />}
                 >
                   Like
                 </Button>
@@ -388,7 +398,7 @@ export function ButtonExamples() {
                   variant="outline"
                   size="sm"
                   icon="left"
-                  iconElement={<Share2 />}
+                  iconElement={<Share2 className="w-4 h-4" />}
                 >
                   Share
                 </Button>
@@ -415,7 +425,7 @@ export function ButtonExamples() {
                     variant="ghost"
                     size="sm"
                     icon="left"
-                    iconElement={<X />}
+                    iconElement={<X className="w-4 h-4" />}
                   >
                     Cancel
                   </Button>
