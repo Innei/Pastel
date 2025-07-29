@@ -186,10 +186,9 @@ export function Hero() {
 
               <m.a
                 href={pkg.repo.url}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium rounded-full bg-background-secondary text-text border border-border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-border"
+                className="inline-flex items-center justify-center gap-2 hover:bg-background-tertiary px-6 py-3 text-base font-medium rounded-full bg-background-secondary text-text border border-border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-border"
                 whileHover={{
                   scale: 1.05,
-                  backgroundColor: 'var(--color-background-tertiary)',
                 }}
                 whileTap={{ scale: 0.98 }}
                 transition={microReboundPreset}

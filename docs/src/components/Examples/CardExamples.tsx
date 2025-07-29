@@ -8,7 +8,7 @@ export function CardExamples() {
     <div className="card p-8 lg:p-10 space-y-12">
       {/* Header with improved hierarchy */}
       <div className="text-center space-y-3">
-        <m.h4 
+        <m.h4
           className="text-2xl font-bold text-foreground tracking-tight"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -16,7 +16,7 @@ export function CardExamples() {
         >
           Card Gallery
         </m.h4>
-        <m.p 
+        <m.p
           className="text-text-secondary text-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -24,7 +24,7 @@ export function CardExamples() {
         >
           Clean cards for every need
         </m.p>
-        <m.div 
+        <m.div
           className="w-16 h-0.5 bg-gradient-to-r from-accent/20 via-accent to-accent/20 mx-auto"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -37,19 +37,21 @@ export function CardExamples() {
         <section className="space-y-6">
           <div className="flex items-center gap-3">
             <div className="w-1 h-6 bg-accent rounded-full" />
-            <h5 className="text-xl font-semibold text-foreground">Basic Cards</h5>
+            <h5 className="text-xl font-semibold text-foreground">
+              Basic Cards
+            </h5>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <m.div 
+            <m.div
               className={cn(
-                "card p-6 group cursor-pointer",
-                "hover:shadow-lg hover:shadow-fill/5",
-                "transition-all duration-300 ease-out",
-                "focus-within:ring-2 focus-within:ring-accent/20 focus-within:ring-offset-2"
+                'card p-6 group cursor-pointer',
+                'hover:shadow-lg hover:shadow-fill/5',
+                'transition-all duration-300 ease-out',
+                'focus-within:ring-2 focus-within:ring-accent/20 focus-within:ring-offset-2',
+                'hover:border-border-secondary',
               )}
-              whileHover={{ 
+              whileHover={{
                 y: -4,
-                borderColor: "var(--color-border-secondary)"
               }}
               transition={microReboundPreset}
               tabIndex={0}
@@ -69,16 +71,16 @@ export function CardExamples() {
               </div>
             </m.div>
 
-            <m.div 
+            <m.div
               className={cn(
-                "bg-pink border border-pink-dark rounded-lg p-6 group cursor-pointer",
-                "hover:shadow-lg hover:shadow-pink/20",
-                "transition-all duration-300 ease-out",
-                "focus-within:ring-2 focus-within:ring-pink/30 focus-within:ring-offset-2"
+                'bg-pink border border-pink-dark rounded-lg p-6 group cursor-pointer',
+                'hover:shadow-lg hover:shadow-pink/20',
+                'transition-all duration-300 ease-out',
+                'focus-within:ring-2 focus-within:ring-pink/30 focus-within:ring-offset-2',
               )}
-              whileHover={{ 
+              whileHover={{
                 y: -4,
-                scale: 1.02
+                scale: 1.02,
               }}
               transition={microReboundPreset}
               tabIndex={0}
@@ -98,16 +100,16 @@ export function CardExamples() {
               </div>
             </m.div>
 
-            <m.div 
+            <m.div
               className={cn(
-                "card bg-background-secondary p-6 group cursor-pointer",
-                "hover:shadow-lg hover:shadow-fill/5",
-                "transition-all duration-300 ease-out",
-                "focus-within:ring-2 focus-within:ring-accent/20 focus-within:ring-offset-2"
+                'card bg-background-secondary p-6 group cursor-pointer',
+                'hover:shadow-lg hover:shadow-fill/5',
+                'transition-all duration-300 ease-out',
+                'focus-within:ring-2 focus-within:ring-accent/20 focus-within:ring-offset-2',
+                'hover:bg-background-tertiary',
               )}
-              whileHover={{ 
+              whileHover={{
                 y: -4,
-                backgroundColor: "var(--color-background-tertiary)"
               }}
               transition={microReboundPreset}
               tabIndex={0}
@@ -133,20 +135,22 @@ export function CardExamples() {
         <section className="space-y-6">
           <div className="flex items-center gap-3">
             <div className="w-1 h-6 bg-blue rounded-full" />
-            <h5 className="text-xl font-semibold text-foreground">Interactive Cards</h5>
+            <h5 className="text-xl font-semibold text-foreground">
+              Interactive Cards
+            </h5>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <m.div 
+            <m.div
               className={cn(
-                "card p-6 cursor-pointer group relative overflow-hidden",
-                "hover:shadow-xl hover:shadow-accent/10",
-                "transition-all duration-300 ease-out",
-                "focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:outline-none"
+                'card p-6 cursor-pointer group relative overflow-hidden',
+                'hover:shadow-xl hover:shadow-accent/10',
+                'transition-all duration-300 ease-out',
+                'focus:ring-2 hover:border-accent focus:ring-accent focus:ring-offset-2 focus:outline-none',
               )}
-              whileHover={{ 
+              whileHover={{
                 y: -6,
-                borderColor: "var(--color-accent)",
-                boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04)"
+                boxShadow:
+                  '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04)',
               }}
               transition={microReboundPreset}
               tabIndex={0}
@@ -167,16 +171,16 @@ export function CardExamples() {
               </div>
             </m.div>
 
-            <m.div 
+            <m.div
               className={cn(
-                "card p-6 cursor-pointer group",
-                "hover:shadow-lg hover:shadow-fill/10",
-                "transition-all duration-300 ease-out",
-                "focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:outline-none"
+                'card p-6 cursor-pointer group',
+                'hover:shadow-lg hover:shadow-fill/10',
+                'transition-all duration-300 ease-out',
+                'focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:outline-none',
+                'hover:bg-background-tertiary',
               )}
-              whileHover={{ 
+              whileHover={{
                 y: -4,
-                backgroundColor: "var(--color-background-secondary)"
               }}
               transition={microReboundPreset}
               tabIndex={0}
@@ -196,17 +200,17 @@ export function CardExamples() {
               </div>
             </m.div>
 
-            <m.div 
+            <m.div
               className={cn(
-                "card p-6 cursor-pointer group",
-                "hover:shadow-2xl hover:shadow-green/15",
-                "transition-all duration-300 ease-out",
-                "focus:ring-2 focus:ring-green focus:ring-offset-2 focus:outline-none"
+                'card p-6 cursor-pointer group',
+                'hover:shadow-2xl hover:shadow-green/15',
+                'transition-all duration-300 ease-out',
+                'focus:ring-2 focus:ring-green focus:ring-offset-2 focus:outline-none',
               )}
-              whileHover={{ 
+              whileHover={{
                 y: -8,
                 scale: 1.02,
-                rotateY: 5
+                rotateY: 5,
               }}
               transition={microReboundPreset}
               tabIndex={0}
@@ -232,14 +236,16 @@ export function CardExamples() {
         <section className="space-y-6">
           <div className="flex items-center gap-3">
             <div className="w-1 h-6 bg-purple rounded-full" />
-            <h5 className="text-xl font-semibold text-foreground">Content Cards</h5>
+            <h5 className="text-xl font-semibold text-foreground">
+              Content Cards
+            </h5>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <m.div 
+            <m.div
               className={cn(
-                "card p-8 group",
-                "hover:shadow-lg hover:shadow-fill/5",
-                "transition-all duration-300 ease-out"
+                'card p-8 group',
+                'hover:shadow-lg hover:shadow-fill/5',
+                'transition-all duration-300 ease-out',
               )}
               whileHover={{ y: -2 }}
               transition={microReboundPreset}
@@ -256,7 +262,7 @@ export function CardExamples() {
                   with a minimal aesthetic and improved visual hierarchy.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
-                  <m.button 
+                  <m.button
                     className="btn btn-primary"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -264,7 +270,7 @@ export function CardExamples() {
                   >
                     Learn More
                   </m.button>
-                  <m.button 
+                  <m.button
                     className="btn btn-secondary"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -276,11 +282,11 @@ export function CardExamples() {
               </div>
             </m.div>
 
-            <m.div 
+            <m.div
               className={cn(
-                "card p-8 group",
-                "hover:shadow-lg hover:shadow-fill/5",
-                "transition-all duration-300 ease-out"
+                'card p-8 group',
+                'hover:shadow-lg hover:shadow-fill/5',
+                'transition-all duration-300 ease-out',
               )}
               whileHover={{ y: -2 }}
               transition={microReboundPreset}
@@ -297,7 +303,7 @@ export function CardExamples() {
                   design system with enhanced spacing and typography.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
-                  <m.button 
+                  <m.button
                     className="btn btn-secondary"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -305,7 +311,7 @@ export function CardExamples() {
                   >
                     Explore
                   </m.button>
-                  <m.button 
+                  <m.button
                     className="btn btn-secondary"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -323,13 +329,15 @@ export function CardExamples() {
         <section className="space-y-6">
           <div className="flex items-center gap-3">
             <div className="w-1 h-6 bg-orange rounded-full" />
-            <h5 className="text-xl font-semibold text-foreground">Nested Cards</h5>
+            <h5 className="text-xl font-semibold text-foreground">
+              Nested Cards
+            </h5>
           </div>
-          <m.div 
+          <m.div
             className={cn(
-              "card bg-background-secondary border-2 border-border-secondary p-10",
-              "hover:shadow-xl hover:shadow-fill/10",
-              "transition-all duration-500 ease-out"
+              'card bg-background-secondary border-2 border-border-secondary p-10',
+              'hover:shadow-xl hover:shadow-fill/10',
+              'transition-all duration-500 ease-out',
             )}
             whileHover={{ scale: 1.01 }}
             transition={softSpringPreset}
@@ -344,11 +352,11 @@ export function CardExamples() {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <m.div 
+              <m.div
                 className={cn(
-                  "card bg-background p-6 group",
-                  "hover:shadow-lg hover:shadow-fill/5",
-                  "transition-all duration-300 ease-out"
+                  'card bg-background p-6 group',
+                  'hover:shadow-lg hover:shadow-fill/5',
+                  'transition-all duration-300 ease-out',
                 )}
                 whileHover={{ y: -4, scale: 1.02 }}
                 transition={microReboundPreset}
@@ -365,11 +373,11 @@ export function CardExamples() {
                   </p>
                 </div>
               </m.div>
-              <m.div 
+              <m.div
                 className={cn(
-                  "card bg-background p-6 group",
-                  "hover:shadow-lg hover:shadow-fill/5",
-                  "transition-all duration-300 ease-out"
+                  'card bg-background p-6 group',
+                  'hover:shadow-lg hover:shadow-fill/5',
+                  'transition-all duration-300 ease-out',
                 )}
                 whileHover={{ y: -4, scale: 1.02 }}
                 transition={microReboundPreset}
@@ -394,15 +402,17 @@ export function CardExamples() {
         <section className="space-y-6">
           <div className="flex items-center gap-3">
             <div className="w-1 h-6 bg-green rounded-full" />
-            <h5 className="text-xl font-semibold text-foreground">Feature Cards</h5>
+            <h5 className="text-xl font-semibold text-foreground">
+              Feature Cards
+            </h5>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <m.div 
+            <m.div
               className={cn(
-                "card p-8 group cursor-pointer relative overflow-hidden",
-                "hover:shadow-xl hover:shadow-pink/15",
-                "transition-all duration-300 ease-out",
-                "focus:ring-2 focus:ring-pink focus:ring-offset-2 focus:outline-none"
+                'card p-8 group cursor-pointer relative overflow-hidden',
+                'hover:shadow-xl hover:shadow-pink/15',
+                'transition-all duration-300 ease-out',
+                'focus:ring-2 focus:ring-pink focus:ring-offset-2 focus:outline-none',
               )}
               whileHover={{ y: -6, scale: 1.02 }}
               transition={microReboundPreset}
@@ -412,7 +422,7 @@ export function CardExamples() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-pink/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative text-center space-y-6">
-                <m.div 
+                <m.div
                   className="w-20 h-20 mx-auto bg-gradient-to-br from-pink to-pink-dark rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-lg group-hover:shadow-xl group-hover:shadow-pink/20"
                   whileHover={{ rotateY: 15, scale: 1.1 }}
                   transition={microReboundPreset}
@@ -424,18 +434,19 @@ export function CardExamples() {
                     Color System
                   </h4>
                   <p className="text-text-secondary leading-relaxed">
-                    13 beautiful colors with light/dark variants and semantic tokens
+                    13 beautiful colors with light/dark variants and semantic
+                    tokens
                   </p>
                 </div>
               </div>
             </m.div>
 
-            <m.div 
+            <m.div
               className={cn(
-                "card p-8 group cursor-pointer relative overflow-hidden",
-                "hover:shadow-xl hover:shadow-blue/15",
-                "transition-all duration-300 ease-out",
-                "focus:ring-2 focus:ring-blue focus:ring-offset-2 focus:outline-none"
+                'card p-8 group cursor-pointer relative overflow-hidden',
+                'hover:shadow-xl hover:shadow-blue/15',
+                'transition-all duration-300 ease-out',
+                'focus:ring-2 focus:ring-blue focus:ring-offset-2 focus:outline-none',
               )}
               whileHover={{ y: -6, scale: 1.02 }}
               transition={microReboundPreset}
@@ -445,7 +456,7 @@ export function CardExamples() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative text-center space-y-6">
-                <m.div 
+                <m.div
                   className="w-20 h-20 mx-auto bg-gradient-to-br from-blue to-blue-dark rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-lg group-hover:shadow-xl group-hover:shadow-blue/20"
                   whileHover={{ rotateY: 15, scale: 1.1 }}
                   transition={microReboundPreset}
@@ -463,12 +474,12 @@ export function CardExamples() {
               </div>
             </m.div>
 
-            <m.div 
+            <m.div
               className={cn(
-                "card p-8 group cursor-pointer relative overflow-hidden",
-                "hover:shadow-xl hover:shadow-green/15",
-                "transition-all duration-300 ease-out",
-                "focus:ring-2 focus:ring-green focus:ring-offset-2 focus:outline-none"
+                'card p-8 group cursor-pointer relative overflow-hidden',
+                'hover:shadow-xl hover:shadow-green/15',
+                'transition-all duration-300 ease-out',
+                'focus:ring-2 focus:ring-green focus:ring-offset-2 focus:outline-none',
               )}
               whileHover={{ y: -6, scale: 1.02 }}
               transition={microReboundPreset}
@@ -478,7 +489,7 @@ export function CardExamples() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative text-center space-y-6">
-                <m.div 
+                <m.div
                   className="w-20 h-20 mx-auto bg-gradient-to-br from-green to-green-dark rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-lg group-hover:shadow-xl group-hover:shadow-green/20"
                   whileHover={{ rotateY: 15, scale: 1.1 }}
                   transition={microReboundPreset}
