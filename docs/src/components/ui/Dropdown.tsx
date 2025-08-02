@@ -1,6 +1,6 @@
 import * as Portal from '@radix-ui/react-portal'
 import { ChevronDown } from 'lucide-react'
-import { useEffect,useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface DropdownOption {
   value: string
@@ -16,17 +16,30 @@ interface DropdownProps {
   className?: string
 }
 
-export function Dropdown({ options, value, onChange, placeholder, className = '' }: DropdownProps) {
+export function Dropdown({
+  options,
+  value,
+  onChange,
+  placeholder,
+  className = '',
+}: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const [buttonPosition, setButtonPosition] = useState({ top: 0, left: 0, width: 0 })
+  const [buttonPosition, setButtonPosition] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+  })
 
-  const selectedOption = options.find(option => option.value === value)
+  const selectedOption = options.find((option) => option.value === value)
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false)
       }
     }
@@ -40,14 +53,14 @@ export function Dropdown({ options, value, onChange, placeholder, className = ''
   // Update button position when dropdown opens
   useEffect(() => {
     if (isOpen && buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
+      const rect = buttonRef.current.getBoundingClientRect()
       setButtonPosition({
         top: rect.bottom + window.scrollY,
         left: rect.left + window.scrollX,
-        width: rect.width
-      });
+        width: rect.width,
+      })
     }
-  }, [isOpen]);
+  }, [isOpen])
 
   const handleSelect = (optionValue: string) => {
     onChange(optionValue)
@@ -74,26 +87,32 @@ export function Dropdown({ options, value, onChange, placeholder, className = ''
       </button>
 
       {isOpen && (
-        <Portal.Root ref={dropdownRef}
+        <Portal.Root
+          ref={dropdownRef}
           style={{
             position: 'absolute',
             top: `${buttonPosition.top}px`,
             left: `${buttonPosition.left}px`,
             width: `${buttonPosition.width}px`,
           }}
-          className="mt-1 rounded-md bg-background border border-border shadow-xl">
+          className="mt-1 rounded-md bg-background border border-border shadow-xl"
+        >
           <div className="max-h-60 overflow-auto py-1">
             {options.map((option) => (
               <button
                 key={option.value}
                 type="button"
                 onClick={() => handleSelect(option.value)}
-                className={`relative w-full cursor-pointer select-none py-2 pl-3 pr-9 text-left hover:bg-background-secondary transition-colors ${
-                  option.value === value ? 'bg-background-secondary text-accent' : 'text-text'
+                className={`relative w-full cursor-pointer select-none py-2 pl-3 pr-9 text-left hover:bg-background-tertiary transition-colors ${
+                  option.value === value
+                    ? 'bg-accent/10 text-accent font-medium '
+                    : 'text-text hover:bg-accent/15'
                 }`}
               >
                 <div className="flex flex-col">
-                  <span className={`block truncate font-medium ${option.value === value ? 'font-semibold' : ''}`}>
+                  <span
+                    className={`block truncate font-medium ${option.value === value ? 'font-semibold' : ''}`}
+                  >
                     {option.label}
                   </span>
                   {option.description && (
@@ -104,7 +123,11 @@ export function Dropdown({ options, value, onChange, placeholder, className = ''
                 </div>
                 {option.value === value && (
                   <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-accent">
-                    <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <svg
+                      className="h-4 w-4"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"

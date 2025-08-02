@@ -3,6 +3,7 @@ import { m } from 'motion/react'
 import { useState } from 'react'
 
 import { microReboundPreset, softSpringPreset } from '../../constants/spring'
+import { Checkbox } from '../ui/Checkbox'
 import { Input } from '../ui/Input'
 import { Label } from '../ui/Label'
 import {
@@ -17,11 +18,7 @@ import { Textarea } from '../ui/Textarea'
 
 export function FormExamples() {
   const [selectedPlan, setSelectedPlan] = useState<string>('')
-  const [checkboxStates, setCheckboxStates] = useState({
-    notifications: false,
-    darkMode: false,
-    weeklyUpdates: false,
-  })
+
   const [isDragOver, setIsDragOver] = useState(false)
 
   const plans = [
@@ -30,10 +27,6 @@ export function FormExamples() {
     { id: 'team', name: 'Team', price: '$25/month', popular: false },
     { id: 'enterprise', name: 'Enterprise', price: 'Custom', popular: false },
   ]
-
-  const handleCheckboxChange = (key: keyof typeof checkboxStates) => {
-    setCheckboxStates((prev) => ({ ...prev, [key]: !prev[key] }))
-  }
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault()
@@ -79,7 +72,7 @@ export function FormExamples() {
             {/* Left Column */}
             <div className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="name" className="flex items-center gap-2">
+                <Label htmlFor="name" className="flex items-center gap-2 ml-3">
                   Your Name
                   <span className="text-red text-xs">*</span>
                 </Label>
@@ -89,13 +82,13 @@ export function FormExamples() {
                   placeholder="Enter your name..."
                   className="transition-all duration-200 focus:scale-[1.01]"
                 />
-                <p className="text-xs text-text-tertiary">
+                <p className="text-xs text-text-tertiary ml-3">
                   This will be displayed on your profile
                 </p>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email" className="flex items-center gap-2">
+                <Label htmlFor="email" className="flex items-center gap-2 ml-3">
                   Email Address
                   <span className="text-red text-xs">*</span>
                 </Label>
@@ -105,17 +98,19 @@ export function FormExamples() {
                   placeholder="your@email.com"
                   className="transition-all duration-200 focus:scale-[1.01]"
                 />
-                <p className="text-xs text-text-tertiary">
+                <p className="text-xs text-text-tertiary ml-3">
                   We'll never share your email
                 </p>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="color">Favorite Color</Label>
+                <Label htmlFor="color" className="ml-3">
+                  Favorite Color
+                </Label>
                 <Select>
                   <SelectTrigger
                     id="color"
-                    className="transition-all duration-200 hover:border-border-secondary"
+                    className="transition-all duration-200 hover:border-border-secondary !mt-1"
                   >
                     <SelectValue placeholder="Choose your favorite..." />
                   </SelectTrigger>
@@ -127,28 +122,33 @@ export function FormExamples() {
                     <SelectItem value="orange">🧡 Orange</SelectItem>
                   </SelectContent>
                 </Select>
+                <p className="text-xs text-text-tertiary ml-3">
+                  Help us personalize your experience
+                </p>
               </div>
             </div>
 
             {/* Right Column */}
             <div className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
+                <Label htmlFor="message" className="ml-3">
+                  Message
+                </Label>
                 <Textarea
                   id="message"
                   placeholder="Tell us something..."
                   rows={4}
-                  className="transition-all duration-200 focus:scale-[1.01] resize-none"
+                  className="transition-all duration-200 focus:scale-[1.01] resize-none !mt-1"
                 />
-                <div className="flex justify-between text-xs text-text-tertiary">
+                <div className="flex justify-between text-xs text-text-tertiary ml-3">
                   <span>Share your thoughts with us</span>
                   <span>0/500</span>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <Label>Preferences</Label>
-                <div className="space-y-1">
+                <Label className="ml-3">Preferences</Label>
+                <div className="space-y-3">
                   {[
                     {
                       key: 'notifications' as const,
@@ -166,39 +166,16 @@ export function FormExamples() {
                       desc: 'Receive weekly newsletters',
                     },
                   ].map(({ key, label, desc }) => (
-                    <m.label
+                    <Checkbox
                       key={key}
-                      className="group flex items-start gap-3 cursor-pointer p-3 rounded-lg hover:bg-background-secondary transition-all duration-200"
-                      whileHover={{ x: 2 }}
-                      transition={microReboundPreset}
+                      id={key}
+                      description={desc}
+                      size="md"
+                      variant="accent"
+                      className="p-3 rounded-lg hover:bg-background-secondary transition-all duration-200"
                     >
-                      <div className="relative">
-                        <input
-                          type="checkbox"
-                          checked={checkboxStates[key]}
-                          onChange={() => handleCheckboxChange(key)}
-                          className="w-4 h-4 rounded border-border text-accent focus:ring-accent focus:ring-offset-0 transition-colors"
-                        />
-                        {checkboxStates[key] && (
-                          <m.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={microReboundPreset}
-                            className="absolute inset-0 pointer-events-none"
-                          >
-                            <Check className="w-4 h-4 text-white" />
-                          </m.div>
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <span className="text-sm font-medium text-text group-hover:text-foreground transition-colors">
-                          {label}
-                        </span>
-                        <p className="text-xs text-text-tertiary mt-0.5">
-                          {desc}
-                        </p>
-                      </div>
-                    </m.label>
+                      {label}
+                    </Checkbox>
                   ))}
                 </div>
               </div>

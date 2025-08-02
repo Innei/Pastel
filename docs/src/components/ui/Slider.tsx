@@ -9,32 +9,58 @@ interface SliderProps
   valueFormatter?: (value: number) => string
 }
 
-const Slider = ({ ref, className, showValue = false, valueFormatter, ...props }: SliderProps & { ref?: React.RefObject<React.ElementRef<typeof SliderPrimitive.Root> | null> }) => (
-  <div className="relative flex flex-col space-y-2">
-    <SliderPrimitive.Root
-      ref={ref}
-      className={cn(
-        'relative flex w-full touch-none select-none items-center',
-        className,
+const Slider = ({
+  ref,
+  className,
+  showValue = false,
+  valueFormatter,
+  ...props
+}: SliderProps & {
+  ref?: React.RefObject<React.ElementRef<typeof SliderPrimitive.Root> | null>
+}) => {
+  const [currentValue, setCurrentValue] = React.useState<number[]>(
+    props.value ?? props.defaultValue ?? [0],
+  )
+
+  // Update current value when props.value changes
+  React.useEffect(() => {
+    if (props.value) {
+      setCurrentValue(props.value)
+    }
+  }, [props.value])
+
+  // Handle value changes during sliding
+  const handleValueChange = (newValue: number[]) => {
+    setCurrentValue(newValue)
+    props.onValueChange?.(newValue)
+  }
+
+  return (
+    <div className="relative flex flex-col space-y-2">
+      <SliderPrimitive.Root
+        ref={ref}
+        className={cn(
+          'relative flex w-full touch-none select-none items-center',
+          className,
+        )}
+        {...props}
+        onValueChange={handleValueChange}
+      >
+        <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-background-secondary border border-border">
+          <SliderPrimitive.Range className="absolute h-full bg-accent" />
+        </SliderPrimitive.Track>
+        <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border-2 border-white bg-accent shadow-lg ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:scale-110 active:scale-95" />
+      </SliderPrimitive.Root>
+      {showValue && (
+        <div className="flex justify-center">
+          <span className="text-xs text-text-secondary font-medium">
+            {valueFormatter ? valueFormatter(currentValue[0]) : currentValue[0]}
+          </span>
+        </div>
       )}
-      {...props}
-    >
-      <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-background-secondary border border-border">
-        <SliderPrimitive.Range className="absolute h-full bg-accent" />
-      </SliderPrimitive.Track>
-      <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border-2 border-white bg-accent shadow-lg ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:scale-110 active:scale-95" />
-    </SliderPrimitive.Root>
-    {showValue && (
-      <div className="flex justify-center">
-        <span className="text-xs text-text-secondary font-medium">
-          {valueFormatter
-            ? valueFormatter(props.value?.[0] ?? props.defaultValue?.[0] ?? 0)
-            : props.value?.[0] ?? props.defaultValue?.[0] ?? 0}
-        </span>
-      </div>
-    )}
-  </div>
-)
+    </div>
+  )
+}
 
 Slider.displayName = SliderPrimitive.Root.displayName
 

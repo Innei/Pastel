@@ -450,32 +450,134 @@ export function ButtonExamples() {
             <div className="flex-1 h-px bg-border" />
           </div>
           <div className="bg-material-medium rounded-xl p-6 overflow-x-auto">
-            <pre className="text-sm text-text">
-              <code>{`// Semantic variants
-<Button variant="primary">Primary Action</Button>
-<Button variant="secondary">Secondary Action</Button>
-<Button variant="outline">Outlined Button</Button>
-<Button variant="ghost">Ghost Button</Button>
-<Button variant="destructive">Delete Action</Button>
-
-// With icons
-<Button 
-  variant="primary" 
-  icon="left" 
-  iconElement={<Plus />}
->
-  Add Item
-</Button>
-
-// With states
-<Button loading={isLoading} disabled={isDisabled}>
-  Submit
-</Button>
-
-// Direct color access
-<Button className="bg-pink text-white hover:opacity-90">
-  Pink Button
-</Button>`}</code>
+            <pre className="text-sm text-text leading-relaxed">
+              <code>
+                <div>
+                  <span className="text-gray italic">// Semantic variants</span>
+                  {'\n'}
+                  <span className="text-blue">&lt;</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-purple"> variant</span>
+                  <span className="text-blue">=</span>
+                  <span className="text-emerald">"primary"</span>
+                  <span className="text-blue">&gt;</span>
+                  Primary Action
+                  <span className="text-blue">&lt;/</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-blue">&gt;</span>
+                  {'\n'}
+                  <span className="text-blue">&lt;</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-purple"> variant</span>
+                  <span className="text-blue">=</span>
+                  <span className="text-emerald">"secondary"</span>
+                  <span className="text-blue">&gt;</span>
+                  Secondary Action
+                  <span className="text-blue">&lt;/</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-blue">&gt;</span>
+                  {'\n'}
+                  <span className="text-blue">&lt;</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-purple"> variant</span>
+                  <span className="text-blue">=</span>
+                  <span className="text-emerald">"outline"</span>
+                  <span className="text-blue">&gt;</span>
+                  Outlined Button
+                  <span className="text-blue">&lt;/</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-blue">&gt;</span>
+                  {'\n'}
+                  <span className="text-blue">&lt;</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-purple"> variant</span>
+                  <span className="text-blue">=</span>
+                  <span className="text-emerald">"ghost"</span>
+                  <span className="text-blue">&gt;</span>
+                  Ghost Button
+                  <span className="text-blue">&lt;/</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-blue">&gt;</span>
+                  {'\n'}
+                  <span className="text-blue">&lt;</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-purple"> variant</span>
+                  <span className="text-blue">=</span>
+                  <span className="text-emerald">"destructive"</span>
+                  <span className="text-blue">&gt;</span>
+                  Delete Action
+                  <span className="text-blue">&lt;/</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-blue">&gt;</span>
+                  {'\n\n'}
+                  <span className="text-gray-500 italic">// With icons</span>
+                  {'\n'}
+                  <span className="text-blue">&lt;</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  {'\n  '}
+                  <span className="text-purple">variant</span>
+                  <span className="text-blue">=</span>
+                  <span className="text-emerald">"primary"</span>
+                  {'\n  '}
+                  <span className="text-purple">icon</span>
+                  <span className="text-blue">=</span>
+                  <span className="text-emerald">"left"</span>
+                  {'\n  '}
+                  <span className="text-purple">iconElement</span>
+                  <span className="text-blue">={'{'}</span>
+                  <span className="text-blue">&lt;</span>
+                  <span className="text-blue font-semibold">Plus</span>
+                  <span className="text-blue"> /&gt;</span>
+                  <span className="text-blue">{'}'}</span>
+                  {'\n'}
+                  <span className="text-blue">&gt;</span>
+                  {'\n  '}
+                  Add Item
+                  {'\n'}
+                  <span className="text-blue">&lt;/</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-blue">&gt;</span>
+                  {'\n\n'}
+                  <span className="text-gray-500 italic">// With states</span>
+                  {'\n'}
+                  <span className="text-blue">&lt;</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-purple"> loading</span>
+                  <span className="text-blue">={'{'}</span>
+                  <span className="text-red">isLoading</span>
+                  <span className="text-blue">{'}'}</span>
+                  <span className="text-purple"> disabled</span>
+                  <span className="text-blue">={'{'}</span>
+                  <span className="text-red">isDisabled</span>
+                  <span className="text-blue">{'}'}</span>
+                  <span className="text-blue">&gt;</span>
+                  {'\n  '}
+                  Submit
+                  {'\n'}
+                  <span className="text-blue">&lt;/</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-blue">&gt;</span>
+                  {'\n\n'}
+                  <span className="text-gray-500 italic">
+                    // Direct color access
+                  </span>
+                  {'\n'}
+                  <span className="text-blue">&lt;</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-purple"> className</span>
+                  <span className="text-blue">=</span>
+                  <span className="text-emerald">
+                    "bg-pink text-white hover:opacity-90"
+                  </span>
+                  <span className="text-blue">&gt;</span>
+                  {'\n  '}
+                  Pink Button
+                  {'\n'}
+                  <span className="text-blue">&lt;/</span>
+                  <span className="text-blue font-semibold">Button</span>
+                  <span className="text-blue">&gt;</span>
+                </div>
+              </code>
             </pre>
           </div>
         </motion.section>
