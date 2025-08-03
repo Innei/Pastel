@@ -508,7 +508,7 @@ export function generateTailwindTheme(
 }
 
 @layer theme {
-  * {
+  :root {
     /* Dark mode overrides */
     @variant dark {
       ${colorVars.darkOverrides};
@@ -516,112 +516,30 @@ export function generateTailwindTheme(
   }
 }
 
-@layer theme {
-   [data-contrast=low], [data-contrast=low] * {
-      /* Kawaii color overrides */
-      ${colorVars.kawaiiOverrides};
 
-      /* Kawaii dark mode overrides */
-      @variant dark {
-        ${colorVars.kawaiiDarkOverrides};
-      }
-    }
+@layer theme {
+  [data-contrast=low], [data-contrast=low] * {
+     /* Kawaii color overrides */
+     ${colorVars.kawaiiOverrides};
+
+     /* Kawaii dark mode overrides */
+     @variant dark {
+       ${colorVars.kawaiiDarkOverrides};
+     }
+   }
 }
 
 @layer theme {
-  [data-contrast=high], [data-contrast=high] * {
-      /* High contrast color overrides */
-      ${colorVars.hcOverrides};
+ [data-contrast=high], [data-contrast=high] * {
+     /* High contrast color overrides */
+     ${colorVars.hcOverrides};
 
-      /* High contrast dark mode overrides */
-      @variant dark {
-        ${colorVars.hcDarkOverrides};
-      }
-    }
+     /* High contrast dark mode overrides */
+     @variant dark {
+       ${colorVars.hcDarkOverrides};
+     }
+   }
 }`
-}
-
-// Deprecated: keeping for compatibility
-export function generateActiveColorReferences(
-  colors: ColorSystem,
-  mode: 'light' | 'dark',
-): string {
-  const lines: string[] = []
-
-  // Regular colors
-  for (const colorName of Object.keys(colors.regular.colors)) {
-    lines.push(`--color-${colorName}: var(--color-${colorName}-${mode})`)
-  }
-
-  // Regular grayScale colors
-  for (const grayScaleName of Object.keys(colors.regular.grayScale)) {
-    lines.push(
-      `--color-${grayScaleName}: var(--color-${grayScaleName}-${mode})`,
-    )
-  }
-
-  // High contrast regular colors
-  for (const colorName of Object.keys(colors['high-contrast'].colors)) {
-    lines.push(`--color-${colorName}-hc: var(--color-${colorName}-hc-${mode})`)
-  }
-
-  // High contrast grayScale colors
-  for (const grayScaleName of Object.keys(colors['high-contrast'].grayScale)) {
-    lines.push(
-      `--color-${grayScaleName}-hc: var(--color-${grayScaleName}-hc-${mode})`,
-    )
-  }
-
-  // Kawaii regular colors
-  if (colors.kawaii) {
-    for (const colorName of Object.keys(colors.kawaii.colors)) {
-      lines.push(
-        `--color-${colorName}-kawaii: var(--color-${colorName}-kawaii-${mode})`,
-      )
-    }
-
-    // Kawaii grayScale colors
-    for (const grayScaleName of Object.keys(colors.kawaii.grayScale)) {
-      lines.push(
-        `--color-${grayScaleName}-kawaii: var(--color-${grayScaleName}-kawaii-${mode})`,
-      )
-    }
-  }
-
-  // Element colors (using regular theme)
-  for (const [colorName, depthColors] of Object.entries(
-    colors.regular.element,
-  )) {
-    for (const depth of Object.keys(depthColors as SemanticColor)) {
-      const varName = depth === 'primary' ? colorName : `${colorName}-${depth}`
-      lines.push(`--color-${varName}: var(--color-${varName}-${mode})`)
-    }
-  }
-
-  // Background colors (using regular theme)
-  for (const depth of Object.keys(colors.regular.background)) {
-    const varName = depth === 'primary' ? 'background' : `background-${depth}`
-    lines.push(`--color-${varName}: var(--color-${varName}-${mode})`)
-  }
-
-  // Fill colors (using regular theme)
-  for (const depth of Object.keys(colors.regular.fill)) {
-    const varName = depth === 'primary' ? 'fill' : `fill-${depth}`
-    lines.push(`--color-${varName}: var(--color-${varName}-${mode})`)
-  }
-
-  // Material colors (using regular theme)
-  for (const opacity of Object.keys(colors.regular.material)) {
-    const varName = `material-${opacity.toLowerCase()}`
-    lines.push(`--color-${varName}: var(--color-${varName}-${mode})`)
-  }
-
-  // Application colors (using regular theme)
-  for (const colorName of Object.keys(colors.regular.application)) {
-    lines.push(`--color-${colorName}: var(--color-${colorName}-${mode})`)
-  }
-
-  return lines.join(';\n    ')
 }
 
 export function generateCSS(config: GeneratorConfig): string {

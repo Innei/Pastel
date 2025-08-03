@@ -3,6 +3,7 @@ import { m } from 'motion/react'
 import { Spring } from '../../constants/spring'
 import { ColorExplorer } from '../ColorPalette/ColorExplorer'
 import { ColorGrid } from '../ColorPalette/ColorGrid'
+import { ContrastDemo } from '../ContrastDemo'
 import { AlertExamples } from '../Examples/AlertExamples'
 import { ButtonExamples } from '../Examples/ButtonExamples'
 import { CardExamples } from '../Examples/CardExamples'
@@ -61,6 +62,42 @@ export function MainSections() {
           </p>
           <ColorExplorer />
         </m.div>
+      </m.section>
+
+      {/* Contrast Demo Section */}
+      <m.section
+        id="contrast"
+        className="py-16 sm:py-24 lg:py-32 border-t border-border"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={Spring.smooth(0.8)}
+        viewport={{ once: true, margin: '-100px' }}
+      >
+        <Container>
+          <m.div
+            className="max-w-2xl mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={Spring.smooth(0.6, 0.2)}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+              Contrast levels
+            </h2>
+            <p className="text-lg text-text-secondary">
+              Explore how colors adapt to different contrast requirements for
+              accessibility and visual preference.
+            </p>
+          </m.div>
+          <m.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={Spring.smooth(0.8, 0.4)}
+            viewport={{ once: true }}
+          >
+            <ContrastDemo />
+          </m.div>
+        </Container>
       </m.section>
 
       {/* Examples Section */}
