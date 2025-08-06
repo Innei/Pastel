@@ -13,76 +13,81 @@ npm install @pastel-palette/colors
 ### Basic Usage
 
 ```typescript
-import { colorSystem } from '@pastel-palette/colors';
+import { colorSystem } from '@pastel-palette/colors'
 
 // Access regular colors
-const blueLight = colorSystem.regular.blue.light;
-console.log(blueLight.oklch); // "oklch(0.85 0.12 237)"
-console.log(blueLight.srgb);  // "rgb(173 207 255)"
-console.log(blueLight.p3);    // "color(display-p3 0.678 0.812 1.0)"
+const blueLight = colorSystem.regular.blue.light
+console.log(blueLight.oklch) // "oklch(0.85 0.12 237)"
+console.log(blueLight.srgb) // "rgb(173 207 255)"
+console.log(blueLight.p3) // "color(display-p3 0.678 0.812 1.0)"
 
 // Access semantic colors
-const primaryText = colorSystem.element.text.primary.light;
-const background = colorSystem.background.primary.dark;
+const primaryText = colorSystem.element.text.primary.light
+const background = colorSystem.background.primary.dark
 ```
 
 ### Type Definitions
 
 ```typescript
-import type { 
-  ColorValue, 
-  ColorVariants, 
+import type {
+  ColorValue,
+  ColorVariants,
   SemanticColor,
-  DepthLevel 
-} from '@pastel-palette/colors';
+  DepthLevel,
+} from '@pastel-palette/colors'
 
 // Color value with multiple formats
 interface ColorValue {
-  oklch: string;  // Primary format
-  srgb: string;   // Fallback for older browsers
-  p3?: string;    // Optional P3 color space
+  oklch: string // Primary format
+  srgb: string // Fallback for older browsers
+  p3?: string // Optional P3 color space
 }
 
 // Light and dark variants
 interface ColorVariants {
-  light: ColorValue;
-  dark: ColorValue;
+  light: ColorValue
+  dark: ColorValue
 }
 
 // Depth levels for semantic colors
-type DepthLevel = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
+type DepthLevel =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'quaternary'
+  | 'quinary'
 ```
 
 ### Color Utilities
 
 ```typescript
-import { 
-  parseOKLCH, 
+import {
+  parseOKLCH,
   formatOKLCH,
   validateColor,
-  calculateContrastRatio 
-} from '@pastel-palette/colors';
+  calculateContrastRatio,
+} from '@pastel-palette/colors'
 
 // Parse OKLCH color strings
-const oklch = parseOKLCH('oklch(0.85 0.12 237)');
+const oklch = parseOKLCH('oklch(0.85 0.12 237)')
 // { l: 0.85, c: 0.12, h: 237, a: 1 }
 
 // Format OKLCH objects
-const formatted = formatOKLCH({ l: 0.85, c: 0.12, h: 237 });
+const formatted = formatOKLCH({ l: 0.85, c: 0.12, h: 237 })
 // "oklch(0.85 0.12 237)"
 
 // Validate color formats
-const validation = validateColor('oklch(0.85 0.12 237)');
+const validation = validateColor('oklch(0.85 0.12 237)')
 // { valid: true, errors: [], warnings: [] }
 
 // Calculate WCAG contrast ratios
 const contrast = calculateContrastRatio(
-  { r: 62, g: 59, b: 68 },    // Text color
-  { r: 250, g: 248, b: 249 }  // Background color
-);
-// { 
-//   ratio: 12.5, 
-//   passes: { aa: true, aaa: true, largeTextAa: true, largeTextAaa: true } 
+  { r: 62, g: 59, b: 68 }, // Text color
+  { r: 250, g: 248, b: 249 }, // Background color
+)
+// {
+//   ratio: 12.5,
+//   passes: { aa: true, aaa: true, largeTextAa: true, largeTextAaa: true }
 // }
 ```
 
@@ -93,7 +98,7 @@ const contrast = calculateContrastRatio(
 All regular colors include light/dark variants:
 
 - **blue**: Cotton candy blue
-- **pink**: Sakura petal pink  
+- **pink**: Sakura petal pink
 - **purple**: Soft lavender
 - **green**: Mint green
 - **orange**: Peach orange
@@ -111,36 +116,40 @@ All regular colors include light/dark variants:
 Semantic colors for UI elements with depth levels:
 
 - **text**: Text colors (primary → quaternary)
-- **placeholderText**: Form placeholder text
+- **placeholder-text**: Form placeholder text
 - **border**: Border colors (primary, secondary)
 - **separator**: Divider lines
 - **link**: Interactive links
-- **disabledControl**: Disabled form controls
-- **disabledText**: Disabled text
+- **disabled-control**: Disabled form controls
+- **disabled-text**: Disabled text
 
 ### Background Colors (`colorSystem.background`)
 
 System background colors with 5 depth levels:
+
 - primary → secondary → tertiary → quaternary → quinary
 
 ### Fill Colors (`colorSystem.fill`)
 
 System fill colors with 4 depth levels:
+
 - primary → secondary → tertiary → quaternary
 
 ### Material Colors (`colorSystem.material`)
 
 Translucent materials with varying opacity:
-- **ultraThick**: 93% opacity
+
+- **ultra-thick**: 93% opacity
 - **thick**: 85% opacity
 - **medium**: 72% opacity
 - **thin**: 60% opacity
-- **ultraThin**: 45% opacity
+- **ultra-thin**: 45% opacity
 - **opaque**: 100% opacity
 
 ### Application Colors (`colorSystem.application`)
 
 Brand colors for your application:
+
 - **accent**: Main accent color
 - **primary**: Primary brand color
 - **secondary**: Secondary brand color
@@ -150,45 +159,45 @@ Brand colors for your application:
 ### Custom Color Validation
 
 ```typescript
-import { validateColor } from '@pastel-palette/colors';
+import { validateColor } from '@pastel-palette/colors'
 
 function validateThemeColors(colors: string[]) {
-  return colors.map(color => {
-    const result = validateColor(color);
+  return colors.map((color) => {
+    const result = validateColor(color)
     if (!result.valid) {
-      console.error(`Invalid color: ${color}`, result.errors);
+      console.error(`Invalid color: ${color}`, result.errors)
     }
     if (result.warnings.length > 0) {
-      console.warn(`Color warnings: ${color}`, result.warnings);
+      console.warn(`Color warnings: ${color}`, result.warnings)
     }
-    return result;
-  });
+    return result
+  })
 }
 ```
 
 ### Accessibility Checking
 
 ```typescript
-import { calculateContrastRatio, parseRGB } from '@pastel-palette/colors';
+import { calculateContrastRatio, parseRGB } from '@pastel-palette/colors'
 
 function checkTextContrast(textColor: string, bgColor: string) {
-  const text = parseRGB(textColor);
-  const bg = parseRGB(bgColor);
-  
+  const text = parseRGB(textColor)
+  const bg = parseRGB(bgColor)
+
   if (!text || !bg) {
-    throw new Error('Invalid color format');
+    throw new Error('Invalid color format')
   }
-  
-  const contrast = calculateContrastRatio(text, bg);
-  
+
+  const contrast = calculateContrastRatio(text, bg)
+
   return {
     ratio: contrast.ratio.toFixed(2),
     meetsWCAG_AA: contrast.passes.aa,
     meetsWCAG_AAA: contrast.passes.aaa,
-    recommendation: contrast.passes.aa 
-      ? 'Passes WCAG AA standards' 
-      : 'Consider increasing contrast'
-  };
+    recommendation: contrast.passes.aa
+      ? 'Passes WCAG AA standards'
+      : 'Consider increasing contrast',
+  }
 }
 ```
 
@@ -198,16 +207,16 @@ The package provides multiple export paths:
 
 ```typescript
 // Main exports
-import { colorSystem, colorPalette } from '@pastel-palette/colors';
+import { colorSystem, colorPalette } from '@pastel-palette/colors'
 
 // Type definitions
-import type { ColorValue, ColorVariants } from '@pastel-palette/colors/types';
+import type { ColorValue, ColorVariants } from '@pastel-palette/colors/types'
 
 // Utilities only
-import { parseOKLCH, validateColor } from '@pastel-palette/colors/utils';
+import { parseOKLCH, validateColor } from '@pastel-palette/colors/utils'
 
 // Color palette info
-import { colorPalette } from '@pastel-palette/colors/palette';
+import { colorPalette } from '@pastel-palette/colors/palette'
 ```
 
 ## Development

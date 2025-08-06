@@ -112,7 +112,6 @@ Use suffixed classes for colors that don't respond to dark mode changes:
 </div>
 ```
 
-
 ## Color Categories
 
 ### Regular Colors
@@ -126,12 +125,12 @@ Use suffixed classes for colors that don't respond to dark mode changes:
 #### Element Colors
 
 - `text` - Primary text colors with depth levels
-- `placeholderText` - Form placeholder text
+- `placeholder-text` - Form placeholder text
 - `border` - Border colors with primary/secondary variants
 - `separator` - Divider/separator lines
 - `link` - Interactive link colors
-- `disabledControl` - Disabled UI controls
-- `disabledText` - Disabled text elements
+- `disabled-control` - Disabled UI controls
+- `disabled-text` - Disabled text elements
 
 #### Background Colors
 
@@ -145,11 +144,11 @@ System fills with depth levels for UI components
 
 Opacity-based materials:
 
-- `ultraThick` (93% opacity)
+- `ultra-thick` (93% opacity)
 - `thick` (85% opacity)
 - `medium` (72% opacity)
 - `thin` (60% opacity)
-- `ultraThin` (45% opacity)
+- `ultra-thin` (45% opacity)
 - `opaque` (100% opacity)
 
 #### Application Colors

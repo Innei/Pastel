@@ -7,12 +7,18 @@ import type {
   SemanticColor,
 } from '@pastel-palette/colors'
 
+function camelToKebabCase(str: string): string {
+  return str.replaceAll(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)
+}
+
 export function generateColorVariable(name: string, value: string): string {
-  return `--color-${name}: ${value}`
+  const kebabName = camelToKebabCase(name)
+  return `--color-${kebabName}: ${value}`
 }
 
 export function generateThemeVariable(name: string, value: string): string {
-  return `--color-${name}: ${value}`
+  const kebabName = camelToKebabCase(name)
+  return `--color-${kebabName}: ${value}`
 }
 
 function extractColorValues(
@@ -336,23 +342,26 @@ export function generateUnifiedThemeColorVariables(
       let varName: string
       switch (groupName) {
         case 'element': {
-          varName = key === 'primary' ? key : `${key}`
+          varName = key === 'primary' ? key : `${camelToKebabCase(key)}`
           break
         }
         case 'background': {
-          varName = key === 'primary' ? 'background' : `background-${key}`
+          varName =
+            key === 'primary'
+              ? 'background'
+              : `background-${camelToKebabCase(key)}`
           break
         }
         case 'fill': {
-          varName = key === 'primary' ? 'fill' : `fill-${key}`
+          varName = key === 'primary' ? 'fill' : `fill-${camelToKebabCase(key)}`
           break
         }
         case 'material': {
-          varName = `material-${key.toLowerCase()}`
+          varName = `material-${camelToKebabCase(key)}`
           break
         }
         default: {
-          varName = key
+          varName = camelToKebabCase(key)
         }
       }
 
@@ -362,7 +371,9 @@ export function generateUnifiedThemeColorVariables(
           variants as SemanticColor,
         )) {
           const depthVarName =
-            depth === 'primary' ? varName : `${varName}-${depth}`
+            depth === 'primary'
+              ? varName
+              : `${varName}-${camelToKebabCase(depth)}`
 
           const regularLight = getColorString(
             (depthVariants as ColorVariants).light,
@@ -481,11 +492,6 @@ export function generateUnifiedThemeColorVariables(
     hcOverrides: hcOverrideLines.join(';\n      '),
     hcDarkOverrides: hcDarkOverrideLines.join(';\n        '),
   }
-}
-
-// Deprecated: keeping for compatibility
-export function generateThemeVariables(): string {
-  return 'deprecated function - use generateUnifiedThemeColorVariables instead'
 }
 
 export function generateTailwindTheme(
