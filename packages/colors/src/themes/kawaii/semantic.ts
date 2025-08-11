@@ -97,19 +97,19 @@ export const kawaiiBackgroundColors: SemanticColor = {
 
 export const kawaiiFillColors: SemanticColor = {
   primary: {
-    light: createColor('oklch(0.88 0.0049 338.82)'),
+    light: createColor('oklch(0.96 0.0049 338.82)'),
     dark: createColor('oklch(0.25 0.0049 338.82)'),
   },
   secondary: {
-    light: createColor('oklch(0.84 0.0049 338.82)'),
+    light: createColor('oklch(0.94 0.0049 338.82)'),
     dark: createColor('oklch(0.3 0.0049 338.82)'),
   },
   tertiary: {
-    light: createColor('oklch(0.8 0.0049 338.82)'),
+    light: createColor('oklch(0.92 0.0049 338.82)'),
     dark: createColor('oklch(0.35 0.0049 338.82)'),
   },
   quaternary: {
-    light: createColor('oklch(0.76 0.0049 338.82)'),
+    light: createColor('oklch(0.90 0.0049 338.82)'),
     dark: createColor('oklch(0.4 0.0049 338.82)'),
   },
 }

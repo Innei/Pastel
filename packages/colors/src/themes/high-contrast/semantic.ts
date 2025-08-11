@@ -100,20 +100,20 @@ export const highContrastBackgroundColors: SemanticColor = {
 
 export const highContrastFillColors: SemanticColor = {
   primary: {
-    light: createColor('oklch(0.1 0.005 200)'), // Dark fill for light mode, ensuring high contrast against light backgrounds
-    dark: createColor('oklch(0.95 0.005 200)'), // Light fill for dark mode
+    light: createColor('oklch(0.65 0.005 200)'), // Balanced quaternary fill in light mode
+    dark: createColor('oklch(0.6 0.005 200)'), // Adjusted for dark mode contrast
   },
   secondary: {
-    light: createColor('oklch(0.25 0.01 200)'), // Medium-dark secondary fill in light mode
-    dark: createColor('oklch(0.85 0.005 200)'), // Lighter secondary fill in dark mode
-  },
-  tertiary: {
     light: createColor('oklch(0.45 0.01 200)'), // Mid-tone tertiary fill for contrast
     dark: createColor('oklch(0.75 0.005 200)'), // Lighter tertiary fill in dark mode
   },
+  tertiary: {
+    light: createColor('oklch(0.25 0.01 200)'), // Medium-dark secondary fill in light mode
+    dark: createColor('oklch(0.85 0.005 200)'), // Lighter secondary fill in dark mode
+  },
   quaternary: {
-    light: createColor('oklch(0.65 0.005 200)'), // Balanced quaternary fill in light mode
-    dark: createColor('oklch(0.6 0.005 200)'), // Adjusted for dark mode contrast
+    light: createColor('oklch(0.1 0.005 200)'), // Dark fill for light mode, ensuring high contrast against light backgrounds
+    dark: createColor('oklch(0.95 0.005 200)'), // Light fill for dark mode
   },
 }
 

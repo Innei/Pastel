@@ -98,19 +98,19 @@ export const regularBackgroundColors: SemanticColor = {
 
 export const regularFillColors: SemanticColor = {
   primary: {
-    light: createColor('oklch(0.9 0.0049 230)'),
+    light: createColor('oklch(0.96 0.0049 230)'),
     dark: createColor('oklch(0.3 0.0049 230)'),
   },
   secondary: {
-    light: createColor('oklch(0.87 0.0049 230)'),
+    light: createColor('oklch(0.94 0.0049 230)'),
     dark: createColor('oklch(0.35 0.0049 230)'),
   },
   tertiary: {
-    light: createColor('oklch(0.84 0.0049 230)'),
+    light: createColor('oklch(0.92 0.0049 230)'),
     dark: createColor('oklch(0.4 0.0049 230)'),
   },
   quaternary: {
-    light: createColor('oklch(0.81 0.0049 230)'),
+    light: createColor('oklch(0.90 0.0049 230)'),
     dark: createColor('oklch(0.45 0.0049 230)'),
   },
 }
