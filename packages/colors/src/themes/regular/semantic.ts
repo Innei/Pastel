@@ -13,16 +13,16 @@ export const regularElementColors: Record<ElementColorName, SemanticColor> = {
       dark: createColor('oklch(0.95 0.0049 230)'),
     },
     secondary: {
-      light: createColor('oklch(0.35 0.0049 230)'),
-      dark: createColor('oklch(0.85 0.0049 230)'),
+      light: createColor('oklch(0.45 0.0049 230)'),
+      dark: createColor('oklch(0.75 0.0049 230)'),
     },
     tertiary: {
-      light: createColor('oklch(0.5 0.0049 230)'),
-      dark: createColor('oklch(0.7 0.0049 230)'),
+      light: createColor('oklch(0.55 0.0049 230)'),
+      dark: createColor('oklch(0.65 0.0049 230)'),
     },
     quaternary: {
-      light: createColor('oklch(0.65 0.0049 230)'),
-      dark: createColor('oklch(0.55 0.0049 230)'),
+      light: createColor('oklch(0.7 0.0049 230)'),
+      dark: createColor('oklch(0.45 0.0049 230)'),
     },
   },
 

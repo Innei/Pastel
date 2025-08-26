@@ -28,8 +28,8 @@ export const regularColors: Record<RegularColorName, ColorVariants> = {
   },
 
   yellow: {
-    light: createColor('oklch(0.75 0.12 100)'),
-    dark: createColor('oklch(0.78 0.14 100)'),
+    light: createColor('oklch(0.9 0.19 100)'),
+    dark: createColor('oklch(0.85 0.18 100)'),
   },
 
   sky: {
@@ -38,8 +38,8 @@ export const regularColors: Record<RegularColorName, ColorVariants> = {
   },
 
   red: {
-    light: createColor('oklch(0.65 0.2 20)'),
-    dark: createColor('oklch(0.7 0.19 20)'),
+    light: createColor('oklch(0.65 0.22 27)'),
+    dark: createColor('oklch(0.7 0.21 27)'),
   },
 
   brown: {
@@ -51,7 +51,6 @@ export const regularColors: Record<RegularColorName, ColorVariants> = {
     light: createColor('oklch(0.65 0 0)'),
     dark: createColor('oklch(0.7 0 0)'),
   },
-
 
   neutral: {
     light: createColor('oklch(0.6 0 0)'),

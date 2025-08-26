@@ -25,7 +25,7 @@ export const Button = ({
   ...props
 }: ButtonProps & { ref?: React.RefObject<HTMLButtonElement | null> }) => {
   const variants = {
-    primary: 'bg-text text-background hover:opacity-90',
+    primary: 'bg-accent text-background hover:opacity-90',
     secondary:
       'bg-background text-text border border-border hover:bg-background-secondary',
     ghost: 'hover:bg-background-secondary',
