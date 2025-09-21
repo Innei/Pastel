@@ -78,70 +78,70 @@ export const kawaiiBackgroundColors: SemanticColor = {
     dark: createColor('oklch(0.241 0.0049 338.82)'),
   },
   secondary: {
-    light: createColor('oklch(0.96 0.004 358.73967248753775)'),
-    dark: createColor('oklch(0.271 0.0049 338.82)'),
+    light: createColor('oklch(0.978 0.004 358.73967248753775)'),
+    dark: createColor('oklch(0.253 0.0049 338.82)'),
   },
   tertiary: {
-    light: createColor('oklch(0.94 0.005 358.73967248753775)'),
-    dark: createColor('oklch(0.301 0.0049 338.82)'),
+    light: createColor('oklch(0.970 0.005 358.73967248753775)'),
+    dark: createColor('oklch(0.265 0.0049 338.82)'),
   },
   quaternary: {
-    light: createColor('oklch(0.92 0.006 358.73967248753775)'),
-    dark: createColor('oklch(0.331 0.0049 338.82)'),
+    light: createColor('oklch(0.962 0.006 358.73967248753775)'),
+    dark: createColor('oklch(0.277 0.0049 338.82)'),
   },
   quinary: {
-    light: createColor('oklch(0.90 0.01 358.73967248753775)'),
-    dark: createColor('oklch(0.361 0.0049 338.82)'),
+    light: createColor('oklch(0.954 0.01 358.73967248753775)'),
+    dark: createColor('oklch(0.289 0.0049 338.82)'),
   },
 }
 
 export const kawaiiFillColors: SemanticColor = {
   primary: {
-    light: createColor('oklch(0.96 0.0049 338.82)'),
-    dark: createColor('oklch(0.25 0.0049 338.82)'),
+    light: createColor('oklch(0.964 0.0049 338.82)'),
+    dark: createColor('oklch(0.255 0.0049 338.82)'),
   },
   secondary: {
-    light: createColor('oklch(0.94 0.0049 338.82)'),
-    dark: createColor('oklch(0.3 0.0049 338.82)'),
+    light: createColor('oklch(0.952 0.0049 338.82)'),
+    dark: createColor('oklch(0.275 0.0049 338.82)'),
   },
   tertiary: {
-    light: createColor('oklch(0.92 0.0049 338.82)'),
-    dark: createColor('oklch(0.35 0.0049 338.82)'),
+    light: createColor('oklch(0.940 0.0049 338.82)'),
+    dark: createColor('oklch(0.295 0.0049 338.82)'),
   },
   quaternary: {
-    light: createColor('oklch(0.90 0.0049 338.82)'),
-    dark: createColor('oklch(0.4 0.0049 338.82)'),
+    light: createColor('oklch(0.928 0.0049 338.82)'),
+    dark: createColor('oklch(0.315 0.0049 338.82)'),
   },
 }
 
 export const kawaiiMaterialColors: Record<MaterialOpacity, MaterialColor> = {
   ultraThick: {
-    light: createColor('oklch(0.95 0.0049 338.82 / 0.93)'),
-    dark: createColor('oklch(0.15 0.0049 338.82 / 0.93)'),
+    light: createColor('oklch(0.956 0.0049 338.82 / 0.93)'),
+    dark: createColor('oklch(0.156 0.0049 338.82 / 0.93)'),
   },
 
   thick: {
-    light: createColor('oklch(0.95 0.0049 338.82 / 0.85)'),
-    dark: createColor('oklch(0.15 0.0049 338.82 / 0.85)'),
+    light: createColor('oklch(0.952 0.0049 338.82 / 0.85)'),
+    dark: createColor('oklch(0.152 0.0049 338.82 / 0.85)'),
   },
 
   medium: {
-    light: createColor('oklch(0.95 0.0049 338.82 / 0.65)'),
-    dark: createColor('oklch(0.15 0.0049 338.82 / 0.80)'),
+    light: createColor('oklch(0.948 0.0049 338.82 / 0.65)'),
+    dark: createColor('oklch(0.148 0.0049 338.82 / 0.80)'),
   },
 
   thin: {
-    light: createColor('oklch(0.95 0.0049 338.82 / 0.60)'),
-    dark: createColor('oklch(0.15 0.0049 338.82 / 0.60)'),
+    light: createColor('oklch(0.944 0.0049 338.82 / 0.60)'),
+    dark: createColor('oklch(0.144 0.0049 338.82 / 0.60)'),
   },
 
   ultraThin: {
-    light: createColor('oklch(0.95 0.0049 338.82 / 0.45)'),
-    dark: createColor('oklch(0.15 0.0049 338.82 / 0.45)'),
+    light: createColor('oklch(0.940 0.0049 338.82 / 0.45)'),
+    dark: createColor('oklch(0.140 0.0049 338.82 / 0.45)'),
   },
 
   opaque: {
-    light: createColor('oklch(0.95 0.0049 338.82)'),
-    dark: createColor('oklch(0.15 0.0049 338.82)'),
+    light: createColor('oklch(0.936 0.0049 338.82)'),
+    dark: createColor('oklch(0.136 0.0049 338.82)'),
   },
 }

@@ -29,26 +29,26 @@ export const kawaiiGrayScale: Record<GrayScaleColorName, ColorVariants> = {
 
   gray6: {
     light: createColor('oklch(0.650 0 0)'),
-    dark: createColor('oklch(0.450 0 0)'),
+    dark: createColor('oklch(0.451 0 0)'),
   },
 
   gray7: {
     light: createColor('oklch(0.600 0 0)'),
-    dark: createColor('oklch(0.500 0 0)'),
+    dark: createColor('oklch(0.501 0 0)'),
   },
 
   gray8: {
     light: createColor('oklch(0.550 0 0)'),
-    dark: createColor('oklch(0.550 0 0)'),
+    dark: createColor('oklch(0.551 0 0)'),
   },
 
   gray9: {
     light: createColor('oklch(0.500 0 0)'),
-    dark: createColor('oklch(0.600 0 0)'),
+    dark: createColor('oklch(0.601 0 0)'),
   },
 
   gray10: {
     light: createColor('oklch(0.450 0 0)'),
-    dark: createColor('oklch(0.650 0 0)'),
+    dark: createColor('oklch(0.651 0 0)'),
   },
 }

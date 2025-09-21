@@ -54,7 +54,7 @@ export const regularColors: Record<RegularColorName, ColorVariants> = {
 
   neutral: {
     light: createColor('oklch(0.6 0 0)'),
-    dark: createColor('oklch(0.65 0 0)'),
+    dark: createColor('oklch(0.652 0 0)'),
   },
 
   black: {

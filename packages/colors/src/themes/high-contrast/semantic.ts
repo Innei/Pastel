@@ -39,7 +39,7 @@ export const highContrastElementColors: Record<
   border: {
     primary: {
       light: createColor('oklch(0.80 0.02 200)'), // 原: 0.85，稍微加深为 0.80
-      dark: createColor('oklch(0.25 0.02 200)'), // 原: 0.3，稍微加深为 0.25
+      dark: createColor('oklch(0.251 0.02 200)'), // 原: 0.3，稍微加深为 0.25
     },
     secondary: {
       light: createColor('oklch(0.85 0.01 200)'), // 原: 0.9，稍微加深为 0.85
@@ -81,39 +81,39 @@ export const highContrastBackgroundColors: SemanticColor = {
     dark: createColor('oklch(0.08 0.005 200)'), // Very dark blue-green, ensuring strong contrast in dark mode
   },
   secondary: {
-    light: createColor('oklch(0.97 0.003 200)'), // Very light secondary background with blue-green hue
-    dark: createColor('oklch(0.12 0.008 200)'), // Darker secondary background for better contrast
+    light: createColor('oklch(0.985 0.003 200)'), // Smaller step from primary
+    dark: createColor('oklch(0.095 0.008 200)'), // Smaller step from primary
   },
   tertiary: {
-    light: createColor('oklch(0.94 0.005 200)'), // Light tertiary background, shifted to blue-green
-    dark: createColor('oklch(0.16 0.008 200)'), // Deeper tertiary background in dark mode
+    light: createColor('oklch(0.97 0.005 200)'), // Uniform gradual steps
+    dark: createColor('oklch(0.11 0.008 200)'), // Uniform gradual steps
   },
   quaternary: {
-    light: createColor('oklch(0.91 0.005 200)'), // Pale quaternary background
-    dark: createColor('oklch(0.20 0.008 200)'), // Dark quaternary background for high contrast
+    light: createColor('oklch(0.955 0.005 200)'), // Uniform gradual steps
+    dark: createColor('oklch(0.125 0.008 200)'), // Uniform gradual steps
   },
   quinary: {
-    light: createColor('oklch(0.88 0.005 200)'), // Subtle quinary background
-    dark: createColor('oklch(0.24 0.008 200)'), // Dark quinary background
+    light: createColor('oklch(0.94 0.005 200)'), // Uniform gradual steps
+    dark: createColor('oklch(0.14 0.008 200)'), // Uniform gradual steps
   },
 }
 
 export const highContrastFillColors: SemanticColor = {
   primary: {
-    light: createColor('oklch(0.65 0.005 200)'), // Balanced quaternary fill in light mode
-    dark: createColor('oklch(0.6 0.005 200)'), // Adjusted for dark mode contrast
+    light: createColor('oklch(0.66 0.005 200)'), // Slightly lighter for smoother ramp
+    dark: createColor('oklch(0.62 0.005 200)'), // Slightly lighter for smoother ramp
   },
   secondary: {
-    light: createColor('oklch(0.45 0.01 200)'), // Mid-tone tertiary fill for contrast
-    dark: createColor('oklch(0.75 0.005 200)'), // Lighter tertiary fill in dark mode
+    light: createColor('oklch(0.52 0.01 200)'), // Smooth step from primary
+    dark: createColor('oklch(0.70 0.005 200)'), // Smooth step from primary
   },
   tertiary: {
-    light: createColor('oklch(0.25 0.01 200)'), // Medium-dark secondary fill in light mode
-    dark: createColor('oklch(0.85 0.005 200)'), // Lighter secondary fill in dark mode
+    light: createColor('oklch(0.38 0.01 200)'), // Smooth step from secondary
+    dark: createColor('oklch(0.78 0.005 200)'), // Smooth step from secondary
   },
   quaternary: {
-    light: createColor('oklch(0.1 0.005 200)'), // Dark fill for light mode, ensuring high contrast against light backgrounds
-    dark: createColor('oklch(0.95 0.005 200)'), // Light fill for dark mode
+    light: createColor('oklch(0.24 0.005 200)'), // Smooth step from tertiary
+    dark: createColor('oklch(0.86 0.005 200)'), // Smooth step from tertiary
   },
 }
 
@@ -147,7 +147,7 @@ export const highContrastMaterialColors: Record<
   },
 
   opaque: {
-    light: createColor('oklch(0.95 0 0)'), // 高对比度不透明浅材质
+    light: createColor('oklch(0.949 0 0)'), // 高对比度不透明浅材质
     dark: createColor('oklch(0.15 0 0)'), // 高对比度不透明深材质
   },
 }
