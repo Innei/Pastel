@@ -35,18 +35,18 @@ export const kawaiiElementColors: Record<ElementColorName, SemanticColor> = {
 
   border: {
     primary: {
-      light: createColor('oklch(0.85 0.02 330)'),
+      light: createColor('oklch(0.92 0.015 330)'),
       dark: createColor('oklch(0.3 0.0049 338.82)'),
     },
     secondary: {
-      light: createColor('oklch(0.9 0.01 330)'),
+      light: createColor('oklch(0.95 0.008 330)'),
       dark: createColor('oklch(0.25 0.0049 338.82)'),
     },
   },
 
   separator: {
     primary: {
-      light: createColor('oklch(0.88 0.01 330)'),
+      light: createColor('oklch(0.94 0.008 330)'),
       dark: createColor('oklch(0.28 0.0049 338.82)'),
     },
   },
