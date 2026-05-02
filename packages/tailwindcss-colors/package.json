@@ -26,10 +26,10 @@
     "@pastel-palette/colors": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "22.16.3",
+    "@types/node": "22.16.5",
     "prettier": "3.6.2",
-    "tailwindcss": "^4.1.11",
+    "tailwindcss": "^4.1.18",
     "tsdown": "0.12.9",
-    "tsx": "4.20.3"
+    "tsx": "4.20.6"
   }
 }
