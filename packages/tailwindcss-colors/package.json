@@ -28,7 +28,7 @@
   "devDependencies": {
     "@types/node": "22.16.5",
     "prettier": "3.6.2",
-    "tailwindcss": "^4.1.18",
+    "tailwindcss": "^4.2.4",
     "tsdown": "0.12.9",
     "tsx": "4.20.6"
   }
