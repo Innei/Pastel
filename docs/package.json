@@ -23,20 +23,20 @@
     "lucide-react": "0.525.0",
     "motion": "12.23.28",
     "next-themes": "0.4.6",
-    "react": "^19.1.6",
-    "react-dom": "^19.1.6",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "sonner": "2.0.7",
     "tailwind-merge": "3.3.1",
     "use-context-selector": "2.0.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.17",
-    "@types/react": "^19.1.17",
-    "@types/react-dom": "^19.1.11",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.3.4",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
     "code-inspector-plugin": "0.20.17",
-    "tailwindcss": "^4.0.17",
+    "tailwindcss": "^4.2.4",
     "typescript": "^5.8.3",
     "vite": "^6.4.2"
   }
