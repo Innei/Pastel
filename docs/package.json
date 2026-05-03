@@ -35,7 +35,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.3.4",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
-    "code-inspector-plugin": "0.20.17",
+    "code-inspector-plugin": "1.5.1",
     "tailwindcss": "^4.2.4",
     "typescript": "^5.8.3",
     "vite": "^6.4.2"
