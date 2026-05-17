@@ -33,7 +33,7 @@
     "@tailwindcss/vite": "^4.0.17",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^6.0.2",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
     "code-inspector-plugin": "0.20.17",
     "tailwindcss": "^4.2.4",
