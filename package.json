@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0-canary.3",
   "private": true,
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@11.5.0",
   "license": "MIT",
   "scripts": {
     "build": "turbo build",
