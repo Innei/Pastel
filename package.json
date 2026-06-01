@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0-canary.3",
   "private": true,
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.34.1",
   "license": "MIT",
   "scripts": {
     "build": "turbo build",
@@ -20,14 +20,14 @@
     "@innei/prettier": "1.0.0"
   },
   "devDependencies": {
-    "eslint": "9.31.0",
-    "eslint-config-hyoban": "4.0.10",
-    "lint-staged": "16.1.6",
+    "eslint": "9.39.4",
+    "eslint-config-hyoban": "4.1.0",
+    "lint-staged": "16.4.0",
     "nbump": "2.1.8",
-    "prettier": "3.6.2",
+    "prettier": "3.8.3",
     "simple-git-hooks": "2.13.1",
     "turbo": "2.5.8",
-    "typescript": "5.8.3"
+    "typescript": "5.9.3"
   },
   "simple-git-hooks": {
     "pre-commit": "lint-staged"
