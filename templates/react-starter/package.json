@@ -22,7 +22,7 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router": "^7.17.0",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
@@ -36,7 +36,7 @@
     "@vitejs/plugin-react": "^6.0.2",
     "babel-plugin-react-compiler": "^1.0.0",
     "code-inspector-plugin": "^1.5.3",
-    "eslint": "^9.31.0",
+    "eslint": "^9.39.4",
     "prettier": "^3.8.3",
     "prettier-plugin-packagejson": "^2.5.22",
     "prettier-plugin-sh": "^0.14.0",
