@@ -10,7 +10,10 @@ export const Card = ({
   ...props
 }: CardProps & { ref?: React.RefObject<HTMLDivElement | null> }) => (
   <div
-    className={cn('bg-background border border-border rounded-lg', className)}
+    className={cn(
+      'bg-background border border-border rounded-[12px]',
+      className,
+    )}
     ref={ref}
     {...props}
   />

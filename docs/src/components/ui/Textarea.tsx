@@ -13,7 +13,7 @@ const Textarea = ({
     <textarea
       ref={ref}
       className={cn(
-        'flex min-h-16 w-full rounded-md border border-border bg-background px-2.5 py-1.5 text-[13px] text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent disabled:cursor-not-allowed disabled:opacity-50 resize-none',
+        'flex min-h-20 w-full rounded-[6px] border border-border bg-background px-3 py-2 text-[13px] text-text placeholder:text-text-tertiary focus:outline-none focus:border-accent focus:shadow-(--shadow-notion-ring) disabled:cursor-not-allowed disabled:opacity-50 resize-none transition-shadow',
         className,
       )}
       {...props}

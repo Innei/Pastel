@@ -38,7 +38,7 @@ export function Modal({
               render={
                 <motion.div
                   animate={{ opacity: 1 }}
-                  className="fixed inset-0 z-50 bg-background-quaternary/20 backdrop-blur-[70px]"
+                  className="fixed inset-0 z-50 bg-black/30 backdrop-blur-[2px]"
                   exit={{ opacity: 0 }}
                   initial={{ opacity: 0 }}
                   transition={Spring.presets.smooth}
@@ -54,7 +54,7 @@ export function Modal({
                   transition={Spring.presets.smooth}
                   className={cn(
                     'fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2',
-                    'bg-background rounded-lg shadow-xl w-full max-h-[90vh] flex flex-col',
+                    'bg-background rounded-[10px] shadow-(--shadow-notion-modal) w-full max-h-[90vh] flex flex-col',
                     'focus:outline-none',
                     sizes[size],
                     className,

@@ -83,7 +83,7 @@ const CheckboxComponent = ({
 
       <div
         className={cn(
-          'relative flex items-center justify-center rounded border transition-all duration-200 cursor-pointer',
+          'relative flex items-center justify-center rounded-[4px] border transition-[background-color,border-color,box-shadow] duration-150 cursor-pointer',
           sizeClasses[size],
           disabled && 'opacity-50 cursor-not-allowed',
           isCheckedOrIndeterminate
@@ -93,7 +93,7 @@ const CheckboxComponent = ({
                 ? 'border-green bg-green'
                 : 'border-foreground bg-foreground'
             : 'border-border bg-background hover:border-border-secondary',
-          'focus-within:ring-2 focus-within:ring-accent/40',
+          'focus-within:shadow-(--shadow-notion-ring) focus-within:border-accent',
           !children && !description && className,
         )}
       >

@@ -19,7 +19,7 @@ const SelectTrigger = ({
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex h-7 w-full items-center justify-between rounded-md border border-border bg-background px-2.5 text-[13px] text-text data-[placeholder]:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
+      'flex h-8 w-full items-center justify-between rounded-[6px] border border-border bg-background px-3 text-[13px] text-text data-[placeholder]:text-text-tertiary focus:outline-none focus:border-accent focus:shadow-(--shadow-notion-ring) data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 transition-shadow',
       className as string,
     )}
     {...props}
@@ -49,10 +49,10 @@ const SelectContent = ({
       <SelectPrimitive.Popup
         ref={ref}
         className={cn(
-          'relative max-h-96 min-w-[8rem] min-w-(--anchor-width) overflow-hidden rounded-md border border-border bg-background p-1 text-text shadow-md outline-none',
+          'relative max-h-96 min-w-[8rem] min-w-(--anchor-width) overflow-hidden rounded-[10px] bg-background p-1.5 text-text shadow-(--shadow-notion-popup) outline-none',
           'origin-(--transform-origin) transition-[transform,opacity] duration-150 ease-out',
-          'data-[starting-style]:scale-95 data-[starting-style]:opacity-0',
-          'data-[ending-style]:scale-95 data-[ending-style]:opacity-0',
+          'data-[starting-style]:scale-[0.97] data-[starting-style]:opacity-0',
+          'data-[ending-style]:scale-[0.97] data-[ending-style]:opacity-0',
           className as string,
         )}
         {...props}
@@ -84,7 +84,7 @@ const SelectItem = ({
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1 pl-7 pr-2 text-[13px] outline-none data-[highlighted]:bg-background-secondary data-[highlighted]:text-text data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex w-full cursor-default select-none items-center rounded-[5px] py-1.5 pl-7 pr-2.5 text-[13px] outline-none transition-colors data-[highlighted]:bg-fill-secondary data-[highlighted]:text-text data-[disabled]:pointer-events-none data-[disabled]:opacity-40',
       className as string,
     )}
     {...props}
@@ -107,7 +107,7 @@ const SelectSeparator = ({
 }) => (
   <div
     ref={ref}
-    className={cn('-mx-1 my-1 h-px bg-border', className)}
+    className={cn('mx-1.5 my-1 h-px bg-border', className)}
     role="separator"
     {...props}
   />

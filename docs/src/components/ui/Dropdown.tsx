@@ -70,7 +70,7 @@ export function Dropdown({
   return (
     <div className={`relative ${className}`}>
       <button
-        className="relative w-full cursor-pointer rounded-md bg-background border border-border py-1 pl-2.5 pr-8 text-left text-[13px] shadow-sm focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40 hover:border-border-secondary transition-colors"
+        className="relative w-full cursor-pointer rounded-[6px] bg-background border border-border h-8 pl-3 pr-8 text-left text-[13px] focus:border-accent focus:outline-none focus:shadow-(--shadow-notion-ring) hover:border-border-secondary transition-shadow"
         ref={buttonRef}
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -89,7 +89,7 @@ export function Dropdown({
       {isOpen &&
         createPortal(
           <div
-            className="mt-1 rounded-md bg-background border border-border shadow-xl"
+            className="mt-1.5 rounded-[10px] bg-background p-1.5 shadow-(--shadow-notion-popup)"
             ref={dropdownRef}
             style={{
               position: 'absolute',
@@ -98,15 +98,15 @@ export function Dropdown({
               width: `${buttonPosition.width}px`,
             }}
           >
-            <div className="max-h-60 overflow-auto py-1">
+            <div className="max-h-60 overflow-auto">
               {options.map((option) => (
                 <button
                   key={option.value}
                   type="button"
-                  className={`relative w-full cursor-pointer select-none py-1 pl-2.5 pr-8 text-left text-[13px] hover:bg-background-tertiary transition-colors ${
+                  className={`relative w-full cursor-pointer select-none py-1.5 pl-2.5 pr-8 text-left text-[13px] rounded-[5px] transition-colors ${
                     option.value === value
-                      ? 'bg-accent/10 text-accent font-medium '
-                      : 'text-text hover:bg-accent/15'
+                      ? 'bg-accent/10 text-accent font-medium'
+                      : 'text-text hover:bg-fill-secondary'
                   }`}
                   onClick={() => handleSelect(option.value)}
                 >
