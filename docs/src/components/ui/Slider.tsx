@@ -1,11 +1,13 @@
-import * as SliderPrimitive from '@radix-ui/react-slider'
+import { Slider as SliderPrimitive } from '@base-ui/react/slider'
 import * as React from 'react'
 
 import { cn } from '../../utils/cn'
 
-interface SliderProps extends React.ComponentPropsWithoutRef<
-  typeof SliderPrimitive.Root
+interface SliderProps extends Omit<
+  React.ComponentProps<typeof SliderPrimitive.Root>,
+  'className' | 'render'
 > {
+  className?: string
   showValue?: boolean
   valueFormatter?: (value: number) => string
 }
@@ -17,23 +19,32 @@ const Slider = ({
   valueFormatter,
   ...props
 }: SliderProps & {
-  ref?: React.RefObject<React.ElementRef<typeof SliderPrimitive.Root> | null>
+  ref?: React.RefObject<HTMLDivElement | null>
 }) => {
-  const [currentValue, setCurrentValue] = React.useState<number[]>(
-    props.value ?? props.defaultValue ?? [0],
-  )
+  const initial = Array.isArray(props.value)
+    ? props.value
+    : Array.isArray(props.defaultValue)
+      ? props.defaultValue
+      : [typeof props.value === 'number' ? props.value : 0]
+  const [currentValue, setCurrentValue] = React.useState<number[]>(initial)
 
-  // Update current value when props.value changes
   React.useEffect(() => {
-    if (props.value) {
+    if (Array.isArray(props.value)) {
       setCurrentValue(props.value)
+    } else if (typeof props.value === 'number') {
+      setCurrentValue([props.value])
     }
   }, [props.value])
 
-  // Handle value changes during sliding
-  const handleValueChange = (newValue: number[]) => {
-    setCurrentValue(newValue)
-    props.onValueChange?.(newValue)
+  const handleValueChange = (
+    newValue: number | readonly number[],
+    ...rest: unknown[]
+  ) => {
+    const next = Array.isArray(newValue) ? [...newValue] : [newValue as number]
+    setCurrentValue(next)
+    ;(
+      props.onValueChange as ((value: any, ...rest: any[]) => void) | undefined
+    )?.(newValue, ...rest)
   }
 
   return (
@@ -47,10 +58,12 @@ const Slider = ({
         {...props}
         onValueChange={handleValueChange}
       >
-        <SliderPrimitive.Track className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-background-secondary border border-border">
-          <SliderPrimitive.Range className="absolute h-full bg-accent" />
-        </SliderPrimitive.Track>
-        <SliderPrimitive.Thumb className="block h-4 w-4 rounded-full border-2 border-white bg-accent shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:pointer-events-none disabled:opacity-50" />
+        <SliderPrimitive.Control className="flex h-5 w-full items-center">
+          <SliderPrimitive.Track className="relative h-1.5 w-full overflow-hidden rounded-full border border-border bg-background-secondary">
+            <SliderPrimitive.Indicator className="absolute h-full bg-accent" />
+          </SliderPrimitive.Track>
+          <SliderPrimitive.Thumb className="block h-4 w-4 rounded-full border-2 border-white bg-accent shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:pointer-events-none disabled:opacity-50" />
+        </SliderPrimitive.Control>
       </SliderPrimitive.Root>
       {showValue && (
         <div className="flex justify-center">
@@ -62,7 +75,5 @@ const Slider = ({
     </div>
   )
 }
-
-Slider.displayName = SliderPrimitive.Root.displayName
 
 export { Slider }

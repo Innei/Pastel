@@ -1,6 +1,6 @@
-import * as Portal from '@radix-ui/react-portal'
 import { ChevronDown } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 interface DropdownOption {
   description?: string
@@ -86,61 +86,63 @@ export function Dropdown({
         </span>
       </button>
 
-      {isOpen && (
-        <Portal.Root
-          className="mt-1 rounded-md bg-background border border-border shadow-xl"
-          ref={dropdownRef}
-          style={{
-            position: 'absolute',
-            top: `${buttonPosition.top}px`,
-            left: `${buttonPosition.left}px`,
-            width: `${buttonPosition.width}px`,
-          }}
-        >
-          <div className="max-h-60 overflow-auto py-1">
-            {options.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                className={`relative w-full cursor-pointer select-none py-1 pl-2.5 pr-8 text-left text-[13px] hover:bg-background-tertiary transition-colors ${
-                  option.value === value
-                    ? 'bg-accent/10 text-accent font-medium '
-                    : 'text-text hover:bg-accent/15'
-                }`}
-                onClick={() => handleSelect(option.value)}
-              >
-                <div className="flex flex-col">
-                  <span
-                    className={`block truncate font-medium ${option.value === value ? 'font-semibold' : ''}`}
-                  >
-                    {option.label}
-                  </span>
-                  {option.description && (
-                    <span className="text-xs text-text-secondary">
-                      {option.description}
+      {isOpen &&
+        createPortal(
+          <div
+            className="mt-1 rounded-md bg-background border border-border shadow-xl"
+            ref={dropdownRef}
+            style={{
+              position: 'absolute',
+              top: `${buttonPosition.top}px`,
+              left: `${buttonPosition.left}px`,
+              width: `${buttonPosition.width}px`,
+            }}
+          >
+            <div className="max-h-60 overflow-auto py-1">
+              {options.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  className={`relative w-full cursor-pointer select-none py-1 pl-2.5 pr-8 text-left text-[13px] hover:bg-background-tertiary transition-colors ${
+                    option.value === value
+                      ? 'bg-accent/10 text-accent font-medium '
+                      : 'text-text hover:bg-accent/15'
+                  }`}
+                  onClick={() => handleSelect(option.value)}
+                >
+                  <div className="flex flex-col">
+                    <span
+                      className={`block truncate font-medium ${option.value === value ? 'font-semibold' : ''}`}
+                    >
+                      {option.label}
+                    </span>
+                    {option.description && (
+                      <span className="text-xs text-text-secondary">
+                        {option.description}
+                      </span>
+                    )}
+                  </div>
+                  {option.value === value && (
+                    <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-accent">
+                      <svg
+                        className="h-4 w-4"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          clipRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          fillRule="evenodd"
+                        />
+                      </svg>
                     </span>
                   )}
-                </div>
-                {option.value === value && (
-                  <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-accent">
-                    <svg
-                      className="h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-        </Portal.Root>
-      )}
+                </button>
+              ))}
+            </div>
+          </div>,
+          document.body,
+        )}
     </div>
   )
 }

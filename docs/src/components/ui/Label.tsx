@@ -1,4 +1,3 @@
-import * as LabelPrimitive from '@radix-ui/react-label'
 import * as React from 'react'
 
 import { cn } from '../../utils/cn'
@@ -7,10 +6,10 @@ const Label = ({
   ref,
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & {
-  ref?: React.RefObject<React.ElementRef<typeof LabelPrimitive.Root> | null>
+}: React.LabelHTMLAttributes<HTMLLabelElement> & {
+  ref?: React.RefObject<HTMLLabelElement | null>
 }) => (
-  <LabelPrimitive.Root
+  <label
     ref={ref}
     className={cn(
       'text-[13px] font-medium text-text leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
@@ -19,6 +18,5 @@ const Label = ({
     {...props}
   />
 )
-Label.displayName = LabelPrimitive.Root.displayName
 
 export { Label }
