@@ -73,12 +73,15 @@ export const ModalBackdrop = ({
   return (
     <Dialog.Backdrop
       {...rest}
-      className={cn('fixed inset-0 z-40 bg-black/40', className as string)}
+      className={cn(
+        'fixed inset-0 z-40 bg-black/30 backdrop-blur-[2px]',
+        className as string,
+      )}
       render={
         <m.div
           animate={{ opacity: open ? 1 : 0 }}
           initial={{ opacity: 0 }}
-          transition={{ duration: 0.18, ease: softEase }}
+          transition={{ duration: 0.15, ease: softEase }}
         />
       }
     />
@@ -111,7 +114,7 @@ export const ModalPopup = ({ className, style, width, children, ...rest }: Modal
             transition={{ duration: 0.22, ease: softEase }}
             className={cn(
               'pointer-events-auto relative flex max-h-[calc(100dvh-4rem)] w-full max-w-md flex-col overflow-hidden',
-              'rounded-xl border border-border bg-background shadow-xl',
+              'rounded-[10px] bg-background shadow-(--shadow-notion-modal)',
               className,
             )}
             exit={{
@@ -152,9 +155,9 @@ export const ModalClose = ({
   <Dialog.Close
     {...rest}
     className={cn(
-      'flex size-6 items-center justify-center rounded-full text-text-tertiary',
-      'transition-colors hover:bg-fill-tertiary hover:text-text',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40',
+      'flex size-6 items-center justify-center rounded-[5px] text-text-tertiary',
+      'transition-colors hover:bg-fill-secondary hover:text-text',
+      'focus-visible:outline-none focus-visible:shadow-(--shadow-notion-ring)',
       className as string,
     )}
   >

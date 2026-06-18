@@ -3,6 +3,44 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+@theme {
+  --shadow-notion-popup:
+    0 0 0 1px rgb(15 15 15 / 0.05),
+    0 1px 3px rgb(15 15 15 / 0.04),
+    0 8px 24px -6px rgb(15 15 15 / 0.08);
+  --shadow-notion-modal:
+    0 0 0 1px rgb(15 15 15 / 0.06),
+    0 2px 4px rgb(15 15 15 / 0.05),
+    0 16px 32px -8px rgb(15 15 15 / 0.16);
+  --shadow-notion-toast:
+    0 0 0 1px rgb(15 15 15 / 0.05),
+    0 4px 12px rgb(15 15 15 / 0.08);
+  --shadow-notion-ring: 0 0 0 3px var(--color-accent-soft, oklch(0.7 0.12 230 / 0.16));
+}
+
+[data-theme='dark'] {
+  --shadow-notion-popup:
+    0 0 0 1px rgb(255 255 255 / 0.06),
+    0 1px 3px rgb(0 0 0 / 0.3),
+    0 8px 24px -6px rgb(0 0 0 / 0.5);
+  --shadow-notion-modal:
+    0 0 0 1px rgb(255 255 255 / 0.07),
+    0 2px 4px rgb(0 0 0 / 0.4),
+    0 16px 40px -8px rgb(0 0 0 / 0.6);
+  --shadow-notion-toast:
+    0 0 0 1px rgb(255 255 255 / 0.06),
+    0 4px 12px rgb(0 0 0 / 0.4);
+}
+
+@keyframes notion-progress-indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
 @layer base {
   html,
   body {

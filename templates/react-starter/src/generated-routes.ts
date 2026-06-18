@@ -8,7 +8,8 @@ import type { RouteObject } from "react-router"
 // Imports for page components
 const lazy0 = () => import("./pages/layout")
 const lazy1 = () => import("./pages/about")
-const lazy2 = () => import("./pages/index")
+const lazy2 = () => import("./pages/design")
+const lazy3 = () => import("./pages/index")
 
 // Generated route configuration
 export const routes: RouteObject[] = [
@@ -21,8 +22,12 @@ export const routes: RouteObject[] = [
         "lazy": lazy1
       },
       {
-        "path": "",
+        "path": "design",
         "lazy": lazy2
+      },
+      {
+        "path": "",
+        "lazy": lazy3
       }
     ]
   }

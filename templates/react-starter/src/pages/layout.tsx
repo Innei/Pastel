@@ -11,6 +11,9 @@ export function Component() {
             <Link className="font-semibold text-text" to="/">
               Pastel Starter
             </Link>
+            <Link className="text-text-secondary hover:text-text" to="/design">
+              Design
+            </Link>
             <Link className="text-text-secondary hover:text-text" to="/about">
               About
             </Link>

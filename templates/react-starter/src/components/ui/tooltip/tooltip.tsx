@@ -19,7 +19,9 @@ export const Tooltip = ({ children, title, side = 'top', delay = 400 }: TooltipP
       <TooltipPrimitive.Positioner className="z-50" side={side} sideOffset={6}>
         <TooltipPrimitive.Popup
           className={cn(
-            'rounded-md bg-text px-2 py-1 text-xs text-background shadow-md',
+            'rounded-[5px] px-2.5 py-1.5 text-[12px] font-medium',
+            'bg-[oklch(0.3_0.005_286)] text-white dark:bg-fill dark:text-text',
+            'shadow-(--shadow-notion-popup)',
             popupTransitionClassName,
           )}
         >

@@ -21,13 +21,13 @@ export const Toaster = () => {
           '--error-bg': 'var(--color-background)',
           '--error-border': 'var(--color-border)',
           '--error-text': 'var(--color-red)',
-          '--border-radius': 'var(--radius-lg, 0.5rem)',
+          '--border-radius': '10px',
         } as CSSProperties
       }
       toastOptions={{
         classNames: {
           description: '!text-text-secondary',
-          toast: '!shadow-lg',
+          toast: '!shadow-(--shadow-notion-toast)',
         },
       }}
     />

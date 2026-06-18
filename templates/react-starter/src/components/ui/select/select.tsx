@@ -40,8 +40,8 @@ export const Select = <Value extends string = string>({
   >
     <SelectPrimitive.Trigger
       className={cn(
-        'flex h-7 min-w-36 items-center justify-between gap-2 rounded-md border border-border bg-background px-2.5 text-[13px] text-text',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:border-accent',
+        'flex h-8 min-w-36 items-center justify-between gap-2 rounded-[6px] border border-border bg-background px-3 text-[13px] text-text',
+        'focus-visible:outline-none focus-visible:border-accent focus-visible:shadow-(--shadow-notion-ring)',
         'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
         'transition-shadow',
         className,
@@ -52,7 +52,7 @@ export const Select = <Value extends string = string>({
         placeholder={placeholder}
       />
       <SelectPrimitive.Icon className="text-text-tertiary">
-        <ChevronDown className="size-4" />
+        <ChevronDown className="size-3.5" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
     <SelectPrimitive.Portal>
@@ -69,7 +69,7 @@ export const Select = <Value extends string = string>({
                 {option.label}
               </SelectPrimitive.ItemText>
               <SelectPrimitive.ItemIndicator className="absolute right-2 text-accent">
-                <Check className="size-4" />
+                <Check className="size-3.5" />
               </SelectPrimitive.ItemIndicator>
             </SelectPrimitive.Item>
           ))}
