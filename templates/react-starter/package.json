@@ -28,7 +28,7 @@
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.7",
+    "@babel/core": "^8.0.1",
     "@lobehub/eslint-config": "^2.1.5",
     "@lobehub/prettier-config": "^2.1.5",
     "@rolldown/plugin-babel": "^0.2.3",
