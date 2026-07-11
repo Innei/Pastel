@@ -46,7 +46,7 @@
     "prettier-plugin-sh": "^0.14.0",
     "prettier-plugin-sort-json": "^4.2.0",
     "tailwindcss": "^4.3.0",
-    "typescript": "^5.9.3",
+    "typescript": "^7.0.2",
     "vite": "^8.0.16",
     "vite-plugin-route-builder": "^0.4.1"
   },
