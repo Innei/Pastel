@@ -40,7 +40,7 @@
     "@vitejs/plugin-react": "^6.0.2",
     "babel-plugin-react-compiler": "^1.0.0",
     "code-inspector-plugin": "^1.5.3",
-    "eslint": "^9.39.4",
+    "eslint": "^10.9.1",
     "prettier": "^3.8.3",
     "prettier-plugin-packagejson": "^2.5.22",
     "prettier-plugin-sh": "^0.14.0",
