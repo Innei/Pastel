@@ -95,8 +95,8 @@ importers:
         specifier: 1.0.0
         version: 1.0.0
       code-inspector-plugin:
-        specifier: 1.6.1
-        version: 1.6.1
+        specifier: 2.0.8
+        version: 2.0.8
       tailwindcss:
         specifier: ^4.3.1
         version: 4.3.1
@@ -305,23 +305,34 @@ packages:
       '@types/react':
         optional: true
 
-  '@code-inspector/core@1.6.1':
-    resolution: {integrity: sha512-jlRjItyW7AlcEAi3oqxq11NsGdtfvG2ZOCs8mJQAlRhIKGEIWSECgN5oNzuOICOF+eRVHxUfBL4gd0FiFfaDuQ==}
+  '@code-inspector/core@2.0.8':
+    resolution: {integrity: sha512-RIGPzE5YGRThjFWvW9coAsg2H02ByJWI1yviOm/mJ6qQVFRliTG9rLwSU4gRzLsMu5V8VF+8hypMp6xSOFH5uQ==}
+    peerDependencies:
+      '@anthropic-ai/claude-agent-sdk': ^0.2.29
+      '@openai/codex-sdk': ^0.106.0
+      '@opencode-ai/sdk': ^1.2.24
+    peerDependenciesMeta:
+      '@anthropic-ai/claude-agent-sdk':
+        optional: true
+      '@openai/codex-sdk':
+        optional: true
+      '@opencode-ai/sdk':
+        optional: true
 
-  '@code-inspector/esbuild@1.6.1':
-    resolution: {integrity: sha512-inZSNq+ZsbgZX48u/O9kwVNnr6RiMpBTlOhmfVx/bxCIs+GkGalVuY6AZ5+epg5QiNbL9RdHBkckEZpPAFDHgg==}
+  '@code-inspector/esbuild@2.0.8':
+    resolution: {integrity: sha512-xnfpBiBKrIOGN0j9IZ+k2p6aGq8TOIeHndGY+W8mxeODhO5KbM9rym0FSgVe3tEm6JcUk3kHP9h/EG61mnqDuw==}
 
-  '@code-inspector/mako@1.6.1':
-    resolution: {integrity: sha512-mk8qfMOhEaGwvxruIudv2edZ5xaREaoMDmaiou4qEkfxfpiQ+8oKKGCQhNw8ML2wgVLUEeizCQO60IWpBJnWxg==}
+  '@code-inspector/mako@2.0.8':
+    resolution: {integrity: sha512-l243SWfGr4sUACVOCd5NbkjuFRobACnmpWXA2IyDFkedYFeGbYYpjZUwP88lxrVHt1PHZyB81HMiScE24P0ONw==}
 
-  '@code-inspector/turbopack@1.6.1':
-    resolution: {integrity: sha512-4jY89hyU4p7DtTqEyr4qYnnaQSGvtZvrWr8PEaYYR0EDK+qHDl6ndupZBYU2zzKMv87gnWqZ271rPA+0YXfEBg==}
+  '@code-inspector/turbopack@2.0.8':
+    resolution: {integrity: sha512-iLbGsojN6MwcqClTUQrqTHZHKUgbHBXSyDc4CAicmPytr5EcSYCCyICPrAY238ny+CdmzxGLaobZTA/YpScNiA==}
 
-  '@code-inspector/vite@1.6.1':
-    resolution: {integrity: sha512-ZlfS23t9naunoA8xBAlaEgEAFWq6YV1frKgE42fXZUNYOmcZlpaV/8EdqBJt/JZu6MJkceEVmgGRSJc5kYXIag==}
+  '@code-inspector/vite@2.0.8':
+    resolution: {integrity: sha512-qj8lOiA6Q1cZ8iJI2zGSdEd85yok/8EFa0G2KiSrY1PaD3pLZquayRgzWMCLTC2pmLSWGM4L1UbTyDM2c8joDg==}
 
-  '@code-inspector/webpack@1.6.1':
-    resolution: {integrity: sha512-pgrqzBja1FBk0WWXodmbfOnpLX4rbofBPk4INHc9UWnDlv1Ypfhn9pX7N5zJ0pBRHjrBF6ow4xfm0GGb7eUG2w==}
+  '@code-inspector/webpack@2.0.8':
+    resolution: {integrity: sha512-lz6LvkugtibrKbA+t/jFBkdSThveFEcLe1zutr4MUUOJh4XXWo1MYAjFHkUKnSy/+KqMC9MfBnDDtObYICBUmA==}
 
   '@conventional-changelog/git-client@2.7.0':
     resolution: {integrity: sha512-j7A8/LBEQ+3rugMzPXoKYzyUPpw/0CBQCyvtTR7Lmu4olG4yRC/Tfkq79Mr3yuPs0SUitlO2HwGP3gitMJnRFw==}
@@ -2002,8 +2013,8 @@ packages:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
 
-  code-inspector-plugin@1.6.1:
-    resolution: {integrity: sha512-XsGzQ2Kkrn2xdZtwviORKOVY4H8ixe95VSxkjUfzdWGhl9z3UVA2tci8o/1juJm+vaIxcVjlyefJOoTKjqhQcw==}
+  code-inspector-plugin@2.0.8:
+    resolution: {integrity: sha512-Ig7pHNGdlVprf6zRFLhSFI28D4PrKG72YkqNQ0uxYZHEomvKvD6FwK1DrYypbthz+N7c7g9v/uvAFM7tJn3ntw==}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -2046,10 +2057,12 @@ packages:
   conventional-changelog-atom@5.1.0:
     resolution: {integrity: sha512-fw7GpI9jHNCWGBnTsPRI452ypQbNupGwsjrXfozvRNE0c92pJRpoj9rXfzDKUYJcsmk0H4XKaQjhjelwI9z27w==}
     engines: {node: '>=18'}
+    deprecated: This preset is deprecated. Please use conventional-changelog-conventionalcommits or conventional-changelog-angular instead.
 
   conventional-changelog-codemirror@5.1.0:
     resolution: {integrity: sha512-iXhy63YczB+yWA9DrsYbquSYLvWKsK9M3WC+xQPEm8cOn4oXzKpmTp2uH3qi7+i10oTcGJTvq9lsBpZmMADaNg==}
     engines: {node: '>=18'}
+    deprecated: This preset is deprecated. Please use conventional-changelog-conventionalcommits or conventional-changelog-angular instead.
 
   conventional-changelog-conventionalcommits@8.0.0:
     resolution: {integrity: sha512-eOvlTO6OcySPyyyk8pKz2dP4jjElYunj9hn9/s0OB+gapTO8zwS9UQWrZ1pmF2hFs3vw1xhonOLGcGjy/zgsuA==}
@@ -2058,26 +2071,32 @@ packages:
   conventional-changelog-core@8.0.0:
     resolution: {integrity: sha512-EATUx5y9xewpEe10UEGNpbSHRC6cVZgO+hXQjofMqpy+gFIrcGvH3Fl6yk2VFKh7m+ffenup2N7SZJYpyD9evw==}
     engines: {node: '>=18'}
+    deprecated: Deprecated and no longer maintained. Please use conventional-changelog instead.
 
   conventional-changelog-ember@5.1.0:
     resolution: {integrity: sha512-XNcgGcdJt7wh341BBML0CI8DKpqE5lKD1WahzFHGZFvKTzJr1rZW976cw7beqKLOBbzdrH9ZIkE/s2TfbOuM3g==}
     engines: {node: '>=18'}
+    deprecated: This preset is deprecated. Please use conventional-changelog-conventionalcommits or conventional-changelog-angular instead.
 
   conventional-changelog-eslint@6.1.0:
     resolution: {integrity: sha512-beWr3qzuEMN9gznMWa8PhTVfGkGXoq+XnUzViNXg5KygrgV728ZRqZngz3uPhz5+ayUhPrpNFYqIE0qHWz9NAw==}
     engines: {node: '>=18'}
+    deprecated: This preset is deprecated. Please use conventional-changelog-conventionalcommits or conventional-changelog-angular instead.
 
   conventional-changelog-express@5.1.0:
     resolution: {integrity: sha512-g/s9eLohrefYTSNQaB6+k0ONbiVx41YOKBbIOIM3ST/NtedAgppCJnrpKXVN9sOmpPkN4vjFwURlfvpEDUjoeg==}
     engines: {node: '>=18'}
+    deprecated: This preset is deprecated. Please use conventional-changelog-conventionalcommits or conventional-changelog-angular instead.
 
   conventional-changelog-jquery@6.1.0:
     resolution: {integrity: sha512-/sFhULybhFrMg+qc8MHHHSj7kTVMfx5C7rSM6Z9EjduVoAQJdGRq/wpv/SWPMQ+KPNSYHqDLwm/x2Z5hOcYvqQ==}
     engines: {node: '>=18'}
+    deprecated: This preset is deprecated. Please use conventional-changelog-conventionalcommits or conventional-changelog-angular instead.
 
   conventional-changelog-jshint@5.2.0:
     resolution: {integrity: sha512-OaatyvHXP1fjI7Mx0b1IkmhbhTsVHsytnsQSkOj4rhGbFMoTcfvbwm/vAtCzRMXOxojK1EDMBBmBj1pM9KNy/Q==}
     engines: {node: '>=18'}
+    deprecated: This preset is deprecated. Please use conventional-changelog-conventionalcommits or conventional-changelog-angular instead.
 
   conventional-changelog-preset-loader@5.0.0:
     resolution: {integrity: sha512-SetDSntXLk8Jh1NOAl1Gu5uLiCNSYenB5tm0YVeZKePRIgDW9lQImromTwLa3c/Gae298tsgOM+/CYT9XAl0NA==}
@@ -2636,11 +2655,13 @@ packages:
   git-raw-commits@5.0.1:
     resolution: {integrity: sha512-Y+csSm2GD/PCSh6Isd/WiMjNAydu0VBiG9J7EdQsNA5P9uXvLayqjmTsNlK5Gs9IhblFZqOU0yid5Il5JPoLiQ==}
     engines: {node: '>=18'}
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   git-semver-tags@8.0.1:
     resolution: {integrity: sha512-zMbamckSNdlT4U48IMFa2Cn6FTzM+2yF6/gEmStPJI8PiLxd/bT6dw10+mc6u5Qe4fhrc/y9nU290FWjQhAV7g==}
     engines: {node: '>=18'}
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   glob-parent@5.1.2:
@@ -2950,8 +2971,8 @@ packages:
     resolution: {integrity: sha512-MbjN408fEndfiQXbFQ1vnd+1NoLDsnQW41410oQBXiyXDMYH5z505juWa4KUE1LqxRC7DgOgZDbKLxHIwm27hA==}
     engines: {node: '>=0.10'}
 
-  launch-ide@1.4.3:
-    resolution: {integrity: sha512-v2xMAarJOFy51kuesYEIIx5r4WHvsV+VLMU49K24bdiRZGUpo1ZulO1DRrLozM5BMbXUfRfrUTM2PbBfYCeA4Q==}
+  launch-ide@1.4.9:
+    resolution: {integrity: sha512-M67fqPmkMQQuiFnMtsgtMvHuB2a+8KLxEwH9ccftpy0f3CJQNoRCebZvKSn/ujxR42cMDOIBstuC/KXR/IgXeQ==}
 
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
@@ -3184,9 +3205,15 @@ packages:
       sass:
         optional: true
 
+  node-addon-api@7.1.1:
+    resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
+
   node-exports-info@1.6.0:
     resolution: {integrity: sha512-pyFS63ptit/P5WqUkt+UUfe+4oevH+bFeIiPPdfb0pFeYEu/1ELnJu5l+5EcTKYL5M7zaAa7S8ddywgXypqKCw==}
     engines: {node: '>= 0.4'}
+
+  node-pty@1.1.0:
+    resolution: {integrity: sha512-20JqtutY6JPXTUnL0ij1uad7Qe1baT46lyolh2sSENDd4sTzKZ4nmAFkeAARDKwmlLjPx6XKRlwRUxwjOy+lUg==}
 
   node-releases@2.0.48:
     resolution: {integrity: sha512-1uz8041X6LoI6ZSdZacM9lVY28vuzDlSKitnpbSNK0RfKoIJkX29NBPVEFXhnuSuEOA9Ww0xnPJ+ILWbGAv8DA==}
@@ -4074,6 +4101,18 @@ packages:
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
+  ws@8.21.3:
+    resolution: {integrity: sha512-201TZ/kPWxoPr/OKWjquZR1SWKXcvxdH+e1xrx89b3YbmzLMFCLfnaG1HFIgWzJOEWZ7MvpK++odZufgYR50Rw==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
@@ -4314,47 +4353,76 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.17
 
-  '@code-inspector/core@1.6.1':
+  '@code-inspector/core@2.0.8':
     dependencies:
       '@vue/compiler-dom': 3.5.38
       chalk: 4.1.1
-      dotenv: 16.6.1
-      launch-ide: 1.4.3
+      launch-ide: 1.4.9
       portfinder: 1.0.38
+      ws: 8.21.3
+    optionalDependencies:
+      node-pty: 1.1.0
     transitivePeerDependencies:
+      - bufferutil
       - supports-color
+      - utf-8-validate
 
-  '@code-inspector/esbuild@1.6.1':
+  '@code-inspector/esbuild@2.0.8':
     dependencies:
-      '@code-inspector/core': 1.6.1
+      '@code-inspector/core': 2.0.8
     transitivePeerDependencies:
+      - '@anthropic-ai/claude-agent-sdk'
+      - '@openai/codex-sdk'
+      - '@opencode-ai/sdk'
+      - bufferutil
       - supports-color
+      - utf-8-validate
 
-  '@code-inspector/mako@1.6.1':
+  '@code-inspector/mako@2.0.8':
     dependencies:
-      '@code-inspector/core': 1.6.1
+      '@code-inspector/core': 2.0.8
     transitivePeerDependencies:
+      - '@anthropic-ai/claude-agent-sdk'
+      - '@openai/codex-sdk'
+      - '@opencode-ai/sdk'
+      - bufferutil
       - supports-color
+      - utf-8-validate
 
-  '@code-inspector/turbopack@1.6.1':
+  '@code-inspector/turbopack@2.0.8':
     dependencies:
-      '@code-inspector/core': 1.6.1
-      '@code-inspector/webpack': 1.6.1
+      '@code-inspector/core': 2.0.8
+      '@code-inspector/webpack': 2.0.8
     transitivePeerDependencies:
+      - '@anthropic-ai/claude-agent-sdk'
+      - '@openai/codex-sdk'
+      - '@opencode-ai/sdk'
+      - bufferutil
       - supports-color
+      - utf-8-validate
 
-  '@code-inspector/vite@1.6.1':
+  '@code-inspector/vite@2.0.8':
     dependencies:
-      '@code-inspector/core': 1.6.1
+      '@code-inspector/core': 2.0.8
       chalk: 4.1.1
     transitivePeerDependencies:
+      - '@anthropic-ai/claude-agent-sdk'
+      - '@openai/codex-sdk'
+      - '@opencode-ai/sdk'
+      - bufferutil
       - supports-color
+      - utf-8-validate
 
-  '@code-inspector/webpack@1.6.1':
+  '@code-inspector/webpack@2.0.8':
     dependencies:
-      '@code-inspector/core': 1.6.1
+      '@code-inspector/core': 2.0.8
     transitivePeerDependencies:
+      - '@anthropic-ai/claude-agent-sdk'
+      - '@openai/codex-sdk'
+      - '@opencode-ai/sdk'
+      - bufferutil
       - supports-color
+      - utf-8-validate
 
   '@conventional-changelog/git-client@2.7.0(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.4.0)':
     dependencies:
@@ -5746,17 +5814,22 @@ snapshots:
 
   clsx@2.1.1: {}
 
-  code-inspector-plugin@1.6.1:
+  code-inspector-plugin@2.0.8:
     dependencies:
-      '@code-inspector/core': 1.6.1
-      '@code-inspector/esbuild': 1.6.1
-      '@code-inspector/mako': 1.6.1
-      '@code-inspector/turbopack': 1.6.1
-      '@code-inspector/vite': 1.6.1
-      '@code-inspector/webpack': 1.6.1
+      '@code-inspector/core': 2.0.8
+      '@code-inspector/esbuild': 2.0.8
+      '@code-inspector/mako': 2.0.8
+      '@code-inspector/turbopack': 2.0.8
+      '@code-inspector/vite': 2.0.8
+      '@code-inspector/webpack': 2.0.8
       chalk: 4.1.1
     transitivePeerDependencies:
+      - '@anthropic-ai/claude-agent-sdk'
+      - '@openai/codex-sdk'
+      - '@opencode-ai/sdk'
+      - bufferutil
       - supports-color
+      - utf-8-validate
 
   color-convert@2.0.1:
     dependencies:
@@ -6941,7 +7014,7 @@ snapshots:
     dependencies:
       language-subtag-registry: 0.3.23
 
-  launch-ide@1.4.3:
+  launch-ide@1.4.9:
     dependencies:
       chalk: 4.1.1
       dotenv: 16.6.1
@@ -7156,12 +7229,20 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
+  node-addon-api@7.1.1:
+    optional: true
+
   node-exports-info@1.6.0:
     dependencies:
       array.prototype.flatmap: 1.3.3
       es-errors: 1.3.0
       object.entries: 1.1.9
       semver: 6.3.1
+
+  node-pty@1.1.0:
+    dependencies:
+      node-addon-api: 7.1.1
+    optional: true
 
   node-releases@2.0.48: {}
 
@@ -8148,6 +8229,8 @@ snapshots:
       strip-ansi: 7.2.0
 
   wrappy@1.0.2: {}
+
+  ws@8.21.3: {}
 
   yallist@3.1.1: {}
 
