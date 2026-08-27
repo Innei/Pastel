@@ -39,7 +39,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
     "babel-plugin-react-compiler": "^1.0.0",
-    "code-inspector-plugin": "^1.5.3",
+    "code-inspector-plugin": "^2.0.8",
     "eslint": "^9.39.4",
     "prettier": "^3.8.3",
     "prettier-plugin-packagejson": "^2.5.22",
